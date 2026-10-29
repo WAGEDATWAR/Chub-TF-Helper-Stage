@@ -3,4 +3,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
-html, body, #root { margin: 0; padding: 0; height: 100%; background: #101820; }
+/* The stage is an overlay on the chat and the host owns the frame size, so the page
+   must be transparent: only our own panels paint, and the chat shows through the
+   rest (which is what lets a collapsed pane reclaim the screen). */
+html, body, #root { margin: 0; padding: 0; height: 100%; background: transparent; }

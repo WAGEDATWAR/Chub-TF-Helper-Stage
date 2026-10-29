@@ -105,7 +105,6 @@ export function Pane({
       </div>
     );
   }
-
   return (
     <div style={css.root}>
       <div style={css.head}>
@@ -363,21 +362,23 @@ function ToolsTab({ game, run, getGuard, getSaveKb }: { game: HelperGame; run: (
 }
 
 const css: Record<string, React.CSSProperties> = {
-  root: { width: "100%", height: "100%", boxSizing: "border-box", fontFamily: "system-ui, sans-serif", color: "#d8e0e6", background: "rgba(14,22,32,0.92)", display: "flex", flexDirection: "column", overflow: "hidden" },
-  collapsed: { display: "flex", alignItems: "center", gap: 8, padding: "5px 10px", boxSizing: "border-box", fontFamily: "system-ui, sans-serif", color: "#d8e0e6", background: "rgba(14,22,32,0.92)", borderBottom: "1px solid rgba(120,200,220,0.25)", flexWrap: "nowrap", minHeight: 34 },
+  // the page is transparent (the chat shows through); only our own panels paint,
+  // so a collapsed or short pane reveals the chat behind it
+  root: { width: "100%", height: "100%", boxSizing: "border-box", fontFamily: "system-ui, sans-serif", color: "#d8e0e6", display: "flex", flexDirection: "column", overflow: "hidden" },
+  collapsed: { display: "flex", alignItems: "center", gap: 8, padding: "5px 10px", boxSizing: "border-box", fontFamily: "system-ui, sans-serif", color: "#d8e0e6", background: "rgba(14,22,32,0.9)", borderBottom: "1px solid rgba(120,200,220,0.25)", flexWrap: "nowrap", minHeight: 34 },
   collapsedSummary: { fontSize: 12, color: "#9fb4be", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", cursor: "pointer", minWidth: 0, flex: 1 },
-  head: { display: "flex", alignItems: "center", gap: 8, padding: "6px 10px", borderBottom: "1px solid rgba(120,200,220,0.3)" },
+  head: { display: "flex", alignItems: "center", gap: 8, padding: "6px 10px", borderBottom: "1px solid rgba(120,200,220,0.3)", background: "rgba(14,22,32,0.9)" },
   toggle: { font: "inherit", fontSize: 13, lineHeight: 1, padding: "2px 7px", borderRadius: 4, border: "1px solid rgba(120,200,220,0.3)", background: "rgba(30,45,55,0.6)", color: "#cfe6ee", cursor: "pointer", whiteSpace: "nowrap" },
   title: { fontSize: 13, letterSpacing: 2, textTransform: "uppercase", color: "#7fd4e6" },
   alerts: { fontSize: 11, color: "#e6a9c0" },
   moon: { fontVariantNumeric: "tabular-nums", fontSize: 11, color: "#8fa3ad", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
   moonShort: { fontVariantNumeric: "tabular-nums", fontSize: 11, color: "#8fa3ad", whiteSpace: "nowrap", flexShrink: 0 },
-  tabs: { display: "flex", gap: 2, padding: "4px 10px", borderBottom: "1px solid rgba(120,200,220,0.15)" },
+  tabs: { display: "flex", gap: 2, padding: "4px 10px", borderBottom: "1px solid rgba(120,200,220,0.15)", background: "rgba(14,22,32,0.9)" },
   tab: { font: "inherit", fontSize: 11, letterSpacing: 1, textTransform: "uppercase", padding: "6px 10px", borderRadius: 4, border: "1px solid transparent", background: "transparent", color: "#6b8794", cursor: "pointer" },
   tabOn: { color: "#7fd4e6", border: "1px solid rgba(120,200,220,0.4)", background: "rgba(30,45,55,0.5)" },
-  body: { flex: 1, overflowY: "auto", padding: 8, display: "flex", flexDirection: "column", gap: 6, WebkitOverflowScrolling: "touch" },
-  castCard: { border: "1px solid rgba(120,200,220,0.18)", borderLeft: "3px solid rgba(120,200,220,0.4)", borderRadius: 6, padding: 7, background: "rgba(20,30,40,0.4)", display: "flex", flexDirection: "column", gap: 4 },
-  card: { border: "1px solid rgba(120,200,220,0.15)", borderRadius: 5, padding: 6, background: "rgba(15,25,35,0.5)", display: "flex", flexDirection: "column", gap: 4 },
+  body: { flex: 1, minHeight: 0, overflowY: "auto", padding: 8, display: "flex", flexDirection: "column", gap: 6, WebkitOverflowScrolling: "touch", background: "rgba(14,22,32,0.9)" },
+  castCard: { border: "1px solid rgba(120,200,220,0.18)", borderLeft: "3px solid rgba(120,200,220,0.4)", borderRadius: 6, padding: 7, background: "rgba(18,27,37,0.92)", display: "flex", flexDirection: "column", gap: 4 },
+  card: { border: "1px solid rgba(120,200,220,0.15)", borderRadius: 5, padding: 6, background: "rgba(16,24,33,0.92)", display: "flex", flexDirection: "column", gap: 4 },
   name: { fontSize: 15 },
   label: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: "#6b8794", marginTop: 4 },
   row: { display: "flex", flexWrap: "wrap", gap: 5, alignItems: "center" },

@@ -1,5 +1,14 @@
 # Decisions
 
+- **D-022 — The stage page is transparent; the host owns the frame (H19).** Chub has
+  **no height/resize API** — the SDK `ReactRunner` never messages a size, and the docs
+  describe a stage as an *overlay* on the chat ("messages fade out in the background").
+  So a collapsed pane cannot shrink the frame itself; what reclaims space is
+  **transparency**: the page (`html/body/#root`) paints nothing and only our panels
+  (header, bar, cards) carry a background, so the chat shows through behind them. The
+  parent stage does the same (`* { background-color: transparent }`). The dev runner
+  paints a backdrop so this is visible offline. (Supersedes the earlier opaque page.)
+
 - **D-021b — The pane collapses; changed parts are listed, not dumped (H19).** Two
   mobile-usability fixes. (a) The pane header has a **collapse/expand** toggle (a
   one-line `▸ chrysalis` bar with a live cast summary + moon); the choice persists in

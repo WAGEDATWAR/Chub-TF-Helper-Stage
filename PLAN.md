@@ -97,6 +97,11 @@ reloads; a cast card lists **only affected parts**, grouped by part and ranked, 
 with its `(N%)` toward target, and the full composer dump sits behind a `full body`
 disclosure. Touch targets meet a 32px minimum. (A skeleton/part visualizer is still
 planned — see `DEFERRED.md`.)
+
+- **Frame size (D-022):** Chub has no height API and owns the frame, so collapsing
+  does not resize it. What reclaims the chat is **transparency** — the page paints
+  nothing, only our panels do, so the chat shows through behind a collapsed pane
+  (matching the parent stage).
 ## H18 — Transformation duration — done
 
 Shipped. The authored set settles in ~22–41 simulated days (median 30) — right for

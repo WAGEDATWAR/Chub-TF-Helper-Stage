@@ -16,5 +16,7 @@ export function TestRunner({ factory }: { factory: (data: AnyInit) => AnyStage }
     });
   }, []);
 
-  return <div style={{ width: "100vw", height: "100vh" }}>{stage.render()}</div>;
+  // in dev there is no chat behind the stage, so paint a chat-ish backdrop to make
+  // the transparency (which lets the real chat show through) legible here too
+  return <div style={{ width: "100vw", height: "100vh", background: "linear-gradient(160deg, #1b2430, #2a3542)" }}>{stage.render()}</div>;
 }
