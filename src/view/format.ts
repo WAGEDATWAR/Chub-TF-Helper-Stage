@@ -82,6 +82,14 @@ export function digest(frames: CastFrame[], moon: { phase: string; intensity: nu
     parts.push(frameHeadline(f) + (c ? ` · pressure ${Math.round(c.pressure * 100)}%${c.shifted ? " SHIFTED" : ""}` : ""));
     if (f.changing.length > 0) parts.push(`  changing: ${f.changing.join(", ")}`);
     if (f.parts.length > 0) parts.push(`  parts: ${f.parts.map((p) => `${p.label}${p.count > 1 ? ` ×${p.count}` : ""} (${p.pct}%)`).join(", ")}`);
+    const it = f.interior;
+    if (it && (f.awareness > 0 || it.feelings.length > 0)) {
+      const bits = [`tier ${it.tier}`];
+      if (it.mood) bits.push(it.mood.band);
+      if (it.feelings.length) bits.push(it.feelings.map((x) => `${x.emotion} ${x.value}`).join("/"));
+      if (it.traits.length) bits.push(it.traits.map((t) => `${t.id} ${t.value}`).join("/"));
+      parts.push(`  interior: ${bits.join(", ")}`);
+    }
   }
   return parts.join("\n");
 }

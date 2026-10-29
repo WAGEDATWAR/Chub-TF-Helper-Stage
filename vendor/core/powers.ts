@@ -8,6 +8,7 @@ import { resistanceCeiling, stabilityDrain, familiarityMultipliers, recordExposu
 import { compress, stretch, phaseShift } from "./temporal";
 import { clampStat } from "./stats";
 import { attemptAwakening, reactionsMatching, type FormedReaction } from "./reactions";
+import { phaseWhenOpen } from "./mind_wiring";
 import type { Session } from "./session";
 import type { ResolverRegistries } from "./types";
 import type { Injector } from "./injectors";
@@ -338,7 +339,7 @@ function resolverFrom(registries: ResolverRegistries, session: Session): Resolve
     phases: registries.phases ?? null,
     genomes: registries.genomes ?? null,
     rng: session.rng,
-    whenOpen: registries.whenOpen ?? null,
+    whenOpen: registries.whenOpen ?? phaseWhenOpen(session),
   });
 }
 

@@ -14,6 +14,7 @@ import type { Registries } from "./registries";
 import { TimeEngine } from "@core/time_engine";
 import { loadSession } from "@core/savegame";
 import { createLunar } from "./lunar";
+import type { Subject } from "@core/subject";
 
 export const MAX_CAST = 6;
 
@@ -41,6 +42,19 @@ export interface CastFrame {
   awareness: number;
   /** H10: true once the character has realized what is happening to them. */
   realized: boolean;
+  /** H11: the interior read — awareness tier, mood, and her strongest mind values. */
+  interior: InteriorRead;
+}
+
+export interface InteriorRead {
+  /** Awareness tier id ("blind" | "dim" | "aware" | "lucid"). */
+  tier: string;
+  /** Mood gamut: valence and arousal (-1..1 / 0..1 style), plus a band label. */
+  mood: { valence: number; arousal: number; band: string } | null;
+  /** The emotions she feels most strongly right now (name + 0..100), top few. */
+  feelings: Array<{ emotion: string; value: number }>;
+  /** Her most-characterful mind values, as label pairs (e.g. "nervous 72"). */
+  traits: Array<{ id: string; label: string; value: number }>;
 }
 
 const STATUS: Record<string, string> = {
@@ -183,6 +197,7 @@ export class Cast {
         parts,
         awareness: Math.round(s.mind?.awareness ?? 0),
         realized: s.mind?.realized ?? false,
+        interior: interiorOf(s),
       });
     }
     return out;
@@ -198,6 +213,37 @@ export class Cast {
 
 function humanize(id: string): string {
   return id.replace(/^(attr|part|genome|react)\./, "").replace(/_/g, " ").trim();
+}
+
+/**
+ * The interior read (H11): her awareness tier, mood, strongest feelings and most
+ * characteristic mind values. Pure over the subject; the pane shows it and the
+ * driving floor may name it (from *her* POV, never the Observer's).
+ */
+function interiorOf(s: Subject): InteriorRead {
+  const mind = s.mind as (Subject["mind"] & { labels?: Map<string, string> }) | null;
+  if (!mind) return { tier: "blind", mood: null, feelings: [], traits: [] };
+  const tier = mind.tier();
+  const feelings = mindEmotions(s)
+    .map((e) => ({ emotion: e, value: Math.round(s.mood?.get(e) ?? 0) }))
+    .filter((x) => x.value >= 25)
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 3);
+  // the mind values furthest from a bland 50 — the ones that characterise her now
+  const traits = mind
+    .ids()
+    .map((id) => ({ id, label: mind.labels?.get(id) ?? id, value: Math.round(mind.read(id)) }))
+    .sort((a, b) => Math.abs(b.value - 50) - Math.abs(a.value - 50))
+    .slice(0, 3);
+  const p = s.mood?.point();
+  const mood = s.mood && p ? { valence: Math.round(p.valence), arousal: Math.round(p.arousal), band: s.mood.band() } : null;
+  return { tier, mood, feelings, traits };
+}
+
+/** The emotion ids the mood model carries (read defensively; the data owns them). */
+function mindEmotions(s: Subject): string[] {
+  const mood = s.mood as (Subject["mood"] & { ids?: () => string[] }) | null;
+  return mood?.ids ? mood.ids() : [];
 }
 
 /** Restore a sim from a save string (separate from game.ts to avoid a cycle). */

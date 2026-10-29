@@ -14,7 +14,7 @@ import { inferPace, type PaceId } from "../sim/pace";
  */
 export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateType, ConfigType> {
   readonly game: HelperGame;
-  private ticksPerMessage: number;
+  private minutesPerMessage: number;
   private statusMessage: boolean;
   private guardProse: boolean;
   private direction = "";
@@ -26,7 +26,14 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
   constructor(data: InitialData<InitStateType, ChatStateType, MessageStateType, ConfigType>) {
     super(data);
     this.game = new HelperGame(seedFrom((data as { id?: number }).id ?? 0, data.config?.seed), { cycleDays: data.config?.lunarCycleDays });
-    this.ticksPerMessage = data.config?.ticksPerMessage && data.config.ticksPerMessage > 0 ? data.config.ticksPerMessage : 4;
+    // how much time a message advances: minutes wins (so 5 min is expressible),
+    // else the legacy hours field, else one hour (H17 groundwork)
+    const minutes = data.config?.minutesPerMessage && data.config.minutesPerMessage > 0
+      ? data.config.minutesPerMessage
+      : data.config?.ticksPerMessage && data.config.ticksPerMessage > 0
+        ? data.config.ticksPerMessage * 60
+        : 60;
+    this.minutesPerMessage = minutes;
     this.statusMessage = data.config?.statusMessage !== false;
     this.guardProse = data.config?.guardProse !== false;
 
@@ -99,7 +106,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
     this.game.observe(userMessage.anonymizedId ?? null, userMessage.content ?? "");
     // bind anyone whose card clearly named a species and who has no genome yet
     this.game.autoApplyPending(1.0);
-    this.game.advance(this.ticksPerMessage);
+    this.game.advanceMinutes(this.minutesPerMessage);
     this.direction = buildDirections(this.driveInput());
     return { stageDirections: this.direction, messageState: this.branchState(), chatState: this.chatState() };
   }

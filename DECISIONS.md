@@ -1,5 +1,15 @@
 # Decisions
 
+- **D-024 — The helper configures the moon; the core supplies the default (D-248).**
+  The parent core now owns a stateless lunar clock (`core/moon.ts`, fixed 29.53-day
+  synodic month) and auto-wires `phaseWhenOpen(session)` as the resolver's gate. The
+  helper **overrides** it with `whenOpenFor(sim)`, which reads the sim's own
+  `src/sim/lunar.ts` — because the stage exposes a configurable `lunarCycleDays`
+  knob (4–60) that a fixed cycle cannot express, and the pane/moon read ride it too.
+  So: core = sensible default for any consumer; helper = same vocabulary, tunable
+  cycle. The two must not drift in *semantics* (both feed `moon_min`/`moon_phase`),
+  only in period. Vendoring keeps the core side current.
+
 - **D-023 — The lycan curse is bite-then-moon (H21).** The werewolf is the first user
   of the parent's phase `when` gate (D-248, vendored): a bite alone lands **phase 0**
   — fangs, claws, tongue, the mark — *permanently* and on its own timetable; every

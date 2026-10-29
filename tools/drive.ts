@@ -4,7 +4,7 @@
  * faithful prose while replacing hard drift with the floor.
  */
 import { HelperGame } from "../src/game";
-import { directions, guardMessage, floorText, instrumentRead, type DriveInput } from "../src/drive/drive";
+import { directions, guardMessage, floorText, floorFor, interiorLine, instrumentRead, type DriveInput } from "../src/drive/drive";
 
 let failures = 0;
 function check(name: string, cond: boolean, detail = ""): void {
@@ -101,6 +101,22 @@ function inputFor(g: HelperGame): DriveInput {
 {
   const g = new HelperGame(6);
   check("no cast → empty directions", directions(inputFor(g)) === "");
+}
+
+// H11: the interior surfaces once aware, and stays out before any awareness
+{
+  const g = new HelperGame(8);
+  g.track("mira", "Mira");
+  g.bestow("mira", "genome.wolf", 3);
+  const human = new HelperGame(8);
+  human.track("pat", "Pat");
+  check("a blind human has no interior line", interiorLine(human.view().frames[0]!) === "");
+  g.advance(24 * 12);
+  const f = g.view().frames[0]!;
+  const line = interiorLine(f);
+  check("an aware subject carries an interior line", line.length > 0, line);
+  check("the interior names her temperament", /temperament/.test(line), line);
+  check("the interior rides in the floor", floorFor(f).includes("temperament") || floorFor(f).includes("realized"));
 }
 
 console.log(failures === 0 ? "\nDRIVE PASS" : `\nDRIVE FAIL (${failures})`);

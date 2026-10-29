@@ -20,6 +20,8 @@ export interface MessageStateType {
 
 export interface ConfigType {
   seed?: number;
+  /** Minutes advanced per message (wins over `ticksPerMessage`; 60 = an hour). */
+  minutesPerMessage?: number;
   ticksPerMessage?: number;
   lunarCycleDays?: number;
   /** Append a compact status line after each bot message. Default on. */

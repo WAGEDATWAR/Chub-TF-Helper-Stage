@@ -221,12 +221,24 @@ ledger is complete, not because anything is stubbed:
 
 ## Composer / mind-perception depth
 
-- **Status:** DEFERRED (scheduled: H11)
-- **Where:** `src/sim/subject.ts` uses the parent core's subject model.
-- **What:** the plan calls for **full mind/perception for NPCs**. The stage currently
-  renders body/exposure/band; mind/perception values exist in the core but are not
-  surfaced in the pane or the facts floor.
-- **Decide:** what mind/perception actually contributes to the driving floor.
+- **Status:** resolved (H11)
+- **Where:** `src/sim/cast.ts` (`interiorOf`), `src/drive/drive.ts` (`interiorLine`).
+- **What:** each frame carries an `interior` (awareness tier, mood, top feelings,
+  characteristic mind values), shown on the card and folded into the floor from her
+  POV. Gated to awareness so a blind subject reads as all surface (the observer rule).
+- **Remainder:** perception (the `seen`/`felt`/`told` notice paths and beliefs about
+  her own body) is still only partially surfaced — the betrayal/self-image dynamics
+  are in the core but not yet shown. Promote to its own entry if it grows.
+
+## Lunar clock: helper overrides the core default (D-024)
+
+- **Status:** deliberate divergence (not a gap)
+- **Where:** `src/sim/lunar.ts`, `src/sim/subject.ts` (`whenOpenFor`) vs the parent
+  `core/moon.ts` + `phaseWhenOpen`.
+- **What:** the parent core supplies a fixed 29.53-day lunar clock + gate; the helper
+  overrides the gate to read its own **configurable-cycle** moon (`lunarCycleDays`
+  knob, 4–60, also used by the pane moon read). Same vocabulary (`moon_min`/
+  `moon_phase`), different period. Do not let the two drift in semantics.
 
 ## Packaging / publish
 

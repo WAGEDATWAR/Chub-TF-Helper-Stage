@@ -184,6 +184,17 @@ function CastTab({
             {f.awareness > 0 && (
               <div style={css.row}>
                 <span style={css.attr}>aware {f.awareness}%{f.realized ? " · realized" : ""}</span>
+                {f.interior.feelings.length > 0 && (
+                  <span style={css.attr}>· feels {f.interior.feelings.map((x) => `${x.emotion} ${x.value}`).join(", ")}</span>
+                )}
+              </div>
+            )}
+            {f.interior.traits.length > 0 && (
+              <div style={css.row}>
+                <span style={css.attr}>
+                  {f.interior.mood ? `${f.interior.mood.band} · ` : ""}
+                  {f.interior.traits.map((t) => `${t.label} ${t.value}`).join(" · ")}
+                </span>
               </div>
             )}
             {c && (
@@ -324,10 +335,12 @@ function ToolsTab({ game, run, getGuard, getSaveKb }: { game: HelperGame; run: (
 
       <div style={css.label}>Time</div>
       <div style={css.row}>
+        <button style={css.btn} onClick={() => run(() => game.advanceMinutes(5))}>+5m</button>
         <button style={css.btn} onClick={() => run(() => game.advance(1))}>+1h</button>
         <button style={css.btn} onClick={() => run(() => game.advance(24))}>+1d</button>
         <button style={css.btn} onClick={() => run(() => game.advance(24 * 7))}>+1w</button>
       </div>
+      {game.partialMinutes > 0 && <div style={css.attr}>{game.partialMinutes}m banked toward the next hour</div>}
 
       <div style={css.label}>Transformation pace</div>
       <div style={css.row}>

@@ -3,7 +3,8 @@ import { driftStep, agencyStep, REVEAL_THRESHOLD, type DriftInputs } from "./min
 import { ageMindInfluence } from "./physiology";
 import { matrixSign, type DispositionTable } from "./reactions";
 import { mentalityFor } from "./genomes";
-import { applyCriteria, type CriterionGroup, type CriteriaContext } from "./criteria";
+import { applyCriteria, matches, type CriterionGroup, type CriteriaContext } from "./criteria";
+import { moonState } from "./moon";
 import type { Session } from "./session";
 import type { NoticableRegistry } from "./perception";
 import { knowledgeAwareness } from "./perception";
@@ -190,6 +191,7 @@ function peakMemorySignificance(session: Session): number {
 export function buildCriteriaContext(session: Session, partTags: string[], partRoles: string[], alliesNear = false, memorySignificance = 0.5): CriteriaContext {
   const s = session.subject;
   const mood = s.mood?.point();
+  const moon = moonState(session.clock.day);
   return {
     stats: s.stats,
     mind: s.mind ? Object.fromEntries(s.mind.ids().map((id) => [id, s.mind!.read(id)])) : {},
@@ -206,7 +208,19 @@ export function buildCriteriaContext(session: Session, partTags: string[], partR
     realized: s.mind?.realized ?? false,
     memorySignificance,
     alliesNear,
+    moon: moon.value,
+    moonPhase: moon.phase,
   };
+}
+
+/**
+ * The resolver's phase `when` gate (D-248), bound to a session. A phase gate like
+ * `{ moon_min: 0.8 }` or `{ stability_min: 40 }` opens only while the world state
+ * satisfies it, evaluated against the same clause vocabulary as criteria. Purely a
+ * read of live state, so it is deterministic and reload-safe.
+ */
+export function phaseWhenOpen(session: Session): (when: Record<string, unknown>) => boolean {
+  return (when) => matches(when, buildCriteriaContext(session, [], []));
 }
 
 /** The nightly mind step (M15.5b): awareness, then the drift. */

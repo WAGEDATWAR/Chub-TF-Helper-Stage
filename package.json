@@ -19,6 +19,7 @@
     "coupling": "tsx tools/coupling.ts",
     "pace": "tsx tools/pace.ts",
     "name-restore": "tsx tools/name-restore.ts",
+    "time": "tsx tools/time.ts",
     "lycan": "tsx tools/lycan.ts",
     "drive": "tsx tools/drive.ts",
     "visualize": "tsx tools/visualize.ts",
@@ -27,7 +28,7 @@
     "validate": "tsx tools/validate.ts",
     "lint:authoring": "tsx tools/authoring.ts",
     "data-check": "tsx tools/data-check.ts",
-    "check": "npm run typecheck && npm run validate && npm run lint:authoring && npm run data-check && npm run smoke && npm run detect && npm run detect-eval && npm run coupling && npm run pace && npm run name-restore && npm run lycan && npm run drive && npm run visualize && npm run golden && npm run persist"
+    "check": "npm run typecheck && npm run validate && npm run lint:authoring && npm run data-check && npm run smoke && npm run detect && npm run detect-eval && npm run coupling && npm run pace && npm run name-restore && npm run time && npm run lycan && npm run drive && npm run visualize && npm run golden && npm run persist"
   },
   "dependencies": {
     "@chub-ai/stages-ts": "^0.3.7",

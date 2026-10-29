@@ -45,6 +45,8 @@ export interface SavePayload {
   chars: Record<string, string>;
   detect: ReturnType<Detector["toJSON"]>;
   coupling: ReturnType<TriggerEngine["toJSON"]>;
+  /** Minutes banked toward the next whole hour (H17 groundwork). */
+  pendingMinutes?: number;
 }
 
 type TriggerEngine = ReturnType<typeof createTriggerEngine>;
@@ -229,6 +231,26 @@ export class HelperGame {
     this.cast.advance(ticks);
   }
 
+  /**
+   * Advance by **minutes** (H17 groundwork): the clock's unit is whole hours, so
+   * sub-hour amounts accumulate until they cross an hour. `advanceMinutes(5)` twelve
+   * times advances one hour; 90 minutes advances an hour and banks 30. This is what
+   * the future time-parse system will feed, and what the 5-minute pace option uses.
+   */
+  advanceMinutes(minutes: number): void {
+    if (minutes <= 0) return;
+    this.pendingMinutes += Math.round(minutes);
+    const hours = Math.floor(this.pendingMinutes / 60);
+    this.pendingMinutes -= hours * 60;
+    if (hours > 0) this.advance(hours);
+  }
+
+  /** Minutes banked toward the next whole hour (0..59). */
+  get partialMinutes(): number {
+    return this.pendingMinutes;
+  }
+  private pendingMinutes = 0;
+
   /** The current read of the whole cast plus the detection feed and coupling. */
   view(): CastView {
     const tick = this.cast.worldTick;
@@ -275,7 +297,7 @@ export class HelperGame {
   /** Serialize the whole cast + detection + coupling state to checksummed saves. */
   save(): SavePayload | null {
     if (this.cast.size === 0) return null;
-    return { worldTick: this.cast.worldTick, chars: this.cast.saveAll(), detect: this.detector.toJSON(), coupling: this.triggers.toJSON() };
+    return { worldTick: this.cast.worldTick, chars: this.cast.saveAll(), detect: this.detector.toJSON(), coupling: this.triggers.toJSON(), pendingMinutes: this.pendingMinutes };
   }
 
   /** The serialized byte size of the current save (for the budget gate). */
@@ -298,6 +320,7 @@ export class HelperGame {
       else this.pace = found;
     }
     this.cast.worldTick = Math.max(this.cast.worldTick, payload.worldTick ?? 0);
+    this.pendingMinutes = Math.max(0, Math.min(59, payload.pendingMinutes ?? 0));
     if (payload.detect) {
       this.detector.loadJSON(payload.detect);
       // re-register names only (cards are re-scanned on load) so attribution works

@@ -37,7 +37,25 @@ const RULES = [
 export function floorFor(frame: CastFrame, coupling?: CouplingRow): string {
   const band = frame.band.replace(/^band\./, "").replace(/_/g, " ");
   const cues = coupling?.cues.length ? ` (moon-stirred: ${coupling.cues.join(", ")})` : "";
-  return `${frame.name} — exposure ${frame.exposure}%, ${band}${cues}. ${frame.describe}`;
+  return `${frame.name} — exposure ${frame.exposure}%, ${band}${cues}. ${frame.describe}${interiorLine(frame)}`;
+}
+
+/**
+ * The interior line (H11): what the character *registers* of her own state — mood,
+ * feelings, and whether she has realized. Kept from her POV, so prose never lets her
+ * know the Observer exists. Omitted entirely before any awareness (a blind subject
+ * has nothing to report).
+ */
+export function interiorLine(frame: CastFrame): string {
+  const it = frame.interior;
+  // nothing to report until she registers anything (a blind subject is all surface)
+  if (!it || (frame.awareness <= 0 && it.feelings.length === 0)) return "";
+  const bits: string[] = [];
+  if (frame.awareness >= 15) bits.push(it.feelings.length ? `feeling ${it.feelings.map((f) => f.emotion).join(" and ")}` : `mood ${it.mood?.band ?? "steady"}`);
+  if (frame.realized) bits.push("she has realized what is happening to her");
+  else if (frame.awareness >= 35) bits.push("she half-suspects it");
+  if (it.traits.length > 0) bits.push(`(temperament: ${it.traits.map((t) => `${t.label.toLowerCase()} ${t.value}`).join(", ")})`);
+  return bits.length ? ` [${bits.join("; ")}]` : "";
 }
 
 /** The whole-cast floor, used as the guard's fallback and the directions body. */

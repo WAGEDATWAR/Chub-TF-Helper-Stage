@@ -75,7 +75,7 @@ milestone names the `DEFERRED.md` entry it closes (if any).
 | H8 | **Visualize: render each body as an image** (`generator.makeImage`) | **done** | — |
 | H9 | **Detection depth: implication rules, per-family cues, focus** | **done** | detection gaps |
 | H10 | **Trigger fidelity: voluntary≠emotional, vampire ambient, stress, decay** | **done** | voluntary, ambient, stress |
-| H11 | **Mind/perception: surface to pane + the driving floor** | planned | mind-depth |
+| H11 | **Mind/perception: surface to pane + the driving floor** | **done** | mind-depth |
 | H12 | **Stage polish: mobile width, a11y, config knobs, status/guard UX** | planned | scene-props |
 | H13 | **Publish: `chub_meta`, deploy workflow, first push (H8/old)** | planned | packaging |
 | H14 | **Hardening: multi-genome on one char, second-genome semantics** | planned | applyRelated |
@@ -177,11 +177,15 @@ is chat-wide and survives a swipe.
   progression, and the ambient day/night bias.
 - Remainder (planned): emotion decay knob; more coupled genomes.
 
-## H11 — Mind/perception depth
+## H11 — Mind/perception depth — done
 
-- Surface core mind/perception (fear, trust, arousal, realization) in the pane and,
-  selectively, in the driving floor so prose reflects an interior, not just a body.
-- Respect the observer rule: a subject may not know it is watched until revealed.
+Shipped. Each frame carries an `interior` read — awareness tier, mood (valence,
+arousal, band), her strongest current feelings, and her most-characteristic mind
+values — surfaced on the cast card (gated to awareness, so a blind subject reads as
+all surface) and folded into the driving floor as an `[...]` line from *her* POV, so
+prose reflects an interior without letting her learn the Observer exists. The tier
+also drives when realization is announced (half-suspects → realized). `tools/drive.ts`
+locks it: no line before awareness, a temperament line once aware.
 
 ## H12 — Stage polish
 
@@ -217,19 +221,19 @@ is chat-wide and survives a swipe.
 ## H17 — Time model: infer elapsed time from prose
 
 Time advances **only** from (a) a chat message or (b) the pane's time controls — never
-a wall clock. The tick-per-message config is the *fallback*, not the rule.
+a wall clock. The per-message config is the *fallback*, not the rule.
 
-- Parse each message for an explicit or implied elapsed time ("later that night",
-  "the next morning", "an hour passed", "three days later", "she slept") → advance by
-  that much. An uncertain/undated message advances a **minimum of 5 minutes**.
-- Deterministic and pure (`src/sim/timeparse.ts`), data-driven cue tables, with a
-  corpus + eval like detection (H9) — the sim's pacing is only as good as this.
-- A manual time control (existing +1h/+1d) always wins and is recorded.
-- Same-message multiple characters advance together; a big inferred jump runs the
-  per-day mind step (H10) for each day crossed.
-- Gate: `tools/timeparse.ts` over a labeled corpus (explicit, relative, sleep,
-  undated→5min, negation like "years ago").
-- Bearing: `Cast.advance`, `Stage.beforePrompt`, `chub_meta` `ticksPerMessage`.
+- **Groundwork shipped:** the config is now **minutes** (`minutesPerMessage`, default
+  **60** = an hour; `5` is expressible), and the clock banks sub-hour amounts
+  (`Cast.advanceMinutes`, persisted) so a 5-minute message accumulates toward the next
+  hour rather than being lost — the seam the parser feeds. `+5m` pane control added.
+  Gate: `tools/time.ts`.
+- **Still planned:** parse each message for explicit/implied elapsed time ("later that
+  night", "three days later") → advance by that much; an undated message advances the
+  **5-minute minimum**. Pure `src/sim/timeparse.ts` + corpus + eval (like H9).
+- Same-message characters advance together; a big inferred jump runs the per-day mind
+  step for each day crossed.
+- Bearing: `Cast.advanceMinutes`, `Stage.beforePrompt`, `chub_meta` `minutesPerMessage`.
 
 ## Cross-cutting
 
@@ -241,8 +245,8 @@ a wall clock. The tick-per-message config is the *fallback*, not the rule.
 ## Gates
 
 `npm run check` = `typecheck` + `validate` + `lint:authoring` + `data-check` +
-`smoke` + `detect` + `detect-eval` + `coupling` + `pace` + `name-restore` + `lycan` +
-`drive` + `visualize` + `golden` + `persist`. All must be green
+`smoke` + `detect` + `detect-eval` + `coupling` + `pace` + `name-restore` + `time` +
+`lycan` + `drive` + `visualize` + `golden` + `persist`. All must be green
 for any content or code change. `data-check` fails if a new genome lands < 5
 attributes, never settles, or (if fantasy) is missing its coupling block.
 
