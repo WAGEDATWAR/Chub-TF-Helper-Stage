@@ -71,3 +71,6 @@ state_schema:
       playstyles:
         type: object
         description: "Per-character playstyle for a coupled genome (moon-only, emotional, hormonal, full)."
+
+github_path: 'https://github.com/WAGEDATWAR/Chub-TF-Helper-Stage'
+
