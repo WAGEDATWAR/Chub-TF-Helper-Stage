@@ -14,6 +14,10 @@ permissions:
 jobs:
   build-and-upload:
     runs-on: ubuntu-latest
+    env:
+      # Cloudflare on api.chub.ai rejects the default curl UA with a geo 403
+      # ("not available in your country"); a browser UA gets through.
+      UA: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -46,7 +50,7 @@ jobs:
             if [ -z "${STAGE_ID}" ]; then
               sudo apt-get install -y jq
               echo "Creating the stage..."
-              code=$(curl -s -w '%{http_code}' -H "CH-API-KEY: ${{ secrets.CHUB_AUTH_TOKEN }}" -H "Content-Type: application/json" \
+              code=$(curl -s -w '%{http_code}' -A "$UA" -H "CH-API-KEY: ${{ secrets.CHUB_AUTH_TOKEN }}" -H "Content-Type: application/json" \
                 --request POST --data "{\"name\":\"${{ github.event.repository.name }}-stage\"}" \
                 https://api.chub.ai/extensions -o creation.json)
               echo "HTTP $code"
@@ -83,6 +87,6 @@ jobs:
         env:
           CHUB_AUTH_TOKEN: ${{ secrets.CHUB_AUTH_TOKEN }}
         run: |
-          curl -H "CH-API-KEY: ${{ secrets.CHUB_AUTH_TOKEN }}" \
+          curl -A "$UA" -H "CH-API-KEY: ${{ secrets.CHUB_AUTH_TOKEN }}" \
             -F "file=@build.zip" \
             https://api.chub.ai/extension/${{ env.STAGE_ID }}/upload
