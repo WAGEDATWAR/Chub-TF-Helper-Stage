@@ -8,6 +8,7 @@
 import { mergedContentSet } from "./content";
 import { buildRegistries } from "../src/sim/registries";
 import { startSubject, bestow, advance, mutagenPowerId } from "../src/sim/subject";
+import { runDailyMind } from "../src/sim/mind";
 
 interface Finding {
   level: "error" | "warn";
@@ -46,7 +47,11 @@ function lintGenome(genomeId: string): void {
 
   let settledTick: number | null = null;
   for (let t = 0; t < 90 * 24; t++) {
+    const day = sim.session.clock.day;
     advance(sim, 1);
+    // a `when: { realized: true }` phase (the serpent's endoskeleton) only opens once
+    // the subject realizes — which the real cast drives per day, so the lint must too
+    if (sim.session.clock.day !== day) runDailyMind(sim);
     if (settledTick === null && settled(subject)) {
       settledTick = sim.session.clock.tick;
       break;

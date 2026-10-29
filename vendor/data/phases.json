@@ -47,7 +47,7 @@
     },
     "genome.rabbit": {
       "phases": [
-        { "id": "ears", "label": "the ears", "families": ["ears"], "tags": ["long_ears_tag", "mobile_ears_tag"] },
+        { "id": "ears", "label": "the ears", "families": ["ears"], "tags": ["long_ears_tag", "mobile_ears_tag", "tongue_tag"] },
         { "id": "coat", "label": "the coat and teeth", "families": ["coat", "skin"], "tags": ["teeth_tag"] },
         { "id": "gait", "label": "the gait", "families": ["gait", "muscle", "tail", "size"] },
         { "id": "rhythm", "label": "the cycles", "families": ["genital", "bone"], "exposure_min": 35 }
@@ -55,29 +55,29 @@
     },
     "genome.bovine": {
       "phases": [
-        { "id": "horns_hooves", "label": "horns and hooves", "families": ["horns", "gait"] },
+        { "id": "horns_hooves", "label": "horns, hooves and tongue", "families": ["horns", "gait"], "tags": ["tongue_tag"] },
         { "id": "hide", "label": "the hide", "families": ["skin", "coat", "muscle", "size"] },
         { "id": "frame", "label": "the frame", "families": ["bone", "structure"], "exposure_min": 45 }
       ]
     },
     "genome.equine": {
       "phases": [
-        { "id": "hooves", "label": "hooves", "families": ["gait"] },
+        { "id": "hooves", "label": "the hooves and tongue", "families": ["gait"], "tags": ["tongue_tag"] },
         { "id": "hide", "label": "the hide", "families": ["skin", "coat", "muscle", "size"] },
         { "id": "frame", "label": "the frame", "families": ["bone", "structure"], "exposure_min": 45 }
       ]
     },
     "genome.raven": {
       "phases": [
-        { "id": "feathers_eyes", "label": "feathers, beak and eyes", "families": ["coat", "eyes", "skin"], "tags": ["beak_tag"] },
+        { "id": "feathers_eyes", "label": "feathers, beak and eyes", "families": ["coat", "eyes", "skin"], "tags": ["beak_tag", "tongue_tag"] },
         { "id": "wings", "label": "the wings", "families": ["wings", "bone", "size"] },
         { "id": "gait", "label": "the gait", "families": ["gait", "muscle", "voice"], "exposure_min": 30 }
       ]
     },
     "genome.serpent": {
       "phases": [
-        { "id": "venom", "label": "venom and fangs", "families": ["genital"], "tags": ["venom_tag", "fangs_tag"] },
-        { "id": "tongue_eyes", "label": "tongue and eyes", "roles": ["tongue", "nose", "eyes"] },
+        { "id": "venom", "label": "venom, fangs and tongue", "families": ["genital"], "tags": ["venom_tag", "fangs_tag", "tongue_tag"] },
+        { "id": "tongue_eyes", "label": "eyes and nose", "roles": ["nose", "eyes"] },
         { "id": "scales", "label": "the scales", "families": ["coat", "skin", "muscle"] },
         { "id": "length", "label": "the length", "families": ["tail", "gait"], "roles": ["leg_lower", "leg_upper"], "exposure_min": 40 },
         { "id": "endoskeleton", "label": "the endoskeleton", "families": ["bone", "structure"], "exposure_min": 55, "when": { "realized": true } }
@@ -85,7 +85,7 @@
     },
     "genome.bat": {
       "phases": [
-        { "id": "ears_eyes", "label": "ears and eyes", "families": ["ears", "eyes"] },
+        { "id": "ears_eyes", "label": "ears, eyes and tongue", "families": ["ears", "eyes"], "tags": ["tongue_tag"] },
         { "id": "wings", "label": "the wings", "families": ["wings"] },
         { "id": "coat", "label": "the coat", "families": ["coat", "skin", "muscle", "size"] },
         { "id": "frame", "label": "the frame", "families": ["bone", "structure"], "exposure_min": 45 }

@@ -63,6 +63,9 @@ export interface Sequencable {
   /** Filled by schedule(): the phase's gate, so the resolver honours it (R6). */
   phaseFeralOnly?: boolean;
   phaseExposureMin?: number;
+  /** Filled by schedule(): the phase's `when` gate (D-248), so the resolver can
+   *  hold the entry until the caller's world state satisfies it (e.g. a full moon). */
+  phaseWhen?: Record<string, unknown> | null;
 }
 
 export interface PhaseRegistry {
@@ -141,8 +144,8 @@ export class PhaseSequencer {
       const within = spreadWithin(plan.spread || this.spread, tempo, rng);
       const base = phaseStart.get(index) ?? 0;
       // stamp the phase's gate onto the winner (R6) so the resolver can honour a
-      // feral-only / exposure_min phase without re-reading the genome each tick.
-      return { ...w, phaseIndex: index, phaseId: phase.id, delay: base + within, phaseFeralOnly: phase.feral_only ?? false, phaseExposureMin: phase.exposure_min ?? 0 };
+      // feral-only / exposure_min / when-gated phase without re-reading the genome.
+      return { ...w, phaseIndex: index, phaseId: phase.id, delay: base + within, phaseFeralOnly: phase.feral_only ?? false, phaseExposureMin: phase.exposure_min ?? 0, phaseWhen: phase.when ?? null };
     });
   }
 

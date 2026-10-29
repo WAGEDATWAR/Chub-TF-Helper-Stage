@@ -19,4 +19,6 @@ export interface ResolverRegistries {
   genomes?: GenomeRegistry | null;
   reactions: ReactionCatalog;
   dispositionTable: DispositionTable | null;
+  /** Evaluates a phase `when` gate (D-248) against the caller's world state. */
+  whenOpen?: ((when: Record<string, unknown>) => boolean) | null;
 }

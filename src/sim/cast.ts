@@ -13,6 +13,7 @@ import { runDailyMind } from "./mind";
 import type { Registries } from "./registries";
 import { TimeEngine } from "@core/time_engine";
 import { loadSession } from "@core/savegame";
+import { createLunar } from "./lunar";
 
 export const MAX_CAST = 6;
 
@@ -61,13 +62,15 @@ export class Cast {
   private readonly regs: Registries;
   private readonly baseSeed: number;
   private readonly composer: ReturnType<typeof buildComposer>;
+  private readonly lunar?: { cycleDays?: number };
   private readonly chars = new Map<string, TrackedCharacter>();
   /** The shared world tick every character's clock is kept at. */
   worldTick = 0;
 
-  constructor(regs: Registries, data: Record<string, unknown>, seed: number) {
+  constructor(regs: Registries, data: Record<string, unknown>, seed: number, lunar?: { cycleDays?: number }) {
     this.regs = regs;
     this.baseSeed = seed;
+    this.lunar = lunar;
     this.composer = buildComposer(regs, data);
   }
 
@@ -96,7 +99,7 @@ export class Cast {
   add(id: string, name: string, baseGender = "female"): TrackedCharacter | null {
     if (this.chars.has(id) || this.full) return null;
     const seed = (this.baseSeed ^ hashString(id)) >>> 0;
-    const sim = startSubject({ name, seed, baseGender, regs: this.regs });
+    const sim = startSubject({ name, seed, baseGender, regs: this.regs, lunar: this.lunar });
     const char: TrackedCharacter = { id, name, baseGender, sim };
     this.chars.set(id, char);
     if (this.worldTick > 0) sim.engine.advance(this.worldTick);
@@ -108,7 +111,7 @@ export class Cast {
     if (this.chars.has(id) || this.full) return null;
     const char = this.add(id, name, baseGender);
     if (!char) return null;
-    char.sim = restoreSim(save, this.regs) ?? char.sim;
+    char.sim = restoreSim(save, this.regs, this.lunar) ?? char.sim;
     // the restored clock is authoritative; adopt its tick as the world tick floor
     if (char.sim.session.clock.tick > this.worldTick) this.worldTick = char.sim.session.clock.tick;
     return char;
@@ -198,7 +201,7 @@ function humanize(id: string): string {
 }
 
 /** Restore a sim from a save string (separate from game.ts to avoid a cycle). */
-function restoreSim(save: string, regs: Registries): Sim | null {
+function restoreSim(save: string, regs: Registries, lunar?: { cycleDays?: number }): Sim | null {
   try {
     const loaded = loadSession(save, {
       skeleton: regs.skeleton,
@@ -208,7 +211,7 @@ function restoreSim(save: string, regs: Registries): Sim | null {
       attributes: regs.attributes,
       events: regs.events,
     });
-    return { subject: loaded.session.subject, session: loaded.session, engine: new TimeEngine(loaded.session), regs };
+    return { subject: loaded.session.subject, session: loaded.session, engine: new TimeEngine(loaded.session), regs, lunar: createLunar(lunar) };
   } catch {
     return null;
   }

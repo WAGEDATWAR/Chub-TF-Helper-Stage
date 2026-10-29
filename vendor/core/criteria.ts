@@ -32,6 +32,10 @@ export interface CriteriaContext {
   alliesNear: boolean;
   /** A memory significance for the triggering moment, 0..1. */
   phase?: string;
+  /** Lunar state, 0..1 (0 new, 1 full). Fed by the caller's lunar clock. */
+  moon?: number;
+  /** The lunar phase name ("new"|"waxing crescent"|…|"full"). */
+  moonPhase?: string;
   [k: string]: unknown;
 }
 
@@ -115,6 +119,12 @@ function matchesClause(key: string, value: unknown, ctx: CriteriaContext): boole
       return ctx.day >= (value as number);
     case "phase":
       return ctx.phase === value;
+    case "moon_min":
+      return (ctx.moon ?? 0) >= (value as number);
+    case "moon_max":
+      return (ctx.moon ?? 0) <= (value as number);
+    case "moon_phase":
+      return ctx.moonPhase === value;
     case "stability_min":
       return (ctx.stats.stability ?? 0) >= (value as number);
     case "stability_max":
@@ -136,6 +146,7 @@ export const CRITERIA_KEYS = Object.freeze([
   "mood_valence_min", "mood_valence_max", "mood_arousal_min", "mood_arousal_max", "mood_band",
   "has_part_tag", "has_part_role", "flag", "realized", "allies_near",
   "memory_significance_min", "day_min", "phase",
+  "moon_min", "moon_max", "moon_phase",
 ]);
 
 /** Validate a criteria condition against the criteria vocabulary. */

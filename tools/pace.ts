@@ -37,8 +37,10 @@ function settleDays(seed: number, pace: "slow" | "normal" | "fast" | "quick" | "
   check("quick is faster than fast", quick < fast, `${quick} < ${fast}`);
   check("normal lands near the authored baseline", normal >= 20 && normal <= 45, `${normal}`);
   // instant must collapse the whole timeline, phase schedule included (D-H02):
-  // before the onset-scaling fix this floored at ~8 days no matter the rate
-  check("instant settles in a beat (<= 3 days)", instant <= 3, `${instant}`);
+  // before the onset-scaling fix this floored at ~8 days no matter the rate. It is
+  // now a handful of days because the wolf's `skull` phase is `stability_min`-gated
+  // (D-248), so it waits for the body to steady (truer than an artificial floor).
+  check("instant settles in a beat (<= 5 days)", instant <= 5, `${instant}`);
   check("quick is a scene or two (<= 10 days)", quick <= 10, `${quick}`);
 }
 

@@ -1,5 +1,16 @@
 # Decisions
 
+- **D-023 — The lycan curse is bite-then-moon (H21).** The werewolf is the first user
+  of the parent's phase `when` gate (D-248, vendored): a bite alone lands **phase 0**
+  — fangs, claws, tongue, the mark — *permanently* and on its own timetable; every
+  later phase is gated on `moon_min`, so the change only deepens as the moon fills.
+  The genitals sit in phase 1 behind the same gate, so the moon brings the genital
+  change and with it the heat cycle. The gate predicate is supplied per sim
+  (`whenOpenFor`, reading that sim's own lunar clock) so the resolver stays
+  world-agnostic; the plan is a helper overlay (`data/phases.extra.json`, werewolf
+  only). `tools/lycan.ts` proves it: a bite starts the mark, later phases freeze at a
+  new moon and advance under a full one.
+
 - **D-022 — The stage page is transparent; the host owns the frame (H19).** Chub has
   **no height/resize API** — the SDK `ReactRunner` never messages a size, and the docs
   describe a stage as an *overlay* on the chat ("messages fade out in the background").

@@ -85,6 +85,7 @@ milestone names the `DEFERRED.md` entry it closes (if any).
 | H18 | **Transformation duration: a pace knob + card-inferred rate** | **done** | PACE |
 | H19 | **Mobile usability: collapse/hide the pane; list changed parts** | **done** | mobile |
 | H20 | **Part/skeleton visualizer: a visual body map of changed parts** | planned | — |
+| H21 | **Lycan curse: bite→permanent mark, later phases on the moon** | **done** | — |
 
 Milestone order is a suggestion; H8–H12 are independent and can be resequenced.
 
@@ -102,6 +103,15 @@ planned — see `DEFERRED.md`.)
   does not resize it. What reclaims the chat is **transparency** — the page paints
   nothing, only our panels do, so the chat shows through behind a collapsed pane
   (matching the parent stage).
+
+## H21 — Lycan curse — done
+
+The werewolf is bite-then-moon (D-023). A bite alone lands **phase 0** (fangs, claws,
+tongue — the mark) permanently and on its own timetable; later phases are gated on
+`moon_min` so the change deepens only under the moon, and the genitals sit in phase 1
+behind that gate (the moon brings the genital change and the heat cycle). Built on
+the parent's `when` gate + lunar criteria keys (D-248, vendored); the plan is a
+werewolf-only overlay. `tools/lycan.ts` locks it.
 ## H18 — Transformation duration — done
 
 Shipped. The authored set settles in ~22–41 simulated days (median 30) — right for
@@ -231,8 +241,8 @@ a wall clock. The tick-per-message config is the *fallback*, not the rule.
 ## Gates
 
 `npm run check` = `typecheck` + `validate` + `lint:authoring` + `data-check` +
-`smoke` + `detect` + `detect-eval` + `coupling` + `pace` + `drive` + `visualize` +
-`golden` + `persist`. All must be green
+`smoke` + `detect` + `detect-eval` + `coupling` + `pace` + `name-restore` + `lycan` +
+`drive` + `visualize` + `golden` + `persist`. All must be green
 for any content or code change. `data-check` fails if a new genome lands < 5
 attributes, never settles, or (if fantasy) is missing its coupling block.
 

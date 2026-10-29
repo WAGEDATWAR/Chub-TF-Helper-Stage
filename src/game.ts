@@ -65,7 +65,7 @@ export class HelperGame {
     this.seed = seed;
     this.data = contentBundle();
     this.regs = buildRegistries(this.data);
-    this.cast = new Cast(this.regs, this.data, seed);
+    this.cast = new Cast(this.regs, this.data, seed, lunarConfig);
     this.detector = new Detector(this.data.detect ?? {});
     this.lunar = createLunar(lunarConfig);
     this.triggers = createTriggerEngine(this.data.coupling ?? {}, this.lunar);

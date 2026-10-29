@@ -338,6 +338,7 @@ function resolverFrom(registries: ResolverRegistries, session: Session): Resolve
     phases: registries.phases ?? null,
     genomes: registries.genomes ?? null,
     rng: session.rng,
+    whenOpen: registries.whenOpen ?? null,
   });
 }
 

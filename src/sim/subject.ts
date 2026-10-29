@@ -9,8 +9,11 @@ import { createSession, type Session } from "@core/session";
 import { createObserver } from "@core/observer";
 import { TimeEngine } from "@core/time_engine";
 import { resolvePower, powerFromInjector, type PowerResolution } from "@core/powers";
+import { buildCriteriaContext } from "@core/mind_wiring";
+import { matches, type CriteriaContext } from "@core/criteria";
 import { createComposer, buildFragmentLibrary, buildToneLibrary, type Composer } from "@core/composer";
 import { compactSave } from "./compact";
+import { createLunar, type Lunar } from "./lunar";
 import type { Registries } from "./registries";
 import type { Subject } from "@core/subject";
 
@@ -28,6 +31,7 @@ export interface SimOptions {
   seed: number;
   baseGender?: string;
   regs: Registries;
+  lunar?: { cycleDays?: number };
 }
 
 export interface Sim {
@@ -35,6 +39,22 @@ export interface Sim {
   session: Session;
   engine: TimeEngine;
   regs: Registries;
+  /** The lunar clock this sim's phase gates read (D-248). */
+  lunar: Lunar;
+}
+
+/**
+ * The phase `when` evaluator for one sim (D-248): a phase gate like
+ * `{ moon_min: 0.8 }` holds only near a full moon. Moon state comes from the sim's
+ * own clock, so a gate is deterministic and rides the shared world tick.
+ */
+export function whenOpenFor(sim: { session: Session; lunar: Lunar }): (when: Record<string, unknown>) => boolean {
+  return (when) => {
+    const tick = sim.session.clock.tick;
+    const base = buildCriteriaContext(sim.session, [], []);
+    const ctx: CriteriaContext = { ...base, moon: sim.lunar.intensity(tick), moonPhase: sim.lunar.phaseName(tick) };
+    return matches(when, ctx);
+  };
 }
 
 export function startSubject(opts: SimOptions): Sim {
@@ -55,7 +75,8 @@ export function startSubject(opts: SimOptions): Sim {
   });
   const session = createSession({ subject, observer: createObserver(), saveSeed: opts.seed, events: regs.events });
   const engine = new TimeEngine(session);
-  return { subject, session, engine, regs };
+  const lunar = createLunar(opts.lunar);
+  return { subject, session, engine, regs, lunar };
 }
 
 /** Push an emotion (0..100), for the emotional coupling and manual nudges. */
@@ -110,6 +131,9 @@ export function bestow(sim: Sim, genomeId: string, dose = DEFAULT_DOSE): PowerRe
       genomes: sim.regs.genomes,
       reactions: { reactions: [] } as never,
       dispositionTable: null,
+      // a phase `when` gate (D-248) reads this sim's moon, so a lycan's later phases
+      // only advance under the moon while its first phase lands from the bite alone
+      whenOpen: whenOpenFor(sim),
     },
     power,
     dose,

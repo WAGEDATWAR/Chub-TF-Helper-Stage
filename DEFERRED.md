@@ -30,6 +30,20 @@ ledger is complete, not because anything is stubbed:
   `DURATION` entry below for the one remaining gap (card-stated order/timing).
 - **H20 — Part/skeleton visualizer.** A visual body map (which parts are changed and
   how far), on the menu — not stubbed yet. The H19 parts list is the textual stand-in.
+- **H21 — Lycan curse. Shipped.** Bite → permanent phase 0; later phases + genitals
+  gated on the moon (D-023), via the parent's phase `when` gate (D-248).
+
+## MOON-GATED-OTHER-SPECIES — only the werewolf uses the lunar phase gate
+
+- **Status:** GAP (only werewolf; grows per exotic species)
+- **Where:** `data/phases.extra.json`, `src/sim/subject.ts` (`whenOpenFor`).
+- **What:** D-248 lets any phase gate on world state (`moon_min`/`moon_phase`), but
+  only `genome.werewolf` uses it. Other species whose fiction is moon/light/tide-bound
+  (a lunar-tide species, a sun-fearing one) could gate phases the same way; it is
+  content, not engine. Vanilla `genome.wolf` stays ungated (it is the plain animal).
+- **Decide:** which future species gate on which world state, and whether to add more
+  world-state criteria keys (time-of-day, season) alongside the lunar ones.
+
 - **H12 — Stage polish.** Phone-width layout, a11y (real buttons, focus, aria-live),
   config knobs for existing toggles, status/guard UX.
 - **H15 — Voice (optional).** `generator.speak` for the status, `makeSound` foley on

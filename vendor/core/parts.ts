@@ -48,6 +48,9 @@ export interface PartAttributeEntry {
   phase_feral_only?: boolean;
   /** The exposure the phase requires (R6): the entry waits below it. */
   phase_exposure_min?: number;
+  /** The phase's `when` gate (D-248): the entry waits until the caller's world
+   *  state satisfies it (e.g. `{ moon_min: 0.8 }`). */
+  phase_when?: Record<string, unknown>;
   /** An optional intra-phase priority; lower goes first, default 0. */
   phase_priority?: number;
   progress_block?: unknown;

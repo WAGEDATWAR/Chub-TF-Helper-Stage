@@ -35,6 +35,7 @@ import feralExtra from "../../data/feral.extra.json";
 import injectorsExtra from "../../data/injectors.extra.json";
 import attributesExtra from "../../data/attributes.extra.json";
 import partsExtra from "../../data/parts.extra.json";
+import phasesExtra from "../../data/phases.extra.json";
 
 const BASE: Record<string, unknown> = {
   skeleton,
@@ -65,6 +66,7 @@ const OVERLAYS: Record<string, unknown> = {
   injectors: injectorsExtra,
   attributes: attributesExtra,
   parts: partsExtra,
+  phases: phasesExtra,
 };
 
 /** The merged content set the stage runs. */

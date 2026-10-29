@@ -46,7 +46,7 @@ export function rehydrate(save: Record<string, unknown>, content: SaveContent): 
     baseGender?: string;
     personalitySeed?: string | null;
     stats?: Record<string, number>;
-    parts?: Array<{ template: string; slot: string; integrity?: number; flags?: string[]; attributes?: Array<{ id: string; progress: number; stage_index?: number; target_progress?: number; dose_mult?: number; start_delay?: number; phase_index?: number; morph_chain?: string[] }> }>;
+    parts?: Array<{ template: string; slot: string; integrity?: number; flags?: string[]; attributes?: Array<{ id: string; progress: number; stage_index?: number; target_progress?: number; dose_mult?: number; start_delay?: number; phase_index?: number; phase_feral_only?: boolean; phase_exposure_min?: number; phase_when?: Record<string, unknown>; morph_chain?: string[] }> }>;
     pronouns?: string;
     age?: number | null;
     height?: number | null;
@@ -99,6 +99,9 @@ export function rehydrate(save: Record<string, unknown>, content: SaveContent): 
       if (attr.dose_mult !== undefined) entry.dose_mult = attr.dose_mult;
       if (attr.start_delay && attr.start_delay > 0) entry.start_delay = attr.start_delay;
       if (attr.phase_index !== undefined) entry.phase_index = attr.phase_index;
+      if (attr.phase_feral_only) entry.phase_feral_only = true;
+      if (attr.phase_exposure_min !== undefined) entry.phase_exposure_min = attr.phase_exposure_min;
+      if (attr.phase_when) entry.phase_when = attr.phase_when;
       if (attr.morph_chain) entry.morph_chain = attr.morph_chain;
       entry.stage_index = attr.stage_index ?? 0;
     }

@@ -90,6 +90,8 @@ export interface Candidate extends DistributionWinner {
   phaseId?: string;
   phaseFeralOnly?: boolean;
   phaseExposureMin?: number;
+  /** The phase's `when` gate (D-248), stamped by schedule(). */
+  phaseWhen?: Record<string, unknown> | null;
 }
 
 export function matchesTargets(instance: Pick<PartInstance, "tags" | "role">, targets: { match_tags?: string[]; match_roles?: string[] } | undefined): boolean {
@@ -202,6 +204,12 @@ export interface ResolverOptions {
   phases?: PhaseSequencer | null;
   rng?: Rng | null;
   genomes?: { get(id: string): { morph_role_tracks?: Record<string, string> } | null } | null;
+  /**
+   * Evaluates a phase's `when` gate (D-248) against the caller's world state — e.g.
+   * `{ moon_min: 0.8 }` holds only near a full moon. Returns true when the gate is
+   * satisfied (or absent). The resolver is world-agnostic, so the caller supplies it.
+   */
+  whenOpen?: ((when: Record<string, unknown>) => boolean) | null;
 }
 
 export interface TickEvent {
@@ -225,6 +233,7 @@ export class Resolver {
   readonly phases: PhaseSequencer | null;
   readonly rng: Rng | null;
   readonly genomes: ResolverOptions["genomes"];
+  readonly whenOpen: ((when: Record<string, unknown>) => boolean) | null;
 
   constructor(opts: ResolverOptions) {
     this.traits = opts.traits;
@@ -237,6 +246,7 @@ export class Resolver {
     this.phases = opts.phases ?? null;
     this.genomes = opts.genomes ?? null;
     this.rng = opts.rng ?? null;
+    this.whenOpen = opts.whenOpen ?? null;
   }
 
   /**
@@ -268,12 +278,15 @@ export class Resolver {
     return entry.target_progress ?? PROGRESS_MAX;
   }
 
-  /** The highest phase index whose every earlier phase is `PHASE_GATE` done. */
+  /**
+   * The highest phase index whose every earlier phase is `PHASE_GATE` done. A phase
+   * with no attributes of its own counts as done, so an empty phase (or a gap) never
+   * wedges the gate shut (D-247).
+   */
   private _openPhase(completion: Map<number, number>): number {
-    const phases = [...completion.keys()].sort((a, b) => a - b);
+    const max = completion.size > 0 ? Math.max(...completion.keys()) : 0;
     let open = 0;
-    for (const p of phases) {
-      if (p > open) break;
+    for (let p = 0; p <= max; p++) {
       if ((completion.get(p) ?? 1) >= PHASE_GATE) open = p + 1;
       else break;
     }
@@ -330,6 +343,10 @@ export class Resolver {
       for (const [p, b] of deepestByPhase) if (p < phase) { sum += b.sum; n += b.n; }
       return n === 0 ? 0 : (sum / n) * 100;
     };
+    // a phase may carry a `when` gate (D-248): e.g. later lycan phases wait for the
+    // moon. Evaluated once per tick (the world state does not change within it).
+    const whenOpen = (when: Record<string, unknown> | undefined): boolean =>
+      !when || !this.whenOpen ? true : this.whenOpen(when);
     const feral = Boolean((subject as { feral?: { locked?: boolean } }).feral?.locked);
     for (const instance of subject.body.allInstances()) {
       for (const entry of instance.attributes) {
@@ -343,6 +360,9 @@ export class Resolver {
         // a feral-only or exposure-gated phase waits for its condition (R6)
         if (entry.phase_feral_only && !feral) continue;
         if ((entry.phase_exposure_min ?? 0) > exposureBefore(entry.phase_index ?? 0)) continue;
+        // a `when`-gated phase waits for its condition (D-248): a lycan's later
+        // phases only advance under the moon, so a bite's first phase still lands.
+        if (!whenOpen(entry.phase_when)) continue;
         // a jittered onset (D-219): parts scheduled this dose do not all begin at
         // once; a random few-tick delay staggers first application, so a whole
         // tier does not bulk-apply. Once moving, its own progress jitter keeps it
@@ -480,6 +500,8 @@ export class Resolver {
       if (winner.phaseIndex !== undefined && entry.phase_index === undefined) entry.phase_index = winner.phaseIndex;
       if (winner.phaseFeralOnly !== undefined) entry.phase_feral_only = winner.phaseFeralOnly;
       if (winner.phaseExposureMin !== undefined) entry.phase_exposure_min = winner.phaseExposureMin;
+      // a `when` gate (D-248): hold the entry until the caller's world state holds
+      if (winner.phaseWhen) entry.phase_when = winner.phaseWhen;
       // a jittered onset (D-219): stagger first application so parts scheduled in
       // the same phase do not all fire at once; preserve an existing delay on re-dose.
       if (entry.start_delay === undefined) {
