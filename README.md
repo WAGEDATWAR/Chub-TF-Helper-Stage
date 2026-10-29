@@ -28,6 +28,10 @@ npm run build       # production bundle -> dist/
 `@chub-ai` boundary; `src/view/*` is pure formatting. The parent *Chrysalis* core is
 committed under `vendor/` (refresh with `npm run sync:vendor`).
 
+## Status
+
+Early / unlisted. See `PLAN.md` for what is shipped and `DEFERRED.md` for gaps.
+
 ## Publish
 
 Pushing to `main` runs `.github/workflows/stage-deploy.yml`, which creates the stage
