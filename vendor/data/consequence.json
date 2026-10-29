@@ -1,0 +1,18 @@
+{
+  "consequence_version": 1,
+  "push_outcomes": [
+    { "max_pressure": 1.3, "weights": { "good": 70, "strain": 30 } },
+    { "max_pressure": 1.8, "weights": { "good": 45, "strain": 40, "spasm": 15 } },
+    { "max_pressure": 2.5, "weights": { "good": 25, "damage": 45, "blackout": 30 } },
+    { "max_pressure": 99, "weights": { "good": 10, "damage": 50, "blackout": 40 } }
+  ],
+  "responses": {
+    "yield": { "composure_delta": 1, "pain_decay_mult": 2.0, "gain": "none", "label": "Yield" },
+    "soften": { "composure_delta": 0, "pain_mult": 0.6, "cost": "chemical_action", "label": "Soften" },
+    "push": { "composure_delta": -1, "table": "push_outcomes", "label": "Push" },
+    "break": { "composure_delta": -2, "table": "push_outcomes", "payoff": "higher", "label": "Break" }
+  },
+  "stop_priority": ["phobia", "hard_limit", "overload", "pain"],
+  "composure_gate": 30,
+  "resonance_forgiveness_threshold": 70
+}

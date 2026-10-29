@@ -1,0 +1,97 @@
+{
+  "distribution_version": 1,
+  "defaults": {
+    "miss_base": 0.35,
+    "miss_min": 0.18,
+    "coverage_jitter": 0.2,
+    "tier_delay": 3,
+    "delay_spread": 3
+  },
+  "default_order": [
+    [
+      "ears",
+      "tail",
+      "horns",
+      "wings",
+      "fangs",
+      "nails_hand",
+      "nails_foot",
+      "toes",
+      "fingers"
+    ],
+    [
+      "hand",
+      "foot_base",
+      "arm_lower",
+      "leg_lower",
+      "head",
+      "face",
+      "eyes",
+      "nose",
+      "mouth",
+      "tongue",
+      "teeth",
+      "hair"
+    ],
+    [
+      "arm_upper",
+      "leg_upper",
+      "torso_upper",
+      "torso_lower",
+      "chest",
+      "breasts",
+      "nipples",
+      "back",
+      "abdomen",
+      "pelvis"
+    ]
+  ],
+  "orders": {
+    "genome.serpent": [
+      [
+        "tongue",
+        "fangs",
+        "eyes",
+        "tail"
+      ],
+      [
+        "leg_lower",
+        "leg_upper",
+        "foot_base"
+      ],
+      [
+        "torso_lower",
+        "torso_upper",
+        "abdomen",
+        "back",
+        "arm_upper",
+        "arm_lower",
+        "hand"
+      ]
+    ],
+    "genome.bovine": [
+      [
+        "horns",
+        "ears",
+        "tail"
+      ],
+      [
+        "foot_base",
+        "leg_lower",
+        "hand",
+        "nose",
+        "mouth"
+      ],
+      [
+        "torso_upper",
+        "torso_lower",
+        "chest",
+        "breasts",
+        "abdomen",
+        "back",
+        "arm_upper",
+        "leg_upper"
+      ]
+    ]
+  }
+}

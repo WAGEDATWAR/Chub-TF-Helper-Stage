@@ -1,0 +1,130 @@
+{
+  "agents_version": 2,
+  "_comment": "Townsfolk (M16a/M16.5a, §44/§45). Each agent has a home building of its own household, an age, needs, relationships, and a day-plan. Households are coherent: a couple, a single parent and child, a lone neighbour, a lone colleague, and the subject. A `dawn` entry is the pre-wake tail of night so nobody is active at hour 0; `role: subject` marks the focal agent.",
+  "agents": [
+    {
+      "id": "subject",
+      "name": "the subject",
+      "archetype": "subject",
+      "age": 28,
+      "household": "hh.subject",
+      "home": "loc.her_home",
+      "needs": { "need.energy": 70, "need.hunger": 60, "need.social": 50, "need.duty": 60, "need.hygiene": 60 },
+      "relationships": [
+        { "to": "agent.friend", "type": "friend", "bond": 70 },
+        { "to": "agent.neighbour", "type": "neighbour", "bond": 55 }
+      ],
+      "schedule": [
+        { "block": "dawn", "activity": "act.sleep", "where": "loc.her_home_bedroom" },
+        { "block": "morning", "activity": "act.wash", "where": "loc.her_home_bathroom" },
+        { "block": "morning", "activity": "act.work", "where": "loc.office" },
+        { "block": "midday", "activity": "act.work", "where": "loc.office" },
+        { "block": "afternoon", "activity": "act.errand", "where": "loc.street" },
+        { "block": "evening", "activity": "act.eat", "where": "loc.her_home_kitchen" },
+        { "block": "night", "activity": "act.sleep", "where": "loc.her_home_bedroom" }
+      ]
+    },
+    {
+      "id": "agent.neighbour",
+      "name": "Mira Falk",
+      "archetype": "neighbour",
+      "age": 41,
+      "household": "hh.falks",
+      "home": "loc.falk_home",
+      "needs": { "need.energy": 70, "need.hunger": 60, "need.social": 55, "need.duty": 40, "need.hygiene": 65 },
+      "relationships": [
+        { "to": "subject", "type": "neighbour", "bond": 55 },
+        { "to": "agent.neighbour2", "type": "partner", "bond": 82 }
+      ],
+      "schedule": [
+        { "block": "dawn", "activity": "act.sleep", "where": "loc.falk_home_bedroom" },
+        { "block": "morning", "activity": "act.wash", "where": "loc.falk_home_bathroom" },
+        { "block": "morning", "activity": "act.eat", "where": "loc.falk_home_kitchen" },
+        { "block": "midday", "activity": "act.errand", "where": "loc.cafe" },
+        { "block": "afternoon", "activity": "act.socialize", "where": "loc.park" },
+        { "block": "evening", "activity": "act.eat", "where": "loc.falk_home_kitchen" },
+        { "block": "night", "activity": "act.sleep", "where": "loc.falk_home_bedroom" }
+      ]
+    },
+    {
+      "id": "agent.coworker",
+      "name": "Drin Okafor",
+      "archetype": "coworker",
+      "age": 34,
+      "household": "hh.okafor",
+      "home": "loc.okafor_home",
+      "needs": { "need.energy": 55, "need.hunger": 50, "need.social": 45, "need.duty": 70, "need.hygiene": 60 },
+      "relationships": [ { "to": "subject", "type": "colleague", "bond": 50 } ],
+      "schedule": [
+        { "block": "dawn", "activity": "act.sleep", "where": "loc.okafor_home_bedroom" },
+        { "block": "morning", "activity": "act.work", "where": "loc.office" },
+        { "block": "midday", "activity": "act.work", "where": "loc.office" },
+        { "block": "afternoon", "activity": "act.work", "where": "loc.office" },
+        { "block": "evening", "activity": "act.eat", "where": "loc.okafor_home_kitchen" },
+        { "block": "night", "activity": "act.sleep", "where": "loc.okafor_home_bedroom" }
+      ]
+    },
+    {
+      "id": "agent.friend",
+      "name": "Cass Rhodes",
+      "archetype": "friend",
+      "age": 26,
+      "household": "hh.rhodes",
+      "home": "loc.rhodes_home",
+      "needs": { "need.energy": 65, "need.hunger": 55, "need.social": 75, "need.duty": 35, "need.hygiene": 55 },
+      "relationships": [ { "to": "subject", "type": "friend", "bond": 70 } ],
+      "schedule": [
+        { "block": "dawn", "activity": "act.sleep", "where": "loc.rhodes_home_bedroom" },
+        { "block": "morning", "activity": "act.wash", "where": "loc.rhodes_home_bathroom" },
+        { "block": "midday", "activity": "act.socialize", "where": "loc.cafe" },
+        { "block": "afternoon", "activity": "act.errand", "where": "loc.street" },
+        { "block": "evening", "activity": "act.socialize", "where": "loc.rhodes_home_living" },
+        { "block": "night", "activity": "act.sleep", "where": "loc.rhodes_home_bedroom" }
+      ]
+    },
+    {
+      "id": "agent.neighbour2",
+      "name": "Tomas Reyner",
+      "archetype": "neighbour",
+      "age": 44,
+      "household": "hh.reyners",
+      "home": "loc.reyner_home",
+      "needs": { "need.energy": 60, "need.hunger": 65, "need.social": 40, "need.duty": 55, "need.hygiene": 50 },
+      "relationships": [
+        { "to": "subject", "type": "neighbour", "bond": 45 },
+        { "to": "agent.neighbour", "type": "partner", "bond": 80 },
+        { "to": "agent.kid", "type": "family", "bond": 88 }
+      ],
+      "schedule": [
+        { "block": "dawn", "activity": "act.sleep", "where": "loc.reyner_home_bedroom" },
+        { "block": "morning", "activity": "act.eat", "where": "loc.reyner_home_kitchen" },
+        { "block": "midday", "activity": "act.work", "where": "loc.office" },
+        { "block": "afternoon", "activity": "act.work", "where": "loc.office" },
+        { "block": "evening", "activity": "act.home", "where": "loc.reyner_home_living" },
+        { "block": "night", "activity": "act.sleep", "where": "loc.reyner_home_bedroom" }
+      ]
+    },
+    {
+      "id": "agent.kid",
+      "name": "Pim Reyner",
+      "archetype": "student",
+      "age": 13,
+      "household": "hh.reyners",
+      "home": "loc.reyner_home",
+      "needs": { "need.energy": 80, "need.hunger": 60, "need.social": 70, "need.duty": 60, "need.hygiene": 45 },
+      "relationships": [
+        { "to": "subject", "type": "neighbour", "bond": 40 },
+        { "to": "agent.neighbour2", "type": "family", "bond": 88 },
+        { "to": "agent.neighbour", "type": "acquaintance", "bond": 62 }
+      ],
+      "schedule": [
+        { "block": "dawn", "activity": "act.sleep", "where": "loc.reyner_home_kid_bedroom" },
+        { "block": "morning", "activity": "act.school", "where": "loc.office" },
+        { "block": "midday", "activity": "act.school", "where": "loc.office" },
+        { "block": "afternoon", "activity": "act.socialize", "where": "loc.park" },
+        { "block": "evening", "activity": "act.eat", "where": "loc.reyner_home_kitchen" },
+        { "block": "night", "activity": "act.sleep", "where": "loc.reyner_home_kid_bedroom" }
+      ]
+    }
+  ]
+}

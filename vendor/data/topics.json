@@ -1,0 +1,23 @@
+{
+  "topics_version": 1,
+  "_comment": "Preference topics (D-186). A topic's parent is generic, data-driven: a species tag, a part role, or a self topic (a whole unique topic like pawplay). `tags` (all must be present on the triggering change) is the match. Children inherit nothing mechanically — the parent only groups variants in the UI/report.",
+  "topics": [
+    { "id": "topic.canine", "label": "Canines", "parent": "species_tag", "parentKind": "tag", "tags": ["canine_tag"] },
+    { "id": "topic.feline", "label": "Felines", "parent": "species_tag", "parentKind": "tag", "tags": ["feline_tag"] },
+    { "id": "topic.serpentine", "label": "Serpents", "parent": "species_tag", "parentKind": "tag", "tags": ["serpent_tag"] },
+    { "id": "topic.avian", "label": "Avians", "parent": "species_tag", "parentKind": "tag", "tags": ["avian_tag"] },
+    { "id": "topic.tail", "label": "Tails", "parent": "part_role", "parentKind": "role", "tags": ["tail_tag"] },
+    { "id": "topic.wings", "label": "Wings", "parent": "part_role", "parentKind": "role", "tags": ["wings_tag"] },
+    { "id": "topic.horns", "label": "Horns", "parent": "part_role", "parentKind": "role", "tags": ["horns_tag"] },
+    { "id": "topic.extra_limb", "label": "Extra Limbs", "parent": "part_role", "parentKind": "role", "tags": ["extra_limb"] },
+    { "id": "topic.digitigrade", "label": "Digitigrade Stance", "parent": "structure_tag", "parentKind": "tag", "tags": ["digitigrade_tag"] },
+    { "id": "topic.bone_structure", "label": "Bone Structure", "parent": "structure_tag", "parentKind": "tag", "tags": ["structure_tag"] },
+    { "id": "topic.size", "label": "Size", "parent": "self", "parentKind": "self", "tags": ["size_tag"] },
+    { "id": "topic.tf_canine", "label": "Becoming Canine", "parent": "topic.canine", "parentKind": "self" },
+    { "id": "topic.pawplay", "label": "Pawplay", "parent": "self", "parentKind": "self" },
+    { "id": "topic.intersex", "label": "Intersex", "parent": "self", "parentKind": "self" },
+    { "id": "topic.lactation", "label": "Lactation", "parent": "self", "parentKind": "self" },
+    { "id": "topic.exhibition", "label": "Being Watched", "parent": "self", "parentKind": "self" },
+    { "id": "topic.scent", "label": "Scent", "parent": "self", "parentKind": "self", "tags": ["scent_tag"] }
+  ]
+}

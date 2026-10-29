@@ -1,0 +1,16 @@
+{
+  "presentation_version": 1,
+  "_comment": "Two independent presentation controls (S77). `tone_likelihood` scales how OFTEN an event category fires (permille; 1000 = unchanged) per preset - NEVER what it does. `filter_detail` says how much named detail a filter level shows (all/major/core) - NEVER the record. Changing either leaves the event record byte-identical.",
+  "tone_likelihood": {
+    "sex": { "cozy": 800, "standard": 1000, "mature": 1400 },
+    "change": { "cozy": 900, "standard": 1000, "mature": 1100 },
+    "feral": { "cozy": 700, "standard": 1000, "mature": 1300 },
+    "town": { "cozy": 1100, "standard": 1000, "mature": 900 },
+    "social": { "cozy": 1200, "standard": 1000, "mature": 900 }
+  },
+  "filter_detail": {
+    "full": "all",
+    "reduced": "major",
+    "minimal": "core"
+  }
+}

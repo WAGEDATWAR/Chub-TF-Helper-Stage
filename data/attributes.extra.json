@@ -1,0 +1,14 @@
+{
+  "_comment": "Attribute patches (merged by id). attr.fixed_claws had no morph track, so fixed-claw species kept human nails.",
+  "attributes": [
+    {
+      "id": "attr.fixed_claws",
+      "morph_tracks_by_role": { "nails_hand": "morph.nail_to_claw", "nails_foot": "morph.toenail_to_claw" }
+    },
+    {
+      "id": "attr.paw_pads",
+      "_patch": "paw_pads (skin) lost the toes slot to wet_skin (skin, higher priority) on amphibious species, so pads never showed. Raise its priority just above wet_skin; only pad-footed species are affected.",
+      "priority": 38
+    }
+  ]
+}

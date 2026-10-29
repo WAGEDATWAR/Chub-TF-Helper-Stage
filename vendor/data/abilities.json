@@ -1,0 +1,1931 @@
+{
+  "abilities_version": 2,
+  "abilities": [
+    {
+      "id": "ability.retractable_claws",
+      "acquire_at": 0.5,
+      "display_name": "Retractable Claws",
+      "category": "physical",
+      "granted_by": [
+        "attr.canine_claws",
+        "attr.feline_claws"
+      ],
+      "requires_part_tags": [
+        "nails_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.muscle_density",
+          "id": "synergy.rending"
+        }
+      ],
+      "conflicts_with": [
+        "ability.fixed_claws"
+      ],
+      "test_stat": "agility",
+      "acquire_effects": {
+        "drive": 12,
+        "arousal": 8
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Uncontrolled",
+          "faults": [
+            "fault.involuntary_extension",
+            "fault.snagging"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Willed",
+          "faults": [
+            "fault.involuntary_on_arousal"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Controlled",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.claw_tracing"
+          }
+        ],
+        "sex": [
+          {
+            "at": 40,
+            "id": "sex.claw_grip"
+          },
+          {
+            "at": 90,
+            "id": "sex.claw_restraint"
+          }
+        ]
+      },
+      "instinct_behavior": {
+        "at_exposure": 76,
+        "auto_trigger": "extension"
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.fixed_claws",
+      "acquire_at": 0.5,
+      "display_name": "Fixed Claws",
+      "category": "physical",
+      "granted_by": [
+        "attr.fixed_claws"
+      ],
+      "requires_part_tags": [
+        "nails_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [
+        "ability.retractable_claws"
+      ],
+      "test_stat": "agility",
+      "acquire_effects": {
+        "drive": 8
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Uncontrolled",
+          "faults": [
+            "fault.snagging"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Willed",
+          "faults": []
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Controlled",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.scent_tracking",
+      "acquire_at": 0.4,
+      "display_name": "Scent Tracking",
+      "category": "sense",
+      "granted_by": [
+        "attr.keen_smell"
+      ],
+      "requires_part_tags": [
+        "nose_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.keen_sight",
+          "id": "synergy.hunter_senses"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "perception",
+      "acquire_effects": {
+        "drive": 10,
+        "arousal": 6
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Overwhelmed",
+          "faults": [
+            "fault.scent_lock"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Focused",
+          "faults": [
+            "fault.scent_lock"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Tracking",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.scent_follow"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.fangs",
+      "acquire_at": 0.5,
+      "display_name": "Biting",
+      "category": "physical",
+      "granted_by": [
+        "attr.fangs"
+      ],
+      "requires_part_tags": [
+        "fangs_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.venom_sac",
+          "id": "synergy.envenom"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "strength",
+      "acquire_effects": {
+        "drive": 8,
+        "arousal": 6
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Uncontrolled",
+          "faults": [
+            "fault.involuntary_bite"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Willed",
+          "faults": []
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Controlled",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.night_vision",
+      "acquire_at": 0.4,
+      "display_name": "Night Vision",
+      "category": "sense",
+      "granted_by": [
+        "attr.night_vision"
+      ],
+      "requires_part_tags": [
+        "eyes_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.thermal_pit",
+          "id": "synergy.dark_hunter"
+        },
+        {
+          "with": "ability.bioluminescence",
+          "id": "synergy.lantern"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "perception",
+      "acquire_effects": {
+        "drive": 8
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Dazzled",
+          "faults": []
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Adapting",
+          "faults": []
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Clear",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.venom_sac",
+      "acquire_at": 0.5,
+      "display_name": "Envenoming",
+      "category": "chemical",
+      "granted_by": [
+        "attr.venom_sac"
+      ],
+      "requires_part_tags": [
+        "fangs_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.fangs",
+          "id": "synergy.envenom"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "endurance",
+      "acquire_effects": {
+        "drive": 14,
+        "arousal": 10
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Leaking",
+          "faults": [
+            "fault.venom_drip"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Held",
+          "faults": [
+            "fault.venom_drip"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Controlled",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "instinct_behavior": {
+        "at_exposure": 76,
+        "auto_trigger": "inject"
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.horns_ram",
+      "acquire_at": 0.5,
+      "display_name": "Goring",
+      "category": "physical",
+      "granted_by": [
+        "attr.horns"
+      ],
+      "requires_part_tags": [
+        "horns_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.stamina",
+          "id": "synergy.charge"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "strength",
+      "acquire_effects": {
+        "drive": 8
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Uncontrolled",
+          "faults": []
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Willed",
+          "faults": []
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Controlled",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.wings_glide",
+      "acquire_at": 0.5,
+      "display_name": "Gliding Wings",
+      "category": "locomotion",
+      "granted_by": [
+        "attr.wings_glide"
+      ],
+      "requires_part_tags": [
+        "wings_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.hollow_bones",
+          "id": "synergy.true_flight"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "agility",
+      "acquire_effects": {
+        "drive": 16,
+        "arousal": 12
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Failing",
+          "faults": [
+            "fault.hard_landing"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Gliding",
+          "faults": [
+            "fault.hard_landing",
+            "fault.joyful_leap"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Controlled",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.quadruped_sprint",
+      "acquire_at": 0.25,
+      "display_name": "Quadruped Sprint",
+      "category": "locomotion",
+      "granted_by": [
+        "attr.quadruped_sprint"
+      ],
+      "requires_part_tags": [
+        "leg_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "agility",
+      "acquire_effects": {
+        "drive": 12
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Clumsy",
+          "faults": [
+            "fault.tangling"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Steady",
+          "faults": []
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Swift",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.echolocation",
+      "acquire_at": 0.5,
+      "display_name": "Echolocation",
+      "category": "sense",
+      "granted_by": [
+        "attr.echolocation"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "perception",
+      "acquire_effects": {
+        "drive": 12
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Noisy",
+          "faults": [
+            "fault.clicking"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Reading",
+          "faults": []
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Mapping",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.thermal_pit",
+      "acquire_at": 0.4,
+      "display_name": "Heat Sensing",
+      "category": "sense",
+      "granted_by": [
+        "attr.thermal_pit"
+      ],
+      "requires_part_tags": [
+        "face_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.night_vision",
+          "id": "synergy.dark_hunter"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "perception",
+      "acquire_effects": {
+        "drive": 8
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Flickering",
+          "faults": [
+            "fault.heat_ghosting"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Reading",
+          "faults": [
+            "fault.heat_ghosting"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Tracking",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.heat_reading"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.lactation",
+      "acquire_at": 0.4,
+      "display_name": "Nursing",
+      "category": "chemical",
+      "granted_by": [
+        "attr.lactation"
+      ],
+      "requires_part_tags": [
+        "breasts_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "endurance",
+      "acquire_effects": {
+        "arousal": 10,
+        "drive": 8
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Leaking",
+          "faults": [
+            "fault.letdown",
+            "fault.leaking_arousal"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Noticing",
+          "faults": [
+            "fault.leaking_arousal"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Managed",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.nursing_tease"
+          }
+        ],
+        "sex": [
+          {
+            "at": 50,
+            "id": "sex.milk_play"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.submission_reflex",
+      "acquire_at": 0.25,
+      "display_name": "Submission Reflex",
+      "category": "social",
+      "granted_by": [
+        "attr.submission_reflex"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "composure",
+      "acquire_effects": {
+        "drive": 6,
+        "arousal": 8
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Reflexive",
+          "faults": [
+            "fault.dropping_gaze",
+            "fault.eager_yield"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Aware",
+          "faults": [
+            "fault.eager_yield"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Chosen",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.deference"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.heat_cycle",
+      "acquire_at": 0.25,
+      "display_name": "Heat Cycle",
+      "category": "chemical",
+      "granted_by": [
+        "attr.heat_cycle"
+      ],
+      "requires_part_tags": [
+        "genital_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.breeding_instinct",
+          "id": "synergy.nesting_heat"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "endurance",
+      "acquire_effects": {
+        "drive": 14,
+        "arousal": 10
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Overwhelming",
+          "faults": [
+            "fault.heat_flush",
+            "fault.restless_nights"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Felt",
+          "faults": [
+            "fault.heat_flush"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Managed",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.heat_confession"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.breeding_instinct",
+      "acquire_at": 0.25,
+      "display_name": "Breeding Instinct",
+      "category": "social",
+      "granted_by": [
+        "attr.breeding_instinct"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.heat_cycle",
+          "id": "synergy.nesting_heat"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "composure",
+      "acquire_effects": {
+        "drive": 12
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Consuming",
+          "faults": [
+            "fault.nesting_urge",
+            "fault.possessive_flash"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Acknowledged",
+          "faults": [
+            "fault.nesting_urge"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Directed",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.nesting"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.stamina",
+      "acquire_at": 0.25,
+      "display_name": "Stamina",
+      "category": "physical",
+      "granted_by": [
+        "attr.stamina"
+      ],
+      "requires_part_tags": [
+        "muscle_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.horns_ram",
+          "id": "synergy.charge"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "endurance",
+      "acquire_effects": {
+        "drive": 6
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Gassed",
+          "faults": [
+            "fault.second_wind"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Steady",
+          "faults": []
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Tireless",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.endurance_test"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.clinging",
+      "acquire_at": 0.5,
+      "display_name": "Clinging",
+      "category": "physical",
+      "granted_by": [
+        "attr.clinging"
+      ],
+      "requires_part_tags": [
+        "hand_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.prehensile_tail",
+          "id": "synergy.full_hold"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "agility",
+      "acquire_effects": {
+        "drive": 6,
+        "arousal": 4
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Sticky",
+          "faults": [
+            "fault.stuck_fast",
+            "fault.clingy_grip"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Gripping",
+          "faults": [
+            "fault.clingy_grip"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Sure",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.climbing"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.keen_sight",
+      "acquire_at": 0.4,
+      "display_name": "Keen Sight",
+      "category": "sense",
+      "granted_by": [
+        "attr.keen_sight"
+      ],
+      "requires_part_tags": [
+        "eyes_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.scent_tracking",
+          "id": "synergy.hunter_senses"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "perception",
+      "acquire_effects": {
+        "drive": 6
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Straining",
+          "faults": [
+            "fault.staring"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Focused",
+          "faults": []
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Sharp",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.compound_eyes",
+      "acquire_at": 0.5,
+      "display_name": "Mosaic Sight",
+      "category": "sense",
+      "granted_by": [
+        "attr.compound_eyes"
+      ],
+      "requires_part_tags": [
+        "eyes_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "perception",
+      "acquire_effects": {
+        "drive": 8
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Fractured",
+          "faults": [
+            "fault.too_many_of_you",
+            "fault.staring"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Parsing",
+          "faults": [
+            "fault.too_many_of_you"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Whole",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.mosaic"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.pack_instinct",
+      "acquire_at": 0.25,
+      "display_name": "Pack Instinct",
+      "category": "social",
+      "granted_by": [
+        "attr.pack_instinct"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.growl",
+          "id": "synergy.alpha_voice"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "composure",
+      "acquire_effects": {
+        "drive": 8,
+        "arousal": 4
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Herded",
+          "faults": [
+            "fault.seeking_approval"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Attuned",
+          "faults": [
+            "fault.seeking_approval"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Leading",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.pack_play"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.enhanced_intelligence",
+      "acquire_at": 0.25,
+      "display_name": "Enhanced Intelligence",
+      "category": "mental",
+      "granted_by": [
+        "attr.enhanced_intelligence"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "intelligence",
+      "acquire_effects": {
+        "drive": 10
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Racing",
+          "faults": [
+            "fault.overthinking",
+            "fault.too_clever"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Ordered",
+          "faults": [
+            "fault.too_clever"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Lucid",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.feral_mind",
+      "acquire_at": 0.5,
+      "display_name": "Feral Mind",
+      "category": "mental",
+      "granted_by": [
+        "attr.feral_mind"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "composure",
+      "acquire_effects": {
+        "drive": 10,
+        "arousal": 6
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Overrun",
+          "faults": [
+            "fault.snarl_reflex",
+            "fault.sudden_stillness"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Wary",
+          "faults": [
+            "fault.sudden_stillness"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Harnessed",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.voice_change",
+      "acquire_at": 0.5,
+      "display_name": "Changed Voice",
+      "category": "social",
+      "granted_by": [
+        "attr.voice_deep",
+        "attr.voice_high"
+      ],
+      "requires_part_tags": [
+        "mouth_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "composure",
+      "acquire_effects": {
+        "drive": 6
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Cracking",
+          "faults": [
+            "fault.voice_crack",
+            "fault.purring_laugh"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Shaping",
+          "faults": [
+            "fault.purring_laugh"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Steady",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.murmur"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.growl",
+      "acquire_at": 0.5,
+      "display_name": "Growl",
+      "category": "social",
+      "granted_by": [
+        "attr.growl"
+      ],
+      "requires_part_tags": [
+        "mouth_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.pack_instinct",
+          "id": "synergy.alpha_voice"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "composure",
+      "acquire_effects": {
+        "drive": 8,
+        "arousal": 6
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Involuntary",
+          "faults": [
+            "fault.rumbling_growl",
+            "fault.snarl_reflex"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Willed",
+          "faults": [
+            "fault.rumbling_growl"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Measured",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.growl_play"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.hiss",
+      "acquire_at": 0.5,
+      "display_name": "Hiss",
+      "category": "social",
+      "granted_by": [
+        "attr.hiss"
+      ],
+      "requires_part_tags": [
+        "mouth_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "composure",
+      "acquire_effects": {
+        "drive": 6,
+        "arousal": 4
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Slipping",
+          "faults": [
+            "fault.slipped_hiss",
+            "fault.purring_laugh"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Willed",
+          "faults": [
+            "fault.slipped_hiss"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Measured",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.pain_tolerance",
+      "acquire_at": 0.25,
+      "display_name": "Pain Tolerance",
+      "category": "mental",
+      "granted_by": [
+        "attr.pain_tolerance"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "endurance",
+      "acquire_effects": {
+        "drive": 6
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Numbing",
+          "faults": [
+            "fault.reckless_calm"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Bearing",
+          "faults": []
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Steady",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.dense_bones",
+      "acquire_at": 0.25,
+      "display_name": "Dense Bones",
+      "category": "physical",
+      "granted_by": [
+        "attr.dense_bones"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "strength",
+      "acquire_effects": {
+        "drive": 4
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Heavy",
+          "faults": [
+            "fault.heavy_footfall"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Settled",
+          "faults": []
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Solid",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.hollow_bones",
+      "acquire_at": 0.25,
+      "display_name": "Hollow Bones",
+      "category": "locomotion",
+      "granted_by": [
+        "attr.hollow_bones"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.wings_glide",
+          "id": "synergy.true_flight"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "agility",
+      "acquire_effects": {
+        "drive": 4
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Brittle",
+          "faults": [
+            "fault.too_light"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Light",
+          "faults": []
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Sure",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.cloven_toes",
+      "acquire_at": 0.5,
+      "display_name": "Cloven Stance",
+      "category": "locomotion",
+      "granted_by": [
+        "attr.cloven_toes"
+      ],
+      "requires_part_tags": [
+        "toes_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "agility",
+      "acquire_effects": {
+        "drive": 4
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Clumsy",
+          "faults": [
+            "fault.hoof_clatter",
+            "fault.joyful_leap"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Placing",
+          "faults": [
+            "fault.joyful_leap"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Sure",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.prehensile_tail",
+      "acquire_at": 0.5,
+      "display_name": "Prehensile Tail",
+      "category": "physical",
+      "granted_by": [
+        "attr.prehensile_tail"
+      ],
+      "requires_part_tags": [
+        "tail_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.clinging",
+          "id": "synergy.full_hold"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "agility",
+      "acquire_effects": {
+        "drive": 8,
+        "arousal": 6
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Wayward",
+          "faults": [
+            "fault.tail_wrap",
+            "fault.knocked_over"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Willed",
+          "faults": [
+            "fault.tail_wrap"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Deft",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.tail_hold"
+          }
+        ],
+        "sex": [
+          {
+            "at": 60,
+            "id": "sex.tail_wrap"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.bioluminescence",
+      "acquire_at": 0.4,
+      "display_name": "Glowing",
+      "category": "chemical",
+      "granted_by": [
+        "attr.bioluminescence"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.night_vision",
+          "id": "synergy.lantern"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "perception",
+      "acquire_effects": {
+        "drive": 8,
+        "arousal": 6
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Flaring",
+          "faults": [
+            "fault.glowing_blush",
+            "fault.flare"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Dimming",
+          "faults": [
+            "fault.glowing_blush"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Shaping",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.afterglow"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.scent_musk",
+      "acquire_at": 0.25,
+      "display_name": "Scent Marking",
+      "category": "chemical",
+      "granted_by": [
+        "attr.scent_musk"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "composure",
+      "acquire_effects": {
+        "drive": 8,
+        "arousal": 6
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Strong",
+          "faults": [
+            "fault.scent_cloud",
+            "fault.scent_lock"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Noticed",
+          "faults": [
+            "fault.scent_cloud"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Managed",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.muscle_density",
+      "acquire_at": 0.5,
+      "display_name": "Muscle Density",
+      "category": "physical",
+      "granted_by": [
+        "attr.muscle_density",
+        "attr.muscle_density_heavy"
+      ],
+      "requires_part_tags": [
+        "muscle_tag"
+      ],
+      "synergies": [
+        {
+          "with": "ability.retractable_claws",
+          "id": "synergy.rending"
+        }
+      ],
+      "conflicts_with": [],
+      "test_stat": "strength",
+      "acquire_effects": {
+        "drive": 6
+      },
+      "mastery_tiers": [
+        {
+          "tier": 1,
+          "at": 0,
+          "name": "Clumsy Power",
+          "faults": [
+            "fault.overexertion"
+          ]
+        },
+        {
+          "tier": 2,
+          "at": 25,
+          "name": "Measured",
+          "faults": [
+            "fault.flexing"
+          ]
+        },
+        {
+          "tier": 3,
+          "at": 60,
+          "name": "Controlled",
+          "faults": []
+        },
+        {
+          "tier": 4,
+          "at": 90,
+          "name": "Instinctive",
+          "faults": []
+        }
+      ],
+      "scene_unlocks": {
+        "play": [
+          {
+            "at": 25,
+            "id": "play.lifting"
+          }
+        ]
+      },
+      "latent_floor": 0.7
+    },
+    {
+      "id": "ability.sexual_control",
+      "acquire_at": 0,
+      "display_name": "Sexual Control",
+      "category": "mental",
+      "granted_by": [],
+      "requires_part_tags": [],
+      "synergies": [],
+      "conflicts_with": [],
+      "test_stat": "composure",
+      "acquire_effects": {},
+      "mastery_tiers": [
+        { "tier": 1, "at": 0, "name": "Green", "faults": ["fault.premature"] },
+        { "tier": 2, "at": 25, "name": "Steady", "faults": [] },
+        { "tier": 3, "at": 60, "name": "Practised", "faults": [] },
+        { "tier": 4, "at": 90, "name": "Unflappable", "faults": [] }
+      ],
+      "scene_unlocks": {},
+      "latent_floor": 1,
+      "always_held": true
+    }
+  ]
+}

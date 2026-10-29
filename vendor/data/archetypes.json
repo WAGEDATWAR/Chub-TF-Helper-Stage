@@ -1,0 +1,60 @@
+{
+  "archetypes_version": 1,
+  "_comment": "Six archetypes (D-193). Each defines RANGES per mind value, not fixed assignments; a seeded roll draws within them so runs stay unique but structured. Names are past-tense/participle adjectives implying several facets. Values are core traits (x<->y axes on the mind object); states are secondary. Ids match data/mind.json.",
+  "archetypes": [
+    {
+      "id": "archetype.warm",
+      "label": "Warm",
+      "blurb": "kind, open, trusting; takes people as they come",
+      "personality_seed": "devoted",
+      "dispositions": ["react.tail", "react.canid"],
+      "values": { "optimism": { "min": 55, "max": 80 }, "outgoing": { "min": 50, "max": 75 }, "trusting": { "min": 58, "max": 82 }, "honest": { "min": 55, "max": 80 }, "calm": { "min": 50, "max": 70 }, "dominant": { "min": 40, "max": 60 } },
+      "states": { "confident": { "min": 48, "max": 65 }, "nervous": { "min": 30, "max": 48 }, "aggressive": { "min": 28, "max": 42 }, "libidinous": { "min": 45, "max": 62 } }
+    },
+    {
+      "id": "archetype.bold",
+      "label": "Bold",
+      "blurb": "brash, forward, hungry for new sensation",
+      "personality_seed": "bold",
+      "dispositions": ["react.multi_limb", "react.large_size"],
+      "values": { "optimism": { "min": 52, "max": 72 }, "outgoing": { "min": 62, "max": 85 }, "trusting": { "min": 45, "max": 62 }, "dominant": { "min": 58, "max": 80 }, "calm": { "min": 35, "max": 52 }, "organised": { "min": 35, "max": 55 } },
+      "states": { "confident": { "min": 58, "max": 78 }, "nervous": { "min": 22, "max": 40 }, "aggressive": { "min": 42, "max": 62 }, "libidinous": { "min": 58, "max": 78 } }
+    },
+    {
+      "id": "archetype.wary",
+      "label": "Wary",
+      "blurb": "guarded, observant, slow to trust",
+      "personality_seed": "wary",
+      "dispositions": ["react.avian_wings", "react.insect_chitin"],
+      "values": { "optimism": { "min": 35, "max": 52 }, "outgoing": { "min": 30, "max": 48 }, "trusting": { "min": 28, "max": 46 }, "organised": { "min": 55, "max": 75 }, "calm": { "min": 38, "max": 55 }, "honest": { "min": 45, "max": 62 } },
+      "states": { "confident": { "min": 38, "max": 55 }, "nervous": { "min": 55, "max": 75 }, "aggressive": { "min": 30, "max": 48 }, "libidinous": { "min": 35, "max": 52 } }
+    },
+    {
+      "id": "archetype.devoted",
+      "label": "Devoted",
+      "blurb": "loyal, giving, defines herself through others",
+      "personality_seed": "devoted",
+      "dispositions": ["react.legless", "react.tail"],
+      "values": { "optimism": { "min": 50, "max": 68 }, "outgoing": { "min": 45, "max": 62 }, "trusting": { "min": 62, "max": 85 }, "honest": { "min": 60, "max": 82 }, "dominant": { "min": 28, "max": 45 }, "clean": { "min": 55, "max": 75 } },
+      "states": { "confident": { "min": 42, "max": 58 }, "nervous": { "min": 35, "max": 55 }, "aggressive": { "min": 22, "max": 38 }, "libidinous": { "min": 48, "max": 66 } }
+    },
+    {
+      "id": "archetype.stoic",
+      "label": "Stoic",
+      "blurb": "even, unshaken, keeps it to herself",
+      "personality_seed": "stoic",
+      "dispositions": ["react.large_size", "react.multi_limb"],
+      "values": { "optimism": { "min": 42, "max": 58 }, "outgoing": { "min": 30, "max": 45 }, "trusting": { "min": 42, "max": 58 }, "calm": { "min": 68, "max": 88 }, "organised": { "min": 45, "max": 62 }, "honest": { "min": 55, "max": 72 } },
+      "states": { "confident": { "min": 52, "max": 68 }, "nervous": { "min": 18, "max": 34 }, "aggressive": { "min": 30, "max": 45 }, "composed": { "min": 62, "max": 82 } }
+    },
+    {
+      "id": "archetype.studious",
+      "label": "Studious",
+      "blurb": "prompt, organised, curious, cool toward the social",
+      "personality_seed": "curious",
+      "dispositions": ["react.tail", "react.feline"],
+      "values": { "optimism": { "min": 45, "max": 62 }, "outgoing": { "min": 28, "max": 45 }, "organised": { "min": 70, "max": 90 }, "clean": { "min": 58, "max": 78 }, "trusting": { "min": 42, "max": 58 }, "calm": { "min": 48, "max": 65 } },
+      "states": { "confident": { "min": 45, "max": 60 }, "nervous": { "min": 40, "max": 60 }, "aggressive": { "min": 25, "max": 40 }, "curious": { "min": 65, "max": 85 }, "libidinous": { "min": 40, "max": 58 } }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "derived_fields_version": 1,
+  "_comment": "Derived values are recomputed, never stored (D-014). `bounds`, where declared, is the path-owned clamp (blueprint §3.0 I4): a write clamps from its own path, never from a call site.",
+  "fields": [
+    { "id": "exposure", "bounds": [0, 100], "formula": "clamp(mean_over_slots(max_attr_progress_on_slot) * 100, 0, 100)", "spec": "§19.4", "inputs": ["parts", "attributes.counts_toward_exposure"] },
+    { "id": "band", "formula": "exposure_bands.band_for(exposure)", "spec": "§19.1", "inputs": ["exposure"] },
+    { "id": "transform_state", "formula": "band.id", "spec": "§19.1", "inputs": ["band"] },
+    { "id": "genital_profile", "formula": "f(filled genital sockets)", "spec": "§18.4", "inputs": ["genital_primary", "genital_secondary"] },
+    { "id": "hormone_balance", "bounds": [-1, 1], "formula": "sum(gynomorphic progress) - sum(andromorphic progress), clamped -1..1", "spec": "§18.3", "inputs": ["attr.gynomorphic", "attr.andromorphic"] },
+    { "id": "global_health", "bounds": [0, 100], "formula": "weighted_mean(integrity / base, weight by criticality)", "spec": "§17.2", "inputs": ["parts.integrity", "parts.criticality"] },
+    { "id": "speech_multiplier", "formula": "band.speech_mult", "spec": "§19.1", "inputs": ["band"] },
+    { "id": "capacities", "formula": "capacities.rules(body tags/attrs, stats) -> permille abilities (S76)", "spec": "§8.1", "inputs": ["parts.tags", "parts.attributes", "stats.energy", "stats.pain", "stats.fatigue"] },
+    { "id": "instinct_override", "formula": "band.instinct_override", "spec": "§19.1", "inputs": ["band"] },
+    { "id": "pain_tolerance", "bounds": [10, 95], "formula": "35 + 0.45*strength + 0.25*arousal + 0.15*resonance + 0.15*composure - 0.20*exposure - 0.30*(100-stability) - 0.20*fatigue + 0.20*drive, clamped 10..95", "spec": "§25.1", "inputs": ["strength", "arousal", "resonance", "composure", "exposure", "stability", "fatigue", "drive"] },
+    { "id": "pain_pressure", "bounds": [0, 10], "formula": "pain / pain_tolerance", "spec": "§25.1", "inputs": ["pain", "pain_tolerance"] },
+    { "id": "overload_stop_point", "bounds": [0, 100], "formula": "60 + 0.35*drive + 0.15*composure - 0.20*exposure", "spec": "§21.2", "inputs": ["drive", "composure", "exposure"] },
+    { "id": "health_summary", "formula": "count(hurt), count(critical), count(flagged) over parts", "spec": "§17.2", "inputs": ["parts.integrity", "parts.flags"] },
+    { "id": "tier", "formula": "f(mastery)", "spec": "§37.1", "inputs": ["mastery"] },
+    { "id": "estimate_band", "formula": "mean ± 1.5σ over trials, null when n=0", "spec": "§10.6", "inputs": ["research.trials"] },
+    { "id": "description_strings", "formula": "composed at read time (§33)", "spec": "§37.1", "inputs": ["parts", "attributes", "fragments"] }
+  ]
+}

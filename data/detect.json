@@ -1,0 +1,119 @@
+{
+  "detect_version": 1,
+  "_comment": "Heuristic detection cues (H2). A species token in a character card or a chat message proposes a genome for the character it sits beside. Family tokens are weaker fallbacks. Change cues mark that a transformation is underway without naming a species.",
+  "species": [
+    { "genome": "genome.wolf", "tokens": ["wolf", "wolves", "lupine", "wolfish", "wolfen"], "family": "canine" },
+    { "genome": "genome.dog", "tokens": ["dog", "dogs", "hound", "puppy", "pup", "doglike", "dogged"], "family": "canine" },
+    { "genome": "genome.fox", "tokens": ["fox", "vixen", "vulpine", "foxlike", "foxy"], "family": "canine" },
+    { "genome": "genome.coyote", "tokens": ["coyote"], "family": "canine" },
+    { "genome": "genome.jackal", "tokens": ["jackal"], "family": "canine" },
+    { "genome": "genome.husky", "tokens": ["husky", "malamute"], "family": "canine" },
+    { "genome": "genome.hyena", "tokens": ["hyena"], "family": "canine" },
+
+    { "genome": "genome.cat", "tokens": ["cat", "cats", "kitten", "feline"], "family": "feline" },
+    { "genome": "genome.lion", "tokens": ["lion", "lioness"], "family": "feline" },
+    { "genome": "genome.tiger", "tokens": ["tiger", "tigress"], "family": "feline" },
+    { "genome": "genome.panther", "tokens": ["panther", "jaguar"], "family": "feline" },
+    { "genome": "genome.leopard", "tokens": ["leopard"], "family": "feline" },
+    { "genome": "genome.lynx", "tokens": ["lynx", "bobcat"], "family": "feline" },
+    { "genome": "genome.cheetah", "tokens": ["cheetah"], "family": "feline" },
+
+    { "genome": "genome.rabbit", "tokens": ["rabbit", "bunny", "bun"], "family": "leporine" },
+    { "genome": "genome.hare", "tokens": ["hare", "jackrabbit"], "family": "leporine" },
+
+    { "genome": "genome.bear", "tokens": ["bear", "ursine", "grizzly"], "family": "ursine" },
+    { "genome": "genome.badger", "tokens": ["badger"], "family": "mustelid" },
+    { "genome": "genome.otter", "tokens": ["otter"], "family": "mustelid" },
+    { "genome": "genome.weasel", "tokens": ["weasel", "stoat", "ferret", "marten"], "family": "mustelid" },
+
+    { "genome": "genome.mouse", "tokens": ["mouse", "mice"], "family": "rodent" },
+    { "genome": "genome.rat", "tokens": ["rat", "rats"], "family": "rodent" },
+    { "genome": "genome.squirrel", "tokens": ["squirrel"], "family": "rodent" },
+
+    { "genome": "genome.bovine", "tokens": ["cow", "cattle", "bull", "ox"], "family": "bovine" },
+    { "genome": "genome.goat", "tokens": ["goat", "kid", "billy", "nanny"], "family": "caprine" },
+    { "genome": "genome.ram", "tokens": ["ram"], "family": "caprine" },
+    { "genome": "genome.sheep", "tokens": ["sheep", "ewe", "lamb", "ovine"], "family": "ovine" },
+    { "genome": "genome.deer", "tokens": ["deer", "stag", "doe", "fawn", "cervine"], "family": "cervine" },
+    { "genome": "genome.boar", "tokens": ["boar", "pig", "hog", "swine", "suine"], "family": "suine" },
+    { "genome": "genome.equine", "tokens": ["horse", "stallion", "mare", "pony", "foal"], "family": "equine" },
+    { "genome": "genome.zebra", "tokens": ["zebra"], "family": "equine" },
+    { "genome": "genome.donkey", "tokens": ["donkey", "mule", "ass"], "family": "equine" },
+
+    { "genome": "genome.raven", "tokens": ["raven", "crow", "corvid"], "family": "corvid" },
+    { "genome": "genome.eagle", "tokens": ["eagle"], "family": "raptor" },
+    { "genome": "genome.owl", "tokens": ["owl"], "family": "raptor" },
+    { "genome": "genome.hawk", "tokens": ["hawk", "falcon"], "family": "raptor" },
+
+    { "genome": "genome.serpent", "tokens": ["snake", "serpent", "serpentine", "viper"], "family": "serpentine" },
+    { "genome": "genome.lizard", "tokens": ["lizard", "gecko", "skink", "lacertine"], "family": "lacertine" },
+    { "genome": "genome.crocodile", "tokens": ["crocodile", "croc", "alligator", "gator"], "family": "crocodilian" },
+    { "genome": "genome.frog", "tokens": ["frog", "toad", "anuran", "amphibian"], "family": "anuran" },
+    { "genome": "genome.shark", "tokens": ["shark"], "family": "selachian" },
+    { "genome": "genome.wasp", "tokens": ["wasp", "hornet", "bee"], "family": "hymenopteran" },
+    { "genome": "genome.moth", "tokens": ["moth", "butterfly", "lepidopteran"], "family": "lepidopteran" },
+
+    { "genome": "genome.werewolf", "tokens": ["werewolf", "lycan", "lycanthrope", "wolf-man", "wolfman"], "family": "canine" },
+    { "genome": "genome.vampire", "tokens": ["vampire", "vampiric", "nosferatu", "undead"], "family": "humanoid" }
+  ],
+  "family_tokens": {
+    "canine": ["canine", "canid"],
+    "feline": ["feline", "cat-like"],
+    "leporine": ["leporine", "rabbit-like"],
+    "ursine": ["ursine"],
+    "mustelid": ["mustelid"],
+    "rodent": ["rodent"],
+    "bovine": ["bovine"],
+    "caprine": ["caprine", "goat-like"],
+    "ovine": ["ovine"],
+    "cervine": ["cervine", "deer-like"],
+    "suine": ["suine", "pig-like"],
+    "equine": ["equine", "horse-like"],
+    "corvid": ["corvid"],
+    "raptor": ["raptor", "raptorial", "bird of prey"],
+    "serpentine": ["serpentine", "snake-like", "reptilian"],
+    "lacertine": ["lacertine"],
+    "crocodilian": ["crocodilian"],
+    "anuran": ["anuran"],
+    "selachian": ["selachian"],
+    "hymenopteran": ["hymenopteran"],
+    "lepidopteran": ["lepidopteran"],
+    "humanoid": ["humanoid"]
+  },
+  "change_cues": ["shift", "shifts", "shifting", "morph", "morphs", "morphing", "transform", "transforms", "transforming", "transformation", "change", "changes", "changing", "ripple", "ripples", "sprout", "sprouts", "bud", "budding", "tingle", "tingles", "grow", "grows", "growing"],
+  "weak_tokens": ["ass", "kid", "pup", "bun", "cat", "rat", "hen", "doe", "mare", "ox"],
+  "implications": [
+    { "genome": "genome.werewolf", "family": "canine", "any": ["bite", "bites", "bitten", "maul", "mauls", "howl", "howls", "growl", "growls", "snarl", "snarls", "lunge", "lunges"], "support": ["moon", "full", "night", "silver", "teeth", "fang", "fangs", "claw", "claws", "fur", "beast", "wolf", "lupine", "curse", "mark", "wound", "shoulder", "arm", "neck"], "confidence": 0.55 },
+    { "genome": "genome.werewolf", "family": "canine", "any": ["moon", "full"], "support": ["howl", "howls", "shift", "shifts", "fur", "fangs", "claws", "beast", "growl"], "confidence": 0.5 },
+    { "genome": "genome.vampire", "family": "humanoid", "any": ["bite", "bites", "bitten", "drain", "drains", "drank", "drink", "suck", "sucks", "pale", "fangs"], "support": ["blood", "necks", "neck", "fangs", "undead", "bat", "coffin", "pale", "thirst", "cold"], "confidence": 0.5 },
+    { "genome": "genome.hawk", "family": "raptor", "any": ["wing", "wings", "feather", "feathers", "plumage"], "support": ["talon", "talons", "beak", "flight", "soar", "air", "sky"], "min_any": 1, "min_support": 1, "confidence": 0.4 }
+  ],
+  "anatomy_rules": [
+    { "genome": "genome.wolf", "family": "canine", "need": ["fur", "muzzle"], "confidence": 0.42 },
+    { "genome": "genome.wolf", "family": "canine", "need": ["fur", "ears", "tail"], "confidence": 0.42 },
+    { "genome": "genome.eagle", "family": "raptor", "need": ["wings", "feathers"], "confidence": 0.45 },
+    { "genome": "genome.serpent", "family": "serpentine", "need": ["scales"], "confidence": 0.4 },
+    { "genome": "genome.wolf", "family": "canine", "need": ["claws", "fangs"], "confidence": 0.4 },
+    { "genome": "genome.wolf", "family": "canine", "need": ["claws", "eyes"], "confidence": 0.36 },
+    { "genome": "genome.bear", "family": "ursine", "need": ["claws", "fur"], "confidence": 0.38 }
+  ],
+  "anatomy_cues": {
+    "tail": ["tail"],
+    "ears": ["ears", "ear"],
+    "fur": ["fur", "furred", "furry", "coat"],
+    "claws": ["claw", "claws", "nails"],
+    "wings": ["wing", "wings"],
+    "fangs": ["fang", "fangs", "teeth"],
+    "muzzle": ["muzzle", "snout"],
+    "horns": ["horn", "horns"],
+    "scales": ["scales", "scaled"],
+    "feathers": ["feather", "feathers", "plumage"],
+    "eyes": ["eyes", "slit eyes", "glowing eyes"]
+  },
+  "settings": {
+    "min_token_length": 3,
+    "attribute_window": 2,
+    "auto_bind_from_card": true,
+    "auto_bind_from_chat": true
+  }
+}

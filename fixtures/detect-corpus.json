@@ -1,0 +1,172 @@
+{
+  "corpus_version": 1,
+  "_comment": "Labeled detection corpus (H9). Each case is realistic generated prose. `expect` maps a character name → the genome it SHOULD propose (empty = no species proposal for that character). `must` = genomes that must appear somewhere; `mustNot` = genomes that must NOT appear anywhere. `note` explains the hard part. Used by tools/detect-eval.ts for precision/recall.",
+  "cases": [
+    {
+      "id": "explicit-bite",
+      "chars": ["Sarah", "Alisson"],
+      "text": "Something huge lunges from the dark. Teeth sink into her shoulder, and a low growl fills the night.",
+      "must": ["genome.werewolf"],
+      "mustNot": [],
+      "note": "implied werewolf: bite + growl, no species word"
+    },
+    {
+      "id": "explicit-named",
+      "chars": ["Mira", "Tomas"],
+      "text": "Mira stumbles back as a wolf bursts from the trees.",
+      "expect": { "Mira": "genome.wolf" },
+      "mustNot": ["genome.eagle"],
+      "note": "named species in a named clause"
+    },
+    {
+      "id": "two-at-once",
+      "chars": ["Mira", "Tomas"],
+      "text": "Mira's skin prickles as fur spreads like a fox, while Tomas hunches, growing eagle wings.",
+      "expect": { "Mira": "genome.fox", "Tomas": "genome.eagle" },
+      "note": "two characters, two species, clause attribution"
+    },
+    {
+      "id": "simile-vs-actual",
+      "chars": ["Ada"],
+      "text": "Ada is quick as a fox, darting between the stalls.",
+      "expect": { "Ada": "genome.fox" },
+      "note": "simile 'as a fox' — still a fox, but a weak signal"
+    },
+    {
+      "id": "anatomy-only-canine",
+      "chars": ["Wren"],
+      "text": "Fur ripples along her arms. Her ears sharpen and slide up her skull, and a muzzle pushes out her jaw.",
+      "must": ["genome.wolf", "genome.dog"],
+      "note": "anatomy-only (fur+ears+muzzle), family-level"
+    },
+    {
+      "id": "anatomy-only-serpent",
+      "chars": ["Kai"],
+      "text": "Scales erupt along his forearms, cool and bright, and his tongue flicks out forked.",
+      "must": ["genome.serpent"],
+      "note": "scales + forked tongue"
+    },
+    {
+      "id": "metaphor-size-bear",
+      "chars": ["Bo"],
+      "text": "Bo was always a bear of a man, broad and warm.",
+      "expect": { "Bo": "genome.bear" },
+      "note": "metaphor 'a bear of a man'"
+    },
+    {
+      "id": "adjective-wolfish",
+      "chars": ["Lin"],
+      "text": "A wolfish grin spread across her face.",
+      "expect": { "Lin": "genome.wolf" },
+      "note": "adjective, not 'a wolf'"
+    },
+    {
+      "id": "change-explicit-claws",
+      "chars": ["Rae"],
+      "text": "Her nails lengthen into curving claws and her eyes flash amber.",
+      "must": ["genome.wolf"],
+      "note": "claws + eyes, family-level canine"
+    },
+    {
+      "id": "no-false-positive-plain",
+      "chars": ["Pat"],
+      "text": "Pat pours coffee and reads the paper on a grey morning.",
+      "expect": {},
+      "mustNot": ["genome.wolf", "genome.fox"],
+      "note": "plain prose, no species"
+    },
+    {
+      "id": "negation-not-wolf",
+      "chars": ["Ivy"],
+      "text": "It was not a wolf at her door, but something older.",
+      "expect": {},
+      "note": "negated species"
+    },
+    {
+      "id": "negation-but-then-yes",
+      "chars": ["Ivy"],
+      "text": "It was no ordinary dog — this thing had a wolf's hunger.",
+      "expect": { "Ivy": "genome.wolf" },
+      "note": "negated 'dog' but a real 'wolf' lands"
+    },
+    {
+      "id": "negation-anatomy",
+      "chars": ["Sam"],
+      "text": "No fur, no fangs — Sam looked entirely herself this morning.",
+      "expect": {},
+      "note": "negated anatomy; must not imply a canine"
+    },
+    {
+      "id": "negation-human",
+      "chars": ["Sam"],
+      "text": "Sam is human, through and through — no fur, no fangs.",
+      "expect": {},
+      "note": "explicitly human, anatomy named as absent"
+    },
+    {
+      "id": "howl-moon",
+      "chars": ["Dee"],
+      "text": "The moon was full and Dee threw back her head and howled.",
+      "must": ["genome.werewolf"],
+      "note": "moon + howl implies werewolf"
+    },
+    {
+      "id": "vampire-bite-blood",
+      "chars": ["Vee"],
+      "text": "Fangs pierced her neck and the world went cold as he drank.",
+      "must": ["genome.vampire"],
+      "note": "fangs + blood/drank implies vampire"
+    },
+    {
+      "id": "wings-burst",
+      "chars": ["Tomas"],
+      "text": "Wings burst from Tomas's back, wide and feathered.",
+      "must": ["genome.eagle", "genome.hawk", "genome.owl"],
+      "note": "wings + feathered, raptor family"
+    },
+    {
+      "id": "focus-hold",
+      "chars": ["Sarah", "Alisson"],
+      "text": "Sarah stumbles back as a wolf lunges.",
+      "expect": { "Sarah": "genome.wolf" },
+      "note": "first half of a two-message test"
+    },
+    {
+      "id": "focus-followup",
+      "chars": ["Sarah", "Alisson"],
+      "prior": ["A wolf lunges from the undergrowth and Sarah stumbles back."],
+      "text": "She screams as it bites her arm.",
+      "expect": { "Sarah": "genome.wolf" },
+      "note": "bare pronominal follow-up keeps the focus"
+    },
+    {
+      "id": "common-word-ass",
+      "chars": ["Xen"],
+      "text": "Xen, a wolf with a nice ass, trotted over.",
+      "expect": { "Xen": "genome.wolf" },
+      "mustNot": ["genome.donkey"],
+      "note": "'ass' must lose to 'wolf'"
+    },
+    {
+      "id": "equine-horse",
+      "chars": ["Nell"],
+      "text": "Nell swung up onto the horse and rode for the ridge.",
+      "expect": { "Nell": "genome.equine" },
+      "note": "riding a horse is not becoming one — acceptable either way, but must not be dog"
+    },
+    {
+      "id": "feline-slit-eyes",
+      "chars": ["Mew"],
+      "text": "Her pupils narrowed to slits and she stretched, feline and slow.",
+      "expect": { "Mew": "genome.cat" },
+      "note": "slit eyes + 'feline'"
+    },
+    {
+      "id": "dragon-ish-later",
+      "chars": ["Zee"],
+      "text": "Zee's skin hardened into scales and heat rolled off her in waves.",
+      "expect": { "Zee": "genome.serpent" },
+      "note": "scales + heat, anatomy/hint-level reptile (serpent is the reptilian rep)"
+    }
+  ]
+}

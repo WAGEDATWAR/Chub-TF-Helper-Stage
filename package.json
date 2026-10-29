@@ -1,0 +1,46 @@
+{
+  "name": "chrysalis-transformation-helper",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "A Chub stage that simulates and drives a transformation so LLM prose follows a real, per-character progression.",
+  "scripts": {
+    "dev": "vite",
+    "dev:staging": "vite --mode staging --host",
+    "cert": "powershell -ExecutionPolicy Bypass -File tools/make-cert.ps1",
+    "restart": "powershell -ExecutionPolicy Bypass -File tools/restart-stage.ps1",
+    "sync:vendor": "powershell -ExecutionPolicy Bypass -File tools/sync-vendor.ps1",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "smoke": "tsx tools/smoke.ts",
+    "detect": "tsx tools/detect.ts",
+    "detect-eval": "tsx tools/detect-eval.ts",
+    "coupling": "tsx tools/coupling.ts",
+    "pace": "tsx tools/pace.ts",
+    "name-restore": "tsx tools/name-restore.ts",
+    "drive": "tsx tools/drive.ts",
+    "visualize": "tsx tools/visualize.ts",
+    "golden": "tsx tools/view.ts",
+    "persist": "tsx tools/persist.ts",
+    "validate": "tsx tools/validate.ts",
+    "lint:authoring": "tsx tools/authoring.ts",
+    "data-check": "tsx tools/data-check.ts",
+    "check": "npm run typecheck && npm run validate && npm run lint:authoring && npm run data-check && npm run smoke && npm run detect && npm run detect-eval && npm run coupling && npm run pace && npm run name-restore && npm run drive && npm run visualize && npm run golden && npm run persist"
+  },
+  "dependencies": {
+    "@chub-ai/stages-ts": "^0.3.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react": "^4.2.1",
+    "sass": "^1.106.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  }
+}

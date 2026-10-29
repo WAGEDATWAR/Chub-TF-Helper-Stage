@@ -1,0 +1,95 @@
+{
+  "phases_version": 1,
+  "_comment": "Transformation sequencing (M14.5, S46). A genome's change lands in ordered *phases* — what comes before what. Within a phase, parts still spread procedurally by tempo. A phase marked feral_only opens only at the feral stage. Missing genome plans fall back to `default`.",
+  "spacing": 18,
+  "spread": 10,
+  "default": {
+    "phases": [
+      { "id": "marks", "label": "the marks", "families": ["claws", "ears", "eyes", "horns", "tail", "voice"] },
+      { "id": "cover", "label": "the cover", "families": ["coat", "skin", "muscle", "size", "gait"] },
+      { "id": "frame", "label": "the frame", "families": ["bone", "structure", "wings"] },
+      { "id": "deeper", "label": "what runs deeper", "families": ["genital"] }
+    ]
+  },
+  "plans": {
+    "genome.wolf": {
+      "phases": [
+        { "id": "claws_teeth", "label": "claws, teeth and the face", "families": ["claws", "eyes", "voice"], "tags": ["fangs_tag", "nail_tag", "teeth_tag", "nose_tag"], "roles": ["nose", "mouth", "tongue"] },
+        { "id": "coat", "label": "the coat and ears", "families": ["coat", "skin", "ears"] },
+        { "id": "gait", "label": "the gait", "families": ["gait", "muscle", "tail", "size"] },
+        { "id": "skull", "label": "the skull and frame", "families": ["bone", "structure"], "exposure_min": 40, "when": { "stability_min": 40 } },
+        { "id": "full_form", "label": "the full form", "families": ["genital"], "feral_only": true }
+      ]
+    },
+    "genome.dog": {
+      "phases": [
+        { "id": "claws_teeth", "label": "claws, teeth and the face", "families": ["claws"], "tags": ["fangs_tag", "nail_tag", "teeth_tag"] },
+        { "id": "coat", "label": "the coat and ears", "families": ["coat", "skin", "ears"] },
+        { "id": "gait", "label": "the gait", "families": ["gait", "muscle", "tail", "size"] },
+        { "id": "skull", "label": "the skull and frame", "families": ["bone", "structure"], "exposure_min": 40, "when": { "stability_min": 40 } }
+      ]
+    },
+    "genome.cat": {
+      "phases": [
+        { "id": "claws_eyes", "label": "claws, teeth and eyes", "families": ["claws", "eyes"], "tags": ["fangs_tag", "teeth_tag"] },
+        { "id": "coat", "label": "the coat and ears", "families": ["coat", "skin", "ears"] },
+        { "id": "gait", "label": "the gait", "families": ["gait", "muscle", "tail", "size"] },
+        { "id": "skull", "label": "the skull and frame", "families": ["bone", "structure"], "exposure_min": 40, "when": { "stability_min": 40 } }
+      ]
+    },
+    "genome.fox": {
+      "phases": [
+        { "id": "claws_eyes", "label": "claws, teeth and eyes", "families": ["claws", "eyes"], "tags": ["fangs_tag", "teeth_tag"] },
+        { "id": "coat", "label": "the coat and ears", "families": ["coat", "skin", "ears"] },
+        { "id": "gait", "label": "the gait", "families": ["gait", "muscle", "tail", "size"] },
+        { "id": "skull", "label": "the skull and frame", "families": ["bone", "structure"], "exposure_min": 40, "when": { "stability_min": 40 } }
+      ]
+    },
+    "genome.rabbit": {
+      "phases": [
+        { "id": "ears_teeth", "label": "the ears and teeth", "families": ["ears"], "tags": ["long_ears_tag", "mobile_ears_tag", "teeth_tag"] },
+        { "id": "coat", "label": "the coat", "families": ["coat", "skin"] },
+        { "id": "gait", "label": "the gait", "families": ["gait", "muscle", "tail", "size"] },
+        { "id": "rhythm", "label": "the cycles", "families": ["genital", "bone"], "exposure_min": 35 }
+      ]
+    },
+    "genome.bovine": {
+      "phases": [
+        { "id": "horns_hooves", "label": "horns and hooves", "families": ["horns", "gait"] },
+        { "id": "hide", "label": "the hide", "families": ["skin", "coat", "muscle", "size"] },
+        { "id": "frame", "label": "the frame", "families": ["bone", "structure"], "exposure_min": 45 }
+      ]
+    },
+    "genome.equine": {
+      "phases": [
+        { "id": "hooves", "label": "hooves", "families": ["gait"] },
+        { "id": "hide", "label": "the hide", "families": ["skin", "coat", "muscle", "size"] },
+        { "id": "frame", "label": "the frame", "families": ["bone", "structure"], "exposure_min": 45 }
+      ]
+    },
+    "genome.raven": {
+      "phases": [
+        { "id": "feathers_eyes", "label": "feathers, beak and eyes", "families": ["coat", "eyes", "skin"], "tags": ["beak_tag"] },
+        { "id": "wings", "label": "the wings", "families": ["wings", "bone", "size"] },
+        { "id": "gait", "label": "the gait", "families": ["gait", "muscle", "voice"], "exposure_min": 30 }
+      ]
+    },
+    "genome.serpent": {
+      "phases": [
+        { "id": "venom", "label": "venom and fangs", "families": ["genital"], "tags": ["venom_tag", "fangs_tag"] },
+        { "id": "tongue_eyes", "label": "tongue and eyes", "roles": ["tongue", "nose", "eyes"] },
+        { "id": "scales", "label": "the scales", "families": ["coat", "skin", "muscle"] },
+        { "id": "length", "label": "the length", "families": ["tail", "gait"], "roles": ["leg_lower", "leg_upper"], "exposure_min": 40 },
+        { "id": "endoskeleton", "label": "the endoskeleton", "families": ["bone", "structure"], "exposure_min": 55, "when": { "realized": true } }
+      ]
+    },
+    "genome.bat": {
+      "phases": [
+        { "id": "ears_eyes", "label": "ears and eyes", "families": ["ears", "eyes"] },
+        { "id": "wings", "label": "the wings", "families": ["wings"] },
+        { "id": "coat", "label": "the coat", "families": ["coat", "skin", "muscle", "size"] },
+        { "id": "frame", "label": "the frame", "families": ["bone", "structure"], "exposure_min": 45 }
+      ]
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "dialogue_version": 1,
+  "_comment": "Inner-life reaction keys (Wave 3, D-198; broadened Wave 2). `react.thought.*` are unspoken; `react.say.*` are overheard speech. Selected by the same axes as voice (mood, awareness, confidence, aggression, dominance, libido, ...). Every key needs a zero-axis floor.",
+  "keys": [
+    { "key": "react.thought.change", "speaker": "subject", "intent": "she privately registers a change to her body",
+      "variants": [
+        { "axes": { "awareness_tier": "blind" }, "lines": ["Something is different and she cannot say what.", "It itches under the skin, somewhere she cannot reach.", "Her body is keeping a secret from her.", "Something has moved, quietly, without asking."] },
+        { "axes": { "awareness_tier": "lucid" }, "lines": ["She can name it now, and naming it makes it worse.", "The change is legible to her, and that is its own weight.", "She watches herself become, clear-eyed."] },
+        { "axes": { "mood_valence": "up" }, "lines": ["Oh. Oh, that is nice.", "That is new — and good.", "She catches it and smiles before she means to.", "Yes. That. More of that."] },
+        { "axes": { "mood_valence": "down" }, "lines": ["That is not nothing. That is her.", "She does not like what the mirror keeps saying.", "Something of the old her just went quiet.", "It is happening and she has no vote."] },
+        { "axes": { "aggression_band": "hot" }, "lines": ["Fine. Fine. Let it come.", "She sets her jaw and dares it to keep going.", "Alright. Alright, then."] },
+        { "axes": { "nervous_band": "fraught" }, "lines": ["Her heart hurries ahead of her.", "She counts the changes like exits.", "It is fine. It has to be fine."] },
+        { "axes": { "composure_band": "rattled" }, "lines": ["Her hands will not stay still.", "She is coming apart at the seams, slowly.", "The shape of her is not the shape she knew."] },
+        { "lines": ["She notices, and files it away.", "She turns the change over in her mind.", "Another small alteration, noted.", "She wonders how far it will go."] }
+      ] },
+    { "key": "react.say.change", "speaker": "subject", "intent": "she speaks aloud about a change",
+      "variants": [
+        { "axes": { "mood_valence": "up" }, "lines": ["\"...Okay. Okay, that is happening.\"", "\"That feels right, actually.\"", "\"I could get used to this.\"", "A pleased little hum."] },
+        { "axes": { "mood_valence": "down" }, "lines": ["\"What is it doing to me now.\"", "\"That is going to take some getting used to.\"", "\"Wait. Wait, hold on.\"", "\"That was not there yesterday.\""] },
+        { "axes": { "nervous_band": "fraught" }, "lines": ["\"Okay. Okay. Breathe.\"", "\"That is fine. That is fine, right?\"", "\"Is it supposed to do that?\""] },
+        { "axes": { "aggression_band": "hot" }, "lines": ["\"About time.\"", "\"Good. Keep going.\"", "\"Is that all you've got?\""] },
+        { "lines": ["\"Huh.\"", "A small sound escapes her.", "\"...Right.\"", "\"Okay.\""] }
+      ] },
+    { "key": "react.thought.dose", "speaker": "subject", "intent": "a dose is working on her",
+      "variants": [
+        { "axes": { "pain": "high" }, "lines": ["It burns going in and keeps burning after.", "She counts through the worst of it.", "Bone-deep and bright, all at once.", "Her body is being rewritten and it knows it."] },
+        { "axes": { "arousal": "high" }, "lines": ["Warmth pools low and will not leave.", "Her thoughts keep sliding somewhere south.", "Every nerve is awake and listening.", "It flushes through her, warm and wrong and good."] },
+        { "axes": { "stability_min": "low" }, "lines": ["The dose lands crooked; nothing moves the way it should.", "It takes, unevenly, in fits."] },
+        { "lines": ["She feels it working, slow and inevitable.", "The dose settles in and begins its work.", "Something is being rearranged inside her."] }
+      ] },
+    { "key": "react.say.dose", "speaker": "subject", "intent": "she speaks as a dose lands",
+      "variants": [
+        { "axes": { "pain": "high" }, "lines": ["\"Ah — okay. Okay.\"", "\"That is a lot. That is a lot at once.\"", "\"Ohh. That hurts.\"", "She hisses through her teeth."] },
+        { "axes": { "arousal": "high" }, "lines": ["\"Mm. Oh.\"", "\"That is why you picked this one, isn't it.\"", "\"Oh, that's — that's nice.\""] },
+        { "lines": ["\"Here we go.\"", "\"Okay, then.\"", "\"Do it.\""] }
+      ] },
+    { "key": "react.thought.realize", "speaker": "subject", "intent": "she realizes the change is real and happening to her",
+      "variants": [
+        { "axes": { "mood_valence": "up" }, "lines": ["It is real. It is real and she wants it.", "This is happening. And she is glad.", "The old shape is gone and she does not mourn it.", "Yes. This. Her."] },
+        { "axes": { "mood_valence": "down" }, "lines": ["This is real. This is actually happening to her.", "There is no going back. The thought sits heavy.", "She is not who she was, and she did not agree to it.", "Grief, brief and sharp, for a body already gone."] },
+        { "axes": { "awareness_tier": "blind" }, "lines": ["This is happening to someone, and it is her.", "The change is real even if she cannot hold it."] },
+        { "lines": ["It lands on her all at once: this is happening.", "The truth arrives, quiet and total.", "She understands now; there was never a choice."] }
+      ] },
+    { "key": "react.say.realize", "speaker": "subject", "intent": "she says it out loud",
+      "variants": [
+        { "axes": { "mood_valence": "down" }, "lines": ["\"So this is really happening.\"", "\"Okay. So. This is real now.\"", "\"I'm not going back, am I.\""] },
+        { "axes": { "mood_valence": "up" }, "lines": ["\"This is real. And good.\"", "\"I'm becoming. Actually becoming.\""] },
+        { "lines": ["\"Okay. So. This is real now.\"", "\"Right.\"", "\"This is really happening.\""] }
+      ] },
+    { "key": "react.thought.urge", "speaker": "subject", "intent": "the wanting scrambles her head",
+      "variants": [
+        { "axes": { "libido_band": "burning" }, "lines": ["She cannot think past the wanting.", "It keeps taking the wheel.", "Everything is a reminder of everything.", "Her body is one long demand."] },
+        { "axes": { "dominance_band": "dominant" }, "lines": ["She wants to be on top of someone, soon.", "The urge has an edge to it.", "She could take, if she chose to."] },
+        { "axes": { "arousal": "high" }, "lines": ["It sits low and warm and will not be ignored.", "She presses her thighs together and thinks of nothing else."] },
+        { "lines": ["The wanting is loud today.", "The wanting will not be reasoned with.", "Her head and her body are not agreeing."] }
+      ] },
+    { "key": "react.say.urge", "speaker": "subject", "intent": "she mutters about wanting",
+      "variants": [
+        { "axes": { "libido_band": "burning" }, "lines": ["\"Focus. Focus.\"", "\"Not now. Not now.\"", "\"This is unfair.\""] },
+        { "axes": { "arousal": "high" }, "lines": ["\"Mm.\"", "\"That's not helping.\""] },
+        { "lines": ["\"...Okay.\"", "A breath, held and let go.", "\"Focus.\""] }
+      ] },
+    { "key": "react.thought.preference", "speaker": "subject", "intent": "a preference settles in her",
+      "variants": [
+        { "axes": { "mood_valence": "up" }, "lines": ["Whatever this is, she is starting to like it.", "That feeling has a shape now, and she likes the shape.", "It is becoming a want, and wants are fun.", "She leans into it and lets it grow."] },
+        { "axes": { "mood_valence": "down" }, "lines": ["That is becoming a real feeling. It might be a problem.", "She cannot call it ambivalence anymore.", "It is settling wrong, but it is settling."] },
+        { "axes": { "awareness_tier": "lucid" }, "lines": ["The preference names itself to her, cleanly.", "She can see the taste forming and choose it or not."] },
+        { "lines": ["Something about the change settles into a feeling.", "A taste is forming, quiet and hers.", "Another small want takes root."] }
+      ] },
+    { "key": "react.say.preference", "speaker": "subject", "intent": "she owns a new preference aloud",
+      "variants": [
+        { "axes": { "mood_valence": "down" }, "lines": ["\"...I think I like this.\"", "\"That does something for me. Apparently.\"", "\"Don't tell anyone.\""] },
+        { "lines": ["\"...I think I like this.\"", "\"That does something for me. Apparently.\"", "\"Oh. Huh.\""] }
+      ] },
+    { "key": "react.thought.resist", "speaker": "subject", "intent": "she is pushing back against the change",
+      "variants": [
+        { "axes": { "aggression_band": "hot" }, "lines": ["No. It moves and she digs in.", "She will not lose to her own body.", "If it wants a fight, she will give it one."] },
+        { "axes": { "nervous_band": "fraught" }, "lines": ["She braces against it, hard.", "If she holds still, maybe it stops.", "She grips the old shape and pulls."] },
+        { "axes": { "composure_band": "poised" }, "lines": ["She slows it with a breath and a steady hand.", "Controlled, for now."] },
+        { "lines": ["She resists, and it hurts to.", "She pushes back; it pushes harder.", "Not yet, she thinks, and means it."] }
+      ] },
+    { "key": "react.say.resist", "speaker": "subject", "intent": "she voices resistance",
+      "variants": [
+        { "axes": { "aggression_band": "hot" }, "lines": ["\"No. Mine.\"", "\"Slow down.\"", "\"Hold on.\""] },
+        { "lines": ["\"Not yet. Slow down.\"", "\"Give me a second.\"", "\"Okay — okay, hold on.\""] }
+      ] },
+    { "key": "react.thought.mood", "speaker": "subject", "intent": "a mood turn",
+      "variants": [
+        { "axes": { "mood_valence": "up" }, "lines": ["Light, for no reason she can name.", "Something lifts.", "The day turns kind.", "She is almost happy and it surprises her."] },
+        { "axes": { "mood_valence": "down" }, "lines": ["It sits on her chest and will not lift.", "Heavy, all at once.", "The day turns thin and grey.", "She wants to be left alone and cannot say why."] },
+        { "axes": { "mood_band": "pleasant-charged" }, "lines": ["Everything is bright and too much.", "Her skin is electric today."] },
+        { "lines": ["Her mood turns.", "Something in her shifts, unasked.", "The colour of the day changes."] }
+      ] },
+    { "key": "react.say.mood", "speaker": "subject", "intent": "she speaks out of mood",
+      "variants": [
+        { "axes": { "mood_valence": "up" }, "lines": ["\"Mm.\"", "\"This is a good day.\"", "A hum, pleased."] },
+        { "axes": { "mood_valence": "down" }, "lines": ["\"...Yeah.\"", "\"I'm fine.\"", "A sigh, mostly."] },
+        { "lines": ["\"...Yeah.\"", "A breath, in or out.", "\"Mm.\""] }
+      ] },
+    { "key": "react.thought.ability", "speaker": "subject", "intent": "a new capability she can feel",
+      "variants": [
+        { "axes": { "confidence_band": "high" }, "lines": ["Oh, that is useful. She can feel the difference.", "Another thing her body can do now.", "She flexes it and grins.", "That will come in handy."] },
+        { "axes": { "confidence_band": "low" }, "lines": ["Something new and she does not trust it yet.", "It works, but it is not hers yet."] },
+        { "lines": ["Something new answers when she reaches for it.", "A new trick lives in her now.", "Her body has learned something."] }
+      ] },
+    { "key": "react.say.ability", "speaker": "subject", "intent": "she tries the new capability aloud",
+      "variants": [
+        { "axes": { "confidence_band": "high" }, "lines": ["\"Huh. So I can do that now.\"", "\"That is new.\"", "\"Well. Alright then.\""] },
+        { "lines": ["\"Huh. So I can do that now.\"", "\"That is new.\"", "\"Oh.\""] }
+      ] },
+    { "key": "react.thought.inspect", "speaker": "subject", "intent": "she actively looks at a change and confirms it",
+      "variants": [
+        { "axes": { "mood_valence": "down" }, "lines": ["She looks, and it is real, and there is no arguing with it.", "Her hands tell her what she did not want to know.", "So that is what that was."] },
+        { "axes": { "mood_valence": "up" }, "lines": ["She looks, and it is real — and better than she feared.", "Her hands find the change and she smiles.", "Oh. So that is what has been happening."] },
+        { "axes": { "awareness_tier": "lucid" }, "lines": ["She inspects it coolly, names it, and files it.", "She confirms what she already suspected."] },
+        { "lines": ["She stops and really looks.", "She turns the change over in her hands.", "She checks, and finds she was right."] }
+      ] },
+    { "key": "react.say.inspect", "speaker": "subject", "intent": "she speaks as she confirms a change",
+      "variants": [
+        { "axes": { "mood_valence": "down" }, "lines": ["\"So it is real.\"", "\"Okay. Okay.\"", "\"...That's new.\""] },
+        { "axes": { "mood_valence": "up" }, "lines": ["\"Well. That's new.\"", "\"Huh. Alright.\"", "\"That's... actually not bad.\""] },
+        { "lines": ["\"...Right.\"", "\"So.\"", "\"Huh.\""] }
+      ] }
+  ]
+}

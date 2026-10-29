@@ -1,0 +1,43 @@
+{
+  "dialogue_version": 1,
+  "keys": [
+    { "key": "fault.claws.pop", "speaker": "subject", "intent": "her claws extend involuntarily",
+      "variants": [
+        { "lines": ["Her claws slide out on their own. \"Sorry — sorry, one second.\""] }
+      ] },
+    { "key": "fault.claws.arousal", "speaker": "subject", "intent": "claws extend because she is aroused",
+      "variants": [
+        { "axes": { "arousal": "high" }, "lines": ["They come out with the heat, and she doesn't even notice at first."] },
+        { "lines": ["Claws out, breath short. She laughs it off."] }
+      ] },
+    { "key": "fault.claws.snag", "speaker": "subject", "intent": "a claw snags on something",
+      "variants": [
+        { "lines": ["A claw catches. \"Ugh. This keeps happening.\""] }
+      ] },
+    { "key": "fault.scent.drunk", "speaker": "subject", "intent": "her scent sense overwhelms her",
+      "variants": [
+        { "lines": ["She goes glassy, drunk on a smell only she can catch."] }
+      ] },
+    { "key": "fault.fangs.bite", "speaker": "subject", "intent": "she bites involuntarily",
+      "variants": [
+        { "axes": { "arousal": "high" }, "lines": ["Her teeth graze harder than she meant. \"Sorry!\""] },
+        { "lines": ["A nip she didn't plan, then a wince."] }
+      ] },
+    { "key": "fault.venom.drip", "speaker": "subject", "intent": "venom drips",
+      "variants": [
+        { "lines": ["A bead of venom wells up and falls. She wipes it away, flushed."] }
+      ] },
+    { "key": "fault.wings.land", "speaker": "subject", "intent": "a hard landing",
+      "variants": [
+        { "lines": ["She lands badly, catches herself, and swears."] }
+      ] },
+    { "key": "fault.sprint.tangle", "speaker": "subject", "intent": "she tangles her legs",
+      "variants": [
+        { "lines": ["Her legs cross wrong and she stumbles. \"Ignore that.\""] }
+      ] },
+    { "key": "fault.echo.click", "speaker": "subject", "intent": "involuntary clicking",
+      "variants": [
+        { "lines": ["A click escapes her. She tilts her head, listening to the echo."] }
+      ] }
+  ]
+}

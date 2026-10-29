@@ -1,0 +1,11 @@
+{
+  "exposure_bands_version": 1,
+  "bands": [
+    { "id": "band.baseline", "min": 0, "max": 0, "name": "Baseline", "speech_mult": 1.0, "intelligence_mod": 0, "strength_mod": 0, "tolerance_mod": 0, "instinct_override": false, "desc_key": "band.baseline" },
+    { "id": "band.cosmetic", "min": 1, "max": 25, "name": "Cosmetic", "speech_mult": 1.0, "intelligence_mod": 0, "strength_mod": 0, "tolerance_mod": 0, "instinct_override": false, "desc_key": "band.cosmetic" },
+    { "id": "band.light_hybrid", "min": 26, "max": 50, "name": "Light Hybrid", "speech_mult": 0.85, "intelligence_mod": -1, "strength_mod": 1, "tolerance_mod": 0, "instinct_override": false, "desc_key": "band.light_hybrid" },
+    { "id": "band.heavy_hybrid", "min": 51, "max": 75, "name": "Heavy Hybrid", "speech_mult": 0.5, "intelligence_mod": -3, "strength_mod": 3, "tolerance_mod": -8, "instinct_override": false, "desc_key": "band.heavy_hybrid" },
+    { "id": "band.near_animal", "min": 76, "max": 99, "name": "Near-Animal", "speech_mult": 0.15, "intelligence_mod": -5, "strength_mod": 4, "tolerance_mod": -12, "instinct_override": true, "desc_key": "band.near_animal" },
+    { "id": "band.feral_lock", "min": 100, "max": 100, "name": "Feral Lock", "speech_mult": 0.0, "intelligence_mod": -8, "strength_mod": 5, "tolerance_mod": -15, "instinct_override": true, "desc_key": "band.feral_lock" }
+  ]
+}

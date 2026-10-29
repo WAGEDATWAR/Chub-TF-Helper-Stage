@@ -1,0 +1,42 @@
+{
+  "dialogue_version": 1,
+  "keys": [
+    { "key": "inject.select.prompt", "speaker": "player", "intent": "the player picks a serum and a dose",
+      "variants": [
+        { "lines": ["The vial is weighed, held up to the light."] }
+      ] },
+    { "key": "inject.select.subject", "speaker": "subject", "intent": "she reacts to the serum being chosen",
+      "variants": [
+        { "axes": { "drive_band": "eager" }, "lines": ["\"That one. Yes. Do it.\""] },
+        { "axes": { "composure_band": "rattled" }, "lines": ["\"What is that? ...Alright.\""] },
+        { "lines": ["She eyes the vial, then the space where someone stands."] }
+      ] },
+    { "key": "inject.onset.react", "speaker": "subject", "intent": "she reacts as the change begins",
+      "variants": [
+        { "axes": { "transform_state": "cosmetic" }, "lines": ["\"Oh — that's warm. It's starting.\""] },
+        { "axes": { "pain": "high" }, "lines": ["\"Ah — that hurts more than last time.\""] },
+        { "lines": ["Her breath catches as the change takes hold."] }
+      ] },
+    { "key": "inject.onset.stage", "speaker": "subject", "intent": "a stage crossing lands during onset",
+      "variants": [
+        { "axes": { "transform_state": "heavy_hybrid" }, "lines": ["She flexes something new and stares at it."] },
+        { "lines": ["Something shifts under the skin and settles."] }
+      ] },
+    { "key": "inject.resolve.done", "speaker": "subject", "intent": "the injection has fully landed",
+      "variants": [
+        { "axes": { "drive_band": "ravenous" }, "lines": ["\"More. That wasn't enough.\""] },
+        { "axes": { "drive_band": "sated" }, "lines": ["She exhales, boneless. \"Okay. Okay.\""] },
+        { "lines": ["She catches her breath and looks herself over."] }
+      ] },
+    { "key": "inject.refuse", "speaker": "subject", "intent": "she refuses the injection at very low Trust (S16)",
+      "variants": [
+        { "axes": { "composure_band": "rattled" }, "lines": ["\"No. Not today. Not from you.\""] },
+        { "lines": ["She pulls her arm back. \"No.\""] }
+      ] },
+    { "key": "inject.revert", "speaker": "subject", "intent": "the Reverter is administered",
+      "variants": [
+        { "axes": { "transform_state": "near_animal" }, "lines": ["She comes back to herself in pieces, gasping."] },
+        { "lines": ["The change unwinds, slowly, back toward baseline."] }
+      ] }
+  ]
+}

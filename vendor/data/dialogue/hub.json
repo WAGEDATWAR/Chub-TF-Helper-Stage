@@ -1,0 +1,41 @@
+{
+  "dialogue_version": 1,
+  "keys": [
+    { "key": "hub.idle", "speaker": "subject", "intent": "she waits for the player to choose an action",
+      "variants": [
+        { "axes": { "drive_band": "ravenous" }, "lines": ["She paces. \"Well? What are we doing today?\""] },
+        { "axes": { "drive_band": "sated" }, "lines": ["She lounges, content. \"Take your time.\""] },
+        { "lines": ["She watches the room, waiting."] }
+      ] },
+    { "key": "hub.action.inject", "speaker": "subject", "intent": "she reacts to the player choosing an injection",
+      "variants": [
+        { "axes": { "composure_band": "poised" }, "lines": ["\"Yes. I've been thinking about it all morning.\""] },
+        { "axes": { "composure_band": "rattled" }, "lines": ["\"...Fine. Get it over with.\""] },
+        { "lines": ["She rolls up her sleeve."] }
+      ] },
+    { "key": "hub.action.train", "speaker": "subject", "intent": "she reacts to being taken to train",
+      "variants": [
+        { "axes": { "frustration_band": "calm" }, "lines": ["\"Training? Good. I want to be better at this.\""] },
+        { "lines": ["She goes to the mat."] }
+      ] },
+    { "key": "hub.action.play", "speaker": "subject", "intent": "she reacts to being offered play",
+      "variants": [
+        { "axes": { "arousal": "high" }, "lines": ["\"Finally.\" She's already close."] },
+        { "lines": ["A slow grin. \"I thought you'd never ask.\""] }
+      ] },
+    { "key": "hub.action.talk", "speaker": "subject", "intent": "she reacts to being invited to talk",
+      "variants": [
+        { "axes": { "composure_band": "steady" }, "lines": ["\"I'd like that. Sit with me.\""] },
+        { "lines": ["\"What about?\""] }
+      ] },
+    { "key": "hub.action.study", "speaker": "player", "intent": "the player goes to study",
+      "variants": [
+        { "lines": ["She is left to herself; the notes can wait."] }
+      ] },
+    { "key": "hub.action.rest", "speaker": "subject", "intent": "she rests",
+      "variants": [
+        { "axes": { "stability_min": "low" }, "lines": ["She sinks onto the cot gratefully."] },
+        { "lines": ["She settles in to rest."] }
+      ] }
+  ]
+}

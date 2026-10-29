@@ -1,0 +1,46 @@
+{
+  "locations_version": 1,
+  "_comment": "The location graph (blueprint §30.1, §44/§45). Locations form town -> home -> rooms. Each household has its own home building with the same room set, so household members share a location budget (§45) and the town is not one house. Ambient declares default light/sound/smell the composer renders and `sway` powers change.",
+  "locations": [
+    { "id": "loc.town", "name": "the town", "kind": "region", "adjacent": [], "ambient": {} },
+
+    { "id": "loc.her_home", "name": "her house", "kind": "building", "parent": "loc.town", "adjacent": ["loc.street"], "ambient": {} },
+    { "id": "loc.her_home_kitchen", "name": "her kitchen", "kind": "room", "parent": "loc.her_home", "adjacent": ["loc.her_home_hall", "loc.her_home_living"], "ambient": { "light": "warm morning light", "sound": "a radio", "smell": "coffee" } },
+    { "id": "loc.her_home_living", "name": "her living room", "kind": "room", "parent": "loc.her_home", "adjacent": ["loc.her_home_hall", "loc.her_home_kitchen"], "ambient": { "light": "low lamplight", "sound": "quiet", "smell": "dust" } },
+    { "id": "loc.her_home_hall", "name": "her hallway", "kind": "room", "parent": "loc.her_home", "adjacent": ["loc.her_home_kitchen", "loc.her_home_living", "loc.her_home_bedroom", "loc.her_home_bathroom"], "ambient": { "light": "dim", "sound": "quiet", "smell": "indoor air" } },
+    { "id": "loc.her_home_bedroom", "name": "her bedroom", "kind": "room", "parent": "loc.her_home", "adjacent": ["loc.her_home_hall", "loc.her_home_bathroom"], "ambient": { "light": "curtained half-light", "sound": "quiet", "smell": "laundry" } },
+    { "id": "loc.her_home_bathroom", "name": "her bathroom", "kind": "room", "parent": "loc.her_home", "adjacent": ["loc.her_home_hall", "loc.her_home_bedroom"], "ambient": { "light": "harsh and white", "sound": "the extractor fan", "smell": "soap" } },
+
+    { "id": "loc.falk_home", "name": "the Falks' house", "kind": "building", "parent": "loc.town", "adjacent": ["loc.street"], "ambient": {} },
+    { "id": "loc.falk_home_kitchen", "name": "the Falks' kitchen", "kind": "room", "parent": "loc.falk_home", "adjacent": ["loc.falk_home_hall", "loc.falk_home_living"], "ambient": { "light": "warm light", "sound": "a kettle", "smell": "toast" } },
+    { "id": "loc.falk_home_living", "name": "the Falks' living room", "kind": "room", "parent": "loc.falk_home", "adjacent": ["loc.falk_home_hall", "loc.falk_home_kitchen"], "ambient": { "light": "lamplight", "sound": "a TV", "smell": "dust" } },
+    { "id": "loc.falk_home_hall", "name": "the Falks' hallway", "kind": "room", "parent": "loc.falk_home", "adjacent": ["loc.falk_home_kitchen", "loc.falk_home_living", "loc.falk_home_bedroom", "loc.falk_home_bathroom"], "ambient": { "light": "dim", "sound": "quiet", "smell": "indoor air" } },
+    { "id": "loc.falk_home_bedroom", "name": "the Falks' bedroom", "kind": "room", "parent": "loc.falk_home", "adjacent": ["loc.falk_home_hall", "loc.falk_home_bathroom"], "ambient": { "light": "curtained half-light", "sound": "quiet", "smell": "laundry" } },
+    { "id": "loc.falk_home_bathroom", "name": "the Falks' bathroom", "kind": "room", "parent": "loc.falk_home", "adjacent": ["loc.falk_home_hall", "loc.falk_home_bedroom"], "ambient": { "light": "harsh and white", "sound": "the extractor fan", "smell": "soap" } },
+
+    { "id": "loc.reyner_home", "name": "the Reyners' house", "kind": "building", "parent": "loc.town", "adjacent": ["loc.street"], "ambient": {} },
+    { "id": "loc.reyner_home_kitchen", "name": "the Reyners' kitchen", "kind": "room", "parent": "loc.reyner_home", "adjacent": ["loc.reyner_home_hall", "loc.reyner_home_living"], "ambient": { "light": "warm light", "sound": "a radio", "smell": "cereal" } },
+    { "id": "loc.reyner_home_living", "name": "the Reyners' living room", "kind": "room", "parent": "loc.reyner_home", "adjacent": ["loc.reyner_home_hall", "loc.reyner_home_kitchen"], "ambient": { "light": "lamplight", "sound": "quiet", "smell": "dust" } },
+    { "id": "loc.reyner_home_hall", "name": "the Reyners' hallway", "kind": "room", "parent": "loc.reyner_home", "adjacent": ["loc.reyner_home_kitchen", "loc.reyner_home_living", "loc.reyner_home_bedroom", "loc.reyner_home_kid_bedroom", "loc.reyner_home_bathroom"], "ambient": { "light": "dim", "sound": "quiet", "smell": "indoor air" } },
+    { "id": "loc.reyner_home_bedroom", "name": "the Reyners' bedroom", "kind": "room", "parent": "loc.reyner_home", "adjacent": ["loc.reyner_home_hall", "loc.reyner_home_bathroom"], "ambient": { "light": "curtained half-light", "sound": "quiet", "smell": "laundry" } },
+    { "id": "loc.reyner_home_kid_bedroom", "name": "Pim's room", "kind": "room", "parent": "loc.reyner_home", "adjacent": ["loc.reyner_home_hall"], "ambient": { "light": "a nightlight", "sound": "quiet", "smell": "crayons" } },
+    { "id": "loc.reyner_home_bathroom", "name": "the Reyners' bathroom", "kind": "room", "parent": "loc.reyner_home", "adjacent": ["loc.reyner_home_hall", "loc.reyner_home_bedroom"], "ambient": { "light": "harsh and white", "sound": "the extractor fan", "smell": "soap" } },
+
+    { "id": "loc.okafor_home", "name": "Drin's flat", "kind": "building", "parent": "loc.town", "adjacent": ["loc.street"], "ambient": {} },
+    { "id": "loc.okafor_home_kitchen", "name": "Drin's kitchenette", "kind": "room", "parent": "loc.okafor_home", "adjacent": ["loc.okafor_home_living"], "ambient": { "light": "a bare bulb", "sound": "quiet", "smell": "instant coffee" } },
+    { "id": "loc.okafor_home_living", "name": "Drin's flat", "kind": "room", "parent": "loc.okafor_home", "adjacent": ["loc.okafor_home_kitchen", "loc.okafor_home_bedroom"], "ambient": { "light": "lamplight", "sound": "a neighbour's TV", "smell": "dust" } },
+    { "id": "loc.okafor_home_bedroom", "name": "Drin's bed", "kind": "room", "parent": "loc.okafor_home", "adjacent": ["loc.okafor_home_living"], "ambient": { "light": "curtained half-light", "sound": "quiet", "smell": "laundry" } },
+
+    { "id": "loc.rhodes_home", "name": "the Flatshare", "kind": "building", "parent": "loc.town", "adjacent": ["loc.street"], "ambient": {} },
+    { "id": "loc.rhodes_home_kitchen", "name": "the Flatshare kitchen", "kind": "room", "parent": "loc.rhodes_home", "adjacent": ["loc.rhodes_home_hall", "loc.rhodes_home_living"], "ambient": { "light": "warm light", "sound": "a radio", "smell": "coffee" } },
+    { "id": "loc.rhodes_home_living", "name": "the Flatshare living room", "kind": "room", "parent": "loc.rhodes_home", "adjacent": ["loc.rhodes_home_hall", "loc.rhodes_home_kitchen"], "ambient": { "light": "lamplight", "sound": "music", "smell": "dust" } },
+    { "id": "loc.rhodes_home_hall", "name": "the Flatshare hallway", "kind": "room", "parent": "loc.rhodes_home", "adjacent": ["loc.rhodes_home_kitchen", "loc.rhodes_home_living", "loc.rhodes_home_bedroom", "loc.rhodes_home_bathroom"], "ambient": { "light": "dim", "sound": "quiet", "smell": "indoor air" } },
+    { "id": "loc.rhodes_home_bedroom", "name": "Cass's room", "kind": "room", "parent": "loc.rhodes_home", "adjacent": ["loc.rhodes_home_hall"], "ambient": { "light": "string lights", "sound": "quiet", "smell": "incense" } },
+    { "id": "loc.rhodes_home_bathroom", "name": "the Flatshare bathroom", "kind": "room", "parent": "loc.rhodes_home", "adjacent": ["loc.rhodes_home_hall"], "ambient": { "light": "harsh and white", "sound": "the extractor fan", "smell": "soap" } },
+
+    { "id": "loc.street", "name": "the street", "kind": "outdoor", "parent": "loc.town", "adjacent": ["loc.her_home", "loc.falk_home", "loc.reyner_home", "loc.okafor_home", "loc.rhodes_home", "loc.office", "loc.cafe", "loc.park"], "ambient": { "light": "daylight", "sound": "traffic", "smell": "wet asphalt" } },
+    { "id": "loc.cafe", "name": "the cafe", "kind": "public", "parent": "loc.town", "adjacent": ["loc.street"], "ambient": { "light": "warm", "sound": "chatter and a grinder", "smell": "roast" } },
+    { "id": "loc.office", "name": "the office", "kind": "work", "parent": "loc.town", "adjacent": ["loc.street"], "ambient": { "light": "fluorescent", "sound": "keyboards", "smell": "photocopier" } },
+    { "id": "loc.park", "name": "the park", "kind": "outdoor", "parent": "loc.town", "adjacent": ["loc.street"], "ambient": { "light": "open sky", "sound": "birds and traffic", "smell": "cut grass" } }
+  ]
+}

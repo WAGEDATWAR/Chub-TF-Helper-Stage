@@ -1,0 +1,23 @@
+{
+  "memory_version": 1,
+  "_comment": "Memory parameters (S74). A memory's severity comes from its type, its impact from the outcome; importance is derived and persistent memories (at or above `persist_threshold`) are never forgotten. Ordinary memories are bounded and fade by `decay_base / severity` per day, then roll up into the relationship they concerned.",
+  "memory": {
+    "persist_threshold": 60,
+    "max_memories": 40,
+    "decay_base": 20
+  },
+  "severity": {
+    "changed.together": 3,
+    "reacted.kindly": 2,
+    "reacted.coldly": 3,
+    "obligation.missed": 3,
+    "event.shared": 3,
+    "obligation.kept": 1,
+    "met": 1
+  },
+  "topic": {
+    "reaction": "the change",
+    "obligation": "work",
+    "event": "the town"
+  }
+}

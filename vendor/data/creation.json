@@ -1,0 +1,90 @@
+{
+  "creation_version": 2,
+  "_comment": "Sandbox creation fields (D-158). Base items only: name, age, sex + pronouns, height; sexuality added (D-166). Origins reference subject_presets.json. Age min 15 so the school system (M16) has relevance. Everything here is data (P5).",
+  "age": {
+    "min": 13,
+    "max": 90,
+    "default": 26,
+    "unit": "years"
+  },
+  "height": {
+    "min": 140,
+    "max": 210,
+    "default": 170,
+    "unit": "cm"
+  },
+  "name": {
+    "allow_custom": true,
+    "generate_when_blank": true
+  },
+  "sexes": [
+    {
+      "id": "female",
+      "label": "Female",
+      "default_pronouns": "she / her / hers",
+      "genital": "vulva"
+    },
+    {
+      "id": "male",
+      "label": "Male",
+      "default_pronouns": "he / him / his",
+      "genital": "penis"
+    }
+  ],
+  "pronouns": [
+    "she / her / hers",
+    "he / him / his",
+    "they / them / theirs"
+  ],
+  "name_rule": {
+    "_comment": "A rolled name follows pronouns: a gendered pool for binary pronouns, any pool for neutral (D-166).",
+    "she / her / hers": "feminine",
+    "he / him / his": "masculine",
+    "they / them / theirs": "any"
+  },
+  "sexualities": [
+    {
+      "id": "straight",
+      "label": "Straight",
+      "attracted_to": [
+        "male"
+      ],
+      "self_sex": "opposite"
+    },
+    {
+      "id": "gay",
+      "label": "Gay",
+      "attracted_to": [
+        "same"
+      ],
+      "self_sex": "same"
+    },
+    {
+      "id": "bi",
+      "label": "Bisexual",
+      "attracted_to": [
+        "male",
+        "female",
+        "other"
+      ],
+      "self_sex": "any"
+    },
+    {
+      "id": "ace",
+      "label": "Asexual",
+      "attracted_to": [],
+      "self_sex": "any"
+    },
+    {
+      "id": "pan",
+      "label": "Pansexual",
+      "attracted_to": [
+        "any"
+      ],
+      "self_sex": "any"
+    }
+  ],
+  "hair_colours": ["black", "dark brown", "brown", "auburn", "red", "blonde", "ash blonde", "grey", "white"],
+  "eye_colours": ["brown", "hazel", "green", "blue", "grey", "amber", "copper"],
+  "hair_length": { "min": 2, "max": 40, "default": 14, "unit": "in." }
+}

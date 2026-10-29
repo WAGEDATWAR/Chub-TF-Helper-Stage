@@ -1,0 +1,22 @@
+{
+  "needs_version": 1,
+  "_comment": "Needs as data (M16a, §44/§46, S32). Each need decays at `rate` per hour toward `bounds[0]`, is clamped to bounds, and is met by activities whose tags intersect `met_by`. `weight` is the activity-scoring weight of a deficit in this need.",
+  "needs": [
+    { "id": "need.energy", "label": "Energy", "rate": 3.2, "bounds": [0, 100], "met_by": ["rest", "sleep"], "weight": 1.4 },
+    { "id": "need.hunger", "label": "Hunger", "rate": 4.5, "bounds": [0, 100], "met_by": ["eat"], "weight": 1.6, "starve_below": 15 },
+    { "id": "need.social", "label": "Social", "rate": 2.4, "bounds": [0, 100], "met_by": ["socialize", "work", "school"], "weight": 1.1 },
+    { "id": "need.duty", "label": "Duty", "rate": 2.0, "bounds": [0, 100], "met_by": ["work", "school", "errand"], "weight": 1.3 },
+    { "id": "need.hygiene", "label": "Hygiene", "rate": 1.6, "bounds": [0, 100], "met_by": ["wash"], "weight": 0.8 }
+  ],
+  "activities": [
+    { "id": "act.sleep", "label": "sleep", "tags": ["sleep", "rest"], "block_pref": ["night"], "where_kind": "room", "restores": 55, "duration_blocks": 2 },
+    { "id": "act.eat", "label": "eat", "tags": ["eat"], "block_pref": ["morning", "midday", "evening"], "where_kind": "room", "restores": 60, "duration_blocks": 1 },
+    { "id": "act.wash", "label": "wash", "tags": ["wash"], "block_pref": ["morning", "evening"], "where_kind": "room", "restores": 70, "duration_blocks": 1 },
+    { "id": "act.work", "label": "work", "tags": ["work", "socialize"], "block_pref": ["morning", "midday", "afternoon"], "where_kind": "work", "restores": 50, "duration_blocks": 3, "obligation": true },
+    { "id": "act.school", "label": "school", "tags": ["school", "socialize"], "block_pref": ["morning", "midday", "afternoon"], "where_kind": "work", "restores": 50, "duration_blocks": 3, "obligation": true },
+    { "id": "act.errand", "label": "run an errand", "tags": ["errand"], "block_pref": ["midday", "afternoon"], "where_kind": "public", "restores": 45, "duration_blocks": 1, "obligation": true },
+    { "id": "act.socialize", "label": "visit", "tags": ["socialize"], "block_pref": ["afternoon", "evening"], "where_kind": "public", "restores": 50, "duration_blocks": 2 },
+    { "id": "act.home", "label": "stay in", "tags": ["rest"], "block_pref": ["evening", "night"], "where_kind": "room", "restores": 30, "duration_blocks": 2 },
+    { "id": "act.idle", "label": "idle", "tags": [], "block_pref": [], "where_kind": "any", "restores": 20, "duration_blocks": 1 }
+  ]
+}

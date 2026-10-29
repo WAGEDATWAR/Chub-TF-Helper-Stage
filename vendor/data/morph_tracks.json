@@ -1,0 +1,819 @@
+{
+  "morph_tracks_version": 1,
+  "morph_tracks": [
+    {
+      "id": "morph.nail_to_claw",
+      "occupies_role": "nails_hand",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_fingernails"
+        },
+        {
+          "at": 0.5,
+          "part": "part.sharpening_nails",
+          "phase": 0
+        },
+        {
+          "at": 0.75,
+          "part": "part.partial_claws",
+          "phase": 1
+        },
+        {
+          "at": 1,
+          "part": "part.canid_claws_hand",
+          "phase": 1
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.toenail_to_claw",
+      "occupies_role": "nails_foot",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_toenails"
+        },
+        {
+          "at": 0.5,
+          "part": "part.human_toenails_intermediate",
+          "phase": 0
+        },
+        {
+          "at": 1,
+          "part": "part.canid_claws_foot",
+          "phase": 1
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.tail_growth",
+      "occupies_role": "tail",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.tail_absent"
+        },
+        {
+          "at": 0.3,
+          "part": "part.tail_bud"
+        },
+        {
+          "at": 0.65,
+          "part": "part.tail_short"
+        },
+        {
+          "at": 1,
+          "part": "part.bushy_tail"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 3,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.foot_to_digitigrade",
+      "occupies_role": "foot_base",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_foot"
+        },
+        {
+          "at": 0.25,
+          "part": "part.rising_heel_foot"
+        },
+        {
+          "at": 0.5,
+          "part": "part.digitigrade_foot_partial"
+        },
+        {
+          "at": 0.75,
+          "part": "part.high_arch_foot"
+        },
+        {
+          "at": 1,
+          "part": "part.digitigrade_foot"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 3,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.leg_to_digitigrade",
+      "occupies_role": "leg_upper",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_leg_upper"
+        },
+        {
+          "at": 0.45,
+          "part": "part.tendonous_thigh"
+        },
+        {
+          "at": 1,
+          "part": "part.digitigrade_leg_upper"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 3,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.foot_to_hoof",
+      "occupies_role": "foot_base",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_foot"
+        },
+        {
+          "at": 0.5,
+          "part": "part.cloven_hoof"
+        },
+        {
+          "at": 1,
+          "part": "part.hoof"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 3,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.hand_to_paw",
+      "occupies_role": "hand",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_hand"
+        },
+        {
+          "at": 0.45,
+          "part": "part.hand_partial_paw"
+        },
+        {
+          "at": 0.8,
+          "part": "part.hybrid_paw"
+        },
+        {
+          "at": 1,
+          "part": "part.thumbless_paw"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 3,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.horn_growth",
+      "occupies_role": "horns",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_horns_absent"
+        },
+        {
+          "at": 0.35,
+          "part": "part.horn_buds"
+        },
+        {
+          "at": 0.7,
+          "part": "part.short_horns"
+        },
+        {
+          "at": 1,
+          "part": "part.bovine_horns"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 4,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.wing_growth",
+      "occupies_role": "wings",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.wings_absent"
+        },
+        {
+          "at": 0.35,
+          "part": "part.wing_nubs"
+        },
+        {
+          "at": 0.7,
+          "part": "part.wing_membrane_partial"
+        },
+        {
+          "at": 1,
+          "part": "part.membrane_wings"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 5,
+        "pain_on_stage": 3
+      }
+    },
+    {
+      "id": "morph.leg_fusion",
+      "occupies_role": "leg_lower",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_leg_lower"
+        },
+        {
+          "at": 0.55,
+          "part": "part.serpent_tail_mid"
+        },
+        {
+          "at": 1,
+          "part": "part.serpent_tail_segment"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 6,
+        "pain_on_stage": 4
+      }
+    },
+    {
+      "id": "morph.ears_to_mobile",
+      "occupies_role": "ears",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_ears"
+        },
+        {
+          "at": 0.3,
+          "part": "part.whisker_ears"
+        },
+        {
+          "at": 1,
+          "part": "part.mobile_ears"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.ears_to_long",
+      "occupies_role": "ears",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_ears"
+        },
+        {
+          "at": 0.4,
+          "part": "part.whisker_ears"
+        },
+        {
+          "at": 1,
+          "part": "part.long_ears"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.nose_to_keen",
+      "occupies_role": "nose",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_nose"
+        },
+        {
+          "at": 0.4,
+          "part": "part.broadened_nose"
+        },
+        {
+          "at": 1,
+          "part": "part.keen_nose"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.teeth_to_canine",
+      "occupies_role": "teeth",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_teeth"
+        },
+        {
+          "at": 0.5,
+          "part": "part.sharpening_teeth",
+          "phase": 0
+        },
+        {
+          "at": 1,
+          "part": "part.canine_teeth",
+          "phase": 1
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.fangs_to_canid",
+      "occupies_role": "fangs",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_fangs_absent"
+        },
+        {
+          "at": 0.5,
+          "part": "part.growing_fangs",
+          "phase": 0
+        },
+        {
+          "at": 1,
+          "part": "part.canid_fangs",
+          "phase": 1
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.fangs_to_venom",
+      "occupies_role": "fangs",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_fangs_absent"
+        },
+        {
+          "at": 0.5,
+          "part": "part.growing_fangs",
+          "phase": 0
+        },
+        {
+          "at": 1,
+          "part": "part.venom_fangs",
+          "phase": 1
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.tongue_to_forked",
+      "occupies_role": "tongue",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_tongue"
+        },
+        {
+          "at": 0.45,
+          "part": "part.notched_tongue"
+        },
+        {
+          "at": 1,
+          "part": "part.forked_tongue"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 1,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.tongue_to_canine",
+      "occupies_role": "tongue",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_tongue"
+        },
+        {
+          "at": 0.5,
+          "part": "part.notched_tongue"
+        },
+        {
+          "at": 1,
+          "part": "part.canine_tongue"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 1,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.toes_to_paw",
+      "occupies_role": "toes",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_toes"
+        },
+        {
+          "at": 0.45,
+          "part": "part.spreading_toes"
+        },
+        {
+          "at": 1,
+          "part": "part.paw_toes"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.mouth_to_beak",
+      "occupies_role": "mouth",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_mouth"
+        },
+        {
+          "at": 0.3,
+          "part": "part.tender_mouth"
+        },
+        {
+          "at": 0.6,
+          "part": "part.muzzled_mouth"
+        },
+        {
+          "at": 1,
+          "part": "part.beak"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.head_to_canine",
+      "occupies_role": "head",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_head"
+        },
+        {
+          "at": 0.5,
+          "part": "part.muzzle_partial_head"
+        },
+        {
+          "at": 1,
+          "part": "part.canine_head"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 3,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.head_to_feline",
+      "occupies_role": "head",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_head"
+        },
+        {
+          "at": 0.5,
+          "part": "part.muzzle_partial_head"
+        },
+        {
+          "at": 1,
+          "part": "part.feline_head"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 3,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.head_to_leporine",
+      "occupies_role": "head",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_head"
+        },
+        {
+          "at": 0.45,
+          "part": "part.broadening_head"
+        },
+        {
+          "at": 1,
+          "part": "part.rabbit_head"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 3,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.head_to_bovine",
+      "occupies_role": "head",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_head"
+        },
+        {
+          "at": 0.45,
+          "part": "part.broadening_head"
+        },
+        {
+          "at": 1,
+          "part": "part.bovine_head"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 3,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.head_to_avian",
+      "occupies_role": "head",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_head"
+        },
+        {
+          "at": 0.45,
+          "part": "part.broadening_head"
+        },
+        {
+          "at": 1,
+          "part": "part.avian_head"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 3,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.head_to_serpent",
+      "occupies_role": "head",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_head"
+        },
+        {
+          "at": 0.45,
+          "part": "part.broadening_head"
+        },
+        {
+          "at": 1,
+          "part": "part.serpent_head"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 4,
+        "pain_on_stage": 3
+      }
+    },
+    {
+      "id": "morph.head_to_bat",
+      "occupies_role": "head",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_head"
+        },
+        {
+          "at": 0.45,
+          "part": "part.broadening_head"
+        },
+        {
+          "at": 1,
+          "part": "part.bat_head"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 3,
+        "pain_on_stage": 2
+      }
+    },
+    {
+      "id": "morph.head_to_small_animal",
+      "occupies_role": "head",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_head"
+        },
+        {
+          "at": 0.5,
+          "part": "part.broadening_head"
+        },
+        {
+          "at": 1,
+          "part": "part.small_animal_head"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.ears_to_canid",
+      "occupies_role": "ears",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_ears"
+        },
+        {
+          "at": 0.4,
+          "part": "part.whisker_ears"
+        },
+        {
+          "at": 1,
+          "part": "part.canid_ears"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.ears_to_feline",
+      "occupies_role": "ears",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_ears"
+        },
+        {
+          "at": 0.4,
+          "part": "part.whisker_ears"
+        },
+        {
+          "at": 1,
+          "part": "part.feline_ears"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.ears_to_chiropteran",
+      "occupies_role": "ears",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_ears"
+        },
+        {
+          "at": 0.4,
+          "part": "part.whisker_ears"
+        },
+        {
+          "at": 1,
+          "part": "part.chiropteran_ears"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.ears_to_leporine",
+      "occupies_role": "ears",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_ears"
+        },
+        {
+          "at": 0.4,
+          "part": "part.whisker_ears"
+        },
+        {
+          "at": 1,
+          "part": "part.leporine_ears"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.ears_to_bovine",
+      "occupies_role": "ears",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_ears"
+        },
+        {
+          "at": 0.4,
+          "part": "part.whisker_ears"
+        },
+        {
+          "at": 1,
+          "part": "part.bovine_ears"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.ears_to_equine",
+      "occupies_role": "ears",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_ears"
+        },
+        {
+          "at": 0.4,
+          "part": "part.whisker_ears"
+        },
+        {
+          "at": 1,
+          "part": "part.equine_ears"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.ears_to_avian",
+      "occupies_role": "ears",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_ears"
+        },
+        {
+          "at": 0.4,
+          "part": "part.whisker_ears"
+        },
+        {
+          "at": 1,
+          "part": "part.avian_ears"
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    }
+  ]
+}
+

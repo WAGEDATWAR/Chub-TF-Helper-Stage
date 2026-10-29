@@ -1,0 +1,616 @@
+{
+  "faults_version": 1,
+  "faults": [
+    {
+      "id": "fault.involuntary_extension",
+      "display_name": "Involuntary Extension",
+      "trigger": {
+        "arousal_above": 50
+      },
+      "chance": 0.4,
+      "effect": {
+        "scene": "interrupt",
+        "composure": -1
+      },
+      "text": "fault.claws.pop",
+      "net_positive": false
+    },
+    {
+      "id": "fault.involuntary_on_arousal",
+      "display_name": "Claws on Arousal",
+      "trigger": {
+        "arousal_above": 70
+      },
+      "chance": 0.3,
+      "effect": {
+        "scene": "interrupt"
+      },
+      "text": "fault.claws.arousal",
+      "net_positive": false
+    },
+    {
+      "id": "fault.snagging",
+      "display_name": "Snagging",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.2,
+      "effect": {
+        "frustration": 5
+      },
+      "text": "fault.claws.snag",
+      "net_positive": false
+    },
+    {
+      "id": "fault.scent_lock",
+      "display_name": "Scent Lock",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.2,
+      "effect": {
+        "drive": 5,
+        "arousal": 10,
+        "obedience": 1
+      },
+      "text": "fault.scent.drunk",
+      "net_positive": true
+    },
+    {
+      "id": "fault.involuntary_bite",
+      "display_name": "Involuntary Bite",
+      "trigger": {
+        "arousal_above": 60
+      },
+      "chance": 0.25,
+      "effect": {
+        "arousal": 8,
+        "composure": -1
+      },
+      "text": "fault.fangs.bite",
+      "net_positive": false
+    },
+    {
+      "id": "fault.venom_drip",
+      "display_name": "Venom Drip",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "arousal": 6,
+        "drive": 4
+      },
+      "text": "fault.venom.drip",
+      "net_positive": true
+    },
+    {
+      "id": "fault.hard_landing",
+      "display_name": "Hard Landing",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.3,
+      "effect": {
+        "integrity": -2,
+        "frustration": 4
+      },
+      "text": "fault.wings.land",
+      "net_positive": false
+    },
+    {
+      "id": "fault.tangling",
+      "display_name": "Tangling",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "frustration": 6
+      },
+      "text": "fault.sprint.tangle",
+      "net_positive": false
+    },
+    {
+      "id": "fault.clicking",
+      "display_name": "Involuntary Clicking",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.3,
+      "effect": {
+        "arousal": 5,
+        "drive": 3
+      },
+      "text": "fault.echo.click",
+      "net_positive": true
+    },
+    {
+      "id": "fault.heat_ghosting",
+      "display_name": "Heat Ghosting",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "frustration": 3
+      },
+      "text": "fault.heat.ghost",
+      "net_positive": false
+    },
+    {
+      "id": "fault.letdown",
+      "display_name": "Let-down",
+      "trigger": {
+        "arousal_above": 40
+      },
+      "chance": 0.3,
+      "effect": {
+        "arousal": 8,
+        "drive": 4
+      },
+      "text": "fault.milk.letdown",
+      "net_positive": true
+    },
+    {
+      "id": "fault.leaking_arousal",
+      "display_name": "Leaking When Aroused",
+      "trigger": {
+        "arousal_above": 55
+      },
+      "chance": 0.3,
+      "effect": {
+        "arousal": 6,
+        "composure": 1
+      },
+      "text": "fault.milk.leak",
+      "net_positive": true
+    },
+    {
+      "id": "fault.dropping_gaze",
+      "display_name": "Dropping Her Gaze",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "frustration": 2
+      },
+      "text": "fault.submit.gaze",
+      "net_positive": false
+    },
+    {
+      "id": "fault.eager_yield",
+      "display_name": "Eager Yielding",
+      "trigger": {
+        "arousal_above": 45
+      },
+      "chance": 0.3,
+      "effect": {
+        "arousal": 8,
+        "drive": 4,
+        "composure": 1
+      },
+      "text": "fault.submit.eager",
+      "net_positive": true
+    },
+    {
+      "id": "fault.heat_flush",
+      "display_name": "Heat Flush",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.3,
+      "effect": {
+        "arousal": 10,
+        "drive": 6
+      },
+      "text": "fault.heat.flush",
+      "net_positive": true
+    },
+    {
+      "id": "fault.restless_nights",
+      "display_name": "Restless Nights",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "frustration": 3
+      },
+      "text": "fault.heat.restless",
+      "net_positive": false
+    },
+    {
+      "id": "fault.nesting_urge",
+      "display_name": "Nesting Urge",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "composure": 1,
+        "drive": 4
+      },
+      "text": "fault.breed.nest",
+      "net_positive": true
+    },
+    {
+      "id": "fault.possessive_flash",
+      "display_name": "Possessive Flash",
+      "trigger": {
+        "arousal_above": 60
+      },
+      "chance": 0.2,
+      "effect": {
+        "frustration": 3,
+        "composure": -1
+      },
+      "text": "fault.breed.possessive",
+      "net_positive": false
+    },
+    {
+      "id": "fault.second_wind",
+      "display_name": "Second Wind",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "drive": 5,
+        "arousal": 4
+      },
+      "text": "fault.stamina.wind",
+      "net_positive": true
+    },
+    {
+      "id": "fault.stuck_fast",
+      "display_name": "Stuck Fast",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.2,
+      "effect": {
+        "frustration": 4
+      },
+      "text": "fault.cling.stuck",
+      "net_positive": false
+    },
+    {
+      "id": "fault.clingy_grip",
+      "display_name": "Clingy Grip",
+      "trigger": {
+        "arousal_above": 50
+      },
+      "chance": 0.3,
+      "effect": {
+        "arousal": 6,
+        "composure": 1
+      },
+      "text": "fault.cling.grip",
+      "net_positive": true
+    },
+    {
+      "id": "fault.staring",
+      "display_name": "Staring",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.2,
+      "effect": {
+        "frustration": 2
+      },
+      "text": "fault.sight.stare",
+      "net_positive": false
+    },
+    {
+      "id": "fault.too_many_of_you",
+      "display_name": "Too Many of You",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "arousal": 5,
+        "drive": 4
+      },
+      "text": "fault.compound.many",
+      "net_positive": true
+    },
+    {
+      "id": "fault.seeking_approval",
+      "display_name": "Seeking Approval",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "composure": 1,
+        "drive": 3
+      },
+      "text": "fault.pack.approval",
+      "net_positive": true
+    },
+    {
+      "id": "fault.overthinking",
+      "display_name": "Overthinking",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.3,
+      "effect": {
+        "frustration": 4
+      },
+      "text": "fault.mind.overthink",
+      "net_positive": false
+    },
+    {
+      "id": "fault.too_clever",
+      "display_name": "Too Clever",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.2,
+      "effect": {
+        "drive": 5
+      },
+      "text": "fault.mind.clever",
+      "net_positive": true
+    },
+    {
+      "id": "fault.snarl_reflex",
+      "display_name": "Snarl Reflex",
+      "trigger": {
+        "arousal_above": 65
+      },
+      "chance": 0.3,
+      "effect": {
+        "frustration": 4,
+        "composure": -1
+      },
+      "text": "fault.feral.snarl",
+      "net_positive": false
+    },
+    {
+      "id": "fault.sudden_stillness",
+      "display_name": "Sudden Stillness",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "arousal": 6,
+        "composure": 1
+      },
+      "text": "fault.feral.still",
+      "net_positive": true
+    },
+    {
+      "id": "fault.voice_crack",
+      "display_name": "Voice Crack",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.3,
+      "effect": {
+        "frustration": 2
+      },
+      "text": "fault.voice.crack",
+      "net_positive": false
+    },
+    {
+      "id": "fault.purring_laugh",
+      "display_name": "Purring Laugh",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "drive": 4,
+        "composure": 1
+      },
+      "text": "fault.voice.purr",
+      "net_positive": true
+    },
+    {
+      "id": "fault.rumbling_growl",
+      "display_name": "Rumbling Growl",
+      "trigger": {
+        "arousal_above": 50
+      },
+      "chance": 0.3,
+      "effect": {
+        "arousal": 8,
+        "drive": 4
+      },
+      "text": "fault.growl.rumble",
+      "net_positive": true
+    },
+    {
+      "id": "fault.slipped_hiss",
+      "display_name": "Slipped Hiss",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "arousal": 5,
+        "drive": 3
+      },
+      "text": "fault.hiss.slip",
+      "net_positive": true
+    },
+    {
+      "id": "fault.reckless_calm",
+      "display_name": "Reckless Calm",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "frustration": 3
+      },
+      "text": "fault.pain.reckless",
+      "net_positive": false
+    },
+    {
+      "id": "fault.heavy_footfall",
+      "display_name": "Heavy Footfall",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.2,
+      "effect": {
+        "frustration": 2
+      },
+      "text": "fault.bone.heavy",
+      "net_positive": false
+    },
+    {
+      "id": "fault.too_light",
+      "display_name": "Too Light",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.2,
+      "effect": {
+        "frustration": 2
+      },
+      "text": "fault.bone.light",
+      "net_positive": false
+    },
+    {
+      "id": "fault.hoof_clatter",
+      "display_name": "Hoof Clatter",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "frustration": 2
+      },
+      "text": "fault.hoof.clatter",
+      "net_positive": false
+    },
+    {
+      "id": "fault.tail_wrap",
+      "display_name": "Tail Wrap",
+      "trigger": {
+        "arousal_above": 45
+      },
+      "chance": 0.3,
+      "effect": {
+        "arousal": 8,
+        "composure": 1
+      },
+      "text": "fault.tail.wrap",
+      "net_positive": true
+    },
+    {
+      "id": "fault.knocked_over",
+      "display_name": "Knocked Over",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.2,
+      "effect": {
+        "frustration": 3
+      },
+      "text": "fault.tail.knock",
+      "net_positive": false
+    },
+    {
+      "id": "fault.glowing_blush",
+      "display_name": "Glowing Blush",
+      "trigger": {
+        "arousal_above": 40
+      },
+      "chance": 0.35,
+      "effect": {
+        "arousal": 8,
+        "drive": 4
+      },
+      "text": "fault.glow.blush",
+      "net_positive": true
+    },
+    {
+      "id": "fault.flare",
+      "display_name": "Flare",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.2,
+      "effect": {
+        "frustration": 3
+      },
+      "text": "fault.glow.flare",
+      "net_positive": false
+    },
+    {
+      "id": "fault.scent_cloud",
+      "display_name": "Scent Cloud",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "arousal": 8,
+        "drive": 4
+      },
+      "text": "fault.musk.cloud",
+      "net_positive": true
+    },
+    {
+      "id": "fault.joyful_leap",
+      "display_name": "Joyful Leap",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.25,
+      "effect": {
+        "drive": 5,
+        "arousal": 4,
+        "composure": 1
+      },
+      "text": "fault.loco.leap",
+      "net_positive": true
+    },
+    {
+      "id": "fault.overexertion",
+      "display_name": "Overexertion",
+      "trigger": {
+        "on_use": true
+      },
+      "chance": 0.3,
+      "effect": {
+        "frustration": 3
+      },
+      "text": "fault.muscle.over",
+      "net_positive": false
+    },
+    {
+      "id": "fault.flexing",
+      "display_name": "Showing Off",
+      "trigger": {
+        "arousal_above": 35
+      },
+      "chance": 0.3,
+      "effect": {
+        "arousal": 6,
+        "drive": 4,
+        "composure": 1
+      },
+      "text": "fault.muscle.flex",
+      "net_positive": true
+    },
+    {
+      "id": "fault.premature",
+      "display_name": "Too Soon",
+      "trigger": { "arousal_above": 40 },
+      "chance": 0.35,
+      "effect": { "composure": -1 },
+      "text": "fault.premature.text",
+      "net_positive": false
+    }
+  ]
+}

@@ -1,0 +1,1383 @@
+{
+  "traits_version": 1,
+  "traits": [
+    {
+      "id": "trait.mammalian_fur",
+      "display_name": "Mammalian Fur",
+      "family": "coat",
+      "tier": 1,
+      "grants": [
+        "attr.mammalian_fur"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 20,
+      "min_coverage": 0.15,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.body_heat",
+      "display_name": "Body Heat",
+      "family": "skin",
+      "tier": 1,
+      "grants": [
+        "attr.body_heat"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 24,
+      "min_coverage": 0.2,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.scales",
+      "display_name": "Scales",
+      "family": "skin",
+      "tier": 2,
+      "grants": [
+        "attr.scales"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 30,
+      "min_coverage": 0.3,
+      "conflicts_with_families": [
+        "coat"
+      ]
+    },
+    {
+      "id": "trait.feathers",
+      "display_name": "Feathers",
+      "family": "coat",
+      "tier": 2,
+      "grants": [
+        "attr.feathers"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 34,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.canine_claws",
+      "display_name": "Canine Claws",
+      "family": "claws",
+      "tier": 1,
+      "grants": [
+        "attr.canine_claws"
+      ],
+      "targets": {
+        "match_tags": [
+          "nails_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.25,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.feline_claws",
+      "display_name": "Feline Claws",
+      "family": "claws",
+      "tier": 1,
+      "grants": [
+        "attr.feline_claws"
+      ],
+      "targets": {
+        "match_tags": [
+          "nails_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.25,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.fixed_claws",
+      "display_name": "Fixed Claws",
+      "family": "claws",
+      "tier": 2,
+      "grants": [
+        "attr.fixed_claws"
+      ],
+      "targets": {
+        "match_tags": [
+          "nails_tag"
+        ]
+      },
+      "priority": 38,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.digitigrade_legs",
+      "display_name": "Digitigrade Legs",
+      "family": "gait",
+      "tier": 2,
+      "grants": [
+        "attr.digitigrade",
+        "attr.structure_digitigrade"
+      ],
+      "targets": {
+        "match_roles": [
+          "foot_base",
+          "leg_upper"
+        ]
+      },
+      "priority": 44,
+      "min_coverage": 0.35,
+      "conflicts_with_families": [
+        "gait"
+      ]
+    },
+    {
+      "id": "trait.paw_pads",
+      "display_name": "Paw Pads",
+      "family": "skin",
+      "tier": 1,
+      "grants": [
+        "attr.paw_pads"
+      ],
+      "targets": {
+        "match_tags": [
+          "foot_tag"
+        ]
+      },
+      "priority": 30,
+      "min_coverage": 0.25,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.hooves",
+      "display_name": "Hooves",
+      "family": "gait",
+      "tier": 2,
+      "grants": [
+        "attr.hooves"
+      ],
+      "targets": {
+        "match_tags": [
+          "foot_tag"
+        ]
+      },
+      "priority": 46,
+      "min_coverage": 0.35,
+      "conflicts_with_families": [
+        "gait"
+      ]
+    },
+    {
+      "id": "trait.snout_nose",
+      "display_name": "Snout",
+      "family": "structure",
+      "tier": 1,
+      "grants": [
+        "attr.muzzle"
+      ],
+      "targets": {
+        "match_tags": [
+          "head_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.fangs",
+      "display_name": "Fangs",
+      "family": "structure",
+      "tier": 2,
+      "grants": [
+        "attr.fangs"
+      ],
+      "targets": {
+        "match_tags": [
+          "fangs_tag"
+        ]
+      },
+      "priority": 42,
+      "min_coverage": 0.4,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.venom_sac",
+      "display_name": "Venom Sac",
+      "family": "structure",
+      "tier": 3,
+      "grants": [
+        "attr.venom_sac"
+      ],
+      "targets": {
+        "match_tags": [
+          "fangs_tag"
+        ]
+      },
+      "priority": 60,
+      "min_coverage": 0.55,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.forked_tongue",
+      "display_name": "Forked Tongue",
+      "family": "structure",
+      "tier": 2,
+      "grants": [
+        "attr.forked_tongue"
+      ],
+      "targets": {
+        "match_tags": [
+          "tongue_tag"
+        ]
+      },
+      "priority": 48,
+      "min_coverage": 0.4,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.canine_tongue",
+      "display_name": "Canine Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag"
+      ],
+      "tier": 2,
+      "grants": [
+        "attr.canine_tongue"
+      ],
+      "targets": {
+        "match_roles": [
+          "tongue"
+        ]
+      },
+      "priority": 44,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.thermal_pit",
+      "display_name": "Thermal Pits",
+      "family": "structure",
+      "tier": 3,
+      "grants": [
+        "attr.thermal_pit"
+      ],
+      "targets": {
+        "match_tags": [
+          "head_tag"
+        ]
+      },
+      "priority": 58,
+      "min_coverage": 0.5,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.mobile_ears",
+      "display_name": "Mobile Ears",
+      "family": "ears",
+      "tier": 1,
+      "grants": [
+        "attr.mobile_ears"
+      ],
+      "targets": {
+        "match_tags": [
+          "ears_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.2,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.keen_smell",
+      "display_name": "Keen Smell",
+      "family": "structure",
+      "tier": 1,
+      "grants": [
+        "attr.keen_smell"
+      ],
+      "targets": {
+        "match_tags": [
+          "nose_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.25,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.night_vision",
+      "display_name": "Night Vision",
+      "family": "eyes",
+      "tier": 2,
+      "grants": [
+        "attr.night_vision"
+      ],
+      "targets": {
+        "match_tags": [
+          "eyes_tag"
+        ]
+      },
+      "priority": 42,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.echolocation",
+      "display_name": "Echolocation",
+      "family": "structure",
+      "tier": 3,
+      "grants": [
+        "attr.echolocation"
+      ],
+      "targets": {
+        "match_tags": [
+          "head_tag"
+        ]
+      },
+      "priority": 62,
+      "min_coverage": 0.55,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.horns",
+      "display_name": "Horns",
+      "family": "horns",
+      "tier": 2,
+      "grants": [
+        "attr.horns"
+      ],
+      "targets": {
+        "match_tags": [
+          "horns_tag"
+        ]
+      },
+      "priority": 50,
+      "min_coverage": 0.35,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.wings_glide",
+      "display_name": "Gliding Wings",
+      "family": "wings",
+      "tier": 3,
+      "grants": [
+        "attr.wings_glide",
+        "attr.structure_membrane"
+      ],
+      "targets": {
+        "match_tags": [
+          "wings_tag"
+        ]
+      },
+      "priority": 66,
+      "min_coverage": 0.5,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.tail_growth",
+      "display_name": "Tail Growth",
+      "family": "tail",
+      "tier": 2,
+      "grants": [
+        "attr.tail_growth"
+      ],
+      "targets": {
+        "match_tags": [
+          "tail_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.muscle_density",
+      "display_name": "Muscle Density",
+      "family": "muscle",
+      "tier": 2,
+      "grants": [
+        "attr.muscle_density"
+      ],
+      "targets": {
+        "match_tags": [
+          "muscle_tag",
+          "skin_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.heavy_muscle",
+      "display_name": "Heavy Muscle",
+      "family": "muscle",
+      "tier": 2,
+      "grants": [
+        "attr.muscle_density_heavy"
+      ],
+      "targets": {
+        "match_tags": [
+          "muscle_tag"
+        ]
+      },
+      "priority": 44,
+      "min_coverage": 0.4,
+      "conflicts_with_families": [
+        "muscle"
+      ]
+    },
+    {
+      "id": "trait.lactation",
+      "display_name": "Lactation",
+      "family": "genital",
+      "tier": 2,
+      "grants": [
+        "attr.lactation"
+      ],
+      "targets": {
+        "match_tags": [
+          "chest_tag"
+        ]
+      },
+      "priority": 50,
+      "min_coverage": 0.4,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.gynomorphic",
+      "display_name": "Gynomorphic Shift",
+      "family": "genital",
+      "tier": 1,
+      "grants": [
+        "attr.gynomorphic"
+      ],
+      "targets": {
+        "match_tags": [
+          "genital_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.2,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.andromorphic",
+      "display_name": "Andromorphic Shift",
+      "family": "genital",
+      "tier": 1,
+      "grants": [
+        "attr.andromorphic"
+      ],
+      "targets": {
+        "match_tags": [
+          "genital_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.2,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.pack_instinct",
+      "display_name": "Pack Instinct",
+      "family": "voice",
+      "tier": 2,
+      "grants": [
+        "attr.pack_instinct"
+      ],
+      "targets": {
+        "match_tags": [
+          "head_tag"
+        ]
+      },
+      "priority": 30,
+      "min_coverage": 0.35,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.submission_reflex",
+      "display_name": "Submission Reflex",
+      "family": "voice",
+      "tier": 2,
+      "grants": [
+        "attr.submission_reflex"
+      ],
+      "targets": {
+        "match_tags": [
+          "head_tag"
+        ]
+      },
+      "priority": 30,
+      "min_coverage": 0.35,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.heat_cycle",
+      "display_name": "Heat Cycle",
+      "family": "genital",
+      "tier": 3,
+      "grants": [
+        "attr.heat_cycle"
+      ],
+      "targets": {
+        "match_tags": [
+          "genital_tag"
+        ]
+      },
+      "priority": 50,
+      "min_coverage": 0.5,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.breeding_instinct",
+      "display_name": "Breeding Instinct",
+      "family": "voice",
+      "tier": 3,
+      "grants": [
+        "attr.breeding_instinct"
+      ],
+      "targets": {
+        "match_tags": [
+          "head_tag"
+        ]
+      },
+      "priority": 52,
+      "min_coverage": 0.5,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.leg_fusion",
+      "display_name": "Leg Fusion",
+      "family": "structure",
+      "tier": 3,
+      "grants": [
+        "attr.structure_leg_fusion",
+        "attr.coiled_posture"
+      ],
+      "targets": {
+        "match_tags": [
+          "leg_tag"
+        ]
+      },
+      "priority": 92,
+      "min_coverage": 0.45,
+      "conflicts_with_families": [
+        "gait"
+      ]
+    },
+    {
+      "id": "trait.quadruped_sprint",
+      "display_name": "Quadruped Sprint",
+      "family": "gait",
+      "tier": 3,
+      "grants": [
+        "attr.quadruped_sprint"
+      ],
+      "targets": {
+        "match_tags": [
+          "leg_tag"
+        ]
+      },
+      "priority": 56,
+      "min_coverage": 0.5,
+      "conflicts_with_families": [
+        "gait"
+      ]
+    },
+    {
+      "id": "trait.stamina",
+      "display_name": "Deep Stamina",
+      "family": "muscle",
+      "tier": 3,
+      "grants": [
+        "attr.stamina"
+      ],
+      "targets": {
+        "match_tags": [
+          "muscle_tag"
+        ]
+      },
+      "priority": 48,
+      "min_coverage": 0.5,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.clinging",
+      "display_name": "Clinging Grip",
+      "family": "structure",
+      "tier": 3,
+      "grants": [
+        "attr.clinging"
+      ],
+      "targets": {
+        "match_tags": [
+          "hand_tag"
+        ]
+      },
+      "priority": 54,
+      "min_coverage": 0.5,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.keen_sight",
+      "display_name": "Keen Sight",
+      "family": "eyes",
+      "tier": 3,
+      "grants": [
+        "attr.keen_sight"
+      ],
+      "targets": {
+        "match_tags": [
+          "eyes_tag"
+        ]
+      },
+      "priority": 50,
+      "min_coverage": 0.45,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.enhanced_intelligence",
+      "display_name": "Enhanced Cognition",
+      "family": "voice",
+      "tier": 2,
+      "grants": [
+        "attr.enhanced_intelligence"
+      ],
+      "targets": {
+        "match_tags": [
+          "head_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.feral_mind",
+      "display_name": "Feral Mind",
+      "family": "voice",
+      "tier": 3,
+      "grants": [
+        "attr.feral_mind"
+      ],
+      "targets": {
+        "match_tags": [
+          "head_tag"
+        ]
+      },
+      "priority": 70,
+      "min_coverage": 0.6,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.voice_deep",
+      "display_name": "Deep Voice",
+      "family": "voice",
+      "tier": 1,
+      "grants": [
+        "attr.voice_deep"
+      ],
+      "targets": {
+        "match_tags": [
+          "mouth_tag"
+        ]
+      },
+      "priority": 30,
+      "min_coverage": 0.2,
+      "conflicts_with_families": [
+        "voice"
+      ]
+    },
+    {
+      "id": "trait.voice_high",
+      "display_name": "High Voice",
+      "family": "voice",
+      "tier": 1,
+      "grants": [
+        "attr.voice_high"
+      ],
+      "targets": {
+        "match_tags": [
+          "mouth_tag"
+        ]
+      },
+      "priority": 30,
+      "min_coverage": 0.2,
+      "conflicts_with_families": [
+        "voice"
+      ]
+    },
+    {
+      "id": "trait.growl",
+      "display_name": "Growl",
+      "family": "voice",
+      "tier": 2,
+      "grants": [
+        "attr.growl"
+      ],
+      "targets": {
+        "match_tags": [
+          "mouth_tag"
+        ]
+      },
+      "priority": 36,
+      "min_coverage": 0.3,
+      "conflicts_with_families": [
+        "voice"
+      ]
+    },
+    {
+      "id": "trait.hiss",
+      "display_name": "Hiss",
+      "family": "voice",
+      "tier": 2,
+      "grants": [
+        "attr.hiss"
+      ],
+      "targets": {
+        "match_tags": [
+          "mouth_tag"
+        ]
+      },
+      "priority": 44,
+      "min_coverage": 0.35,
+      "conflicts_with_families": [
+        "voice"
+      ]
+    },
+    {
+      "id": "trait.size_baseline",
+      "display_name": "Baseline Size",
+      "family": "size",
+      "tier": 1,
+      "grants": [
+        "attr.size_baseline"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 10,
+      "min_coverage": 0.1,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.bulk_size",
+      "display_name": "Increased Bulk",
+      "family": "size",
+      "tier": 2,
+      "grants": [
+        "attr.bulk_size"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.3,
+      "conflicts_with_families": [
+        "size"
+      ]
+    },
+    {
+      "id": "trait.gracile_size",
+      "display_name": "Gracile Frame",
+      "family": "size",
+      "tier": 2,
+      "grants": [
+        "attr.gracile_size"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.3,
+      "conflicts_with_families": [
+        "size"
+      ]
+    },
+    {
+      "id": "trait.genital_masculine",
+      "display_name": "Masculine Genitalia",
+      "family": "genital",
+      "tier": 1,
+      "grants": [
+        "attr.genital_masculine"
+      ],
+      "targets": {
+        "match_tags": [
+          "genital_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.2,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.genital_feminine",
+      "display_name": "Feminine Genitalia",
+      "family": "genital",
+      "tier": 1,
+      "grants": [
+        "attr.genital_feminine"
+      ],
+      "targets": {
+        "match_tags": [
+          "genital_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.2,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.dexterous_fingers",
+      "display_name": "Dexterous Fingers",
+      "family": "structure",
+      "tier": 2,
+      "grants": [
+        "attr.dexterous_fingers"
+      ],
+      "targets": {
+        "match_tags": [
+          "fingers_tag"
+        ]
+      },
+      "priority": 30,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.thumbless_paw",
+      "display_name": "Paw",
+      "family": "structure",
+      "tier": 2,
+      "grants": [
+        "attr.thumbless_paw"
+      ],
+      "targets": {
+        "match_tags": [
+          "hand_tag"
+        ]
+      },
+      "priority": 45,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.hybrid_paw",
+      "display_name": "Hybrid Paw",
+      "family": "structure",
+      "tier": 2,
+      "grants": [
+        "attr.hybrid_paw"
+      ],
+      "targets": {
+        "match_tags": [
+          "hand_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.35,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.feral_paw",
+      "display_name": "Feral Paw",
+      "family": "structure",
+      "tier": 3,
+      "grants": [
+        "attr.thumbless_paw"
+      ],
+      "targets": {
+        "match_tags": [
+          "hand_tag"
+        ]
+      },
+      "priority": 60,
+      "min_coverage": 0.6,
+      "min_exposure": 70,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.thick_hide",
+      "display_name": "Thick Hide",
+      "family": "skin",
+      "tier": 2,
+      "grants": [
+        "attr.thick_hide"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 38,
+      "min_coverage": 0.35,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.bioluminescence",
+      "display_name": "Bioluminescence",
+      "family": "skin",
+      "tier": 3,
+      "grants": [
+        "attr.bioluminescence"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 64,
+      "min_coverage": 0.55,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.arousal_floor",
+      "display_name": "Elevated Arousal",
+      "family": "voice",
+      "tier": 2,
+      "grants": [
+        "attr.arousal_floor"
+      ],
+      "targets": {
+        "match_tags": [
+          "head_tag"
+        ]
+      },
+      "priority": 34,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.pain_tolerance",
+      "display_name": "Hardened Nerves",
+      "family": "voice",
+      "tier": 2,
+      "grants": [
+        "attr.pain_tolerance"
+      ],
+      "targets": {
+        "match_tags": [
+          "head_tag"
+        ]
+      },
+      "priority": 36,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.hollow_bones",
+      "display_name": "Hollow Bones",
+      "family": "bone",
+      "tier": 3,
+      "grants": [
+        "attr.hollow_bones",
+        "attr.structure_hollow"
+      ],
+      "targets": {
+        "match_roles": [
+          "torso_upper",
+          "arm_upper",
+          "arm_lower",
+          "leg_upper",
+          "leg_lower"
+        ]
+      },
+      "priority": 58,
+      "min_coverage": 0.5,
+      "conflicts_with_families": [
+        "bone"
+      ]
+    },
+    {
+      "id": "trait.dense_bones",
+      "display_name": "Dense Bones",
+      "family": "bone",
+      "tier": 3,
+      "grants": [
+        "attr.dense_bones"
+      ],
+      "targets": {
+        "match_roles": [
+          "torso_upper",
+          "leg_upper",
+          "leg_lower"
+        ]
+      },
+      "priority": 58,
+      "min_coverage": 0.5,
+      "conflicts_with_families": [
+        "bone"
+      ]
+    },
+    {
+      "id": "trait.scent_musk",
+      "display_name": "Scent Musk",
+      "family": "skin",
+      "tier": 1,
+      "grants": [
+        "attr.scent_musk"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 32,
+      "min_coverage": 0.25,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.extra_limbs",
+      "display_name": "Extra Limbs",
+      "family": "structure",
+      "tier": 3,
+      "grants": [
+        "attr.extra_limbs"
+      ],
+      "targets": {
+        "match_tags": [
+          "torso_tag"
+        ]
+      },
+      "priority": 68,
+      "min_coverage": 0.65,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.chitin",
+      "display_name": "Chitin",
+      "family": "skin",
+      "tier": 3,
+      "grants": [
+        "attr.chitin"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 60,
+      "min_coverage": 0.5,
+      "conflicts_with_families": [
+        "coat"
+      ]
+    },
+    {
+      "id": "trait.antennae",
+      "display_name": "Antennae",
+      "family": "ears",
+      "tier": 3,
+      "grants": [
+        "attr.antennae"
+      ],
+      "targets": {
+        "match_tags": [
+          "head_tag"
+        ]
+      },
+      "priority": 56,
+      "min_coverage": 0.5,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.compound_eyes",
+      "display_name": "Compound Eyes",
+      "family": "eyes",
+      "tier": 3,
+      "grants": [
+        "attr.compound_eyes"
+      ],
+      "targets": {
+        "match_tags": [
+          "eyes_tag"
+        ]
+      },
+      "priority": 62,
+      "min_coverage": 0.55,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.prehensile_tail",
+      "display_name": "Prehensile Tail",
+      "family": "tail",
+      "tier": 3,
+      "grants": [
+        "attr.prehensile_tail"
+      ],
+      "targets": {
+        "match_tags": [
+          "tail_tag"
+        ]
+      },
+      "priority": 52,
+      "min_coverage": 0.5,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.venom_resist",
+      "display_name": "Venom Resistance",
+      "family": "skin",
+      "tier": 2,
+      "grants": [
+        "attr.venom_resist"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.35,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.heat_resist",
+      "display_name": "Heat Resistance",
+      "family": "skin",
+      "tier": 2,
+      "grants": [
+        "attr.heat_resist"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.35,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.cold_resist",
+      "display_name": "Cold Resistance",
+      "family": "skin",
+      "tier": 2,
+      "grants": [
+        "attr.cold_resist"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 40,
+      "min_coverage": 0.35,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.cloven_toes",
+      "display_name": "Cloven Toes",
+      "family": "structure",
+      "tier": 2,
+      "grants": [
+        "attr.cloven_toes"
+      ],
+      "targets": {
+        "match_tags": [
+          "toes_tag"
+        ]
+      },
+      "priority": 44,
+      "min_coverage": 0.4,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.wet_skin",
+      "display_name": "Wet Skin",
+      "family": "skin",
+      "tier": 2,
+      "grants": [
+        "attr.wet_skin"
+      ],
+      "targets": {
+        "match_tags": [
+          "skin_tag"
+        ]
+      },
+      "priority": 36,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.cloaca",
+      "display_name": "Cloaca",
+      "family": "genital",
+      "tags": [
+        "cloaca_tag",
+        "avian_tag"
+      ],
+      "grants": [
+        "attr.cloaca"
+      ],
+      "targets": {
+        "match_tags": [
+          "cloaca_tag"
+        ]
+      },
+      "priority": 58,
+      "min_coverage": 0,
+      "tier": 1
+    },
+    {
+      "id": "trait.hemipenes",
+      "display_name": "Hemipenes",
+      "family": "genital",
+      "tags": [
+        "hemipenis_tag",
+        "serpent_tag"
+      ],
+      "grants": [
+        "attr.hemipenis"
+      ],
+      "targets": {
+        "match_tags": [
+          "hemipenis_tag"
+        ]
+      },
+      "priority": 56,
+      "min_coverage": 0,
+      "tier": 1
+    },
+    {
+      "id": "trait.species_genital",
+      "display_name": "Species Genitalia",
+      "family": "genital",
+      "tags": [
+        "genital_tag"
+      ],
+      "grants": [
+        "attr.species_genital"
+      ],
+      "targets": {
+        "match_tags": [
+          "genital_tag"
+        ]
+      },
+      "priority": 30,
+      "min_coverage": 0,
+      "tier": 1
+    },
+    {
+      "id": "trait.mammary_row",
+      "display_name": "Mammary Row",
+      "family": "genital",
+      "tags": [
+        "mammary_tag"
+      ],
+      "grants": [
+        "attr.mammary_row"
+      ],
+      "targets": {
+        "match_tags": [
+          "nipples_tag"
+        ]
+      },
+      "priority": 52,
+      "min_coverage": 0,
+      "tier": 1
+    },
+    {
+      "id": "trait.long_ears",
+      "display_name": "Long Ears",
+      "family": "ears",
+      "tags": [
+        "rabbit_tag",
+        "ears_tag"
+      ],
+      "grants": [
+        "attr.long_ears"
+      ],
+      "targets": {
+        "match_tags": [
+          "ears_tag"
+        ]
+      },
+      "priority": 42,
+      "min_coverage": 0.2,
+      "tier": 1
+    },
+    {
+      "id": "trait.canine_teeth",
+      "display_name": "Canine Teeth",
+      "family": "structure",
+      "tags": [
+        "canine_tag",
+        "feline_tag",
+        "teeth_tag"
+      ],
+      "grants": [
+        "attr.canine_teeth"
+      ],
+      "targets": {
+        "match_tags": [
+          "teeth_tag"
+        ]
+      },
+      "priority": 45,
+      "min_coverage": 0.2,
+      "tier": 1
+    },
+    {
+      "id": "trait.venom_fangs",
+      "display_name": "Venom Fangs",
+      "family": "structure",
+      "tags": [
+        "serpent_tag",
+        "fangs_tag"
+      ],
+      "grants": [
+        "attr.fangs"
+      ],
+      "targets": {
+        "match_tags": [
+          "fangs_tag"
+        ]
+      },
+      "priority": 46,
+      "min_coverage": 0.2,
+      "tier": 1
+    },
+    {
+      "id": "trait.beak",
+      "display_name": "Beak",
+      "family": "structure",
+      "tags": [
+        "avian_tag",
+        "beak_tag"
+      ],
+      "grants": [
+        "attr.beak"
+      ],
+      "targets": {
+        "match_tags": [
+          "mouth_tag"
+        ]
+      },
+      "priority": 44,
+      "min_coverage": 0.2,
+      "tier": 1
+    }
+  ]
+}

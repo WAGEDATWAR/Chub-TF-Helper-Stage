@@ -1,0 +1,71 @@
+{
+  "scenes_version": 1,
+  "_comment": "Scene blueprints (blueprint §31.1). A scene names a location, participants, objects present, and spatial relations; the composer renders it. `subject` is the focal subject; `agent.*` are others (M16 town).",
+  "scenes": [
+    {
+      "id": "scene.kitchen_morning",
+      "location": "loc.her_home_kitchen",
+      "block": "morning",
+      "participants": ["subject"],
+      "objects": [
+        { "id": "obj.coffee_mug", "state": "default" },
+        { "id": "obj.kitchen_table" },
+        { "id": "obj.counter" }
+      ],
+      "spatial": [
+        { "a": "subject", "rel": "standing_at", "b": "obj.counter" },
+        { "a": "obj.coffee_mug", "rel": "on", "b": "obj.counter" }
+      ]
+    },
+    {
+      "id": "scene.bathroom_mirror",
+      "location": "loc.her_home_bathroom",
+      "block": "morning",
+      "participants": ["subject"],
+      "objects": [{ "id": "obj.mirror" }],
+      "spatial": [{ "a": "subject", "rel": "facing", "b": "obj.mirror" }]
+    },
+    {
+      "id": "scene.bedroom_night",
+      "location": "loc.her_home_bedroom",
+      "block": "night",
+      "participants": ["subject"],
+      "objects": [
+        { "id": "obj.bed", "state": "rumpled" },
+        { "id": "obj.wardrobe" },
+        { "id": "obj.phone" }
+      ],
+      "spatial": [{ "a": "subject", "rel": "lying_on", "b": "obj.bed" }]
+    },
+    {
+      "id": "scene.living_evening",
+      "location": "loc.her_home_living",
+      "block": "evening",
+      "participants": ["subject"],
+      "objects": [
+        { "id": "obj.sofa" },
+        { "id": "obj.phone" }
+      ],
+      "spatial": [{ "a": "subject", "rel": "seated_at", "b": "obj.sofa" }]
+    },
+    {
+      "id": "scene.kitchen_midday",
+      "location": "loc.her_home_kitchen",
+      "block": "midday",
+      "participants": ["subject"],
+      "objects": [
+        { "id": "obj.kettle", "state": "boiling" },
+        { "id": "obj.kitchen_table" }
+      ],
+      "spatial": [{ "a": "subject", "rel": "standing_near", "b": "obj.kitchen_table" }]
+    },
+    {
+      "id": "scene.park_stroll",
+      "location": "loc.park",
+      "block": "afternoon",
+      "participants": ["subject"],
+      "objects": [{ "id": "obj.park_bench" }],
+      "spatial": [{ "a": "subject", "rel": "standing_near", "b": "obj.park_bench" }]
+    }
+  ]
+}

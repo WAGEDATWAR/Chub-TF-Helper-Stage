@@ -1,0 +1,27 @@
+{
+  "powers_version": 1,
+  "_comment": "The Observer's verb set (blueprint 11). `bestow` powers are generated from injectors.json so mutation content is never duplicated; the other five categories are authored here. Charge is the pacing lever (11.5); a power is the only interface with the world.",
+  "powers": [
+    { "id": "power.temper_steady", "display_name": "Steady", "category": "temper", "target": { "kind": "subject", "scope": "mind" }, "cost": { "charge": 6 }, "cooldown_ticks": 4, "tier": 1, "unlocks_on": { "day_min": 1 }, "effects": [ { "stat": "composure", "op": "add", "value": 8, "scales_with": "dose" }, { "stat": "pain", "op": "multiply", "value": 0.8, "scales_with": "none" } ], "backlash": { "if": "stability_below", "threshold": 30, "note": "a frayed mind resists steadying" } },
+    { "id": "power.temper_elate", "display_name": "Elate", "category": "temper", "target": { "kind": "subject", "scope": "mind" }, "cost": { "charge": 6 }, "cooldown_ticks": 4, "tier": 1, "unlocks_on": { "day_min": 1 }, "effects": [ { "stat": "drive", "op": "add", "value": 10, "scales_with": "dose" }, { "stat": "arousal", "op": "add", "value": 8, "scales_with": "dose" } ] },
+    { "id": "power.temper_drowse", "display_name": "Drowse", "category": "temper", "target": { "kind": "subject", "scope": "body" }, "cost": { "charge": 5 }, "cooldown_ticks": 6, "tier": 1, "unlocks_on": { "day_min": 1 }, "effects": [ { "stat": "fatigue", "op": "add", "value": 15, "scales_with": "dose" }, { "stat": "arousal", "op": "add", "value": -6, "scales_with": "dose" } ], "backlash": { "if": "stability_below", "threshold": 40, "note": "sedation deepens when unstable" } },
+
+    { "id": "power.hold_pause", "display_name": "Hold", "category": "hold", "target": { "kind": "subject", "scope": "whole" }, "cost": { "charge": 8 }, "cooldown_ticks": 8, "tier": 1, "unlocks_on": { "day_min": 1 }, "effects": [], "hold": { "ticks": 24, "scope": "growth" } },
+    { "id": "power.hold_still", "display_name": "Still", "category": "hold", "target": { "kind": "subject", "scope": "whole" }, "cost": { "charge": 20 }, "cooldown_ticks": 24, "tier": 2, "unlocks_on": { "day_min": 3 }, "effects": [ { "stat": "stability", "op": "add", "value": 10, "scales_with": "none" } ], "hold": { "ticks": 48, "scope": "all" } },
+
+    { "id": "power.unmake_revert", "display_name": "Unmake", "category": "unmake", "target": { "kind": "subject", "scope": "whole" }, "cost": { "charge": 14 }, "cooldown_ticks": 12, "tier": 1, "unlocks_on": { "day_min": 1 }, "effects": [], "unmake": { "mode": "revert" } },
+    { "id": "power.unmake_uncrown", "display_name": "Uncrown", "category": "unmake", "target": { "kind": "subject", "scope": "whole" }, "cost": { "charge": 18 }, "cooldown_ticks": 16, "tier": 2, "unlocks_on": { "day_min": 2 }, "effects": [], "unmake": { "mode": "drop_genome" } },
+
+    { "id": "power.sway_shift", "display_name": "Shift", "category": "sway", "target": { "kind": "object", "scope": "state" }, "cost": { "charge": 4 }, "cooldown_ticks": 2, "tier": 1, "unlocks_on": { "day_min": 1 }, "effects": [], "sway": { "op": "object_state", "state": "moved" } },
+    { "id": "power.sway_dim", "display_name": "Dim", "category": "sway", "target": { "kind": "location", "scope": "ambient" }, "cost": { "charge": 5 }, "cooldown_ticks": 4, "tier": 1, "unlocks_on": { "day_min": 1 }, "effects": [], "sway": { "op": "ambient", "field": "light", "value": "guttering shadow" } },
+    { "id": "power.sway_stir", "display_name": "Stir", "category": "sway", "target": { "kind": "location", "scope": "ambient" }, "cost": { "charge": 5 }, "cooldown_ticks": 4, "tier": 1, "unlocks_on": { "day_min": 1 }, "effects": [], "sway": { "op": "ambient", "field": "sound", "value": "a low hum" } },
+    { "id": "power.sway_open", "display_name": "Open", "category": "sway", "target": { "kind": "location", "scope": "access" }, "cost": { "charge": 7 }, "cooldown_ticks": 6, "tier": 2, "unlocks_on": { "day_min": 2 }, "effects": [], "sway": { "op": "open" } },
+
+    { "id": "power.reveal_magnify", "display_name": "Reveal", "category": "reveal", "target": { "kind": "subject", "scope": "part" }, "cost": { "charge": 3 }, "cooldown_ticks": 2, "tier": 1, "unlocks_on": { "day_min": 1 }, "effects": [], "reveal": { "mode": "magnify", "part": "head" } },
+    { "id": "power.reveal_sight", "display_name": "Sight", "category": "reveal", "target": { "kind": "scene", "scope": "mind" }, "cost": { "charge": 5 }, "cooldown_ticks": 4, "tier": 2, "unlocks_on": { "day_min": 2 }, "effects": [], "reveal": { "mode": "sight" } },
+
+    { "id": "power.temporal_compress", "display_name": "Hasten", "category": "temper", "target": { "kind": "subject", "scope": "time" }, "cost": { "charge": 8 }, "cooldown_ticks": 12, "tier": 2, "unlocks_on": { "day_min": 3 }, "effects": [], "temporal": { "mode": "compress", "factor": 3, "ticks": 48 } },
+    { "id": "power.temporal_stretch", "display_name": "Draw out", "category": "temper", "target": { "kind": "subject", "scope": "time" }, "cost": { "charge": 6 }, "cooldown_ticks": 12, "tier": 2, "unlocks_on": { "day_min": 3 }, "effects": [], "temporal": { "mode": "stretch", "factor": 0.5, "ticks": 72 } },
+    { "id": "power.temporal_shift", "display_name": "Shift hour", "category": "sway", "target": { "kind": "scene", "scope": "time" }, "cost": { "charge": 3 }, "cooldown_ticks": 4, "tier": 1, "unlocks_on": { "day_min": 2 }, "effects": [], "temporal": { "mode": "phase", "hours": 6 } }
+  ]
+}

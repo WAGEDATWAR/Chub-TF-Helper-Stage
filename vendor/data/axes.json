@@ -1,0 +1,24 @@
+{
+  "axes_version": 1,
+  "axes": [
+    { "id": "stance", "weight": 4, "bands": ["yield", "soften", "push", "break"] },
+    { "id": "frustration_band", "weight": 3, "bands": ["calm", "strained", "breaking"] },
+    { "id": "drive_band", "weight": 2, "bands": ["sated", "warm", "eager", "ravenous"] },
+    { "id": "transform_state", "weight": 1, "bands": ["baseline", "cosmetic", "light_hybrid", "heavy_hybrid", "near_animal", "feral_lock"] },
+    { "id": "composure_band", "weight": 3, "bands": ["rattled", "wary", "steady", "poised"] },
+    { "id": "perceived", "weight": 3, "bands": ["hidden", "noticed"] },
+    { "id": "pain", "weight": 2, "bands": ["none", "low", "high"] },
+    { "id": "arousal", "weight": 2, "bands": ["low", "mid", "high"] },
+    { "id": "resonance", "weight": 2, "bands": ["low", "mid", "high"] },
+    { "id": "stability_min", "weight": 2, "bands": ["low", "stable"] },
+    { "id": "mood_band", "weight": 3, "bands": ["pleasant-still", "pleasant-temperate", "pleasant-charged", "neutral-still", "neutral-temperate", "neutral-charged", "unpleasant-still", "unpleasant-temperate", "unpleasant-charged"] },
+    { "id": "mood_valence", "weight": 3, "bands": ["down", "even", "up"] },
+    { "id": "awareness_tier", "weight": 3, "bands": ["blind", "dim", "aware", "lucid"] },
+    { "id": "confidence_band", "weight": 2, "bands": ["low", "steady", "high"] },
+    { "id": "nervous_band", "weight": 2, "bands": ["even", "tight", "fraught"] },
+    { "id": "aggression_band", "weight": 2, "bands": ["mild", "sharp", "hot"] },
+    { "id": "dominance_band", "weight": 2, "bands": ["submissive", "even", "dominant"] },
+    { "id": "libido_band", "weight": 2, "bands": ["cool", "warm", "burning"] },
+    { "id": "preference", "weight": 3, "bands": ["open", "invested"] }
+  ]
+}

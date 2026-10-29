@@ -1,0 +1,29 @@
+{
+  "mind_version": 1,
+  "_comment": "The mind model (D-173): mental values on their own object, off the stat bars. Core values are x<->y axes (0 = negative pole, 100 = positive pole, 50 = even); baselines are clamped ranges set by archetypes, not fixed. `defaultTarget` is the influence cap the drift pulls toward (D-175). Values drift; they are never recomputed whole unless forced.",
+  "values": [
+    { "id": "optimism", "label": "Optimism", "kind": "core", "axis": ["pessimism", "optimism"], "baseline": 50, "defaultTarget": 50, "source": "archetype" },
+    { "id": "outgoing", "label": "Outgoingness", "kind": "core", "axis": ["introverted", "outgoing"], "baseline": 50, "defaultTarget": 50, "source": "archetype" },
+    { "id": "trusting", "label": "Trust", "kind": "core", "axis": ["skeptical", "trusting"], "baseline": 50, "defaultTarget": 50, "source": "archetype" },
+    { "id": "honest", "label": "Honesty", "kind": "core", "axis": ["sneaky", "honest"], "baseline": 50, "defaultTarget": 50, "source": "archetype" },
+    { "id": "clean", "label": "Cleanliness", "kind": "core", "axis": ["messy", "clean"], "baseline": 50, "defaultTarget": 50, "source": "archetype" },
+    { "id": "calm", "label": "Calmness", "kind": "core", "axis": ["emotional", "calm"], "baseline": 50, "defaultTarget": 50, "source": "archetype" },
+    { "id": "organised", "label": "Orderliness", "kind": "core", "axis": ["haphazard", "organised"], "baseline": 50, "defaultTarget": 50, "source": "archetype" },
+    { "id": "dominant", "label": "Dominance", "kind": "core", "axis": ["submissive", "dominant"], "baseline": 50, "defaultTarget": 50, "source": "archetype" },
+    { "id": "confident", "label": "Confidence", "kind": "secondary", "baseline": 50, "defaultTarget": 60, "source": "state, events" },
+    { "id": "libidinous", "label": "Libido", "kind": "secondary", "baseline": 50, "defaultTarget": 60, "source": "arousal history, genome" },
+    { "id": "nervous", "label": "Nervousness", "kind": "secondary", "baseline": 40, "defaultTarget": 40, "source": "stress-proneness; lower = more susceptible" },
+    { "id": "composed", "label": "Composure", "kind": "secondary", "baseline": 50, "defaultTarget": 55, "source": "coping, archetype baseline" },
+    { "id": "aggressive", "label": "Aggression", "kind": "secondary", "baseline": 40, "defaultTarget": 55, "source": "predator genome, late progression" },
+    { "id": "curious", "label": "Curiosity", "kind": "secondary", "baseline": 55, "defaultTarget": 60, "source": "novelty" }
+  ],
+  "inputs": [
+    { "id": "input.genome_mentality", "kind": "target", "owner": "genomes.json" },
+    { "id": "input.reaction_opinion", "kind": "rate", "owner": "preferences" },
+    { "id": "input.self_perception", "kind": "resistance", "owner": "identity" },
+    { "id": "input.emotions", "kind": "rate", "owner": "mood" },
+    { "id": "input.mastery", "kind": "agency", "owner": "abilities" },
+    { "id": "input.awareness", "kind": "rate", "owner": "perception" },
+    { "id": "input.sexuality", "kind": "target", "owner": "sexuality" }
+  ]
+}

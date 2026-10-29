@@ -1,0 +1,82 @@
+{
+  "stances_version": 1,
+  "stances": [
+    {
+      "id": "stance.yield",
+      "label": "Easy",
+      "stance_axis": "yield",
+      "diff_mod": -10,
+      "frustration_per_rep": 0,
+      "mastery_mult": 0.5,
+      "composure_delta": 1,
+      "composure_gate": 0,
+      "desc": "Gentle reps. Slow progress, no strain."
+    },
+    {
+      "id": "stance.soften",
+      "label": "Steady",
+      "stance_axis": "soften",
+      "diff_mod": 0,
+      "frustration_per_rep": 1,
+      "mastery_mult": 0.8,
+      "composure_delta": 0,
+      "composure_gate": 0,
+      "desc": "A comfortable working pace."
+    },
+    {
+      "id": "stance.push",
+      "label": "Push",
+      "stance_axis": "push",
+      "diff_mod": 8,
+      "frustration_per_rep": 3,
+      "mastery_mult": 1.2,
+      "composure_delta": 0,
+      "composure_gate": 30,
+      "desc": "Stretch her. Needs Composure 30 to ask."
+    },
+    {
+      "id": "stance.break",
+      "label": "Hard",
+      "stance_axis": "break",
+      "diff_mod": 16,
+      "frustration_per_rep": 4,
+      "mastery_mult": 1.6,
+      "composure_delta": -1,
+      "composure_gate": 50,
+      "desc": "Drive her past comfort. Needs Composure 50."
+    },
+    {
+      "id": "stance.drill",
+      "label": "Drill",
+      "stance_axis": "soften",
+      "diff_mod": 4,
+      "frustration_per_rep": 1,
+      "mastery_mult": 1,
+      "composure_delta": 0,
+      "composure_gate": 0,
+      "desc": "Repeat the same motion until it is clean."
+    },
+    {
+      "id": "stance.play",
+      "label": "Playful",
+      "stance_axis": "yield",
+      "diff_mod": -4,
+      "frustration_per_rep": 0,
+      "mastery_mult": 0.7,
+      "composure_delta": 1,
+      "composure_gate": 20,
+      "desc": "Make it a game. Builds Resonance."
+    },
+    {
+      "id": "stance.sexual",
+      "label": "Sexual",
+      "stance_axis": "soften",
+      "diff_mod": 2,
+      "frustration_per_rep": 1,
+      "mastery_mult": 1,
+      "composure_delta": 0,
+      "composure_gate": 0,
+      "desc": "Learn to ride the urges instead of fighting them. Trains Sexual Control."
+    }
+  ]
+}

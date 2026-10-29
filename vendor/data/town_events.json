@@ -1,0 +1,61 @@
+{
+  "town_events_version": 1,
+  "_comment": "Town events (M16b, A47). Scheduled/emergent scenes that exist independently of the transformation. An event pulls listed households toward a place, runs for some blocks, then resolves — even if the subject is absent. `bond` deltas apply between attendees by relationship type (default catches the rest).",
+  "events": [
+    {
+      "id": "evt.barbecue",
+      "label": "a neighbour's barbecue",
+      "where": ["loc.park"],
+      "window": ["afternoon"],
+      "chance": 0.25,
+      "duration_blocks": 2,
+      "draws": ["hh.next_door", "hh.subject"],
+      "bond": { "default": 2, "friend": 3, "neighbour": 2, "colleague": 1 },
+      "lines": [
+        "{here} end up at the barbecue, smoke and small talk drifting across the park",
+        "the barbecue draws {here} together over the grille"
+      ]
+    },
+    {
+      "id": "evt.fair",
+      "label": "the season fair",
+      "where": ["loc.street"],
+      "window": ["midday", "afternoon"],
+      "chance": 0.2,
+      "weekly": true,
+      "duration_blocks": 3,
+      "bond": { "default": 2, "friend": 3, "family": 3 },
+      "lines": [
+        "{here} wander the season fair together, shirtsleeves and string lights",
+        "the fair sets up along the street and {here} drift through it"
+      ]
+    },
+    {
+      "id": "evt.powercut",
+      "label": "a power cut",
+      "where": ["loc.her_home"],
+      "window": ["evening"],
+      "chance": 0.15,
+      "duration_blocks": 2,
+      "draws": ["hh.subject", "hh.next_door", "hh.shared"],
+      "bond": { "default": 1, "family": 2, "partner": 3, "friend": 2, "neighbour": 1 },
+      "lines": [
+        "the lights die across the block; {here} share candles and lowered voices",
+        "a power cut strands {here} at home in the dark, finding things to say"
+      ]
+    },
+    {
+      "id": "evt.cafe_meet",
+      "label": "an impromptu cafe meet",
+      "where": ["loc.cafe"],
+      "window": ["morning", "midday"],
+      "chance": 0.2,
+      "duration_blocks": 1,
+      "bond": { "default": 2, "friend": 3, "colleague": 2 },
+      "lines": [
+        "{here} end up sharing a table at the cafe by accident",
+        "a queue at the cafe leaves {here} waiting and talking together"
+      ]
+    }
+  ]
+}

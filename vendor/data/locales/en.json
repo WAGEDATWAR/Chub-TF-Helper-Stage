@@ -1,0 +1,22 @@
+{
+  "locale": "en",
+  "display_name": "English",
+  "strings": {
+    "ui.new_game": "New Game",
+    "ui.continue": "Continue",
+    "ui.load": "Load",
+    "ui.settings": "Settings",
+    "ui.quit": "Quit",
+    "ui.hub": "The Lab",
+    "ui.subject": "Subject",
+    "ui.journal": "Lab Journal",
+    "ui.day": "Day",
+    "ui.slots": "Slots",
+    "ui.energy": "Energy",
+    "ui.hunger": "Hunger",
+    "ui.health": "Health",
+    "ui.save": "Save",
+    "ui.observe": "Observe",
+    "ui.mirror": "Mirror"
+  }
+}

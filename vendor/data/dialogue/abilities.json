@@ -1,0 +1,26 @@
+{
+  "dialogue_version": 1,
+  "keys": [
+    { "key": "ability.granted", "speaker": "subject", "intent": "a new ability is granted",
+      "variants": [
+        { "axes": { "drive_band": "ravenous" }, "lines": ["\"Oh. Oh, I can feel that. What else can I do?\""] },
+        { "axes": { "drive_band": "sated" }, "lines": ["\"That's... strange. Not bad. Strange.\""] },
+        { "lines": ["She flexes the new thing, testing it."] }
+      ] },
+    { "key": "ability.mastery.up", "speaker": "subject", "intent": "an ability mastery tier rises",
+      "variants": [
+        { "axes": { "transform_state": "light_hybrid" }, "lines": ["\"It does what I tell it now. Mostly.\""] },
+        { "lines": ["She uses it without thinking, and notices she did."] }
+      ] },
+    { "key": "ability.fault", "speaker": "subject", "intent": "an ability fault fires",
+      "variants": [
+        { "axes": { "arousal": "high" }, "lines": ["They snap out before she can stop them."] },
+        { "lines": ["Something misfires, and she flinches."] }
+      ] },
+    { "key": "ability.instinct", "speaker": "subject", "intent": "an instinct ability force-activates above exposure 75",
+      "variants": [
+        { "axes": { "transform_state": "near_animal" }, "lines": ["It triggers on its own. There's no asking it not to."] },
+        { "lines": ["The instinct takes the wheel for a moment."] }
+      ] }
+  ]
+}

@@ -1,0 +1,370 @@
+{
+  "prose_version": 1,
+  "_comment": "Composer V2 prose pools (D-218). Keys are paragraph kinds; variants are selected by the same axes as dialogue, with a seeded shuffle and a per-key memory ring so similar moments read differently. Every key has a large zero-axis floor. Lines may carry {tokens} interpolated from live state.",
+  "keys": [
+    {
+      "key": "prose.day",
+      "variants": [
+        {
+          "axes": {
+            "mood_valence": "down"
+          },
+          "lines": [
+            "A long day, {state}; {changes} moved against her.",
+            "Day {day}: {state}, and {changes} changed while she braced."
+          ]
+        },
+        {
+          "axes": {
+            "mood_valence": "up"
+          },
+          "lines": [
+            "A light day, {state}; {changes} changed and she did not mind.",
+            "Day {day}: {state}, {changes} along, and she leaned in."
+          ]
+        },
+        {
+          "lines": [
+            "Day {day}: {changes} changed. {state}.",
+            "{changes} moved on day {day}. {state}, and the hours went on.",
+            "Day {day} — {state}, with {changes} changing.",
+            "A day of {changes}; {state}.",
+            "Day {day}. {changes} shifted; {state}."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "prose.status",
+      "variants": [
+        {
+          "axes": {
+            "perceived": "noticed"
+          },
+          "lines": [
+            "{where} — {state}, {exposure}% along, and she feels every degree of it.",
+            "{where}. {state}. Her body reads {exposure}% changed and she knows it.",
+            "{where}; {exposure}% changed, {state}, and nothing about it is abstract to her."
+          ]
+        },
+        {
+          "axes": {
+            "awareness_tier": "blind"
+          },
+          "lines": [
+            "{where} — {state}, {exposure}%. Something is different; she could not say what.",
+            "{where}, {exposure}% changed. {state}, and none of it named yet.",
+            "{where}. {exposure}% along and no word for it. {state}.",
+            "{where}, {state}. {exposure}% changed and only the body knows why."
+          ]
+        },
+        {
+          "axes": {
+            "mood_valence": "down"
+          },
+          "lines": [
+            "{where}, {state}. {exposure}% and heavy with it.",
+            "{where} — {exposure}% along, {state}, and it sits on her.",
+            "{where}. {state}. It is {exposure}% and climbing, and she feels the weight.",
+            "{where}. {state}, {exposure}%, and the day feels borrowed.",
+            "{where} — {state} and {exposure}% changed, against the grain of her."
+          ]
+        },
+        {
+          "axes": {
+            "mood_valence": "up"
+          },
+          "lines": [
+            "{where} — {state}, {exposure}%. Light, and leaning in.",
+            "{where}, {exposure}% changed, {state}, and almost glad.",
+            "{where}. {exposure}% along and buoyant. {state}.",
+            "{where}, {state}, {exposure}% — and a lightness she did not ask for.",
+            "{where}. {exposure}% along, {state}, and it is not unwelcome."
+          ]
+        },
+        {
+          "axes": {
+            "pain": "high"
+          },
+          "lines": [
+            "{where} — {state}, {exposure}%. It hurts where it is working.",
+            "{where}, {state}; {exposure}% and aching, and she does not stop."
+          ]
+        },
+        {
+          "lines": [
+            "{where} — {state}, exposure {exposure}%.",
+            "{where}. {state}, {exposure}% along.",
+            "{where}, {exposure}% changed; {state}.",
+            "{where} — {exposure}% and {state}, the room going on around her.",
+            "{where}. {exposure}% along. {state}, and the hours keep their shape.",
+            "{where}; {state}, {exposure}% changed, the day neither kind nor cruel."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "prose.action",
+      "variants": [
+        {
+          "axes": {
+            "arousal": "high"
+          },
+          "lines": [
+            "She is {mood}, flushed and restless; {doing}.",
+            "Warm through, {mood}, she {doing}.",
+            "She is {mood}; her skin runs warm and {doing}.",
+            "There is heat under the calm — {mood} — as {doing}.",
+            "{mood} and running warm, she {doing}.",
+            "A low heat under it all — {mood} — and {doing}."
+          ]
+        },
+        {
+          "axes": {
+            "arousal": "low"
+          },
+          "lines": [
+            "She is {mood}, collected; {doing}.",
+            "Cool and {mood}, she {doing}.",
+            "She is {mood}; {doing}, unhurried.",
+            "{mood} and even, she {doing}, giving the change no more than it asks.",
+            "{mood} and cool, she {doing}.",
+            "Even-keeled and {mood}, {doing}."
+          ]
+        },
+        {
+          "axes": {
+            "composure_band": "rattled"
+          },
+          "lines": [
+            "She is {mood} and unsteady; {doing}.",
+            "Her hands are restless — {mood} — as {doing}.",
+            "{mood}, frayed at the edges, she {doing}."
+          ]
+        },
+        {
+          "axes": {
+            "nervous_band": "fraught"
+          },
+          "lines": [
+            "Nervous and {mood}, she {doing}.",
+            "She is {mood}, wound tight, and {doing}."
+          ]
+        },
+        {
+          "axes": {
+            "confidence_band": "high"
+          },
+          "lines": [
+            "Steady and {mood}, she {doing}.",
+            "She is {mood}, sure of the floor under her, and {doing}."
+          ]
+        },
+        {
+          "lines": [
+            "She is {mood}; {doing}.",
+            "{mood}, she {doing}.",
+            "She is {mood}, and {doing}.",
+            "{doing}, {mood}, letting the moment be what it is.",
+            "She is {mood} today; {doing}.",
+            "{doing}; {mood}, and keeping her own counsel."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "prose.summary.change",
+      "variants": [
+        {
+          "axes": {
+            "pain": "high"
+          },
+          "lines": [
+            "The change: {changes} — and it hurts the way real change does.",
+            "What shifted: {changes}. Her body is not quiet about it.",
+            "{changes}. She feels the shape of it move, and it is not gentle."
+          ]
+        },
+        {
+          "axes": {
+            "arousal": "high"
+          },
+          "lines": [
+            "The change, warm through her: {changes}.",
+            "What moved: {changes}, and it leaves her flushed.",
+            "{changes} — and it wakes something low and warm."
+          ]
+        },
+        {
+          "axes": {
+            "mood_valence": "down"
+          },
+          "lines": [
+            "What changed, against her grain: {changes}.",
+            "{changes}. Another part of the old her gone quiet."
+          ]
+        },
+        {
+          "lines": [
+            "The change: {changes}.",
+            "What shifted: {changes}.",
+            "{changes} — the body keeps its own ledger.",
+            "It moved: {changes}.",
+            "She is not the same in one more way: {changes}.",
+            "{changes}. Small on its own; not small together."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "prose.training",
+      "variants": [
+        {
+          "axes": {
+            "frustration_band": "breaking"
+          },
+          "lines": [
+            "She grinds through {skill} ({kind}); it does not come easy, but she does not stop.",
+            "{skill} again — hard, frustrating, hers a little more by the end.",
+            "She works {skill} ({kind}) past the point of comfort, and holds."
+          ]
+        },
+        {
+          "axes": {
+            "confidence_band": "high"
+          },
+          "lines": [
+            "She practices {skill} ({kind}) with a steady hand; it is starting to answer her.",
+            "{skill} comes more cleanly now — a skill she is making hers.",
+            "She runs {skill} ({kind}) and it obeys, mostly, to {mastery}%."
+          ]
+        },
+        {
+          "lines": [
+            "She practices {skill} ({kind}), slow and even, to {mastery}%.",
+            "A session of {skill} ({kind}); forward, if uneven.",
+            "She works at {skill} ({kind}) until it begins to hold.",
+            "Time given to {skill} ({kind}); {mastery}% and no shortcuts.",
+            "{skill} ({kind}) again — patient, deliberate, to {mastery}%.",
+            "She drills {skill} ({kind}); it is hers by inches."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "prose.sex",
+      "variants": [
+        {
+          "axes": {
+            "libido_band": "burning"
+          },
+          "lines": [
+            "She takes herself in hand — {act}, {climax} — and it is a relief she needed.",
+            "{act}, unhurried and urgent at once; after, the edge eases but does not leave.",
+            "Need wins: {act}, {climax}, and still she wants."
+          ]
+        },
+        {
+          "axes": {
+            "mood_valence": "down"
+          },
+          "lines": [
+            "She sees to herself — {act}, {climax} — quiet and a little reluctant.",
+            "{act}, {climax}: a need answered, not celebrated."
+          ]
+        },
+        {
+          "axes": {
+            "mood_valence": "up"
+          },
+          "lines": [
+            "She takes her pleasure — {act}, {climax} — and enjoys the taking.",
+            "{act}, {climax}, unhurried; she is glad of her own body."
+          ]
+        },
+        {
+          "lines": [
+            "She takes herself in hand — {act}, {climax}.",
+            "{act}, {climax}; it takes the edge off, for now.",
+            "A private moment: {act}, {climax}.",
+            "{act}, {climax}, in the quiet she made for it.",
+            "Alone a while, she {act}, {climax}.",
+            "{act} — {climax} — and the day resumes."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "prose.scene.changed",
+      "variants": [
+        {
+          "axes": {
+            "mood_valence": "down"
+          },
+          "lines": [
+            "She notices the change in herself and does not like the angle of it.",
+            "It is happening, and she keeps catching it sideways."
+          ]
+        },
+        {
+          "axes": {
+            "awareness_tier": "lucid"
+          },
+          "lines": [
+            "She clocks the change coolly, names it, and moves on.",
+            "She feels it settle and files it, clear-eyed."
+          ]
+        },
+        {
+          "lines": [
+            "She registers the change and keeps going.",
+            "It lands on her, another step along.",
+            "Another part of her answers to the change."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "prose.awakening",
+      "variants": [
+        {
+          "axes": {
+            "awareness_tier": "lucid"
+          },
+          "lines": [
+            "Something in her turns toward the change and holds: {reaction} is not a stranger any more.",
+            "It clicks quietly — {reaction} ({kind}) — and she lets it."
+          ]
+        },
+        {
+          "lines": [
+            "Something about {reaction} catches in her, and warms.",
+            "A liking she did not plan for takes root: {reaction} ({kind}).",
+            "The change meets something in her that says yes."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "prose.trauma",
+      "variants": [
+        {
+          "axes": {
+            "nervous_band": "fraught"
+          },
+          "lines": [
+            "It stings: {reaction} ({kind}) is too much, and she flinches from it.",
+            "Something in her digs in against {reaction} — a small, stubborn no."
+          ]
+        },
+        {
+          "lines": [
+            "The change lands wrong: {reaction} ({kind}), and it sticks as unease.",
+            "She does not take to {reaction}; it grates, {kind}.",
+            "Aversion settles over {reaction} like a pulled face."
+          ]
+        }
+      ]
+    }
+  ]
+}

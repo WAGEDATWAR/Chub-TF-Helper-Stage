@@ -1,0 +1,22 @@
+{
+  "dialogue_version": 1,
+  "keys": [
+    { "key": "study.read", "speaker": "player", "intent": "the player reads research",
+      "variants": [
+        { "lines": ["The literature is worked through, one dense page at a time."] }
+      ] },
+    { "key": "study.insight", "speaker": "player", "intent": "the player gains an insight",
+      "variants": [
+        { "axes": { "drive_band": "eager" }, "lines": ["A connection snaps into place, and is written down before it fades."] },
+        { "lines": ["Something clicks. It gets underlined twice."] }
+      ] },
+    { "key": "study.blank", "speaker": "player", "intent": "the reading yields nothing useful",
+      "variants": [
+        { "lines": ["Nothing new today. The book closes."] }
+      ] },
+    { "key": "study.ability", "speaker": "player", "intent": "the player unlocks knowledge of an ability",
+      "variants": [
+        { "lines": ["The retractable claws finally make sense."] }
+      ] }
+  ]
+}

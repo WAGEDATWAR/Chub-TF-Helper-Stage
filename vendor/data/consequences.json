@@ -1,0 +1,39 @@
+{
+  "consequences_version": 1,
+  "_comment": "Second-order consequences (M16b, S11). A durable world change caused by the transformation: a job on the line, a bond strained past a line, a friendship formed. `when` is `missed` (subject's missed-obligation count >= threshold), `bond_low`, or `bond_high`. Each fires at most once.",
+  "rules": [
+    {
+      "id": "con.job_wobbles",
+      "when": "missed",
+      "threshold": 2,
+      "note": "two missed shifts: her manager quietly starts covering for her"
+    },
+    {
+      "id": "con.job_lost",
+      "when": "missed",
+      "threshold": 4,
+      "note": "she is taken off the rota — the office job, for now, is gone"
+    },
+    {
+      "id": "con.neighbour_sours",
+      "when": "bond_low",
+      "threshold": 30,
+      "relation": "neighbour",
+      "note": "the neighbour next door stops waving"
+    },
+    {
+      "id": "con.friend_steady",
+      "when": "bond_low",
+      "threshold": 55,
+      "relation": "friend",
+      "note": "her friend is still here, but careful with her now"
+    },
+    {
+      "id": "con.coworker_cools",
+      "when": "bond_low",
+      "threshold": 35,
+      "relation": "colleague",
+      "note": "a colleague keeps the conversation to work"
+    }
+  ]
+}

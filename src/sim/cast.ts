@@ -1,0 +1,204 @@
+/**
+ * The Cast (H1): up to MAX_CAST tracked characters sharing one world clock. Each
+ * character is its own `Subject`+`Session` (the parent's subject model is
+ * single-instance, so a cast is N of them), but all advance together and a
+ * character that joins later is caught up to the world tick — so every clock
+ * reads the same time and "simultaneous" is real.
+ *
+ * The cast owns no rendering; `frames()` returns per-character reads and the pane
+ * renders them.
+ */
+import { startSubject, bestow, buildComposer, saveSim, DEFAULT_DOSE, type Sim } from "./subject";
+import { runDailyMind } from "./mind";
+import type { Registries } from "./registries";
+import { TimeEngine } from "@core/time_engine";
+import { loadSession } from "@core/savegame";
+
+export const MAX_CAST = 6;
+
+export interface TrackedCharacter {
+  id: string;
+  name: string;
+  baseGender: string;
+  sim: Sim;
+}
+
+export interface CastFrame {
+  id: string;
+  name: string;
+  genome: string | null;
+  exposure: number;
+  band: string;
+  statusLine: string;
+  describe: string;
+  day: number;
+  /** Changing part labels, most-progressed first (a compact read). */
+  changing: string[];
+  /** H10: awareness 0..100 toward realizing the change. */
+  awareness: number;
+  /** H10: true once the character has realized what is happening to them. */
+  realized: boolean;
+}
+
+const STATUS: Record<string, string> = {
+  "band.baseline": "unchanged",
+  "band.cosmetic": "a first shimmer of change",
+  "band.light_hybrid": "visibly between",
+  "band.heavy_hybrid": "more animal than not",
+  "band.near_animal": "nearly beast",
+  "band.feral_lock": "consumed",
+};
+
+function hashString(s: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+  return h >>> 0;
+}
+
+export class Cast {
+  private readonly regs: Registries;
+  private readonly baseSeed: number;
+  private readonly composer: ReturnType<typeof buildComposer>;
+  private readonly chars = new Map<string, TrackedCharacter>();
+  /** The shared world tick every character's clock is kept at. */
+  worldTick = 0;
+
+  constructor(regs: Registries, data: Record<string, unknown>, seed: number) {
+    this.regs = regs;
+    this.baseSeed = seed;
+    this.composer = buildComposer(regs, data);
+  }
+
+  get size(): number {
+    return this.chars.size;
+  }
+
+  get full(): boolean {
+    return this.chars.size >= MAX_CAST;
+  }
+
+  list(): TrackedCharacter[] {
+    return [...this.chars.values()];
+  }
+
+  /** id + sim pairs, for engines (coupling, triggers) that step every character. */
+  entries(): Array<{ id: string; sim: Sim }> {
+    return [...this.chars.values()].map((c) => ({ id: c.id, sim: c.sim }));
+  }
+
+  get(id: string): TrackedCharacter | null {
+    return this.chars.get(id) ?? null;
+  }
+
+  /** Track a new character, caught up to the current world tick. Returns null if full. */
+  add(id: string, name: string, baseGender = "female"): TrackedCharacter | null {
+    if (this.chars.has(id) || this.full) return null;
+    const seed = (this.baseSeed ^ hashString(id)) >>> 0;
+    const sim = startSubject({ name, seed, baseGender, regs: this.regs });
+    const char: TrackedCharacter = { id, name, baseGender, sim };
+    this.chars.set(id, char);
+    if (this.worldTick > 0) sim.engine.advance(this.worldTick);
+    return char;
+  }
+
+  /** Restore a character from a save string at the current world tick. */
+  attach(id: string, name: string, save: string, baseGender = "female"): TrackedCharacter | null {
+    if (this.chars.has(id) || this.full) return null;
+    const char = this.add(id, name, baseGender);
+    if (!char) return null;
+    char.sim = restoreSim(save, this.regs) ?? char.sim;
+    // the restored clock is authoritative; adopt its tick as the world tick floor
+    if (char.sim.session.clock.tick > this.worldTick) this.worldTick = char.sim.session.clock.tick;
+    return char;
+  }
+
+  remove(id: string): boolean {
+    return this.chars.delete(id);
+  }
+
+  /** Rename a tracked character (their card name may be revealed later). */
+  rename(id: string, name: string): void {
+    const char = this.chars.get(id);
+    if (char) { char.name = name; char.sim.subject.displayName = name; }
+  }
+
+  /** Apply a genome to a tracked character (forced/narrative trigger). */
+  bind(id: string, genomeId: string, dose = DEFAULT_DOSE): boolean {
+    const char = this.chars.get(id);
+    if (!char || !this.regs.genomes.get(genomeId)) return false;
+    bestow(char.sim, genomeId, dose);
+    return true;
+  }
+
+  /** Advance the whole cast by `ticks`, keeping every clock in lockstep. */
+  advance(ticks: number): void {
+    if (ticks <= 0) return;
+    for (const char of this.chars.values()) {
+      const before = char.sim.session.clock.day;
+      char.sim.engine.advance(ticks);
+      const after = char.sim.session.clock.day;
+      // one identity step per day crossed, so realization/awareness progress
+      for (let d = before; d < after; d++) runDailyMind(char.sim);
+    }
+    this.worldTick += ticks;
+  }
+
+  /** Per-character reads, in insertion order. */
+  frames(): CastFrame[] {
+    const out: CastFrame[] = [];
+    for (const char of this.chars.values()) {
+      const s = char.sim.subject;
+      const band = s.derived.band ?? "band.baseline";
+      const changing = s.body
+        .allInstances()
+        .flatMap((i) => i.attributes.filter((a) => a.progress > 0).map((a) => ({ slot: i.slot, id: a.id, p: a.progress })))
+        .sort((a, b) => b.p - a.p)
+        .slice(0, 6)
+        .map((a) => `${a.slot}: ${humanize(a.id)}`);
+      out.push({
+        id: char.id,
+        name: char.name,
+        genome: s.genomes[s.genomes.length - 1] ?? null,
+        exposure: Math.round(s.derived.exposure ?? 0),
+        band,
+        statusLine: STATUS[band] ?? "changing",
+        describe: this.composer.describeBody(s as never),
+        day: char.sim.session.clock.day,
+        changing,
+        awareness: Math.round(s.mind?.awareness ?? 0),
+        realized: s.mind?.realized ?? false,
+      });
+    }
+    return out;
+  }
+
+  /** Serialize every character to a checksummed save, keyed by id. */
+  saveAll(): Record<string, string> {
+    const out: Record<string, string> = {};
+    for (const [id, char] of this.chars) out[id] = saveSim(char.sim);
+    return out;
+  }
+}
+
+function humanize(id: string): string {
+  return id.replace(/^(attr|part|genome|react)\./, "").replace(/_/g, " ").trim();
+}
+
+/** Restore a sim from a save string (separate from game.ts to avoid a cycle). */
+function restoreSim(save: string, regs: Registries): Sim | null {
+  try {
+    const loaded = loadSession(save, {
+      skeleton: regs.skeleton,
+      library: regs.library,
+      genomes: regs.genomes,
+      bands: regs.exposureBands,
+      attributes: regs.attributes,
+      events: regs.events,
+    });
+    return { subject: loaded.session.subject, session: loaded.session, engine: new TimeEngine(loaded.session), regs };
+  } catch {
+    return null;
+  }
+}
+
+export { STATUS as CAST_STATUS };

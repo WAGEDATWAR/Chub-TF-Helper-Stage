@@ -1,0 +1,16 @@
+{
+  "dispositions_version": 1,
+  "_comment": "Personality seeds bias which reactions a person can awaken toward (blueprint §22.4). `weights` maps a candidate reaction id to its relative likelihood; `precision` biases how strongly the person leans (higher = more likely to awaken toward their disposition, lower = more open to surprise). `attraction`/`aversion` bias the sign of an awakening.",
+  "polarity": {
+    "attraction": ["curious", "bold", "devoted", "eager"],
+    "aversion": ["wary", "stoic", "private"]
+  },
+  "personalities": {
+    "curious": { "weights": { "react.canid": 3, "react.reptile": 2, "react.tail": 2, "react.feline": 2 }, "precision": 0.15 },
+    "bold": { "weights": { "react.multi_limb": 2, "react.large_size": 2, "react.canid": 2 }, "precision": 0.1 },
+    "wary": { "weights": { "react.avian_wings": 3, "react.insect_chitin": 2, "react.legless": 2 }, "precision": 0.25 },
+    "devoted": { "weights": { "react.watched": 3, "react.tail": 2, "react.canid": 2 }, "precision": 0.15 },
+    "stoic": { "weights": { "react.large_size": 2, "react.multi_limb": 2 }, "precision": 0.2 }
+  },
+  "default": { "weights": { "react.tail": 1, "react.canid": 1, "react.feline": 1, "react.avian_wings": 1 }, "precision": 0.2 }
+}

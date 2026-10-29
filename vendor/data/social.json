@@ -1,0 +1,165 @@
+{
+  "social_version": 1,
+  "_comment": "Social reactions (M16b, A45; P2/Q5). How the town reacts to a *visible* change. `when_tags` match subject part/attr tags; `valence` sign pulls the bond; `familiarity_key` is what a familiarity taper wears off (A23). A strong bond notices more and a household reacts first. All data.",
+  "reactions": [
+    {
+      "id": "soc.tail",
+      "label": "the tail",
+      "when_tags": ["tail_tag"],
+      "valence": "curious",
+      "familiarity_key": "family.tail",
+      "bond": 2,
+      "lines": [
+        "{observer} clocks the tail and cannot stop glancing at it",
+        "{observer} asks whether {subject} can actually move it",
+        "{observer} reaches out to touch {subject}'s tail, then thinks better of it"
+      ]
+    },
+    {
+      "id": "soc.ears",
+      "label": "the ears",
+      "when_tags": ["ears_tag"],
+      "valence": "curious",
+      "familiarity_key": "family.ears",
+      "bond": 2,
+      "lines": [
+        "{observer} keeps staring at {subject}'s ears like they might twitch",
+        "\"those are new,\" {observer} says, meaning the ears"
+      ]
+    },
+    {
+      "id": "soc.coat",
+      "label": "the coat",
+      "when_tags": ["fur_tag"],
+      "valence": "warm",
+      "familiarity_key": "family.coat",
+      "bond": 3,
+      "lines": [
+        "{observer} says the fur suits {subject} and means it",
+        "{observer} reaches for {subject}'s sleeve and finds fur",
+        "{observer} wonders aloud if {subject} sheds"
+      ]
+    },
+    {
+      "id": "soc.fangs",
+      "label": "the teeth",
+      "when_tags": ["fangs_tag"],
+      "valence": "curious",
+      "familiarity_key": "family.fangs",
+      "bond": 1,
+      "lines": [
+        "{observer} watches {subject} smile and does a double take at the teeth",
+        "\"say that again?\" {observer} asks, of the fangs"
+      ]
+    },
+    {
+      "id": "soc.paws",
+      "label": "the hands",
+      "when_tags": ["pads_tag"],
+      "valence": "curious",
+      "familiarity_key": "family.hands",
+      "bond": 1,
+      "lines": [
+        "{observer} notices {subject} fumble a cup and hides a wince",
+        "{observer} asks how {subject} types, now"
+      ]
+    },
+    {
+      "id": "soc.claws",
+      "label": "the claws",
+      "when_tags": ["claws_tag"],
+      "valence": "curious",
+      "familiarity_key": "family.claws",
+      "bond": 0,
+      "lines": [
+        "{observer} watches {subject} grip something and rethinks the handshake",
+        "{observer} asks, lightly, whether {subject} scratches"
+      ]
+    },
+    {
+      "id": "soc.wings",
+      "label": "the wings",
+      "when_tags": ["wings_tag"],
+      "valence": "warm",
+      "familiarity_key": "family.wings",
+      "bond": 3,
+      "lines": [
+        "{observer} stands back to take in {subject}'s wings",
+        "{observer} asks whether it hurts to fold them"
+      ]
+    },
+    {
+      "id": "soc.horns",
+      "label": "the horns",
+      "when_tags": ["horns_tag"],
+      "valence": "curious",
+      "familiarity_key": "family.horns",
+      "bond": 1,
+      "lines": [
+        "{observer} eyes {subject}'s horns and keeps a respectful distance",
+        "{observer} asks if they get in the way of hats"
+      ]
+    },
+    {
+      "id": "soc.scales",
+      "label": "the scales",
+      "when_tags": ["scale_tag"],
+      "valence": "cold",
+      "familiarity_key": "family.scales",
+      "bond": -2,
+      "lines": [
+        "{observer} says {subject} feels different to stand beside, now",
+        "{observer} admits the scales take some getting used to"
+      ]
+    },
+    {
+      "id": "soc.chitin",
+      "label": "the chitin",
+      "when_tags": ["insect_tag"],
+      "valence": "cold",
+      "familiarity_key": "family.chitin",
+      "bond": -3,
+      "lines": [
+        "{observer} recoils, then leans back in, about {subject}'s shell",
+        "\"that's a lot of legs,\" {observer} says, evenly"
+      ]
+    },
+    {
+      "id": "soc.feathers",
+      "label": "the feathers",
+      "when_tags": ["feather_tag"],
+      "valence": "warm",
+      "familiarity_key": "family.feathers",
+      "bond": 2,
+      "lines": [
+        "{observer} reaches out to {subject}'s feathers and asks if they are soft",
+        "{observer} keeps looking at {subject} like a bird that landed indoors"
+      ]
+    },
+    {
+      "id": "soc.size",
+      "label": "the new size",
+      "when_tags": ["size_tag"],
+      "valence": "curious",
+      "familiarity_key": "family.size",
+      "bond": 1,
+      "household_extra": true,
+      "lines": [
+        "{observer} looks at {subject}, recalculating",
+        "{observer} jokes that {subject} changed overnight"
+      ]
+    },
+    {
+      "id": "soc.gait",
+      "label": "the new gait",
+      "when_tags": ["gait_tag"],
+      "valence": "curious",
+      "familiarity_key": "family.gait",
+      "bond": 0,
+      "lines": [
+        "{observer} watches {subject} walk and clocks the strange new rhythm",
+        "{observer} asks if {subject}'s legs are alright, in that tone"
+      ]
+    }
+  ]
+}

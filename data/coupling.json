@@ -1,0 +1,60 @@
+{
+  "coupling_version": 1,
+  "_comment": "Fantasy coupling (H3). A werewolf is NOT moon-only: the moon draws the change near, but a hormone cycle and heightened emotion (fear, rage, desire) can also force it — and the player picks which levers are live via `playstyle`. `pressure` sources sum to 0..1; a shift fires past `shift_at`, a reversion below `revert_below`. Vampires get a night/sun ambient instead.",
+  "profiles": [
+    {
+      "id": "coupling.werewolf",
+      "genome": "genome.werewolf",
+      "kind": "lycan",
+      "_comment": "The draw is a partial shift (fur, nails, senses) that rises with the moon; the full shift is a temporary form. Emotion/hormone can force either.",
+      "draw": {
+        "dose_at_draw": 0.6,
+        "dose_at_shift": 3.0,
+        "pre_cues": ["hairier", "sharper nails and claws", "keener senses", "restless, quick to startle"]
+      },
+      "sources": {
+        "moon": { "weight": 1.0, "from": "lunar", "curve": "intensity" },
+        "emotion": { "weight": 0.9, "from": "mood", "emotions": ["fear", "anger", "desire", "surprise"], "threshold": 55 },
+        "hormonal": { "weight": 0.5, "from": "cycle", "cycle_days": 26, "arousal_floor": 40 }
+      },
+      "shift_at": 0.62,
+      "revert_below": 0.22,
+      "shift_ticks": 10,
+      "playstyles": {
+        "full": { "sources": ["moon", "emotion", "hormonal"], "note": "the moon draws it, but fear, rage and the body's own cycle can force it — the intended default" },
+        "classic": { "sources": ["moon"], "note": "full moon only; the traditional curse" },
+        "emotional": { "sources": ["moon", "emotion"], "note": "the moon plus strong feeling — stress, terror, fury" },
+        "hormonal": { "sources": ["moon", "hormonal"], "note": "the moon plus her own cycle" },
+        "voluntary": { "sources": ["moon", "emotion"], "voluntary": true, "note": "as emotional, and — once she has realized the change — she may call the shift on purpose" }
+      }
+    },
+    {
+      "id": "coupling.vampire",
+      "genome": "genome.vampire",
+      "kind": "hemophage",
+      "_comment": "Night restores, sun wearies; a feeding/thirst cycle adds pressure. No forced shift — the change is permanent, the ambient is the tell.",
+      "draw": { "dose_at_draw": 0.8, "dose_at_shift": 2.0, "pre_cues": ["pale skin", "light-sensitivity", "sharper canines", "the smell of blood"] },
+      "ambient": {
+        "night_recovery": 3,
+        "sun_weariness": 4,
+        "thrive_band": "night"
+      },
+      "sources": {
+        "night": { "weight": 0.6, "from": "time" },
+        "emotion": { "weight": 0.4, "from": "mood", "emotions": ["desire", "anger"], "threshold": 60 }
+      },
+      "shift_at": 0.7,
+      "revert_below": 0.2,
+      "shift_ticks": 6,
+      "playstyles": {
+        "full": { "sources": ["night", "emotion"], "note": "night and feeding need shape the change" },
+        "classic": { "sources": ["night"], "note": "night only" }
+      }
+    }
+  ],
+  "default_playstyle": "full",
+  "settings": {
+    "check_every_hours": 6,
+    "emotion_decay_per_check": 1
+  }
+}

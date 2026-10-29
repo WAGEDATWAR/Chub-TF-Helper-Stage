@@ -1,0 +1,10 @@
+{
+  "names_version": 2,
+  "_comment": "Gendered/neutral name pools. Rolling identity links a name to pronouns by the rule in creation.json `name_rule` (he/him -> masculine, she/her -> feminine, they/them -> any). `last` is unisex.",
+  "first": {
+    "feminine": ["Nadia", "Mira", "Juno", "Ember", "Rhea", "Iris", "Marisol", "Tamsin", "Odile", "Briar", "Selene", "Freya", "Isolde", "Maeve", "Nerissa", "Cass", "Willa", "Yara", "Petra", "Opal"],
+    "masculine": ["Rowan", "Vesper", "Kit", "Sable", "Wren", "Aster", "Lux", "Cove", "Fable", "Corin", "Dane", "Ewan", "Galen", "Ivo", "Jonah", "Lior", "Milo", "Nero", "Orin", "Rune"],
+    "neutral": ["Sage", "River", "Quinn", "Avery", "Finley", "Harper", "Remy", "Shay", "Winter", "Lark", "Ash", "Bay", "Ellis", "Jules", "Marley", "Noor", "Onyx", "Pax", "Ren", "Zephyr"]
+  },
+  "last": ["Vale", "Ashcroft", "Rooke", "Sorrel", "Hale", "Mercer", "Fen", "Wilde", "Corvid", "Marsh", "Quill", "Thorne", "Bramble", "Locke", "Frost", "Hollis", "Rune", "Winter", "Crane", "Sterling"]
+}

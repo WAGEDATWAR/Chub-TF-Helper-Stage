@@ -1,0 +1,17 @@
+{
+  "mood_version": 1,
+  "_comment": "The named emotion substrate (D-174). Each emotion declares its gamut axis (valence/arousal/dominance 0..100) so a continuous mood point can be derived for representation. `label_threshold` is the minimum strength for an emotion to appear in the mixed label.",
+  "label_threshold": 12,
+  "emotions": [
+    { "id": "joy", "label": "Joy", "valence": 88, "arousal": 62, "dominance": 68 },
+    { "id": "sadness", "label": "Sadness", "valence": 18, "arousal": 30, "dominance": 35 },
+    { "id": "fear", "label": "Fear", "valence": 25, "arousal": 80, "dominance": 25 },
+    { "id": "anger", "label": "Anger", "valence": 30, "arousal": 82, "dominance": 78 },
+    { "id": "surprise", "label": "Surprise", "valence": 55, "arousal": 78, "dominance": 50 },
+    { "id": "disgust", "label": "Disgust", "valence": 25, "arousal": 48, "dominance": 60 },
+    { "id": "trust", "label": "Trust", "valence": 76, "arousal": 35, "dominance": 58 },
+    { "id": "desire", "label": "Desire", "valence": 74, "arousal": 76, "dominance": 55 },
+    { "id": "shame", "label": "Shame", "valence": 28, "arousal": 45, "dominance": 30 },
+    { "id": "calm", "label": "Calm", "valence": 66, "arousal": 22, "dominance": 60 }
+  ]
+}

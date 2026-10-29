@@ -1,0 +1,15 @@
+{
+  "reactions_version": 1,
+  "reactions": [
+    { "id": "react.insect_chitin", "display_name": "Chitin", "type": "hard", "match": { "tags": ["insect_tag"] }, "composure_to_push": 60, "panic_risk": 0.15, "reaction_key": "react.insect" },
+    { "id": "react.tail", "display_name": "Tail", "type": "soft", "match": { "tags": ["tail_tag"] }, "drive_penalty": 5, "pain_bonus": 8, "reaction_key": "react.tail" },
+    { "id": "react.multi_limb", "display_name": "Extra Limbs", "type": "phobia", "match": { "tags": ["extra_limb"] }, "panic_risk": 0.45, "blackout_immune_to_tolerance": true, "reaction_key": "react.multi_limb" },
+    { "id": "react.canid", "display_name": "Canines", "type": "fetish", "match": { "tags": ["canine_tag"] }, "drive_bonus": 20, "arousal_bonus": 15, "ceiling_bonus": 15, "reaction_key": "react.canid" },
+    { "id": "react.watched", "display_name": "Being Watched", "type": "fetish", "match": { "tags": ["exhibition_tag"] }, "drive_bonus": 18, "arousal_bonus": 12, "ceiling_bonus": 12, "reaction_key": "react.watched" },
+    { "id": "react.reptile", "display_name": "Reptiles", "type": "fetish", "match": { "tags": ["serpent_tag"] }, "drive_bonus": 22, "arousal_bonus": 14, "ceiling_bonus": 14, "reaction_key": "react.reptile" },
+    { "id": "react.feline", "display_name": "Felines", "type": "soft", "match": { "tags": ["feline_tag"] }, "drive_penalty": 2, "pain_bonus": 3, "reaction_key": "react.feline" },
+    { "id": "react.avian_wings", "display_name": "Wings", "type": "phobia", "match": { "tags": ["wings_tag"] }, "panic_risk": 0.4, "blackout_immune_to_tolerance": true, "reaction_key": "react.wings" },
+    { "id": "react.legless", "display_name": "Leglessness", "type": "phobia", "match": { "tags": ["serpent_tag"] }, "panic_risk": 0.5, "blackout_immune_to_tolerance": true, "reaction_key": "react.legless" },
+    { "id": "react.large_size", "display_name": "Large Size", "type": "hard", "match": { "tags": ["size_tag"] }, "composure_to_push": 55, "panic_risk": 0.1, "reaction_key": "react.size" }
+  ]
+}

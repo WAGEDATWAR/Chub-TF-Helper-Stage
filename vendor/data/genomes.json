@@ -1,0 +1,684 @@
+{
+  "genomes_version": 1,
+  "genomes": [
+    {
+      "id": "genome.wolf",
+      "display_name": "Wolf",
+      "description_key": "desc.genome.wolf",
+      "class": "predator_mammal",
+      "familiarity_class": "canine",
+      "limit_tags": [
+        "canine_tag",
+        "tail_tag"
+      ],
+      "traits": [
+        "trait.mammalian_fur",
+        "trait.body_heat",
+        "trait.canine_claws",
+        "trait.snout_nose",
+        "trait.keen_smell",
+        "trait.mobile_ears",
+        "trait.tail_growth",
+        "trait.digitigrade_legs",
+        "trait.canine_tongue",
+        "trait.muscle_density",
+        "trait.pack_instinct",
+        "trait.canine_teeth",
+        "trait.hybrid_paw",
+        "trait.thumbless_paw",
+        "trait.fangs",
+        "trait.mammary_row",
+        "trait.species_genital"
+      ],
+      "priority": 4,
+      "saturation_point": 1,
+      "overshoot_threshold": 1.7,
+      "stability_cost": 18,
+      "stat_modifiers": {
+        "strength": 12,
+        "perception": 16,
+        "intelligence": -4,
+        "agility": 6
+      },
+      "mentality": {
+        "aggressive": 18,
+        "dominant": 12,
+        "confident": 8,
+        "nervous": -6
+      },
+      "feral_profile": "feral.wolf",
+      "genital": {
+        "penis": {
+          "to": "part.canid_sheath_penis",
+          "via": "part.partial_sheath_penis"
+        },
+        "scrotum": {
+          "to": "part.mammal_scrotum",
+          "via": "part.tightening_scrotum"
+        },
+        "vulva": {
+          "to": "part.canid_vulva",
+          "via": "part.swelling_vulva"
+        }
+      },
+      "morph_role_tracks": {
+        "head": "morph.head_to_canine",
+        "ears": "morph.ears_to_canid"
+      }
+    },
+    {
+      "id": "genome.dog",
+      "display_name": "Dog",
+      "description_key": "desc.genome.dog",
+      "class": "domestic_mammal",
+      "familiarity_class": "canine",
+      "limit_tags": [
+        "canine_tag",
+        "tail_tag"
+      ],
+      "traits": [
+        "trait.mammalian_fur",
+        "trait.body_heat",
+        "trait.canine_claws",
+        "trait.snout_nose",
+        "trait.keen_smell",
+        "trait.mobile_ears",
+        "trait.tail_growth",
+        "trait.pack_instinct",
+        "trait.submission_reflex",
+        "trait.arousal_floor",
+        "trait.digitigrade_legs",
+        "trait.canine_tongue",
+        "trait.mammary_row",
+        "trait.canine_teeth",
+        "trait.hybrid_paw",
+        "trait.thumbless_paw",
+        "trait.fangs",
+        "trait.species_genital"
+      ],
+      "priority": 3,
+      "saturation_point": 1,
+      "overshoot_threshold": 1.7,
+      "stability_cost": 12,
+      "stat_modifiers": {
+        "strength": 6,
+        "perception": 10,
+        "intelligence": -8,
+        "endurance": 5,
+        "outgoing": 8
+      },
+      "feral_profile": "feral.dog",
+      "genital": {
+        "penis": {
+          "to": "part.canid_sheath_penis",
+          "via": "part.partial_sheath_penis"
+        },
+        "scrotum": {
+          "to": "part.mammal_scrotum",
+          "via": "part.tightening_scrotum"
+        },
+        "vulva": {
+          "to": "part.canid_vulva",
+          "via": "part.swelling_vulva"
+        }
+      },
+      "morph_role_tracks": {
+        "head": "morph.head_to_canine",
+        "ears": "morph.ears_to_canid"
+      },
+      "mentality": {
+        "outgoing": 14,
+        "curious": 12,
+        "optimistic": 8,
+        "trusting": 6,
+        "clean": {
+          "value": -10,
+          "rate": 0.5
+        },
+        "organised": -12,
+        "calm": -4
+      }
+    },
+    {
+      "id": "genome.cat",
+      "display_name": "Cat",
+      "description_key": "desc.genome.cat",
+      "class": "predator_mammal",
+      "familiarity_class": "feline",
+      "limit_tags": [
+        "feline_tag",
+        "tail_tag"
+      ],
+      "traits": [
+        "trait.mammalian_fur",
+        "trait.feline_claws",
+        "trait.night_vision",
+        "trait.mobile_ears",
+        "trait.tail_growth",
+        "trait.muscle_density",
+        "trait.gracile_size",
+        "trait.keen_smell",
+        "trait.voice_high",
+        "trait.digitigrade_legs",
+        "trait.canine_tongue",
+        "trait.mammary_row",
+        "trait.canine_teeth",
+        "trait.hybrid_paw",
+        "trait.thumbless_paw",
+        "trait.fangs",
+        "trait.species_genital",
+        "trait.snout_nose"
+      ],
+      "priority": 4,
+      "saturation_point": 1,
+      "overshoot_threshold": 1.7,
+      "stability_cost": 12,
+      "stat_modifiers": {
+        "agility": 16,
+        "perception": 12,
+        "intelligence": -4,
+        "calm": 6
+      },
+      "mentality": {
+        "aggressive": 8,
+        "curious": 10,
+        "clean": {
+          "value": 12,
+          "rate": 0.5
+        },
+        "outgoing": {
+          "value": -12,
+          "when": {
+            "awareness_max": 30
+          }
+        }
+      },
+      "feral_profile": "feral.cat",
+      "genital": {
+        "penis": {
+          "to": "part.feline_sheath_penis",
+          "via": "part.partial_sheath_penis"
+        },
+        "scrotum": {
+          "to": "part.mammal_scrotum",
+          "via": "part.tightening_scrotum"
+        },
+        "vulva": {
+          "to": "part.feline_vulva",
+          "via": "part.swelling_vulva"
+        }
+      },
+      "morph_role_tracks": {
+        "head": "morph.head_to_feline",
+        "ears": "morph.ears_to_feline"
+      }
+    },
+    {
+      "id": "genome.fox",
+      "display_name": "Fox",
+      "description_key": "desc.genome.fox",
+      "class": "predator_mammal",
+      "familiarity_class": "canine",
+      "limit_tags": [
+        "canine_tag",
+        "tail_tag"
+      ],
+      "traits": [
+        "trait.mammalian_fur",
+        "trait.canine_claws",
+        "trait.night_vision",
+        "trait.keen_smell",
+        "trait.mobile_ears",
+        "trait.tail_growth",
+        "trait.gracile_size",
+        "trait.keen_sight",
+        "trait.voice_high",
+        "trait.digitigrade_legs",
+        "trait.canine_tongue",
+        "trait.mammary_row",
+        "trait.canine_teeth",
+        "trait.hybrid_paw",
+        "trait.thumbless_paw",
+        "trait.fangs",
+        "trait.species_genital",
+        "trait.snout_nose"
+      ],
+      "priority": 4,
+      "saturation_point": 1,
+      "overshoot_threshold": 1.7,
+      "stability_cost": 16,
+      "stat_modifiers": {
+        "perception": 18,
+        "agility": 10,
+        "strength": -8,
+        "curious": 8
+      },
+      "feral_profile": "feral.fox",
+      "genital": {
+        "penis": {
+          "to": "part.canid_sheath_penis",
+          "via": "part.partial_sheath_penis"
+        },
+        "scrotum": {
+          "to": "part.mammal_scrotum",
+          "via": "part.tightening_scrotum"
+        },
+        "vulva": {
+          "to": "part.canid_vulva",
+          "via": "part.swelling_vulva"
+        }
+      },
+      "morph_role_tracks": {
+        "head": "morph.head_to_canine",
+        "ears": "morph.ears_to_canid"
+      },
+      "mentality": {
+        "curious": 14,
+        "organised": 6,
+        "optimistic": 6,
+        "outgoing": -6,
+        "nervous": 4,
+        "aggressive": 4
+      }
+    },
+    {
+      "id": "genome.rabbit",
+      "display_name": "Rabbit",
+      "description_key": "desc.genome.rabbit",
+      "class": "prey_mammal",
+      "familiarity_class": "leporine",
+      "limit_tags": [
+        "rabbit_tag",
+        "ears_tag"
+      ],
+      "traits": [
+        "trait.mammalian_fur",
+        "trait.gynomorphic",
+        "trait.body_heat",
+        "trait.mobile_ears",
+        "trait.heat_cycle",
+        "trait.breeding_instinct",
+        "trait.arousal_floor",
+        "trait.gracile_size",
+        "trait.paw_pads",
+        "trait.tail_growth",
+        "trait.long_ears",
+        "trait.mammary_row",
+        "trait.hybrid_paw",
+        "trait.thumbless_paw",
+        "trait.canine_teeth",
+        "trait.species_genital"
+      ],
+      "priority": 3,
+      "saturation_point": 1,
+      "overshoot_threshold": 1.7,
+      "stability_cost": 14,
+      "stat_modifiers": {
+        "agility": 16,
+        "strength": -12,
+        "perception": 8,
+        "nervous": 8
+      },
+      "feral_profile": "feral.rabbit",
+      "genital": {
+        "penis": {
+          "to": "part.leporine_sheath_penis",
+          "via": "part.partial_sheath_penis"
+        },
+        "scrotum": {
+          "to": "part.mammal_scrotum",
+          "via": "part.tightening_scrotum"
+        },
+        "vulva": {
+          "to": "part.leporine_vulva",
+          "via": "part.swelling_vulva"
+        }
+      },
+      "morph_role_tracks": {
+        "head": "morph.head_to_leporine",
+        "ears": "morph.ears_to_leporine"
+      },
+      "mentality": {
+        "nervous": 14,
+        "curious": 8,
+        "aggressive": -6,
+        "optimistic": -4,
+        "outgoing": 4,
+        "calm": -6
+      }
+    },
+    {
+      "id": "genome.bovine",
+      "display_name": "Bovine",
+      "description_key": "desc.genome.bovine",
+      "class": "herd_mammal",
+      "familiarity_class": "bovine",
+      "limit_tags": [
+        "bovine_tag",
+        "horns_tag"
+      ],
+      "traits": [
+        "trait.mammalian_fur",
+        "trait.gynomorphic",
+        "trait.thick_hide",
+        "trait.horns",
+        "trait.hooves",
+        "trait.cloven_toes",
+        "trait.lactation",
+        "trait.heavy_muscle",
+        "trait.dense_bones",
+        "trait.bulk_size",
+        "trait.scent_musk",
+        "trait.mammary_row",
+        "trait.mammary_row",
+        "trait.species_genital",
+        "trait.mobile_ears"
+      ],
+      "priority": 5,
+      "saturation_point": 1,
+      "overshoot_threshold": 1.7,
+      "stability_cost": 24,
+      "stat_modifiers": {
+        "strength": 20,
+        "endurance": 16,
+        "agility": -12,
+        "intelligence": -8
+      },
+      "mentality": {
+        "calm": 15,
+        "nervous": -8,
+        "trusting": 10
+      },
+      "feral_profile": "feral.bovine",
+      "genital": {
+        "penis": {
+          "to": "part.bovine_penis",
+          "via": "part.enlarging_penis"
+        },
+        "scrotum": {
+          "to": "part.bovine_scrotum",
+          "via": "part.tightening_scrotum"
+        },
+        "vulva": {
+          "to": "part.bovine_vulva",
+          "via": "part.swelling_vulva"
+        }
+      },
+      "morph_role_tracks": {
+        "head": "morph.head_to_bovine",
+        "ears": "morph.ears_to_bovine"
+      }
+    },
+    {
+      "id": "genome.equine",
+      "display_name": "Equine",
+      "description_key": "desc.genome.equine",
+      "class": "herd_mammal",
+      "familiarity_class": "equine",
+      "limit_tags": [
+        "equine_tag",
+        "hoof_tag"
+      ],
+      "traits": [
+        "trait.mammalian_fur",
+        "trait.andromorphic",
+        "trait.hooves",
+        "trait.quadruped_sprint",
+        "trait.stamina",
+        "trait.heavy_muscle",
+        "trait.dense_bones",
+        "trait.bulk_size",
+        "trait.keen_smell",
+        "trait.voice_deep",
+        "trait.species_genital",
+        "trait.mobile_ears"
+      ],
+      "priority": 5,
+      "saturation_point": 1,
+      "overshoot_threshold": 1.7,
+      "stability_cost": 26,
+      "stat_modifiers": {
+        "strength": 16,
+        "endurance": 22,
+        "agility": -4,
+        "intelligence": -8
+      },
+      "feral_profile": "feral.equine",
+      "genital": {
+        "penis": {
+          "to": "part.equine_penis",
+          "via": "part.enlarging_penis"
+        },
+        "scrotum": {
+          "to": "part.equine_scrotum",
+          "via": "part.tightening_scrotum"
+        },
+        "vulva": {
+          "to": "part.equine_vulva",
+          "via": "part.swelling_vulva"
+        }
+      },
+      "morph_role_tracks": {
+        "head": "morph.head_to_bovine",
+        "ears": "morph.ears_to_equine"
+      },
+      "mentality": {
+        "calm": 10,
+        "composed": 8,
+        "dominant": 4,
+        "nervous": -8,
+        "aggressive": -4,
+        "organised": 4
+      }
+    },
+    {
+      "id": "genome.raven",
+      "display_name": "Raven",
+      "description_key": "desc.genome.raven",
+      "class": "avian",
+      "familiarity_class": "corvid",
+      "limit_tags": [
+        "avian_tag",
+        "wings_tag"
+      ],
+      "traits": [
+        "trait.feathers",
+        "trait.wings_glide",
+        "trait.keen_sight",
+        "trait.hollow_bones",
+        "trait.gracile_size",
+        "trait.enhanced_intelligence",
+        "trait.voice_deep",
+        "trait.cold_resist",
+        "trait.cloaca",
+        "trait.beak",
+        "trait.species_genital",
+        "trait.mobile_ears"
+      ],
+      "priority": 5,
+      "saturation_point": 1,
+      "overshoot_threshold": 1.7,
+      "stability_cost": 20,
+      "stat_modifiers": {
+        "perception": 16,
+        "intelligence": 10,
+        "strength": -12,
+        "agility": 6
+      },
+      "feral_profile": "feral.raven",
+      "genital": {
+        "penis": {
+          "to": "part.cloaca",
+          "via": "part.enlarging_penis"
+        },
+        "scrotum": {
+          "to": "part.avian_cloaca",
+          "via": "part.tightening_scrotum"
+        },
+        "vulva": {
+          "to": "part.avian_cloaca",
+          "via": "part.swelling_vulva"
+        }
+      },
+      "morph_role_tracks": {
+        "head": "morph.head_to_avian",
+        "ears": "morph.ears_to_avian"
+      },
+      "mentality": {
+        "curious": 14,
+        "confident": 8,
+        "optimistic": 4,
+        "trusting": -6,
+        "outgoing": 2,
+        "honest": -4
+      }
+    },
+    {
+      "id": "genome.serpent",
+      "display_name": "Serpent",
+      "description_key": "desc.genome.serpent",
+      "class": "reptile",
+      "familiarity_class": "serpentine",
+      "limit_tags": [
+        "serpent_tag",
+        "scale_tag"
+      ],
+      "traits": [
+        "trait.scales",
+        "trait.andromorphic",
+        "trait.venom_sac",
+        "trait.forked_tongue",
+        "trait.thermal_pit",
+        "trait.leg_fusion",
+        "trait.prehensile_tail",
+        "trait.venom_resist",
+        "trait.heat_resist",
+        "trait.hiss",
+        "trait.feral_mind",
+        "trait.hemipenes",
+        "trait.venom_fangs",
+        "trait.species_genital"
+      ],
+      "priority": 6,
+      "saturation_point": 1,
+      "overshoot_threshold": 1.7,
+      "stability_cost": 30,
+      "stat_modifiers": {
+        "strength": 12,
+        "perception": 12,
+        "agility": 4,
+        "intelligence": -12
+      },
+      "mentality": {
+        "calm": 18,
+        "aggressive": {
+          "value": 14,
+          "when": {
+            "realized": true
+          }
+        },
+        "outgoing": -10
+      },
+      "feral_profile": "feral.serpent",
+      "genital": {
+        "penis": {
+          "to": "part.hemipenes",
+          "via": "part.enlarging_penis"
+        },
+        "hemipenes": {
+          "to": "part.hemipenes",
+          "via": "part.growing_hemipenes"
+        },
+        "scrotum": {
+          "to": "part.cloaca",
+          "via": "part.tightening_scrotum"
+        },
+        "vulva": {
+          "to": "part.cloaca",
+          "via": "part.swelling_vulva"
+        }
+      },
+      "morph_role_tracks": {
+        "head": "morph.head_to_serpent",
+        "fangs": "morph.fangs_to_venom"
+      }
+    },
+    {
+      "id": "genome.bat",
+      "display_name": "Bat",
+      "description_key": "desc.genome.bat",
+      "class": "chiropteran",
+      "familiarity_class": "chiropteran",
+      "limit_tags": [
+        "bat_tag",
+        "wings_tag"
+      ],
+      "traits": [
+        "trait.mammalian_fur",
+        "trait.wings_glide",
+        "trait.echolocation",
+        "trait.clinging",
+        "trait.night_vision",
+        "trait.gracile_size",
+        "trait.mobile_ears",
+        "trait.cold_resist",
+        "trait.hybrid_paw",
+        "trait.thumbless_paw",
+        "trait.mammary_row",
+        "trait.species_genital"
+      ],
+      "priority": 5,
+      "saturation_point": 1,
+      "overshoot_threshold": 1.7,
+      "stability_cost": 22,
+      "stat_modifiers": {
+        "perception": 16,
+        "agility": 12,
+        "strength": -8,
+        "intelligence": -4
+      },
+      "feral_profile": "feral.bat",
+      "genital": {
+        "penis": {
+          "to": "part.chiropteran_sheath_penis",
+          "via": "part.partial_sheath_penis"
+        },
+        "scrotum": {
+          "to": "part.mammal_scrotum",
+          "via": "part.tightening_scrotum"
+        },
+        "vulva": {
+          "to": "part.chiropteran_vulva",
+          "via": "part.swelling_vulva"
+        }
+      },
+      "morph_role_tracks": {
+        "head": "morph.head_to_bat",
+        "ears": "morph.ears_to_chiropteran"
+      },
+      "mentality": {
+        "nervous": 10,
+        "curious": 8,
+        "outgoing": 4,
+        "calm": -4,
+        "organised": 2,
+        "optimistic": -2
+      }
+    },
+    {
+      "id": "genome.human_baseline",
+      "display_name": "Human Baseline",
+      "description_key": "desc.genome.human_baseline",
+      "class": "baseline",
+      "familiarity_class": "human",
+      "limit_tags": [],
+      "traits": [],
+      "priority": 0,
+      "saturation_point": 1,
+      "overshoot_threshold": 1,
+      "stability_cost": 0,
+      "stat_modifiers": {},
+      "feral_profile": null
+    }
+  ]
+}

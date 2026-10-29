@@ -1,0 +1,815 @@
+{
+  "scene_graph_version": 2,
+  "nodes": [
+    {
+      "id": "scene.intro",
+      "type": "story",
+      "title": "Arrival",
+      "beats": [
+        {
+          "id": "arrive",
+          "type": "scripted"
+        }
+      ]
+    },
+    {
+      "id": "scene.creator",
+      "type": "menu",
+      "title": "Focus"
+    },
+    {
+      "id": "scene.hub",
+      "type": "hub",
+      "title": "Home",
+      "location": "loc.home",
+      "beats": [
+        {
+          "id": "idle",
+          "type": "dialogue_loop"
+        }
+      ],
+      "speech_key": "hub.idle"
+    },
+    {
+      "id": "scene.inject",
+      "type": "action",
+      "title": "Bestow",
+      "location": "loc.home_living",
+      "beats": [
+        {
+          "id": "select",
+          "type": "choice"
+        },
+        {
+          "id": "dose",
+          "type": "check"
+        },
+        {
+          "id": "onset",
+          "type": "tick_loop"
+        },
+        {
+          "id": "resolve",
+          "type": "resolve"
+        }
+      ],
+      "prefetch": [
+        "inject.select.prompt",
+        "inject.onset.react",
+        "inject.resolve.done"
+      ],
+      "speech_key": "inject.select.subject"
+    },
+    {
+      "id": "scene.train",
+      "type": "action",
+      "title": "Train",
+      "location": "loc.park",
+      "beats": [
+        {
+          "id": "setup",
+          "type": "choice"
+        },
+        {
+          "id": "warmup",
+          "type": "check"
+        },
+        {
+          "id": "work",
+          "type": "rep_loop",
+          "repeat": 3
+        },
+        {
+          "id": "resolve",
+          "type": "resolve"
+        },
+        {
+          "id": "reward",
+          "type": "intimacy"
+        }
+      ],
+      "prefetch": [
+        "train.warmup.success",
+        "train.rep.fail"
+      ],
+      "speech_key": "train.setup"
+    },
+    {
+      "id": "scene.play",
+      "type": "action",
+      "title": "Play",
+      "location": "loc.home_living",
+      "beats": [
+        {
+          "id": "scene",
+          "type": "intimacy"
+        },
+        {
+          "id": "resolve",
+          "type": "resolve"
+        }
+      ],
+      "speech_key": "play.start"
+    },
+    {
+      "id": "scene.talk",
+      "type": "action",
+      "title": "Talk",
+      "location": "loc.home_kitchen",
+      "beats": [
+        {
+          "id": "topic",
+          "type": "choice"
+        },
+        {
+          "id": "reply",
+          "type": "dialogue_loop"
+        }
+      ],
+      "speech_key": "talk.topic.prompt"
+    },
+    {
+      "id": "scene.study",
+      "type": "action",
+      "title": "Study",
+      "location": "loc.home",
+      "beats": [
+        {
+          "id": "read",
+          "type": "tick_loop"
+        },
+        {
+          "id": "insight",
+          "type": "check"
+        }
+      ]
+    },
+    {
+      "id": "scene.rest",
+      "type": "action",
+      "title": "Rest",
+      "location": "loc.home_bedroom",
+      "beats": [
+        {
+          "id": "settle",
+          "type": "resolve"
+        }
+      ],
+      "speech_key": "rest.start"
+    },
+    {
+      "id": "scene.observe",
+      "type": "action",
+      "title": "Observe",
+      "location": "loc.home",
+      "beats": [
+        {
+          "id": "scan",
+          "type": "check"
+        },
+        {
+          "id": "note",
+          "type": "dialogue_loop"
+        }
+      ],
+      "speech_key": "global.observe"
+    },
+    {
+      "id": "scene.mirror",
+      "type": "action",
+      "title": "Mirror",
+      "location": "loc.home_bathroom",
+      "beats": [
+        {
+          "id": "look",
+          "type": "resolve"
+        }
+      ],
+      "speech_key": "global.mirror"
+    },
+    {
+      "id": "scene.sleep",
+      "type": "system",
+      "title": "Sleep",
+      "location": "loc.home_bedroom",
+      "beats": [
+        {
+          "id": "fade",
+          "type": "resolve"
+        }
+      ],
+      "speech_key": "global.sleep"
+    },
+    {
+      "id": "scene.stage_crossing",
+      "type": "interrupt",
+      "kind": "stage_crossing",
+      "return_to": "push_frame",
+      "cooldown_slots": 1,
+      "beats": [
+        {
+          "id": "notice",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.resistance",
+      "type": "interrupt",
+      "kind": "resistance",
+      "return_to": "pop_frame",
+      "cooldown_slots": 2,
+      "beats": [
+        {
+          "id": "ask",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "scene.resistance_panic",
+      "type": "interrupt",
+      "kind": "resistance_panic",
+      "return_to": "hub",
+      "cooldown_slots": 3,
+      "beats": [
+        {
+          "id": "panic",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.blackout",
+      "type": "interrupt",
+      "kind": "blackout",
+      "return_to": "hub",
+      "cooldown_slots": 5,
+      "beats": [
+        {
+          "id": "down",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.feral_lock",
+      "type": "interrupt",
+      "kind": "feral_lock",
+      "return_to": "hub",
+      "cooldown_slots": 10,
+      "beats": [
+        {
+          "id": "lock",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.breakthrough",
+      "type": "interrupt",
+      "kind": "breakthrough",
+      "return_to": "push_frame",
+      "cooldown_slots": 3,
+      "beats": [
+        {
+          "id": "flash",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.ambient",
+      "type": "interrupt",
+      "kind": "ambient",
+      "return_to": "push_frame",
+      "cooldown_slots": 4,
+      "beats": [
+        {
+          "id": "murmur",
+          "type": "dialogue_loop"
+        }
+      ]
+    },
+    {
+      "id": "scene.journal",
+      "type": "menu",
+      "title": "Journal"
+    },
+    {
+      "id": "scene.subject_view",
+      "type": "menu",
+      "title": "Subject"
+    },
+    {
+      "id": "scene.settings",
+      "type": "menu",
+      "title": "Settings"
+    },
+    {
+      "id": "scene.save_menu",
+      "type": "menu",
+      "title": "Save / Load"
+    },
+    {
+      "id": "scene.main_menu",
+      "type": "menu",
+      "title": "Main Menu",
+      "entry": true
+    },
+    {
+      "id": "scene.place.home",
+      "type": "story",
+      "title": "The House",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.place.kitchen",
+      "type": "story",
+      "title": "The Kitchen",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.place.living",
+      "type": "story",
+      "title": "The Living Room",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.place.bedroom",
+      "type": "story",
+      "title": "The Bedroom",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.place.street",
+      "type": "story",
+      "title": "The Street",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.place.park",
+      "type": "story",
+      "title": "The Park",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.place.cafe",
+      "type": "story",
+      "title": "The Cafe",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.place.office",
+      "type": "story",
+      "title": "The Office",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.kitchen_morning",
+      "speech_key": "hub.idle",
+      "type": "story",
+      "title": "Morning",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        },
+        {
+          "id": "mug",
+          "type": "interaction"
+        },
+        {
+          "id": "settle",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.kitchen_midday",
+      "speech_key": "hub.idle",
+      "type": "story",
+      "title": "Midday",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.bathroom_mirror",
+      "speech_key": "global.mirror",
+      "type": "story",
+      "title": "The Mirror",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        },
+        {
+          "id": "look",
+          "type": "reveal"
+        }
+      ]
+    },
+    {
+      "id": "scene.bedroom_night",
+      "speech_key": "global.sleep",
+      "type": "story",
+      "title": "Night",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        },
+        {
+          "id": "sleep",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.living_evening",
+      "speech_key": "hub.idle",
+      "type": "story",
+      "title": "Evening",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "scene.park_stroll",
+      "speech_key": "hub.idle",
+      "type": "story",
+      "title": "The Park",
+      "beats": [
+        {
+          "id": "desc",
+          "type": "resolve"
+        },
+        {
+          "id": "walk",
+          "type": "resolve"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "scene.main_menu",
+      "to": "scene.intro",
+      "type": "select"
+    },
+    {
+      "from": "scene.intro",
+      "to": "scene.creator",
+      "type": "chain"
+    },
+    {
+      "from": "scene.creator",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.inject",
+      "type": "select",
+      "condition": {
+        "charge_min": 1
+      }
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.train",
+      "type": "select",
+      "condition": {
+        "charge_min": 1
+      }
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.play",
+      "type": "select",
+      "condition": {
+        "charge_min": 1
+      }
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.talk",
+      "type": "select",
+      "condition": {
+        "charge_min": 1
+      }
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.study",
+      "type": "select",
+      "condition": {
+        "charge_min": 2
+      }
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.rest",
+      "type": "select",
+      "condition": {
+        "charge_min": 1
+      }
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.observe",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.mirror",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.sleep",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.journal",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.subject_view",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.settings",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.save_menu",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.place.home",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.place.kitchen",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.place.living",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.place.bedroom",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.place.street",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.place.park",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.place.cafe",
+      "type": "select"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.place.office",
+      "type": "select"
+    },
+    {
+      "from": "scene.inject",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.train",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.play",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.talk",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.study",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.rest",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.observe",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.mirror",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.journal",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.subject_view",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.settings",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.save_menu",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.sleep",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.place.home",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.place.kitchen",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.place.living",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.place.bedroom",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.place.street",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.place.park",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.place.cafe",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.place.office",
+      "to": "scene.hub",
+      "type": "chain"
+    },
+    {
+      "from": "scene.train",
+      "to": "scene.resistance",
+      "type": "interrupt"
+    },
+    {
+      "from": "scene.inject",
+      "to": "scene.stage_crossing",
+      "type": "interrupt"
+    },
+    {
+      "from": "scene.inject",
+      "to": "scene.resistance_panic",
+      "type": "interrupt"
+    },
+    {
+      "from": "scene.inject",
+      "to": "scene.blackout",
+      "type": "interrupt"
+    },
+    {
+      "from": "scene.inject",
+      "to": "scene.feral_lock",
+      "type": "interrupt"
+    },
+    {
+      "from": "scene.train",
+      "to": "scene.breakthrough",
+      "type": "interrupt"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.ambient",
+      "type": "interrupt"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.kitchen_morning",
+      "type": "chain"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.kitchen_midday",
+      "type": "chain"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.bathroom_mirror",
+      "type": "chain"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.bedroom_night",
+      "type": "chain"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.living_evening",
+      "type": "chain"
+    },
+    {
+      "from": "scene.hub",
+      "to": "scene.park_stroll",
+      "type": "chain"
+    }
+  ],
+  "deprecated": {
+    "scene.lab.main": "scene.place.home"
+  },
+  "migrations": []
+}

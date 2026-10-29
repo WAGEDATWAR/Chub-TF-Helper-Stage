@@ -1,0 +1,31 @@
+{
+  "dialogue_version": 1,
+  "keys": [
+    { "key": "play.start", "speaker": "subject", "intent": "an intimate scene begins",
+      "variants": [
+        { "axes": { "composure_band": "poised" }, "lines": ["\"Come here. I've been thinking about this.\""] },
+        { "axes": { "composure_band": "wary" }, "lines": ["\"...Alright. But slowly.\""] },
+        { "lines": ["She reaches out first."] }
+      ] },
+    { "key": "play.mid", "speaker": "subject", "intent": "mid-scene reaction",
+      "variants": [
+        { "axes": { "arousal": "high" }, "lines": ["\"Don't stop. Don't you dare stop.\""] },
+        { "lines": ["Her breath comes faster."] }
+      ] },
+    { "key": "play.ability", "speaker": "subject", "intent": "she uses a transformed ability during play",
+      "variants": [
+        { "axes": { "transform_state": "light_hybrid" }, "lines": ["Something new drags lightly across her skin. She smiles."] },
+        { "lines": ["She moves in a way she couldn't have, before."] }
+      ] },
+    { "key": "play.climax", "speaker": "subject", "intent": "the scene peaks",
+      "variants": [
+        { "axes": { "transform_state": "near_animal" }, "lines": ["A sound comes out of her that is not quite human."] },
+        { "lines": ["She arches, and everything narrows to this."] }
+      ] },
+    { "key": "play.after", "speaker": "subject", "intent": "the scene winds down",
+      "variants": [
+        { "axes": { "resonance": "high" }, "lines": ["\"Stay. Just — stay a minute.\""] },
+        { "lines": ["She goes quiet and heavy against her own arm."] }
+      ] }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "objects_version": 1,
+  "_comment": "Scene prop templates (blueprint §30.2). An object has a default location, a placement, and a small state machine; the composer renders `compose.render` with {state}. `sway` powers mutate state, and the composer reflects it next render.",
+  "objects": [
+    { "id": "obj.coffee_mug", "name": "coffee mug", "tags": ["dish", "warm"], "default_location": "loc.her_home_kitchen", "placement": "on the counter", "states": { "default": "steaming", "empty": "cold and empty" }, "compose": { "noun": "mug", "render": "a {state} mug" } },
+    { "id": "obj.kettle", "name": "kettle", "tags": ["appliance"], "default_location": "loc.her_home_kitchen", "placement": "on the hob", "states": { "default": "cold", "boiling": "hissing steam" }, "compose": { "noun": "kettle", "render": "the kettle, {state}" } },
+    { "id": "obj.kitchen_table", "name": "table", "tags": ["furniture"], "default_location": "loc.her_home_kitchen", "placement": "in the middle of the room", "states": { "default": "scattered with mail" }, "compose": { "noun": "table", "render": "the kitchen table" } },
+    { "id": "obj.counter", "name": "counter", "tags": ["furniture"], "default_location": "loc.her_home_kitchen", "placement": "along the wall", "states": { "default": "clear" }, "compose": { "noun": "counter", "render": "the counter" } },
+    { "id": "obj.sofa", "name": "sofa", "tags": ["furniture"], "default_location": "loc.her_home_living", "placement": "against the wall", "states": { "default": "worn", "sat_in": "creased where she sat" }, "compose": { "noun": "sofa", "render": "the {state} sofa" } },
+    { "id": "obj.phone", "name": "phone", "tags": ["device"], "default_location": "loc.her_home_living", "placement": "on the arm of the sofa", "states": { "default": "face-down", "lit": "lit up" }, "compose": { "noun": "phone", "render": "her phone, {state}" } },
+    { "id": "obj.mirror", "name": "mirror", "tags": ["fixture"], "default_location": "loc.her_home_bathroom", "placement": "over the sink", "states": { "default": "steamed at the edges" }, "compose": { "noun": "mirror", "render": "the bathroom mirror" } },
+    { "id": "obj.bed", "name": "bed", "tags": ["furniture"], "default_location": "loc.her_home_bedroom", "placement": "against the far wall", "states": { "default": "made", "rumpled": "rumpled" }, "compose": { "noun": "bed", "render": "the {state} bed" } },
+    { "id": "obj.wardrobe", "name": "wardrobe", "tags": ["furniture"], "default_location": "loc.her_home_bedroom", "placement": "beside the door", "states": { "default": "closed", "open": "hanging open" }, "compose": { "noun": "wardrobe", "render": "a {state} wardrobe" } },
+    { "id": "obj.park_bench", "name": "bench", "tags": ["furniture", "outdoor"], "default_location": "loc.park", "placement": "under the trees", "states": { "default": "vacant" }, "compose": { "noun": "bench", "render": "a park bench" } },
+    { "id": "obj.desk", "name": "desk", "tags": ["furniture", "work"], "default_location": "loc.office", "placement": "by the window", "states": { "default": "cluttered with papers" }, "compose": { "noun": "desk", "render": "her desk" } },
+    { "id": "obj.cafe_cup", "name": "cup", "tags": ["dish"], "default_location": "loc.cafe", "placement": "on the table", "states": { "default": "half-drunk" }, "compose": { "noun": "cup", "render": "a {state} cup" } }
+  ]
+}

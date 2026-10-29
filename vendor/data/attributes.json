@@ -1,0 +1,3502 @@
+{
+  "attributes_version": 1,
+  "attributes": [
+    {
+      "id": "attr.mammalian_fur",
+      "display_name": "Mammalian Fur",
+      "family": "coat",
+      "tags": [
+        "fur_tag",
+        "coat_tag",
+        "mammal_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "torso_lower",
+        "arm_upper",
+        "arm_lower",
+        "leg_upper",
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 20,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "effects": {
+        "insulation": 0.2,
+        "warmth": 0.3
+      },
+      "description_key": "desc.attr.mammalian_fur",
+      "progress": {
+        "speed_base": 0.06,
+        "curve": "ease_in_out",
+        "reverse_mult": 1.8,
+        "stall_below_stability": 20,
+        "observe_drive_per_stage": 3
+      },
+      "stages": [
+        {
+          "at": 0,
+          "name": "Bare",
+          "pain_on_stage": 0,
+          "effects": {
+            "insulation": 0
+          },
+          "desc_key": "stage.fur.00"
+        },
+        {
+          "at": 0.3,
+          "name": "Downy",
+          "pain_on_stage": 0,
+          "effects": {
+            "insulation": 0.08
+          },
+          "desc_key": "stage.fur.30"
+        },
+        {
+          "at": 0.65,
+          "name": "Thick",
+          "pain_on_stage": 1,
+          "effects": {
+            "insulation": 0.16
+          },
+          "desc_key": "stage.fur.65"
+        },
+        {
+          "at": 1,
+          "name": "Full Coat",
+          "pain_on_stage": 1,
+          "effects": {
+            "insulation": 0.24
+          },
+          "desc_key": "stage.fur.100"
+        }
+      ],
+      "hook": {
+        "point": "needs.decay_modifier",
+        "value": 900
+      }
+    },
+    {
+      "id": "attr.scales",
+      "display_name": "Scales",
+      "family": "skin",
+      "tags": [
+        "scale_tag",
+        "skin_tag",
+        "reptile_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "torso_lower",
+        "arm_upper",
+        "arm_lower",
+        "leg_upper",
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 30,
+      "stack_mode": "replace",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "durability_mult": 1.3,
+        "warmth": -0.2
+      },
+      "description_key": "desc.attr.scales",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Smooth",
+          "pain_on_stage": 0,
+          "effects": {},
+          "desc_key": "stage.scale.00"
+        },
+        {
+          "at": 0.4,
+          "name": "Roughening",
+          "pain_on_stage": 0,
+          "effects": {
+            "durability_mult": 1.1
+          },
+          "desc_key": "stage.scale.40"
+        },
+        {
+          "at": 1,
+          "name": "Scaled",
+          "pain_on_stage": 1,
+          "effects": {
+            "durability_mult": 1.35
+          },
+          "desc_key": "stage.scale.100"
+        }
+      ]
+    },
+    {
+      "id": "attr.feathers",
+      "display_name": "Feathers",
+      "family": "coat",
+      "tags": [
+        "feather_tag",
+        "avian_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "arm_upper",
+        "arm_lower",
+        "back"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 34,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "insulation": 0.25,
+        "mass_mult": 0.9
+      },
+      "description_key": "desc.attr.feathers",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Smooth Skin",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Prickling With Down",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Covered In Sleek, Layered Feathers",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.canine_claws",
+      "display_name": "Canine Claws",
+      "family": "claws",
+      "tags": [
+        "claws_tag",
+        "keratin",
+        "canine_tag"
+      ],
+      "target_roles": [
+        "nails_hand",
+        "nails_foot"
+      ],
+      "requires_part_tags": [
+        "nails_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "damage_type": "slashing",
+        "grip_bonus": 0.15,
+        "pain_on_growth": 3
+      },
+      "grants_ability": "ability.retractable_claws",
+      "description_key": "desc.attr.canine_claws",
+      "progress": {
+        "speed_base": 0.055,
+        "curve": "ease_in_out",
+        "reverse_mult": 1.8,
+        "stall_below_stability": 20,
+        "observe_drive_per_stage": 3
+      },
+      "morph_track": "morph.nail_to_claw",
+      "morph_tracks_by_role": {
+        "nails_hand": "morph.nail_to_claw",
+        "nails_foot": "morph.toenail_to_claw"
+      },
+      "stages": [
+        {
+          "at": 0,
+          "name": "Dull",
+          "pain_on_stage": 0,
+          "effects": {},
+          "desc_key": "stage.keratin.00"
+        },
+        {
+          "at": 0.25,
+          "name": "Thickened",
+          "pain_on_stage": 0,
+          "effects": {
+            "durability_mult": 1.15
+          },
+          "desc_key": "stage.keratin.25"
+        },
+        {
+          "at": 0.5,
+          "name": "Curving",
+          "pain_on_stage": 1,
+          "effects": {
+            "durability_mult": 1.35
+          },
+          "desc_key": "stage.keratin.50"
+        },
+        {
+          "at": 0.75,
+          "name": "Sharpening",
+          "pain_on_stage": 2,
+          "effects": {
+            "durability_mult": 1.5,
+            "damage_type": "slashing"
+          },
+          "desc_key": "stage.keratin.75"
+        },
+        {
+          "at": 1,
+          "name": "Horn-hard",
+          "pain_on_stage": 2,
+          "effects": {
+            "durability_mult": 1.6,
+            "damage_type": "bludgeoning"
+          },
+          "desc_key": "stage.keratin.100"
+        }
+      ]
+    },
+    {
+      "id": "attr.feline_claws",
+      "display_name": "Feline Claws",
+      "family": "claws",
+      "tags": [
+        "claws_tag",
+        "keratin",
+        "feline_tag"
+      ],
+      "target_roles": [
+        "nails_hand",
+        "nails_foot"
+      ],
+      "requires_part_tags": [
+        "nails_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "damage_type": "slashing",
+        "grip_bonus": 0.2,
+        "retractable": 1
+      },
+      "grants_ability": "ability.retractable_claws",
+      "description_key": "desc.attr.feline_claws",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Dull Flat Nails",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.25,
+          "name": "Thickening Nails",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Curving Retractable Claws",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 0.75,
+          "name": "Razor Retractable Claws",
+          "pain_on_stage": 2
+        },
+        {
+          "at": 1,
+          "name": "Keratin-Hard Claws, Always Ready",
+          "pain_on_stage": 2
+        }
+      ]
+    },
+    {
+      "id": "attr.fixed_claws",
+      "display_name": "Fixed Claws",
+      "family": "claws",
+      "tags": [
+        "claws_tag",
+        "keratin"
+      ],
+      "target_roles": [
+        "nails_hand",
+        "nails_foot"
+      ],
+      "requires_part_tags": [
+        "nails_tag"
+      ],
+      "priority": 38,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "damage_type": "slashing",
+        "grip_bonus": 0.1,
+        "retractable": 0
+      },
+      "grants_ability": "ability.fixed_claws",
+      "description_key": "desc.attr.fixed_claws",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Dull Flat Nails",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.25,
+          "name": "Thickening Nails",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Claws That Stay Extended",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 0.75,
+          "name": "Long Immovable Claws",
+          "pain_on_stage": 2
+        },
+        {
+          "at": 1,
+          "name": "Keratin-Hard Claws That Cannot Retract",
+          "pain_on_stage": 2
+        }
+      ]
+    },
+    {
+      "id": "attr.digitigrade",
+      "display_name": "Digitigrade Stance",
+      "family": "gait",
+      "tags": [
+        "gait_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "target_roles": [
+        "foot_base",
+        "leg_upper"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 44,
+      "stack_mode": "replace",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "gait": "digitigrade",
+        "speed_mult": 1.2,
+        "height_mult": 0.95
+      },
+      "description_key": "desc.attr.digitigrade",
+      "morph_track": "morph.foot_to_digitigrade",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Plantigrade, Flat-Footed",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Rising Onto The Balls Of The Feet",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "Standing High On Digitigrade Toes",
+          "pain_on_stage": 2
+        }
+      ],
+      "morph_tracks_by_role": {
+        "leg_upper": "morph.leg_to_digitigrade"
+      },
+      "guaranteed": true,
+      "hook": {
+        "point": "growth.rate_modifier",
+        "value": 1100
+      }
+    },
+    {
+      "id": "attr.paw_pads",
+      "display_name": "Paw Pads",
+      "family": "skin",
+      "tags": [
+        "pads_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "target_roles": [
+        "foot_base",
+        "toes"
+      ],
+      "requires_part_tags": [
+        "foot_tag"
+      ],
+      "priority": 30,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "morph_tracks_by_role": {
+        "toes": "morph.toes_to_paw"
+      },
+      "effects": {
+        "grip_bonus": 0.1,
+        "stealth_bonus": 0.1
+      },
+      "description_key": "desc.attr.paw_pads",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Bare Soles",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Soft New Pads",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Thick, Springy Paw Pads",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.hooves",
+      "display_name": "Hooves",
+      "family": "gait",
+      "tags": [
+        "hoof_tag",
+        "bovine_tag",
+        "equine_tag"
+      ],
+      "target_roles": [
+        "foot_base"
+      ],
+      "requires_part_tags": [
+        "foot_tag"
+      ],
+      "priority": 46,
+      "stack_mode": "replace",
+      "mutation_cost": 5,
+      "hidden": false,
+      "effects": {
+        "gait": "unguligrade",
+        "speed_mult": 1.1,
+        "stability_bonus": 0.15
+      },
+      "description_key": "desc.attr.hooves",
+      "morph_track": "morph.foot_to_hoof",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Bare Feet",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Thickening Into Horn",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "Hard Keratin Hooves",
+          "pain_on_stage": 2
+        }
+      ]
+    },
+    {
+      "id": "attr.muzzle",
+      "display_name": "Muzzle",
+      "morph_track": "morph.head_to_canine",
+      "family": "structure",
+      "tags": [
+        "muzzle_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "target_roles": [
+        "face",
+        "head"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "replace",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "bite_bonus": 0.2,
+        "speech_mult": 0.9
+      },
+      "description_key": "desc.attr.muzzle",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Flat Human Face",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Face Pushing Forward",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "A Full Animal Muzzle",
+          "pain_on_stage": 2
+        }
+      ]
+    },
+    {
+      "id": "attr.fangs",
+      "display_name": "Fangs",
+      "family": "structure",
+      "tags": [
+        "fangs_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "target_roles": [
+        "fangs"
+      ],
+      "requires_part_tags": [
+        "fangs_tag"
+      ],
+      "priority": 42,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "morph_track": "morph.fangs_to_canid",
+      "effects": {
+        "bite_bonus": 0.3,
+        "damage_type": "piercing"
+      },
+      "grants_ability": "ability.fangs",
+      "description_key": "desc.attr.fangs",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Flat Even Teeth",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Canines Lengthening To Points",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "Long Curved Fangs",
+          "pain_on_stage": 2
+        }
+      ]
+    },
+    {
+      "id": "attr.venom_sac",
+      "display_name": "Venom Sac",
+      "family": "structure",
+      "tags": [
+        "venom_tag",
+        "serpent_tag"
+      ],
+      "target_roles": [
+        "fangs"
+      ],
+      "requires_part_tags": [
+        "fangs_tag"
+      ],
+      "priority": 30,
+      "stack_mode": "additive",
+      "mutation_cost": 6,
+      "hidden": false,
+      "effects": {
+        "damage_type": "venom",
+        "poison_bonus": 0.4
+      },
+      "grants_ability": "ability.venom_sac",
+      "description_key": "desc.attr.venom_sac",
+      "stages": [
+        {
+          "at": 0,
+          "name": "No Venom",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Glands Swelling Under The Jaw",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Full Venom Sacs",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.forked_tongue",
+      "display_name": "Forked Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag",
+        "serpent_tag"
+      ],
+      "target_roles": [
+        "tongue"
+      ],
+      "requires_part_tags": [
+        "tongue_tag"
+      ],
+      "priority": 48,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "morph_track": "morph.tongue_to_forked",
+      "effects": {
+        "scent_bonus": 0.25,
+        "speech_mult": 0.85
+      },
+      "description_key": "desc.attr.forked_tongue",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Flat Human Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Tongue Notching At The Tip",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Thin, Forked Tongue",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.canine_tongue",
+      "display_name": "Canine Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag",
+        "canine_tag"
+      ],
+      "target_roles": [
+        "tongue"
+      ],
+      "requires_part_tags": [
+        "tongue_tag"
+      ],
+      "priority": 44,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "morph_track": "morph.tongue_to_canine",
+      "effects": {
+        "panting": 0.3,
+        "speech_mult": 0.95
+      },
+      "description_key": "desc.attr.canine_tongue",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Human Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Longer, Looser Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Broad Canine Tongue, Quick To Loll",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.thermal_pit",
+      "display_name": "Thermal Pits",
+      "family": "structure",
+      "tags": [
+        "thermal_tag",
+        "serpent_tag"
+      ],
+      "target_roles": [
+        "face"
+      ],
+      "requires_part_tags": [
+        "face_tag"
+      ],
+      "priority": 58,
+      "stack_mode": "replace",
+      "mutation_cost": 5,
+      "hidden": false,
+      "effects": {
+        "perception_bonus": 0.3,
+        "heat_sense": 1
+      },
+      "grants_ability": "ability.thermal_pit",
+      "description_key": "desc.attr.thermal_pit",
+      "stages": [
+        {
+          "at": 0,
+          "name": "No Heat Sense",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Faint Pits Along The Snout",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Deep Heat Pits That Read Warmth",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.mobile_ears",
+      "display_name": "Mobile Ears",
+      "family": "ears",
+      "tags": [
+        "ears_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "target_roles": [
+        "ears"
+      ],
+      "requires_part_tags": [
+        "ears_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "morph_track": "morph.ears_to_mobile",
+      "effects": {
+        "perception_bonus": 0.2,
+        "expression": 1
+      },
+      "description_key": "desc.attr.mobile_ears",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Fixed Human Ears",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Ears Beginning To Swivel",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "Fully Mobile Animal Ears",
+          "pain_on_stage": 1
+        }
+      ],
+      "guaranteed": true
+    },
+    {
+      "id": "attr.long_ears",
+      "display_name": "Long Ears",
+      "family": "ears",
+      "tags": [
+        "ears_tag",
+        "rabbit_tag"
+      ],
+      "target_roles": [
+        "ears"
+      ],
+      "requires_part_tags": [
+        "ears_tag"
+      ],
+      "priority": 42,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "morph_track": "morph.ears_to_long",
+      "effects": {
+        "perception_bonus": 0.35,
+        "expression": 1
+      },
+      "description_key": "desc.attr.long_ears",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Human Ears",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Ears Drawing Upward",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "Long, Tall Upright Ears",
+          "pain_on_stage": 1
+        }
+      ],
+      "guaranteed": true
+    },
+    {
+      "id": "attr.keen_smell",
+      "display_name": "Keen Smell",
+      "family": "structure",
+      "tags": [
+        "scent_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "target_roles": [
+        "nose"
+      ],
+      "requires_part_tags": [
+        "nose_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "morph_track": "morph.nose_to_keen",
+      "effects": {
+        "perception_bonus": 0.25,
+        "scent_tracking": 1
+      },
+      "grants_ability": "ability.scent_tracking",
+      "description_key": "desc.attr.keen_smell",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Human Nose",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Scent Sharpening",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Keen Animal Nose That Reads The Air",
+          "pain_on_stage": 0
+        }
+      ],
+      "hook": {
+        "point": "perception.notice_modifier",
+        "value": 1200
+      }
+    },
+    {
+      "id": "attr.night_vision",
+      "display_name": "Night Vision",
+      "family": "eyes",
+      "tags": [
+        "eyes_tag",
+        "feline_tag",
+        "canine_tag"
+      ],
+      "target_roles": [
+        "eyes"
+      ],
+      "requires_part_tags": [
+        "eyes_tag"
+      ],
+      "priority": 42,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "perception_bonus": 0.2,
+        "low_light": 1
+      },
+      "grants_ability": "ability.night_vision",
+      "description_key": "desc.attr.night_vision",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Human Eyes",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Eyes Gathering Light",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Night-Adapted Eyes That See In The Dark",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.echolocation",
+      "display_name": "Echolocation",
+      "family": "structure",
+      "tags": [
+        "echo_tag",
+        "bat_tag"
+      ],
+      "target_roles": [
+        "ears"
+      ],
+      "requires_part_tags": [
+        "ears_tag"
+      ],
+      "priority": 62,
+      "stack_mode": "replace",
+      "mutation_cost": 6,
+      "hidden": false,
+      "effects": {
+        "perception_bonus": 0.35,
+        "spatial_sense": 1
+      },
+      "grants_ability": "ability.echolocation",
+      "description_key": "desc.attr.echolocation",
+      "stages": [
+        {
+          "at": 0,
+          "name": "No Echoes",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Faint Clicks In The Throat",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Full Echolocation, Reading The Room By S",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.horns",
+      "display_name": "Horns",
+      "family": "horns",
+      "tags": [
+        "horns_tag",
+        "keratin"
+      ],
+      "target_roles": [
+        "horns"
+      ],
+      "requires_part_tags": [
+        "horns_tag"
+      ],
+      "priority": 50,
+      "stack_mode": "replace",
+      "mutation_cost": 5,
+      "hidden": false,
+      "effects": {
+        "damage_type": "bludgeoning",
+        "ram_bonus": 0.3
+      },
+      "grants_ability": "ability.horns_ram",
+      "description_key": "desc.attr.horns",
+      "morph_track": "morph.horn_growth",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Smooth Skull",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.333,
+          "name": "Horns Budding Through The Scalp",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.667,
+          "name": "Short Hardening Horns",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "A Full Set Of Horns",
+          "pain_on_stage": 2
+        }
+      ]
+    },
+    {
+      "id": "attr.wings_glide",
+      "display_name": "Gliding Wings",
+      "family": "wings",
+      "tags": [
+        "wings_tag",
+        "avian_tag"
+      ],
+      "target_roles": [
+        "wings"
+      ],
+      "requires_part_tags": [
+        "wings_tag"
+      ],
+      "priority": 66,
+      "stack_mode": "replace",
+      "mutation_cost": 8,
+      "hidden": false,
+      "effects": {
+        "glide": 1,
+        "mass_mult": 0.9,
+        "fall_damage_mult": 0.2
+      },
+      "grants_ability": "ability.wings_glide",
+      "description_key": "desc.attr.wings_glide",
+      "morph_track": "morph.wing_growth",
+      "stages": [
+        {
+          "at": 0,
+          "name": "No Wings",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.333,
+          "name": "Wing Nubs At The Shoulders",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 0.667,
+          "name": "Partial Wings, Ribbed And Thin",
+          "pain_on_stage": 2
+        },
+        {
+          "at": 1,
+          "name": "Broad Wings That Catch The Air",
+          "pain_on_stage": 2
+        }
+      ]
+    },
+    {
+      "id": "attr.tail_growth",
+      "display_name": "Tail",
+      "family": "tail",
+      "tags": [
+        "tail_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "target_roles": [
+        "tail"
+      ],
+      "requires_part_tags": [
+        "tail_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "balance_bonus": 0.15,
+        "expression": 1
+      },
+      "description_key": "desc.attr.tail_growth",
+      "morph_track": "morph.tail_growth",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Absent",
+          "pain_on_stage": 0,
+          "effects": {},
+          "desc_key": "stage.tail.00"
+        },
+        {
+          "at": 0.35,
+          "name": "Budding",
+          "pain_on_stage": 1,
+          "effects": {
+            "balance_bonus": 0.05
+          },
+          "desc_key": "stage.tail.35"
+        },
+        {
+          "at": 1,
+          "name": "Full Tail",
+          "pain_on_stage": 2,
+          "effects": {
+            "balance_bonus": 0.15
+          },
+          "desc_key": "stage.tail.100"
+        }
+      ],
+      "hook": {
+        "point": "mood.valence_shift",
+        "value": 4
+      }
+    },
+    {
+      "id": "attr.muscle_density",
+      "display_name": "Muscle Density",
+      "family": "muscle",
+      "tags": [
+        "muscle_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "arm_upper",
+        "arm_lower",
+        "leg_upper",
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "muscle_tag",
+        "skin_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "additive",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "strength_bonus": 0.2,
+        "mass_mult": 1.15
+      },
+      "description_key": "desc.attr.muscle_density",
+      "grants_ability": "ability.muscle_density",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Soft Baseline Build",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Firming And Tightening",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Densely, Compactly Muscled",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.muscle_density_heavy",
+      "display_name": "Heavy Muscle",
+      "family": "muscle",
+      "tags": [
+        "muscle_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "arm_upper",
+        "arm_lower",
+        "leg_upper",
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "muscle_tag"
+      ],
+      "priority": 44,
+      "stack_mode": "replace",
+      "mutation_cost": 5,
+      "hidden": false,
+      "effects": {
+        "strength_bonus": 0.35,
+        "mass_mult": 1.25,
+        "speed_mult": 0.9
+      },
+      "description_key": "desc.attr.muscle_density_heavy",
+      "grants_ability": "ability.muscle_density",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Soft Baseline Build",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Heavy And Thick",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Massively, Heavily Muscled",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.lactation",
+      "display_name": "Lactation",
+      "family": "genital",
+      "tags": [
+        "lactation_tag",
+        "bovine_tag"
+      ],
+      "target_roles": [
+        "breasts"
+      ],
+      "requires_part_tags": [
+        "breasts_tag"
+      ],
+      "priority": 50,
+      "stack_mode": "replace",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "lactation": 1
+      },
+      "grants_ability": "ability.lactation",
+      "description_key": "desc.attr.lactation",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Dry And Flat",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Fullening And Tender",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Lactating, Heavy And Warm",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.gynomorphic",
+      "display_name": "Gynomorphic Shift",
+      "family": "genital",
+      "tags": [
+        "hormone_tag"
+      ],
+      "target_roles": [
+        "genital_primary",
+        "genital_secondary",
+        "chest"
+      ],
+      "requires_part_tags": [
+        "genital_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "additive",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "hormone_balance": -0.3,
+        "voice_pitch": 0.1,
+        "arousal": 0.4
+      },
+      "description_key": "desc.attr.gynomorphic",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Level, Neutral Build",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Softening Into Rounded Curves",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Fully Gynomorphic Curves",
+          "pain_on_stage": 1
+        }
+      ],
+      "notice": "felt",
+      "notice_weight": 2.2
+    },
+    {
+      "id": "attr.andromorphic",
+      "display_name": "Andromorphic Shift",
+      "family": "genital",
+      "tags": [
+        "hormone_tag"
+      ],
+      "target_roles": [
+        "genital_primary",
+        "genital_secondary",
+        "chest"
+      ],
+      "requires_part_tags": [
+        "genital_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "additive",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "hormone_balance": 0.3,
+        "voice_pitch": -0.1,
+        "arousal": 0.4
+      },
+      "description_key": "desc.attr.andromorphic",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Level, Neutral Build",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Squaring Into Hard Planes",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Fully Andromorphic, Hard And Broad",
+          "pain_on_stage": 1
+        }
+      ],
+      "notice": "felt",
+      "notice_weight": 2.2
+    },
+    {
+      "id": "attr.structure_digitigrade",
+      "display_name": "Digitigrade Structure",
+      "family": "structure",
+      "tags": [
+        "structure_tag"
+      ],
+      "target_roles": [
+        "foot_base"
+      ],
+      "requires_part_tags": [
+        "foot_tag"
+      ],
+      "priority": 90,
+      "stack_mode": "replace",
+      "mutation_cost": 6,
+      "hidden": true,
+      "effects": {
+        "gait": "digitigrade"
+      },
+      "description_key": null,
+      "stages": [
+        {
+          "at": 0,
+          "name": "Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Stage 1",
+          "pain_on_stage": 1
+        }
+      ],
+      "notice": "felt",
+      "notice_weight": 1.6
+    },
+    {
+      "id": "attr.structure_leg_fusion",
+      "display_name": "Leg Fusion",
+      "family": "structure",
+      "tags": [
+        "structure_tag"
+      ],
+      "target_roles": [
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "leg_tag"
+      ],
+      "priority": 92,
+      "stack_mode": "replace",
+      "mutation_cost": 8,
+      "hidden": true,
+      "effects": {
+        "legs": 1
+      },
+      "description_key": null,
+      "morph_track": "morph.leg_fusion",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Stage 1",
+          "pain_on_stage": 1
+        }
+      ],
+      "notice": "felt",
+      "notice_weight": 1.8
+    },
+    {
+      "id": "attr.structure_hollow",
+      "display_name": "Hollow Structure",
+      "family": "structure",
+      "tags": [
+        "structure_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "torso_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 90,
+      "stack_mode": "replace",
+      "mutation_cost": 6,
+      "hidden": true,
+      "effects": {
+        "mass_mult": 0.7
+      },
+      "description_key": null,
+      "stages": [
+        {
+          "at": 0,
+          "name": "Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Stage 1",
+          "pain_on_stage": 1
+        }
+      ],
+      "notice": "felt",
+      "notice_weight": 1.5
+    },
+    {
+      "id": "attr.structure_membrane",
+      "display_name": "Membrane Structure",
+      "family": "structure",
+      "tags": [
+        "structure_tag"
+      ],
+      "target_roles": [
+        "wings"
+      ],
+      "requires_part_tags": [
+        "wings_tag"
+      ],
+      "priority": 90,
+      "stack_mode": "replace",
+      "mutation_cost": 6,
+      "hidden": true,
+      "effects": {
+        "membrane": 1
+      },
+      "description_key": null,
+      "stages": [
+        {
+          "at": 0,
+          "name": "Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Stage 1",
+          "pain_on_stage": 1
+        }
+      ],
+      "notice": "felt",
+      "notice_weight": 1.4
+    },
+    {
+      "id": "attr.body_heat",
+      "display_name": "Body Heat",
+      "family": "skin",
+      "tags": [
+        "heat_tag",
+        "mammal_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "torso_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 24,
+      "stack_mode": "additive",
+      "mutation_cost": 2,
+      "hidden": false,
+      "effects": {
+        "warmth": 0.2,
+        "arousal_floor": 0.05
+      },
+      "description_key": "desc.attr.body_heat",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Normal Warmth",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Running Hot To The Touch",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Radiating Heat Like A Furnace",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.pack_instinct",
+      "display_name": "Pack Instinct",
+      "family": "voice",
+      "tags": [
+        "instinct_tag",
+        "canine_tag"
+      ],
+      "target_roles": [
+        "head"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "priority": 30,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "trust_bonus": 0.1,
+        "obedience_bonus": 0.1
+      },
+      "description_key": "desc.attr.pack_instinct",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Self-Contained",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Watching Others, Leaning In",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Fully Pack-Minded, Uneasy Alone",
+          "pain_on_stage": 0
+        }
+      ],
+      "hook": {
+        "point": "social.bond_modifier",
+        "value": 1200
+      }
+    },
+    {
+      "id": "attr.submission_reflex",
+      "display_name": "Submission Reflex",
+      "family": "voice",
+      "tags": [
+        "instinct_tag",
+        "canine_tag"
+      ],
+      "target_roles": [
+        "head"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "priority": 30,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "obedience_bonus": 0.2,
+        "drive_penalty": 3
+      },
+      "grants_ability": "ability.submission_reflex",
+      "description_key": "desc.attr.submission_reflex",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Steady And Even",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Softening Under A Firm Hand",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Quick To Submit, Quick To Roll Over",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.heat_cycle",
+      "display_name": "Heat Cycle",
+      "family": "genital",
+      "tags": [
+        "cycle_tag",
+        "rabbit_tag"
+      ],
+      "target_roles": [
+        "genital_primary",
+        "genital_secondary"
+      ],
+      "requires_part_tags": [
+        "genital_tag"
+      ],
+      "priority": 50,
+      "stack_mode": "replace",
+      "mutation_cost": 5,
+      "hidden": false,
+      "effects": {
+        "arousal_floor": 0.2,
+        "fertility": 1
+      },
+      "grants_ability": "ability.heat_cycle",
+      "description_key": "desc.attr.heat_cycle",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Level Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Warming In Cycles",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Fully In Heat, Restless And Wanting",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.breeding_instinct",
+      "display_name": "Breeding Instinct",
+      "family": "voice",
+      "tags": [
+        "instinct_tag",
+        "rabbit_tag"
+      ],
+      "target_roles": [
+        "head"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "priority": 52,
+      "stack_mode": "replace",
+      "mutation_cost": 5,
+      "hidden": false,
+      "effects": {
+        "drive_bonus": 8,
+        "arousal_floor": 0.1
+      },
+      "grants_ability": "ability.breeding_instinct",
+      "description_key": "desc.attr.breeding_instinct",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Level Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Restless And Broody",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Driven Hard To Breed",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.coiled_posture",
+      "display_name": "Coiled Posture",
+      "family": "gait",
+      "tags": [
+        "gait_tag",
+        "serpent_tag"
+      ],
+      "target_roles": [
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "leg_tag"
+      ],
+      "priority": 60,
+      "stack_mode": "replace",
+      "mutation_cost": 7,
+      "hidden": false,
+      "effects": {
+        "gait": "serpentine",
+        "speed_mult": 1.15,
+        "height_mult": 0.8
+      },
+      "description_key": "desc.attr.coiled_posture",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Upright And Human",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Loosening Spine",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "Coiled And Serpentine",
+          "pain_on_stage": 2
+        }
+      ]
+    },
+    {
+      "id": "attr.quadruped_sprint",
+      "display_name": "Quadruped Sprint",
+      "family": "gait",
+      "tags": [
+        "gait_tag",
+        "canine_tag",
+        "equine_tag"
+      ],
+      "target_roles": [
+        "leg_upper",
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "leg_tag"
+      ],
+      "priority": 56,
+      "stack_mode": "replace",
+      "mutation_cost": 6,
+      "hidden": false,
+      "effects": {
+        "speed_mult": 1.5,
+        "stamina_bonus": 0.2
+      },
+      "grants_ability": "ability.quadruped_sprint",
+      "description_key": "desc.attr.quadruped_sprint",
+      "stages": [
+        {
+          "at": 0,
+          "name": "An Even Baseline Stride",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Limbs Lengthening For Speed",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "Built To Run On All Fours",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.stamina",
+      "display_name": "Deep Stamina",
+      "family": "muscle",
+      "tags": [
+        "muscle_tag",
+        "equine_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "leg_upper",
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "muscle_tag"
+      ],
+      "priority": 48,
+      "stack_mode": "additive",
+      "mutation_cost": 5,
+      "hidden": false,
+      "effects": {
+        "stamina_bonus": 0.35,
+        "endurance_bonus": 0.2
+      },
+      "grants_ability": "ability.stamina",
+      "description_key": "desc.attr.stamina",
+      "stages": [
+        {
+          "at": 0,
+          "name": "An Even Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Tireless And Steady",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Inexhaustible, Never Winded",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.clinging",
+      "display_name": "Clinging Grip",
+      "family": "structure",
+      "tags": [
+        "grip_tag",
+        "bat_tag"
+      ],
+      "target_roles": [
+        "hand",
+        "foot_base"
+      ],
+      "requires_part_tags": [],
+      "priority": 54,
+      "stack_mode": "replace",
+      "mutation_cost": 5,
+      "hidden": false,
+      "effects": {
+        "climb": 1,
+        "grip_bonus": 0.25
+      },
+      "grants_ability": "ability.clinging",
+      "description_key": "desc.attr.clinging",
+      "stages": [
+        {
+          "at": 0,
+          "name": "No Special Grip",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Grippier Hold",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Able To Hang From Anything",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.keen_sight",
+      "display_name": "Keen Sight",
+      "family": "eyes",
+      "tags": [
+        "eyes_tag",
+        "avian_tag"
+      ],
+      "target_roles": [
+        "eyes"
+      ],
+      "requires_part_tags": [
+        "eyes_tag"
+      ],
+      "priority": 50,
+      "stack_mode": "replace",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "perception_bonus": 0.35,
+        "range_bonus": 0.3
+      },
+      "grants_ability": "ability.keen_sight",
+      "description_key": "desc.attr.keen_sight",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Human Sight",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Sight Sharpening",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Piercing Sight That Misses Nothing",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.enhanced_intelligence",
+      "display_name": "Enhanced Cognition",
+      "family": "voice",
+      "tags": [
+        "mind_tag"
+      ],
+      "target_roles": [
+        "head"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "additive",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "intelligence_bonus": 0.2
+      },
+      "description_key": "desc.attr.enhanced_intelligence",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Baseline Mind",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Thinking Quicker",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Sharply, Coldly Intelligent",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.feral_mind",
+      "display_name": "Feral Mind",
+      "family": "voice",
+      "tags": [
+        "mind_tag",
+        "instinct_tag"
+      ],
+      "target_roles": [
+        "head"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "priority": 70,
+      "stack_mode": "replace",
+      "mutation_cost": 7,
+      "hidden": false,
+      "effects": {
+        "intelligence_bonus": -0.3,
+        "speech_mult": 0.5,
+        "drive_bonus": 12
+      },
+      "description_key": "desc.attr.feral_mind",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Lucid And Verbal",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Thought Fraying At The Edges",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Feral-Minded, Half In Instinct",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.voice_deep",
+      "display_name": "Deep Voice",
+      "family": "voice",
+      "tags": [
+        "voice_tag"
+      ],
+      "target_roles": [
+        "mouth",
+        "tongue"
+      ],
+      "requires_part_tags": [
+        "mouth_tag"
+      ],
+      "priority": 30,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "effects": {
+        "voice_pitch": -0.2,
+        "speech_mult": 1
+      },
+      "description_key": "desc.attr.voice_deep",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Baseline Voice",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Dropping Lower",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Deep Chesty Voice",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.voice_high",
+      "display_name": "High Voice",
+      "family": "voice",
+      "tags": [
+        "voice_tag"
+      ],
+      "target_roles": [
+        "mouth",
+        "tongue"
+      ],
+      "requires_part_tags": [
+        "mouth_tag"
+      ],
+      "priority": 30,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "effects": {
+        "voice_pitch": 0.2,
+        "speech_mult": 1
+      },
+      "description_key": "desc.attr.voice_high",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Baseline Voice",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Rising In Pitch",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A High Thin Voice",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.growl",
+      "display_name": "Growl",
+      "family": "voice",
+      "tags": [
+        "voice_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "target_roles": [
+        "mouth"
+      ],
+      "requires_part_tags": [
+        "mouth_tag"
+      ],
+      "priority": 36,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "effects": {
+        "speech_mult": 0.85,
+        "threat_bonus": 0.15
+      },
+      "description_key": "desc.attr.growl",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Clear Speech",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Rough Edge Under The Words",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Full Chest Growl",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.hiss",
+      "display_name": "Hiss",
+      "family": "voice",
+      "tags": [
+        "voice_tag",
+        "serpent_tag"
+      ],
+      "target_roles": [
+        "mouth"
+      ],
+      "requires_part_tags": [
+        "mouth_tag"
+      ],
+      "priority": 44,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "speech_mult": 0.75,
+        "threat_bonus": 0.2
+      },
+      "description_key": "desc.attr.hiss",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Clear Speech",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Sibilant Edge",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Full Hiss",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.size_baseline",
+      "display_name": "Baseline Size",
+      "family": "size",
+      "tags": [
+        "size_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "torso_lower",
+        "arm_upper",
+        "arm_lower",
+        "leg_upper",
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 10,
+      "stack_mode": "replace",
+      "mutation_cost": 1,
+      "hidden": false,
+      "effects": {
+        "size_mult": 1,
+        "mass_mult": 1
+      },
+      "description_key": "desc.attr.size_baseline",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Baseline Size",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Stage 1",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.bulk_size",
+      "display_name": "Increased Bulk",
+      "family": "size",
+      "tags": [
+        "size_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "torso_lower",
+        "arm_upper",
+        "arm_lower",
+        "leg_upper",
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "additive",
+      "mutation_cost": 5,
+      "hidden": false,
+      "effects": {
+        "size_mult": 1.2,
+        "mass_mult": 1.2,
+        "strength_bonus": 0.15
+      },
+      "description_key": "desc.attr.bulk_size",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Baseline Frame",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Broadening Out",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Imposing, Heavy Bulk",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.gracile_size",
+      "display_name": "Gracile Frame",
+      "family": "size",
+      "tags": [
+        "size_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "torso_lower",
+        "arm_upper",
+        "arm_lower",
+        "leg_upper",
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "additive",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "size_mult": 0.85,
+        "mass_mult": 0.85,
+        "agility_bonus": 0.15
+      },
+      "description_key": "desc.attr.gracile_size",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Baseline Frame",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Slimming Down",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Fine And Gracile",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.genital_masculine",
+      "display_name": "Masculine Genitalia",
+      "family": "genital",
+      "tags": [
+        "genital_tag",
+        "hormone_tag"
+      ],
+      "target_roles": [
+        "genital_primary"
+      ],
+      "requires_part_tags": [
+        "genital_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "hormone_balance": 0.2,
+        "arousal": 0.3
+      },
+      "description_key": "desc.attr.genital_masculine",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Level Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Shifting, Tender",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Male Genitals",
+          "pain_on_stage": 1
+        }
+      ],
+      "notice": "felt",
+      "notice_weight": 2.2
+    },
+    {
+      "id": "attr.genital_feminine",
+      "display_name": "Feminine Genitalia",
+      "family": "genital",
+      "tags": [
+        "genital_tag",
+        "hormone_tag"
+      ],
+      "target_roles": [
+        "genital_secondary"
+      ],
+      "requires_part_tags": [
+        "genital_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "hormone_balance": -0.2,
+        "arousal": 0.3
+      },
+      "description_key": "desc.attr.genital_feminine",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Level Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Shifting, Tender",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Female Genitals",
+          "pain_on_stage": 1
+        }
+      ],
+      "notice": "felt",
+      "notice_weight": 2.2
+    },
+    {
+      "id": "attr.dexterous_fingers",
+      "display_name": "Dexterous Fingers",
+      "family": "structure",
+      "tags": [
+        "hand_tag"
+      ],
+      "target_roles": [
+        "fingers"
+      ],
+      "requires_part_tags": [
+        "fingers_tag"
+      ],
+      "priority": 30,
+      "stack_mode": "additive",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "dexterity_bonus": 0.2,
+        "fine_motor": 1
+      },
+      "description_key": "desc.attr.dexterous_fingers",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Baseline Grip",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Fingers Quickening",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Remarkably Deft Fingers",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.thumbless_paw",
+      "display_name": "Paw",
+      "family": "structure",
+      "tags": [
+        "hand_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "target_roles": [
+        "hand"
+      ],
+      "requires_part_tags": [
+        "hand_tag"
+      ],
+      "priority": 42,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "dexterity_bonus": -0.2,
+        "grip_bonus": 0.1
+      },
+      "description_key": "desc.attr.thumbless_paw",
+      "morph_track": "morph.hand_to_paw",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Human Hands",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Clumsier, Half-Pawed",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Blunt Thumbless Paw",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.hybrid_paw",
+      "display_name": "Hybrid Paw",
+      "family": "structure",
+      "tags": [
+        "hand_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "target_roles": [
+        "hand"
+      ],
+      "requires_part_tags": [
+        "hand_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "effects": {
+        "dexterity_bonus": -0.1,
+        "grip_bonus": 0.05
+      },
+      "description_key": "desc.attr.hybrid_paw",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Human Hands",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Half A Paw With The Thumb Kept",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Hybrid Paw",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.thick_hide",
+      "display_name": "Thick Hide",
+      "family": "skin",
+      "tags": [
+        "hide_tag",
+        "bovine_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "torso_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 38,
+      "stack_mode": "replace",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "durability_mult": 1.25,
+        "pain_resist": 0.1
+      },
+      "description_key": "desc.attr.thick_hide",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Thin Skin",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Toughening",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Thick, Leathery Hide",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.bioluminescence",
+      "display_name": "Bioluminescence",
+      "family": "skin",
+      "tags": [
+        "glow_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "face"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 64,
+      "stack_mode": "replace",
+      "mutation_cost": 6,
+      "hidden": false,
+      "effects": {
+        "glow": 1,
+        "exposure_bonus": 0.1
+      },
+      "description_key": "desc.attr.bioluminescence",
+      "stages": [
+        {
+          "at": 0,
+          "name": "No Glow",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Faint Glow Under The Skin",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Bright Pulsing Bioluminescence",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.arousal_floor",
+      "display_name": "Elevated Arousal",
+      "family": "voice",
+      "tags": [
+        "arousal_tag"
+      ],
+      "target_roles": [
+        "head"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "priority": 34,
+      "stack_mode": "additive",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "arousal_floor": 0.1
+      },
+      "description_key": "desc.attr.arousal_floor",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Level Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Easily Flushed And Warm",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Perpetually, Distractingly Aroused",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.pain_tolerance",
+      "display_name": "Hardened Nerves",
+      "family": "voice",
+      "tags": [
+        "pain_tag"
+      ],
+      "target_roles": [
+        "head"
+      ],
+      "requires_part_tags": [
+        "head_tag"
+      ],
+      "priority": 36,
+      "stack_mode": "additive",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "pain_resist": 0.2
+      },
+      "description_key": "desc.attr.pain_tolerance",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Soft Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Toughening Up",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Nearly Numb To Pain",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.hollow_bones",
+      "display_name": "Hollow Bones",
+      "family": "bone",
+      "tags": [
+        "bone_tag",
+        "avian_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "arm_upper",
+        "arm_lower",
+        "leg_upper",
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 58,
+      "stack_mode": "replace",
+      "mutation_cost": 5,
+      "hidden": false,
+      "effects": {
+        "mass_mult": 0.75,
+        "fragility_mult": 1.3
+      },
+      "description_key": "desc.attr.hollow_bones",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Solid Bones",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Bones Lightening",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Hollow, Bird-Light Bones",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.dense_bones",
+      "display_name": "Dense Bones",
+      "family": "bone",
+      "tags": [
+        "bone_tag",
+        "bovine_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "leg_upper",
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 58,
+      "stack_mode": "replace",
+      "mutation_cost": 5,
+      "hidden": false,
+      "effects": {
+        "durability_mult": 1.3,
+        "mass_mult": 1.15
+      },
+      "description_key": "desc.attr.dense_bones",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Solid Bones",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Bones Densifying",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Dense, Heavy Bones",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.extra_limbs",
+      "display_name": "Extra Limbs",
+      "family": "structure",
+      "tags": [
+        "extra_limb",
+        "structure_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "back"
+      ],
+      "requires_part_tags": [
+        "torso_tag"
+      ],
+      "priority": 68,
+      "stack_mode": "replace",
+      "mutation_cost": 9,
+      "hidden": false,
+      "effects": {
+        "extra_limbs": 1
+      },
+      "description_key": "desc.attr.extra_limbs",
+      "stages": [
+        {
+          "at": 0,
+          "name": "No Extra Limbs",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Limbs Budding From The Flanks",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "A Full Second Set Of Limbs",
+          "pain_on_stage": 2
+        }
+      ]
+    },
+    {
+      "id": "attr.scent_musk",
+      "display_name": "Scent Musk",
+      "family": "skin",
+      "tags": [
+        "scent_tag",
+        "mammal_tag"
+      ],
+      "target_roles": [
+        "torso_lower",
+        "genital_primary",
+        "genital_secondary"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 32,
+      "stack_mode": "additive",
+      "mutation_cost": 2,
+      "hidden": false,
+      "effects": {
+        "scent": 0.3,
+        "arousal_floor": 0.05
+      },
+      "description_key": "desc.attr.scent_musk",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Neutral Scent",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Faint Musk Rising",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Strong, Musky Animal Scent",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.cloven_toes",
+      "display_name": "Cloven Toes",
+      "family": "structure",
+      "tags": [
+        "hoof_tag",
+        "bovine_tag"
+      ],
+      "target_roles": [
+        "toes"
+      ],
+      "requires_part_tags": [
+        "toes_tag"
+      ],
+      "priority": 44,
+      "stack_mode": "replace",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "gait": "unguligrade"
+      },
+      "description_key": "desc.attr.cloven_toes",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Human Toes",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Toes Splitting",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Toes Split Into Cloven Pairs",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.prehensile_tail",
+      "display_name": "Prehensile Tail",
+      "family": "tail",
+      "tags": [
+        "tail_tag",
+        "prehensile"
+      ],
+      "target_roles": [
+        "tail"
+      ],
+      "requires_part_tags": [
+        "tail_tag"
+      ],
+      "priority": 52,
+      "stack_mode": "replace",
+      "mutation_cost": 5,
+      "hidden": false,
+      "effects": {
+        "grip_bonus": 0.2,
+        "dexterity_bonus": 0.1
+      },
+      "description_key": "desc.attr.prehensile_tail",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Plain Tail",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "The Tail Growing Grippier",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Fully Prehensile Tail",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.venom_resist",
+      "display_name": "Venom Resistance",
+      "family": "skin",
+      "tags": [
+        "resist_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "torso_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "additive",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "venom_resist": 0.4
+      },
+      "description_key": "desc.attr.venom_resist",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Level Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Hardening Against Venom",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Venom-Proof Blood",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.heat_resist",
+      "display_name": "Heat Resistance",
+      "family": "skin",
+      "tags": [
+        "resist_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "torso_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "additive",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "heat_resist": 0.4
+      },
+      "description_key": "desc.attr.heat_resist",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Level Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Hardening Against Heat",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Heat-Proof, Cool-Blooded",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.cold_resist",
+      "display_name": "Cold Resistance",
+      "family": "skin",
+      "tags": [
+        "resist_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "torso_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 40,
+      "stack_mode": "additive",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "cold_resist": 0.4
+      },
+      "description_key": "desc.attr.cold_resist",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Level Baseline",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Hardening Against Cold",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Cold-Proof, Well Insulated",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.wet_skin",
+      "display_name": "Wet Skin",
+      "family": "skin",
+      "tags": [
+        "skin_tag",
+        "amphibian_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "torso_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 36,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "grip_bonus": -0.1,
+        "cold_resist": -0.1,
+        "glow": 0
+      },
+      "description_key": "desc.attr.wet_skin",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Dry Skin",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Damp To The Touch",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Permanently Wet, Slick Skin",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.chitin",
+      "display_name": "Chitin",
+      "family": "skin",
+      "tags": [
+        "insect_tag",
+        "chitin_tag"
+      ],
+      "target_roles": [
+        "torso_upper",
+        "torso_lower",
+        "arm_upper",
+        "arm_lower",
+        "leg_upper",
+        "leg_lower"
+      ],
+      "requires_part_tags": [
+        "skin_tag"
+      ],
+      "priority": 60,
+      "stack_mode": "replace",
+      "mutation_cost": 6,
+      "hidden": false,
+      "effects": {
+        "durability_mult": 1.5,
+        "agility_bonus": -0.1
+      },
+      "description_key": "desc.attr.chitin",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Soft Skin",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Hardening Into Shell",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Chitinous Shell",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.antennae",
+      "display_name": "Antennae",
+      "family": "ears",
+      "tags": [
+        "insect_tag",
+        "ears_tag"
+      ],
+      "target_roles": [
+        "ears"
+      ],
+      "requires_part_tags": [
+        "ears_tag"
+      ],
+      "priority": 56,
+      "stack_mode": "replace",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "perception_bonus": 0.25,
+        "scent_tracking": 1
+      },
+      "description_key": "desc.attr.antennae",
+      "stages": [
+        {
+          "at": 0,
+          "name": "No Antennae",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Antennae Budding From The Brow",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "A Full Pair Of Antennae",
+          "pain_on_stage": 2
+        }
+      ]
+    },
+    {
+      "id": "attr.compound_eyes",
+      "display_name": "Compound Eyes",
+      "family": "eyes",
+      "tags": [
+        "insect_tag",
+        "eyes_tag"
+      ],
+      "target_roles": [
+        "eyes"
+      ],
+      "requires_part_tags": [
+        "eyes_tag"
+      ],
+      "priority": 62,
+      "stack_mode": "replace",
+      "mutation_cost": 6,
+      "hidden": false,
+      "effects": {
+        "perception_bonus": 0.4,
+        "low_light": 1
+      },
+      "grants_ability": "ability.compound_eyes",
+      "description_key": "desc.attr.compound_eyes",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Single-Lensed Eyes",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Eyes Breaking Into Facets",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "Faceted, Many-Lensed Compound Eyes",
+          "pain_on_stage": 2
+        }
+      ]
+    },
+    {
+      "id": "attr.cloaca",
+      "display_name": "Cloaca",
+      "family": "genital",
+      "tags": [
+        "cloaca_tag",
+        "genital_tag",
+        "avian_tag"
+      ],
+      "target_roles": [
+        "genital_secondary"
+      ],
+      "requires_part_tags": [
+        "cloaca_tag"
+      ],
+      "priority": 58,
+      "stack_mode": "replace",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "genital_form": 1
+      },
+      "description_key": "desc.attr.cloaca",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Human Parts",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Single Vent Forming",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Single Shared Cloaca",
+          "pain_on_stage": 0
+        }
+      ],
+      "notice": "felt",
+      "notice_weight": 2.2
+    },
+    {
+      "id": "attr.mammary_row",
+      "display_name": "Mammary Row",
+      "family": "genital",
+      "tags": [
+        "mammary_tag",
+        "nipples_tag"
+      ],
+      "target_roles": [
+        "nipples"
+      ],
+      "requires_part_tags": [
+        "nipples_tag"
+      ],
+      "priority": 52,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "effects": {
+        "nipple_count": 1.5,
+        "lactation_bonus": 0.2
+      },
+      "grants_ability": "ability.lactation",
+      "description_key": "desc.attr.mammary_row",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Two Flat Nipples",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Wider Spread Of Nipples",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Full Double Row Of Teats",
+          "pain_on_stage": 0
+        }
+      ]
+    },
+    {
+      "id": "attr.hemipenis",
+      "display_name": "Hemipenes",
+      "family": "genital",
+      "tags": [
+        "hemipenis_tag",
+        "genital_tag",
+        "serpent_tag"
+      ],
+      "target_roles": [
+        "genital_primary"
+      ],
+      "requires_part_tags": [
+        "hemipenis_tag"
+      ],
+      "priority": 56,
+      "stack_mode": "replace",
+      "mutation_cost": 4,
+      "hidden": false,
+      "effects": {
+        "genital_masculine": 0.8
+      },
+      "description_key": "desc.attr.hemipenis",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Single Shaft",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Two Shafts Budding",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Pair Of Hemipenes",
+          "pain_on_stage": 0
+        }
+      ],
+      "notice": "felt",
+      "notice_weight": 2.2
+    },
+    {
+      "id": "attr.species_genital",
+      "display_name": "Species Genitalia",
+      "family": "genital",
+      "tags": [
+        "genital_tag",
+        "species_genital_tag"
+      ],
+      "target_roles": [
+        "genital_primary",
+        "genital_secondary"
+      ],
+      "requires_part_tags": [
+        "genital_tag"
+      ],
+      "priority": 30,
+      "stack_mode": "additive",
+      "mutation_cost": 3,
+      "hidden": false,
+      "guaranteed": true,
+      "effects": {
+        "arousal": 14,
+        "genital_form": 1
+      },
+      "description_key": "desc.attr.species_genital",
+      "stages": [
+        {
+          "at": 0,
+          "name": "As They Were",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Shifting, Tender And Over-Sensitive",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "Refashioned To The New Species",
+          "pain_on_stage": 1
+        }
+      ],
+      "notice": "felt",
+      "notice_weight": 2.2
+    },
+    {
+      "id": "attr.canine_teeth",
+      "display_name": "Canine Teeth",
+      "family": "structure",
+      "tags": [
+        "teeth_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "target_roles": [
+        "teeth"
+      ],
+      "requires_part_tags": [
+        "teeth_tag"
+      ],
+      "priority": 45,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "morph_track": "morph.teeth_to_canine",
+      "effects": {
+        "diet_carnivore": 1
+      },
+      "description_key": "desc.attr.canine_teeth",
+      "stages": [
+        {
+          "at": 0,
+          "name": "Even Human Teeth",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "Teeth Sharpening At The Edges",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "A Full Set Of Pointed Canine Teeth",
+          "pain_on_stage": 2
+        }
+      ]
+    },
+    {
+      "id": "attr.beak",
+      "display_name": "Beak",
+      "family": "structure",
+      "tags": [
+        "beak_tag",
+        "avian_tag",
+        "mouth_tag"
+      ],
+      "target_roles": [
+        "mouth"
+      ],
+      "requires_part_tags": [
+        "beak_tag"
+      ],
+      "priority": 44,
+      "stack_mode": "replace",
+      "mutation_cost": 3,
+      "hidden": false,
+      "morph_track": "morph.mouth_to_beak",
+      "effects": {
+        "diet_omnivore": 1
+      },
+      "description_key": "desc.attr.beak",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Flat Face",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Protruding Ridge",
+          "pain_on_stage": 1
+        },
+        {
+          "at": 1,
+          "name": "A Hard Beak",
+          "pain_on_stage": 2
+        }
+      ]
+    }
+  ]
+}

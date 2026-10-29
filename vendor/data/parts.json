@@ -1,0 +1,4770 @@
+{
+  "parts_version": 1,
+  "parts": [
+    {
+      "id": "part.human_head",
+      "display_name": "Human Head",
+      "tags": [
+        "head_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "head",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "face",
+          "rel": "face"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "horns",
+        "voice"
+      ],
+      "integrity": 90,
+      "mass": 5,
+      "size_class": "medium",
+      "criticality": "vital"
+    },
+    {
+      "id": "part.canine_head",
+      "display_name": "Canine Head",
+      "tags": [
+        "head_tag",
+        "skin_tag",
+        "canine_tag",
+        "fur_tag"
+      ],
+      "occupies_role": "head",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "face",
+          "rel": "face"
+        }
+      ],
+      "innate_attributes": [
+        "attr.muzzle"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "horns",
+        "voice"
+      ],
+      "integrity": 88,
+      "mass": 5.4,
+      "size_class": "medium",
+      "criticality": "vital",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.muzzle_partial_head",
+      "display_name": "Half-Muzzled Head",
+      "tags": [
+        "head_tag",
+        "skin_tag",
+        "animal_tag"
+      ],
+      "occupies_role": "head",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "size",
+        "coat"
+      ],
+      "integrity": 58,
+      "mass": 3.6,
+      "size_class": "large",
+      "criticality": "major"
+    },
+    {
+      "id": "part.feline_head",
+      "display_name": "Feline Head",
+      "tags": [
+        "head_tag",
+        "skin_tag",
+        "feline_tag",
+        "fur_tag"
+      ],
+      "occupies_role": "head",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "face",
+          "rel": "face"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "horns",
+        "voice"
+      ],
+      "integrity": 88,
+      "mass": 5.2,
+      "size_class": "medium",
+      "criticality": "vital",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.rabbit_head",
+      "display_name": "Leporine Head",
+      "tags": [
+        "head_tag",
+        "skin_tag",
+        "rabbit_tag",
+        "fur_tag"
+      ],
+      "occupies_role": "head",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "face",
+          "rel": "face"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "horns",
+        "voice"
+      ],
+      "integrity": 86,
+      "mass": 4.8,
+      "size_class": "medium",
+      "criticality": "vital",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.bovine_head",
+      "display_name": "Bovine Head",
+      "tags": [
+        "head_tag",
+        "skin_tag",
+        "bovine_tag",
+        "fur_tag"
+      ],
+      "occupies_role": "head",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "face",
+          "rel": "face"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "horns",
+        "voice"
+      ],
+      "integrity": 92,
+      "mass": 6.2,
+      "size_class": "large",
+      "criticality": "vital",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.equine_head",
+      "display_name": "Equine Head",
+      "tags": [
+        "head_tag",
+        "skin_tag",
+        "equine_tag",
+        "fur_tag"
+      ],
+      "occupies_role": "head",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "face",
+          "rel": "face"
+        }
+      ],
+      "innate_attributes": [
+        "attr.muzzle"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "horns",
+        "voice"
+      ],
+      "integrity": 94,
+      "mass": 6.8,
+      "size_class": "large",
+      "criticality": "vital",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.avian_head",
+      "display_name": "Avian Head",
+      "tags": [
+        "head_tag",
+        "skin_tag",
+        "avian_tag",
+        "feather_tag"
+      ],
+      "occupies_role": "head",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "face",
+          "rel": "face"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "horns",
+        "voice"
+      ],
+      "integrity": 74,
+      "mass": 3.6,
+      "size_class": "small",
+      "criticality": "vital",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.serpent_head",
+      "display_name": "Serpent Head",
+      "tags": [
+        "head_tag",
+        "scale_tag",
+        "serpent_tag"
+      ],
+      "occupies_role": "head",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "face",
+          "rel": "face"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "horns",
+        "voice"
+      ],
+      "integrity": 80,
+      "mass": 4.4,
+      "size_class": "medium",
+      "criticality": "vital",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.bat_head",
+      "display_name": "Chiropteran Head",
+      "tags": [
+        "head_tag",
+        "skin_tag",
+        "bat_tag",
+        "fur_tag"
+      ],
+      "occupies_role": "head",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "face",
+          "rel": "face"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "horns",
+        "voice"
+      ],
+      "integrity": 72,
+      "mass": 3.2,
+      "size_class": "small",
+      "criticality": "vital",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.human_face",
+      "display_name": "Human Face",
+      "tags": [
+        "face_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "face",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "eyes",
+          "rel": "eyes"
+        },
+        {
+          "role": "nose",
+          "rel": "nose"
+        },
+        {
+          "role": "mouth",
+          "rel": "mouth"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure"
+      ],
+      "integrity": 70,
+      "mass": 1,
+      "size_class": "small",
+      "criticality": "major"
+    },
+    {
+      "id": "part.muzzled_face",
+      "display_name": "Muzzled Face",
+      "tags": [
+        "face_tag",
+        "skin_tag",
+        "fur_tag"
+      ],
+      "occupies_role": "face",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "eyes",
+          "rel": "eyes"
+        },
+        {
+          "role": "nose",
+          "rel": "nose"
+        },
+        {
+          "role": "mouth",
+          "rel": "mouth"
+        }
+      ],
+      "innate_attributes": [
+        "attr.muzzle"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure"
+      ],
+      "integrity": 70,
+      "mass": 1.2,
+      "size_class": "small",
+      "criticality": "major",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.serpent_face",
+      "display_name": "Serpent Face",
+      "tags": [
+        "face_tag",
+        "scale_tag",
+        "serpent_tag"
+      ],
+      "occupies_role": "face",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "eyes",
+          "rel": "eyes"
+        },
+        {
+          "role": "mouth",
+          "rel": "mouth"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure"
+      ],
+      "integrity": 68,
+      "mass": 1.1,
+      "size_class": "small",
+      "criticality": "major",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.human_hair",
+      "display_name": "Human Hair",
+      "tags": [
+        "hair_tag",
+        "human_tag"
+      ],
+      "occupies_role": "hair",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "coat"
+      ],
+      "integrity": 40,
+      "mass": 0.4,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "black"
+        },
+        "length": {
+          "kind": "length",
+          "unit": "in.",
+          "default": "12"
+        }
+      }
+    },
+    {
+      "id": "part.human_ears",
+      "display_name": "Human Ears",
+      "tags": [
+        "ears_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "ears",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "ears"
+      ],
+      "integrity": 30,
+      "mass": 0.1,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.mobile_ears",
+      "display_name": "Mobile Animal Ears",
+      "tags": [
+        "ears_tag",
+        "fur_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "occupies_role": "ears",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.mobile_ears"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "ears"
+      ],
+      "integrity": 34,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.long_ears",
+      "display_name": "Long Leporine Ears",
+      "tags": [
+        "ears_tag",
+        "fur_tag",
+        "rabbit_tag"
+      ],
+      "occupies_role": "ears",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.mobile_ears"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "ears"
+      ],
+      "integrity": 32,
+      "mass": 0.3,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.human_horns_absent",
+      "display_name": "Smooth Skull",
+      "tags": [
+        "horns_tag",
+        "human_tag",
+        "absent_tag"
+      ],
+      "occupies_role": "horns",
+      "layers": [
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "horns"
+      ],
+      "integrity": 20,
+      "mass": 0,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.bovine_horns",
+      "display_name": "Bovine Horns",
+      "tags": [
+        "horns_tag",
+        "bovine_tag",
+        "keratin"
+      ],
+      "occupies_role": "horns",
+      "layers": [
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.horns"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "horns"
+      ],
+      "integrity": 50,
+      "mass": 0.6,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.curling_horns",
+      "display_name": "Curling Horns",
+      "tags": [
+        "horns_tag",
+        "keratin"
+      ],
+      "occupies_role": "horns",
+      "layers": [
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.horns"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "horns"
+      ],
+      "integrity": 52,
+      "mass": 0.8,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.human_eyes",
+      "display_name": "Human Eyes",
+      "tags": [
+        "eyes_tag",
+        "human_tag"
+      ],
+      "occupies_role": "eyes",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "eyes"
+      ],
+      "integrity": 24,
+      "mass": 0.05,
+      "size_class": "small",
+      "criticality": "vital",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "values": [
+            "brown",
+            "hazel",
+            "green",
+            "blue",
+            "grey",
+            "amber",
+            "gold",
+            "copper",
+            "violet",
+            "red"
+          ],
+          "default": "brown"
+        }
+      }
+    },
+    {
+      "id": "part.night_eyes",
+      "display_name": "Night-Vision Eyes",
+      "tags": [
+        "eyes_tag",
+        "feline_tag",
+        "canine_tag"
+      ],
+      "occupies_role": "eyes",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.night_vision"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "eyes"
+      ],
+      "integrity": 26,
+      "mass": 0.05,
+      "size_class": "small",
+      "criticality": "vital",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "values": [
+            "brown",
+            "hazel",
+            "green",
+            "blue",
+            "grey",
+            "amber",
+            "gold",
+            "copper",
+            "violet",
+            "red"
+          ],
+          "default": "brown"
+        }
+      }
+    },
+    {
+      "id": "part.slit_eyes",
+      "display_name": "Slit-Pupil Eyes",
+      "tags": [
+        "eyes_tag",
+        "serpent_tag",
+        "scale_tag"
+      ],
+      "occupies_role": "eyes",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.thermal_pit"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "eyes"
+      ],
+      "integrity": 24,
+      "mass": 0.05,
+      "size_class": "small",
+      "criticality": "vital",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "values": [
+            "brown",
+            "hazel",
+            "green",
+            "blue",
+            "grey",
+            "amber",
+            "gold",
+            "copper",
+            "violet",
+            "red"
+          ],
+          "default": "brown"
+        }
+      }
+    },
+    {
+      "id": "part.human_nose",
+      "display_name": "Human Nose",
+      "tags": [
+        "nose_tag",
+        "human_tag"
+      ],
+      "occupies_role": "nose",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure"
+      ],
+      "integrity": 20,
+      "mass": 0.05,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.keen_nose",
+      "display_name": "Keen Animal Nose",
+      "tags": [
+        "nose_tag",
+        "fur_tag",
+        "canine_tag"
+      ],
+      "occupies_role": "nose",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.keen_smell"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure"
+      ],
+      "integrity": 22,
+      "mass": 0.06,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.human_mouth",
+      "display_name": "Human Mouth",
+      "tags": [
+        "mouth_tag",
+        "human_tag"
+      ],
+      "occupies_role": "mouth",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "teeth",
+          "rel": "teeth"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "voice"
+      ],
+      "integrity": 26,
+      "mass": 0.1,
+      "size_class": "small",
+      "criticality": "major"
+    },
+    {
+      "id": "part.muzzled_mouth",
+      "display_name": "Muzzled Mouth",
+      "tags": [
+        "mouth_tag",
+        "fur_tag",
+        "canine_tag"
+      ],
+      "occupies_role": "mouth",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "teeth",
+          "rel": "teeth"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "voice"
+      ],
+      "integrity": 28,
+      "mass": 0.12,
+      "size_class": "small",
+      "criticality": "major",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.human_tongue",
+      "display_name": "Human Tongue",
+      "tags": [
+        "tongue_tag",
+        "human_tag"
+      ],
+      "occupies_role": "tongue",
+      "layers": [
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "voice"
+      ],
+      "integrity": 20,
+      "mass": 0.05,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.forked_tongue",
+      "display_name": "Forked Tongue",
+      "tags": [
+        "tongue_tag",
+        "serpent_tag",
+        "scale_tag"
+      ],
+      "occupies_role": "tongue",
+      "layers": [
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.forked_tongue"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "voice"
+      ],
+      "integrity": 20,
+      "mass": 0.05,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.canine_tongue",
+      "display_name": "Canine Tongue",
+      "tags": [
+        "tongue_tag",
+        "canine_tag",
+        "animal_tag"
+      ],
+      "occupies_role": "tongue",
+      "layers": [
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.canine_tongue"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "voice"
+      ],
+      "integrity": 20,
+      "mass": 0.05,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.human_teeth",
+      "display_name": "Human Teeth",
+      "tags": [
+        "teeth_tag",
+        "human_tag"
+      ],
+      "occupies_role": "teeth",
+      "layers": [
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "fangs",
+          "rel": "fangs"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure"
+      ],
+      "integrity": 30,
+      "mass": 0.05,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.canine_teeth",
+      "display_name": "Canine Teeth",
+      "tags": [
+        "teeth_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "occupies_role": "teeth",
+      "layers": [
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "fangs",
+          "rel": "fangs"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure"
+      ],
+      "integrity": 32,
+      "mass": 0.06,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.human_fangs_absent",
+      "display_name": "Flat Dentition",
+      "tags": [
+        "fangs_tag",
+        "human_tag",
+        "absent_tag"
+      ],
+      "occupies_role": "fangs",
+      "layers": [
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure"
+      ],
+      "integrity": 12,
+      "mass": 0,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.canid_fangs",
+      "display_name": "Canid Fangs",
+      "tags": [
+        "fangs_tag",
+        "canine_tag",
+        "feline_tag",
+        "keratin"
+      ],
+      "occupies_role": "fangs",
+      "layers": [
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.fangs"
+      ],
+      "mutable_aspects": [
+        "structure"
+      ],
+      "integrity": 24,
+      "mass": 0.04,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.venom_fangs",
+      "display_name": "Venom Fangs",
+      "tags": [
+        "fangs_tag",
+        "serpent_tag",
+        "keratin"
+      ],
+      "occupies_role": "fangs",
+      "layers": [
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.venom_sac"
+      ],
+      "mutable_aspects": [
+        "structure"
+      ],
+      "integrity": 22,
+      "mass": 0.04,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.human_torso_upper",
+      "display_name": "Human Upper Torso",
+      "tags": [
+        "torso_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "torso_upper",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "chest",
+          "rel": "chest"
+        },
+        {
+          "role": "back",
+          "rel": "back"
+        },
+        {
+          "role": "arm_upper",
+          "rel": "arms"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat",
+        "size",
+        "bone"
+      ],
+      "integrity": 80,
+      "mass": 20,
+      "size_class": "large",
+      "criticality": "vital"
+    },
+    {
+      "id": "part.muscular_torso_upper",
+      "display_name": "Muscular Upper Torso",
+      "tags": [
+        "torso_tag",
+        "skin_tag",
+        "muscle_tag"
+      ],
+      "occupies_role": "torso_upper",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "chest",
+          "rel": "chest"
+        },
+        {
+          "role": "back",
+          "rel": "back"
+        },
+        {
+          "role": "arm_upper",
+          "rel": "arms"
+        }
+      ],
+      "innate_attributes": [
+        "attr.muscle_density"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat",
+        "size",
+        "bone"
+      ],
+      "integrity": 84,
+      "mass": 24,
+      "size_class": "large",
+      "criticality": "vital"
+    },
+    {
+      "id": "part.human_torso_lower",
+      "display_name": "Human Lower Torso",
+      "tags": [
+        "torso_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "torso_lower",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "abdomen",
+          "rel": "abdomen"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat",
+        "size"
+      ],
+      "integrity": 78,
+      "mass": 16,
+      "size_class": "large",
+      "criticality": "vital"
+    },
+    {
+      "id": "part.human_chest",
+      "display_name": "Human Chest",
+      "tags": [
+        "chest_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "chest",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "breasts",
+          "rel": "breasts"
+        },
+        {
+          "role": "nipples",
+          "rel": "nipples"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure"
+      ],
+      "integrity": 70,
+      "mass": 8,
+      "size_class": "medium",
+      "criticality": "major"
+    },
+    {
+      "id": "part.lactating_chest",
+      "display_name": "Lactating Chest",
+      "tags": [
+        "chest_tag",
+        "skin_tag",
+        "bovine_tag"
+      ],
+      "occupies_role": "chest",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "breasts",
+          "rel": "breasts"
+        },
+        {
+          "role": "nipples",
+          "rel": "nipples"
+        }
+      ],
+      "innate_attributes": [
+        "attr.lactation"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure"
+      ],
+      "integrity": 72,
+      "mass": 9,
+      "size_class": "medium",
+      "criticality": "major",
+      "appearance": {
+        "fullness": {
+          "kind": "fullness",
+          "bands": [
+            {
+              "min": 0,
+              "label": "dry"
+            },
+            {
+              "min": 25,
+              "label": "filling"
+            },
+            {
+              "min": 55,
+              "label": "heavy"
+            },
+            {
+              "min": 80,
+              "label": "brimming"
+            }
+          ],
+          "default": "dry"
+        }
+      }
+    },
+    {
+      "id": "part.flat_breasts",
+      "display_name": "Flat Chest",
+      "tags": [
+        "breasts_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "breasts",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "size",
+        "genital"
+      ],
+      "integrity": 30,
+      "mass": 1,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "cup": {
+          "kind": "size",
+          "values": [
+            "AA",
+            "A",
+            "B",
+            "C",
+            "D",
+            "DD",
+            "E",
+            "F",
+            "G",
+            "H"
+          ],
+          "default": "B"
+        },
+        "fullness": {
+          "kind": "fullness",
+          "bands": [
+            {
+              "min": 0,
+              "label": "dry"
+            },
+            {
+              "min": 25,
+              "label": "filling"
+            },
+            {
+              "min": 55,
+              "label": "heavy"
+            },
+            {
+              "min": 80,
+              "label": "brimming"
+            }
+          ],
+          "default": "dry"
+        }
+      }
+    },
+    {
+      "id": "part.full_breasts",
+      "display_name": "Full Breasts",
+      "tags": [
+        "breasts_tag",
+        "skin_tag"
+      ],
+      "occupies_role": "breasts",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "size",
+        "genital"
+      ],
+      "integrity": 32,
+      "mass": 2.5,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "cup": {
+          "kind": "size",
+          "values": [
+            "AA",
+            "A",
+            "B",
+            "C",
+            "D",
+            "DD",
+            "E",
+            "F",
+            "G",
+            "H"
+          ],
+          "default": "B"
+        },
+        "fullness": {
+          "kind": "fullness",
+          "bands": [
+            {
+              "min": 0,
+              "label": "dry"
+            },
+            {
+              "min": 25,
+              "label": "filling"
+            },
+            {
+              "min": 55,
+              "label": "heavy"
+            },
+            {
+              "min": 80,
+              "label": "brimming"
+            }
+          ],
+          "default": "dry"
+        }
+      }
+    },
+    {
+      "id": "part.human_nipples",
+      "display_name": "Human Nipples",
+      "tags": [
+        "nipples_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "nipples",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 14,
+      "mass": 0.02,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.human_back",
+      "display_name": "Human Back",
+      "tags": [
+        "back_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "back",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "wings",
+          "rel": "wings"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat"
+      ],
+      "integrity": 68,
+      "mass": 10,
+      "size_class": "medium",
+      "criticality": "major"
+    },
+    {
+      "id": "part.wings_absent",
+      "display_name": "No Wings",
+      "tags": [
+        "wings_tag",
+        "human_tag",
+        "absent_tag"
+      ],
+      "occupies_role": "wings",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "wings"
+      ],
+      "integrity": 10,
+      "mass": 0,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.feathered_wings",
+      "display_name": "Feathered Wings",
+      "tags": [
+        "wings_tag",
+        "avian_tag",
+        "feather_tag"
+      ],
+      "occupies_role": "wings",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.wings_glide"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "wings"
+      ],
+      "integrity": 46,
+      "mass": 3.5,
+      "size_class": "large",
+      "criticality": "major",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.membrane_wings",
+      "display_name": "Membrane Wings",
+      "tags": [
+        "wings_tag",
+        "bat_tag",
+        "skin_tag"
+      ],
+      "occupies_role": "wings",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.echolocation"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "wings"
+      ],
+      "integrity": 40,
+      "mass": 2.4,
+      "size_class": "large",
+      "criticality": "major"
+    },
+    {
+      "id": "part.human_abdomen",
+      "display_name": "Human Abdomen",
+      "tags": [
+        "abdomen_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "abdomen",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat"
+      ],
+      "integrity": 66,
+      "mass": 9,
+      "size_class": "medium",
+      "criticality": "major"
+    },
+    {
+      "id": "part.human_arm_upper",
+      "display_name": "Human Upper Arm",
+      "tags": [
+        "arm_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "arm_upper",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "arm_lower",
+          "rel": "forearm"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat",
+        "size",
+        "bone"
+      ],
+      "integrity": 60,
+      "mass": 3.2,
+      "size_class": "medium",
+      "criticality": "major"
+    },
+    {
+      "id": "part.human_arm_lower",
+      "display_name": "Human Forearm",
+      "tags": [
+        "arm_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "arm_lower",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "hand",
+          "rel": "hand"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat",
+        "size",
+        "bone"
+      ],
+      "integrity": 58,
+      "mass": 2.4,
+      "size_class": "medium",
+      "criticality": "major"
+    },
+    {
+      "id": "part.human_hand",
+      "display_name": "Human Hand",
+      "tags": [
+        "hand_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "hand",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "fingers",
+          "rel": "fingers"
+        },
+        {
+          "role": "nails_hand",
+          "rel": "nails"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "claws"
+      ],
+      "integrity": 50,
+      "mass": 0.6,
+      "size_class": "small",
+      "criticality": "major"
+    },
+    {
+      "id": "part.hybrid_paw",
+      "display_name": "Hybrid Paw",
+      "tags": [
+        "hand_tag",
+        "skin_tag",
+        "canine_tag",
+        "feline_tag",
+        "animal_tag"
+      ],
+      "occupies_role": "hand",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "fingers",
+          "rel": "fingers"
+        },
+        {
+          "role": "nails_hand",
+          "rel": "nails"
+        }
+      ],
+      "innate_attributes": [
+        "attr.paw_pads"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "claws"
+      ],
+      "integrity": 52,
+      "mass": 0.7,
+      "size_class": "small",
+      "criticality": "major"
+    },
+    {
+      "id": "part.thumbless_paw",
+      "display_name": "Thumbless Paw",
+      "tags": [
+        "hand_tag",
+        "skin_tag",
+        "canine_tag",
+        "feline_tag",
+        "animal_tag"
+      ],
+      "occupies_role": "hand",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "fingers",
+          "rel": "fingers"
+        },
+        {
+          "role": "nails_hand",
+          "rel": "nails"
+        }
+      ],
+      "innate_attributes": [
+        "attr.thumbless_paw",
+        "attr.paw_pads"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "claws"
+      ],
+      "integrity": 52,
+      "mass": 0.7,
+      "size_class": "small",
+      "criticality": "major"
+    },
+    {
+      "id": "part.human_fingers",
+      "display_name": "Human Fingers",
+      "tags": [
+        "fingers_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "fingers",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "claws"
+      ],
+      "integrity": 24,
+      "mass": 0.15,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.human_fingernails",
+      "display_name": "Human Fingernails",
+      "tags": [
+        "nails_tag",
+        "keratin",
+        "human_tag"
+      ],
+      "occupies_role": "nails_hand",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "claws"
+      ],
+      "integrity": 12,
+      "mass": 0.02,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.sharpening_nails",
+      "display_name": "Sharpening Nails",
+      "tags": [
+        "nails_tag",
+        "keratin"
+      ],
+      "occupies_role": "nails_hand",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "claws"
+      ],
+      "integrity": 16,
+      "mass": 0.03,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.partial_claws",
+      "display_name": "Partial Claws",
+      "tags": [
+        "nails_tag",
+        "keratin"
+      ],
+      "occupies_role": "nails_hand",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "claws"
+      ],
+      "integrity": 20,
+      "mass": 0.04,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.canid_claws_hand",
+      "display_name": "Canid Claws (Hand)",
+      "tags": [
+        "nails_tag",
+        "keratin",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "occupies_role": "nails_hand",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.canine_claws"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "claws"
+      ],
+      "integrity": 24,
+      "mass": 0.05,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.human_toenails_intermediate",
+      "display_name": "Thickening Toenails",
+      "tags": [
+        "nails_tag",
+        "keratin"
+      ],
+      "occupies_role": "nails_foot",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "claws"
+      ],
+      "integrity": 15,
+      "mass": 0.03,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.tail_bud",
+      "display_name": "Tail Bud",
+      "tags": [
+        "tail_tag",
+        "skin_tag"
+      ],
+      "occupies_role": "tail",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "coat",
+        "tail"
+      ],
+      "integrity": 18,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.tail_short",
+      "display_name": "Short Tail",
+      "tags": [
+        "tail_tag",
+        "fur_tag"
+      ],
+      "occupies_role": "tail",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.tail_growth"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "coat",
+        "tail"
+      ],
+      "integrity": 30,
+      "mass": 0.6,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.digitigrade_foot_partial",
+      "display_name": "Semi-Digitigrade Foot",
+      "tags": [
+        "foot_tag",
+        "skin_tag",
+        "pads_tag"
+      ],
+      "occupies_role": "foot_base",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "toes",
+          "rel": "toes"
+        },
+        {
+          "role": "nails_foot",
+          "rel": "nails"
+        }
+      ],
+      "innate_attributes": [
+        "attr.paw_pads"
+      ],
+      "mutable_aspects": [
+        "claws",
+        "coat",
+        "structure",
+        "gait"
+      ],
+      "integrity": 56,
+      "mass": 1,
+      "size_class": "small",
+      "criticality": "major"
+    },
+    {
+      "id": "part.hand_partial_paw",
+      "display_name": "Semi-Paw Hand",
+      "tags": [
+        "hand_tag",
+        "skin_tag",
+        "pads_tag"
+      ],
+      "occupies_role": "hand",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "fingers",
+          "rel": "fingers"
+        },
+        {
+          "role": "nails_hand",
+          "rel": "nails"
+        }
+      ],
+      "innate_attributes": [
+        "attr.paw_pads"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "claws"
+      ],
+      "integrity": 50,
+      "mass": 0.65,
+      "size_class": "small",
+      "criticality": "major"
+    },
+    {
+      "id": "part.horn_buds",
+      "display_name": "Horn Buds",
+      "tags": [
+        "horns_tag",
+        "keratin"
+      ],
+      "occupies_role": "horns",
+      "layers": [
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "horns"
+      ],
+      "integrity": 26,
+      "mass": 0.1,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.short_horns",
+      "display_name": "Short Horns",
+      "tags": [
+        "horns_tag",
+        "keratin"
+      ],
+      "occupies_role": "horns",
+      "layers": [
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.horns"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "horns"
+      ],
+      "integrity": 38,
+      "mass": 0.3,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.wing_nubs",
+      "display_name": "Wing Nubs",
+      "tags": [
+        "wings_tag",
+        "skin_tag"
+      ],
+      "occupies_role": "wings",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "wings"
+      ],
+      "integrity": 18,
+      "mass": 0.3,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.wing_membrane_partial",
+      "display_name": "Partial Membrane Wings",
+      "tags": [
+        "wings_tag",
+        "bat_tag",
+        "skin_tag"
+      ],
+      "occupies_role": "wings",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.structure_membrane"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "wings"
+      ],
+      "integrity": 30,
+      "mass": 1.4,
+      "size_class": "medium",
+      "criticality": "major"
+    },
+    {
+      "id": "part.serpent_tail_mid",
+      "display_name": "Lengthening Serpent Tail",
+      "tags": [
+        "tail_tag",
+        "scale_tag",
+        "serpent_tag",
+        "leg_tag"
+      ],
+      "occupies_role": "leg_lower",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "absorb_siblings",
+      "provides": [
+        {
+          "role": "tail",
+          "rel": "tail"
+        }
+      ],
+      "innate_attributes": [
+        "attr.structure_leg_fusion"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "coat",
+        "gait",
+        "size",
+        "bone"
+      ],
+      "integrity": 56,
+      "mass": 12,
+      "size_class": "large",
+      "criticality": "major",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.cloven_hoof",
+      "display_name": "Cloven Hoof",
+      "tags": [
+        "foot_tag",
+        "bovine_tag",
+        "keratin"
+      ],
+      "occupies_role": "foot_base",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "nails_foot",
+          "rel": "nails"
+        }
+      ],
+      "innate_attributes": [
+        "attr.digitigrade"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "gait"
+      ],
+      "integrity": 62,
+      "mass": 1.3,
+      "size_class": "small",
+      "criticality": "major"
+    },
+    {
+      "id": "part.scaled_patch",
+      "display_name": "Scaled Patch",
+      "tags": [
+        "skin_tag",
+        "scale_tag"
+      ],
+      "occupies_role": "torso_upper",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "chest",
+          "rel": "chest"
+        },
+        {
+          "role": "back",
+          "rel": "back"
+        },
+        {
+          "role": "arm_upper",
+          "rel": "arms"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat",
+        "size",
+        "bone"
+      ],
+      "integrity": 78,
+      "mass": 20,
+      "size_class": "large",
+      "criticality": "vital",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.furred_torso_upper",
+      "display_name": "Furred Upper Torso",
+      "tags": [
+        "torso_tag",
+        "skin_tag",
+        "fur_tag"
+      ],
+      "occupies_role": "torso_upper",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "chest",
+          "rel": "chest"
+        },
+        {
+          "role": "back",
+          "rel": "back"
+        },
+        {
+          "role": "arm_upper",
+          "rel": "arms"
+        }
+      ],
+      "innate_attributes": [
+        "attr.mammalian_fur"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat",
+        "size",
+        "bone"
+      ],
+      "integrity": 80,
+      "mass": 20,
+      "size_class": "large",
+      "criticality": "vital",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.human_pelvis",
+      "display_name": "Human Pelvis",
+      "tags": [
+        "pelvis_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "pelvis",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "genital_primary",
+          "rel": "genital"
+        },
+        {
+          "role": "genital_secondary",
+          "rel": "genital"
+        },
+        {
+          "role": "tail",
+          "rel": "tail"
+        },
+        {
+          "role": "leg_upper",
+          "rel": "legs"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat"
+      ],
+      "integrity": 74,
+      "mass": 12,
+      "size_class": "large",
+      "criticality": "vital"
+    },
+    {
+      "id": "part.human_genital_primary_absent",
+      "display_name": "No Primary Genital",
+      "tags": [
+        "genital_tag",
+        "human_tag",
+        "absent_tag"
+      ],
+      "occupies_role": "genital_primary",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital"
+      ],
+      "integrity": 10,
+      "mass": 0,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.penis",
+      "display_name": "Penis",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "human_tag",
+        "penis_tag"
+      ],
+      "occupies_role": "genital_primary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 30,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "length": {
+          "kind": "length",
+          "unit": "in.",
+          "default": "5"
+        }
+      }
+    },
+    {
+      "id": "part.partial_sheath_penis",
+      "display_name": "Emerging Sheath Penis",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "penis_tag",
+        "sheathed_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "genital_primary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 30,
+      "mass": 0.22,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.sheath_penis",
+      "display_name": "Sheathed Penis",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "penis_tag",
+        "sheathed_tag",
+        "canine_tag",
+        "feline_tag",
+        "rabbit_tag",
+        "bat_tag"
+      ],
+      "occupies_role": "genital_primary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 32,
+      "mass": 0.25,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "length": {
+          "kind": "length",
+          "unit": "in.",
+          "default": "5"
+        }
+      }
+    },
+    {
+      "id": "part.equine_penis",
+      "display_name": "Equine Penis",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "penis_tag",
+        "equine_tag"
+      ],
+      "occupies_role": "genital_primary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 34,
+      "mass": 0.4,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "length": {
+          "kind": "length",
+          "unit": "in.",
+          "default": "5"
+        }
+      }
+    },
+    {
+      "id": "part.bovine_penis",
+      "display_name": "Bovine Penis",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "penis_tag",
+        "bovine_tag"
+      ],
+      "occupies_role": "genital_primary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 33,
+      "mass": 0.38,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "length": {
+          "kind": "length",
+          "unit": "in.",
+          "default": "5"
+        }
+      }
+    },
+    {
+      "id": "part.hemipenes",
+      "display_name": "Hemipenes",
+      "tags": [
+        "genital_tag",
+        "penis_tag",
+        "hemipenis_tag",
+        "scale_tag",
+        "serpent_tag"
+      ],
+      "occupies_role": "genital_primary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.hemipenis"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 28,
+      "mass": 0.18,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.human_genital_secondary_absent",
+      "display_name": "No Secondary Genital",
+      "tags": [
+        "genital_tag",
+        "human_tag",
+        "absent_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital"
+      ],
+      "integrity": 10,
+      "mass": 0,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.vulva",
+      "display_name": "Vulva",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "human_tag",
+        "vulva_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 30,
+      "mass": 0.1,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.canid_vulva",
+      "display_name": "Canid Vulva",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "vulva_tag",
+        "canine_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 32,
+      "mass": 0.12,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.feline_vulva",
+      "display_name": "Feline Vulva",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "vulva_tag",
+        "feline_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 31,
+      "mass": 0.11,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.leporine_vulva",
+      "display_name": "Leporine Vulva",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "vulva_tag",
+        "rabbit_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 31,
+      "mass": 0.11,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.chiropteran_vulva",
+      "display_name": "Chiropteran Vulva",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "vulva_tag",
+        "bat_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 30,
+      "mass": 0.1,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.equine_vulva",
+      "display_name": "Equine Vulva",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "vulva_tag",
+        "equine_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 34,
+      "mass": 0.16,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.bovine_vulva",
+      "display_name": "Bovine Vulva",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "vulva_tag",
+        "bovine_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 33,
+      "mass": 0.15,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.scrotum",
+      "display_name": "Scrotum",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "human_tag",
+        "scrotum_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 28,
+      "mass": 0.15,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.mammal_scrotum",
+      "display_name": "Furred Scrotum",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "scrotum_tag",
+        "mammal_tag",
+        "fur_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size",
+        "coat"
+      ],
+      "integrity": 29,
+      "mass": 0.16,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.cloaca",
+      "display_name": "Cloaca",
+      "tags": [
+        "genital_tag",
+        "scale_tag",
+        "serpent_tag",
+        "avian_tag",
+        "cloaca_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 30,
+      "mass": 0.12,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.tail_absent",
+      "display_name": "No Tail",
+      "tags": [
+        "tail_tag",
+        "human_tag",
+        "absent_tag"
+      ],
+      "occupies_role": "tail",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "tail"
+      ],
+      "integrity": 8,
+      "mass": 0,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.bushy_tail",
+      "display_name": "Bushy Tail",
+      "tags": [
+        "tail_tag",
+        "fur_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "occupies_role": "tail",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.tail_growth"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "coat",
+        "tail"
+      ],
+      "integrity": 40,
+      "mass": 1.2,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.short_tail",
+      "display_name": "Short Tail",
+      "tags": [
+        "tail_tag",
+        "fur_tag",
+        "rabbit_tag"
+      ],
+      "occupies_role": "tail",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.tail_growth"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "coat",
+        "tail"
+      ],
+      "integrity": 30,
+      "mass": 0.4,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.serpent_tail_segment",
+      "display_name": "Serpent Tail Segment",
+      "tags": [
+        "tail_tag",
+        "scale_tag",
+        "serpent_tag",
+        "leg_tag"
+      ],
+      "occupies_role": "leg_lower",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "absorb_siblings",
+      "provides": [
+        {
+          "role": "tail",
+          "rel": "tail"
+        }
+      ],
+      "innate_attributes": [
+        "attr.structure_leg_fusion"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "coat",
+        "gait",
+        "size",
+        "bone"
+      ],
+      "integrity": 70,
+      "mass": 18,
+      "size_class": "large",
+      "criticality": "major",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.human_leg_upper",
+      "display_name": "Human Thigh",
+      "tags": [
+        "leg_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "leg_upper",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "leg_lower",
+          "rel": "shin"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat",
+        "gait",
+        "size",
+        "bone"
+      ],
+      "integrity": 62,
+      "mass": 7,
+      "size_class": "large",
+      "criticality": "major"
+    },
+    {
+      "id": "part.digitigrade_leg_upper",
+      "display_name": "Digitigrade Thigh",
+      "tags": [
+        "leg_tag",
+        "skin_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "occupies_role": "leg_upper",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "leg_lower",
+          "rel": "shin"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat",
+        "gait",
+        "size",
+        "bone"
+      ],
+      "integrity": 64,
+      "mass": 7.6,
+      "size_class": "large",
+      "criticality": "major"
+    },
+    {
+      "id": "part.tendonous_thigh",
+      "display_name": "Tightening Thigh",
+      "tags": [
+        "leg_tag",
+        "skin_tag",
+        "canine_tag",
+        "feline_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "leg_upper",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "leg_lower",
+          "rel": "shin"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat",
+        "gait",
+        "size",
+        "bone"
+      ],
+      "integrity": 62,
+      "mass": 7.2,
+      "size_class": "large",
+      "criticality": "major"
+    },
+    {
+      "id": "part.human_leg_lower",
+      "display_name": "Human Shin",
+      "tags": [
+        "leg_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "leg_lower",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "foot_base",
+          "rel": "foot"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "muscle",
+        "structure",
+        "coat",
+        "gait",
+        "size",
+        "bone"
+      ],
+      "integrity": 58,
+      "mass": 4.5,
+      "size_class": "medium",
+      "criticality": "major"
+    },
+    {
+      "id": "part.human_foot",
+      "display_name": "Human Foot",
+      "tags": [
+        "foot_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "foot_base",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "toes",
+          "rel": "toes"
+        },
+        {
+          "role": "nails_foot",
+          "rel": "nails"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "gait",
+        "claws"
+      ],
+      "integrity": 54,
+      "mass": 1,
+      "size_class": "small",
+      "criticality": "major"
+    },
+    {
+      "id": "part.digitigrade_foot",
+      "display_name": "Digitigrade Foot",
+      "tags": [
+        "foot_tag",
+        "canine_tag",
+        "feline_tag",
+        "skin_tag",
+        "pads_tag"
+      ],
+      "occupies_role": "foot_base",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "toes",
+          "rel": "toes"
+        },
+        {
+          "role": "nails_foot",
+          "rel": "nails"
+        }
+      ],
+      "innate_attributes": [
+        "attr.paw_pads",
+        "attr.digitigrade"
+      ],
+      "mutable_aspects": [
+        "claws",
+        "coat",
+        "structure",
+        "gait"
+      ],
+      "integrity": 60,
+      "mass": 1.1,
+      "size_class": "small",
+      "criticality": "major"
+    },
+    {
+      "id": "part.hoof",
+      "display_name": "Hoof",
+      "tags": [
+        "foot_tag",
+        "bovine_tag",
+        "equine_tag",
+        "keratin"
+      ],
+      "occupies_role": "foot_base",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "nails_foot",
+          "rel": "nails"
+        }
+      ],
+      "innate_attributes": [
+        "attr.digitigrade"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "gait"
+      ],
+      "integrity": 64,
+      "mass": 1.4,
+      "size_class": "small",
+      "criticality": "major"
+    },
+    {
+      "id": "part.human_toes",
+      "display_name": "Human Toes",
+      "tags": [
+        "toes_tag",
+        "skin_tag",
+        "human_tag"
+      ],
+      "occupies_role": "toes",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "nails_foot",
+          "rel": "nails"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "claws"
+      ],
+      "integrity": 20,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.paw_toes",
+      "display_name": "Paw Toes",
+      "tags": [
+        "toes_tag",
+        "pads_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "occupies_role": "toes",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "nails_foot",
+          "rel": "nails"
+        }
+      ],
+      "innate_attributes": [
+        "attr.paw_pads"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "claws"
+      ],
+      "integrity": 22,
+      "mass": 0.25,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.human_toenails",
+      "display_name": "Human Toenails",
+      "tags": [
+        "nails_tag",
+        "keratin",
+        "human_tag"
+      ],
+      "occupies_role": "nails_foot",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "claws"
+      ],
+      "integrity": 12,
+      "mass": 0.02,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.canid_claws_foot",
+      "display_name": "Canid Claws (Foot)",
+      "tags": [
+        "nails_tag",
+        "keratin",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "occupies_role": "nails_foot",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.canine_claws"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "claws"
+      ],
+      "integrity": 24,
+      "mass": 0.05,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.multiple_nipples",
+      "display_name": "Mammary Row",
+      "tags": [
+        "nipples_tag",
+        "mammary_tag",
+        "skin_tag"
+      ],
+      "occupies_role": "nipples",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.lactation"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 26,
+      "mass": 0.03,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.udder_nipples",
+      "display_name": "Udder",
+      "tags": [
+        "nipples_tag",
+        "mammary_tag",
+        "bovine_tag",
+        "skin_tag"
+      ],
+      "occupies_role": "nipples",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.lactation",
+        "attr.heavy_muscle"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "size"
+      ],
+      "integrity": 30,
+      "mass": 0.12,
+      "size_class": "medium",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.avian_cloaca",
+      "display_name": "Avian Vent",
+      "tags": [
+        "genital_tag",
+        "cloaca_tag",
+        "avian_tag",
+        "skin_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.cloaca"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 28,
+      "mass": 0.04,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.tapetum_eyes",
+      "display_name": "Tapetum Eyes",
+      "tags": [
+        "eyes_tag",
+        "tapetum_tag",
+        "canine_tag",
+        "feline_tag"
+      ],
+      "occupies_role": "eyes",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.night_vision",
+        "attr.keen_sight"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "eyes",
+        "structure"
+      ],
+      "integrity": 26,
+      "mass": 0.03,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "values": [
+            "brown",
+            "hazel",
+            "green",
+            "blue",
+            "grey",
+            "amber",
+            "gold",
+            "copper",
+            "violet",
+            "red"
+          ],
+          "default": "brown"
+        }
+      }
+    },
+    {
+      "id": "part.whisker_ears",
+      "display_name": "Whisker Ears",
+      "tags": [
+        "ears_tag",
+        "whisker_tag",
+        "feline_tag",
+        "rabbit_tag"
+      ],
+      "occupies_role": "ears",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.mobile_ears",
+        "attr.keen_smell"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "ears",
+        "structure"
+      ],
+      "integrity": 26,
+      "mass": 0.04,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.rattle_ears",
+      "display_name": "Rattle Ears",
+      "tags": [
+        "ears_tag",
+        "fur_tag",
+        "rabbit_tag"
+      ],
+      "occupies_role": "ears",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.mobile_ears"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "ears",
+        "structure"
+      ],
+      "integrity": 24,
+      "mass": 0.03,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.intermediate_claws",
+      "display_name": "Hardened Claws",
+      "tags": [
+        "nails_tag",
+        "keratin",
+        "transitional_tag"
+      ],
+      "occupies_role": "nails_hand",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.canine_claws"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "claws"
+      ],
+      "integrity": 22,
+      "mass": 0.04,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.partial_horns",
+      "display_name": "Horn Nubs",
+      "tags": [
+        "horns_tag",
+        "keratin",
+        "transitional_tag"
+      ],
+      "occupies_role": "horns",
+      "layers": [
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.horns"
+      ],
+      "mutable_aspects": [
+        "bone",
+        "horns",
+        "structure"
+      ],
+      "integrity": 24,
+      "mass": 0.08,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.intermediate_hoof",
+      "display_name": "Parting Hoof",
+      "tags": [
+        "hoof_tag",
+        "keratin",
+        "transitional_tag",
+        "bovine_tag",
+        "equine_tag"
+      ],
+      "occupies_role": "foot_base",
+      "layers": [
+        "bone",
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.cloven_toes"
+      ],
+      "mutable_aspects": [
+        "gait",
+        "structure",
+        "bone"
+      ],
+      "integrity": 26,
+      "mass": 0.18,
+      "size_class": "medium",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.budding_wings",
+      "display_name": "Wing Buds",
+      "tags": [
+        "wings_tag",
+        "membrane_tag",
+        "transitional_tag",
+        "avian_tag",
+        "chiropteran_tag"
+      ],
+      "occupies_role": "wings",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.wings_glide"
+      ],
+      "mutable_aspects": [
+        "wings",
+        "structure",
+        "size"
+      ],
+      "integrity": 20,
+      "mass": 0.1,
+      "size_class": "medium",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.beak",
+      "display_name": "Beak",
+      "tags": [
+        "mouth_tag",
+        "beak_tag",
+        "avian_tag",
+        "keratin"
+      ],
+      "occupies_role": "mouth",
+      "layers": [
+        "bone",
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.beak"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "voice",
+        "bone"
+      ],
+      "integrity": 26,
+      "mass": 0.06,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.avian_claws",
+      "display_name": "Avian Claws",
+      "tags": [
+        "nails_tag",
+        "keratin",
+        "avian_tag"
+      ],
+      "occupies_role": "nails_hand",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.canine_claws"
+      ],
+      "mutable_aspects": [
+        "structure",
+        "claws"
+      ],
+      "integrity": 20,
+      "mass": 0.03,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.broadened_nose",
+      "display_name": "Broadened Nose",
+      "tags": [
+        "nose_tag",
+        "fur_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "nose",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "size"
+      ],
+      "integrity": 20,
+      "mass": 0.05,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.sharpening_teeth",
+      "display_name": "Sharpening Teeth",
+      "tags": [
+        "teeth_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "teeth",
+      "layers": [
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "size"
+      ],
+      "integrity": 18,
+      "mass": 0.04,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.growing_fangs",
+      "display_name": "Growing Fangs",
+      "tags": [
+        "fangs_tag",
+        "keratin",
+        "transitional_tag"
+      ],
+      "occupies_role": "fangs",
+      "layers": [
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "size"
+      ],
+      "integrity": 14,
+      "mass": 0.03,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.notched_tongue",
+      "display_name": "Notched Tongue",
+      "tags": [
+        "tongue_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "tongue",
+      "layers": [
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "size"
+      ],
+      "integrity": 12,
+      "mass": 0.03,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.spreading_toes",
+      "display_name": "Spreading Toes",
+      "tags": [
+        "toes_tag",
+        "pads_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "toes",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "claws"
+      ],
+      "integrity": 20,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.tender_mouth",
+      "display_name": "Narrowing Mouth",
+      "tags": [
+        "mouth_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "mouth",
+      "layers": [
+        "skin",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "voice"
+      ],
+      "integrity": 18,
+      "mass": 0.04,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.broadening_head",
+      "display_name": "Broadening Head",
+      "tags": [
+        "head_tag",
+        "transitional_tag",
+        "animal_tag"
+      ],
+      "occupies_role": "head",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "size",
+        "coat"
+      ],
+      "integrity": 58,
+      "mass": 3.6,
+      "size_class": "large",
+      "criticality": "major"
+    },
+    {
+      "id": "part.small_animal_head",
+      "display_name": "Small Animal Head",
+      "tags": [
+        "head_tag",
+        "fur_tag",
+        "canine_tag",
+        "feline_tag",
+        "rabbit_tag",
+        "bat_tag",
+        "animal_tag"
+      ],
+      "occupies_role": "head",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "size",
+        "coat"
+      ],
+      "integrity": 56,
+      "mass": 2,
+      "size_class": "medium",
+      "criticality": "major",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.equine_scrotum",
+      "display_name": "Equine Scrotum",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "scrotum_tag",
+        "equine_tag",
+        "fur_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size",
+        "coat"
+      ],
+      "integrity": 29,
+      "mass": 0.16,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.bovine_scrotum",
+      "display_name": "Bovine Scrotum",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "scrotum_tag",
+        "bovine_tag",
+        "fur_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size",
+        "coat"
+      ],
+      "integrity": 29,
+      "mass": 0.16,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.canid_ears",
+      "display_name": "Canid Ears",
+      "tags": [
+        "ears_tag",
+        "fur_tag",
+        "canine_tag",
+        "mobile_ears_tag"
+      ],
+      "occupies_role": "ears",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.mobile_ears"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "ears"
+      ],
+      "integrity": 34,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.feline_ears",
+      "display_name": "Feline Ears",
+      "tags": [
+        "ears_tag",
+        "fur_tag",
+        "feline_tag",
+        "mobile_ears_tag"
+      ],
+      "occupies_role": "ears",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.mobile_ears"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "ears"
+      ],
+      "integrity": 34,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.chiropteran_ears",
+      "display_name": "Chiropteran Ears",
+      "tags": [
+        "ears_tag",
+        "fur_tag",
+        "bat_tag",
+        "mobile_ears_tag"
+      ],
+      "occupies_role": "ears",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.mobile_ears",
+        "attr.echolocation"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "ears"
+      ],
+      "integrity": 34,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.leporine_ears",
+      "display_name": "Leporine Ears",
+      "tags": [
+        "ears_tag",
+        "fur_tag",
+        "rabbit_tag",
+        "long_ears_tag"
+      ],
+      "occupies_role": "ears",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.long_ears"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "ears"
+      ],
+      "integrity": 34,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.canid_sheath_penis",
+      "display_name": "Canid Sheath Penis",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "penis_tag",
+        "sheathed_tag",
+        "canine_tag"
+      ],
+      "occupies_role": "genital_primary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 32,
+      "mass": 0.25,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "length": {
+          "kind": "length",
+          "unit": "in.",
+          "default": "5"
+        }
+      }
+    },
+    {
+      "id": "part.feline_sheath_penis",
+      "display_name": "Feline Sheath Penis",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "penis_tag",
+        "sheathed_tag",
+        "feline_tag"
+      ],
+      "occupies_role": "genital_primary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 32,
+      "mass": 0.25,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "length": {
+          "kind": "length",
+          "unit": "in.",
+          "default": "5"
+        }
+      }
+    },
+    {
+      "id": "part.leporine_sheath_penis",
+      "display_name": "Leporine Sheath Penis",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "penis_tag",
+        "sheathed_tag",
+        "rabbit_tag"
+      ],
+      "occupies_role": "genital_primary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 32,
+      "mass": 0.25,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "length": {
+          "kind": "length",
+          "unit": "in.",
+          "default": "5"
+        }
+      }
+    },
+    {
+      "id": "part.chiropteran_sheath_penis",
+      "display_name": "Chiropteran Sheath Penis",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "penis_tag",
+        "sheathed_tag",
+        "bat_tag"
+      ],
+      "occupies_role": "genital_primary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 32,
+      "mass": 0.25,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "length": {
+          "kind": "length",
+          "unit": "in.",
+          "default": "5"
+        }
+      }
+    },
+    {
+      "id": "part.bovine_ears",
+      "display_name": "Bovine Ears",
+      "tags": [
+        "ears_tag",
+        "fur_tag",
+        "bovine_tag",
+        "mobile_ears_tag"
+      ],
+      "occupies_role": "ears",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.mobile_ears"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "ears"
+      ],
+      "integrity": 34,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.equine_ears",
+      "display_name": "Equine Ears",
+      "tags": [
+        "ears_tag",
+        "fur_tag",
+        "equine_tag",
+        "mobile_ears_tag"
+      ],
+      "occupies_role": "ears",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.mobile_ears"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "ears"
+      ],
+      "integrity": 34,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.avian_ears",
+      "display_name": "Avian Ear Tufts",
+      "tags": [
+        "ears_tag",
+        "feather_tag",
+        "avian_tag",
+        "mobile_ears_tag"
+      ],
+      "occupies_role": "ears",
+      "layers": [
+        "skin"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.mobile_ears"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "ears"
+      ],
+      "integrity": 34,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "colour": {
+          "kind": "colour",
+          "default": "natural"
+        }
+      }
+    },
+    {
+      "id": "part.swelling_vulva",
+      "display_name": "Swelling Vulva",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "vulva_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 30,
+      "mass": 0.1,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.tightening_scrotum",
+      "display_name": "Tightening Scrotum",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "scrotum_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 30,
+      "mass": 0.1,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.enlarging_penis",
+      "display_name": "Enlarging Penis",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "penis_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "genital_primary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 30,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "length": {
+          "kind": "length",
+          "unit": "in.",
+          "default": "5"
+        }
+      }
+    },
+    {
+      "id": "part.growing_hemipenes",
+      "display_name": "Growing Hemipenes",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "penis_tag",
+        "hemipenis_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "genital_primary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 30,
+      "mass": 0.2,
+      "size_class": "small",
+      "criticality": "minor",
+      "appearance": {
+        "length": {
+          "kind": "length",
+          "unit": "in.",
+          "default": "5"
+        }
+      }
+    },
+    {
+      "id": "part.forming_cloaca",
+      "display_name": "Forming Cloaca",
+      "tags": [
+        "genital_tag",
+        "skin_tag",
+        "cloaca_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "genital_secondary",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "genital",
+        "size"
+      ],
+      "integrity": 30,
+      "mass": 0.1,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.rising_heel_foot",
+      "display_name": "Rising-Heel Foot",
+      "tags": [
+        "foot_tag",
+        "skin_tag"
+      ],
+      "occupies_role": "foot_base",
+      "layers": [
+        "skin",
+        "muscle",
+        "bone"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "toes",
+          "rel": "toes"
+        },
+        {
+          "role": "nails_foot",
+          "rel": "nails"
+        }
+      ],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "claws",
+        "coat",
+        "structure",
+        "gait"
+      ],
+      "integrity": 56,
+      "mass": 1,
+      "size_class": "small",
+      "criticality": "major"
+    },
+    {
+      "id": "part.high_arch_foot",
+      "display_name": "High-Arch Foot",
+      "tags": [
+        "foot_tag",
+        "skin_tag",
+        "pads_tag"
+      ],
+      "occupies_role": "foot_base",
+      "layers": [
+        "skin",
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [
+        {
+          "role": "toes",
+          "rel": "toes"
+        },
+        {
+          "role": "nails_foot",
+          "rel": "nails"
+        }
+      ],
+      "innate_attributes": [
+        "attr.paw_pads"
+      ],
+      "mutable_aspects": [
+        "claws",
+        "coat",
+        "structure",
+        "gait"
+      ],
+      "integrity": 58,
+      "mass": 1,
+      "size_class": "small",
+      "criticality": "major"
+    }
+  ]
+}

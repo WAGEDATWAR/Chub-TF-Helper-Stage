@@ -1,0 +1,526 @@
+{
+  "events_version": 1,
+  "_comment": "Closed event registry (blueprint §3.3, D-135). Emitting an unregistered type throws. `base` is salience 0..1; `mods` add when their condition holds; `line` is the story-log template (tokens from the payload); `throttle` suppresses a repeat on the same path within the window unless the event carries final:true.",
+  "config": {
+    "floor": 0.5,
+    "throttle_window": 3,
+    "quiet_threshold": 12
+  },
+  "events": [
+    {
+      "type": "world.tick",
+      "base": 0.15,
+      "line": "",
+      "category": "world",
+      "fields": [
+        "block",
+        "day",
+        "tick"
+      ]
+    },
+    {
+      "type": "day.advanced",
+      "base": 0.2,
+      "line": "— day {day} —",
+      "category": "world",
+      "fields": [
+        "day"
+      ]
+    },
+    {
+      "type": "scene.changed",
+      "base": 0.15,
+      "line": "",
+      "category": "world",
+      "fields": [
+        "scene"
+      ]
+    },
+    {
+      "type": "attribute.applied",
+      "base": 0.4,
+      "throttle": true,
+      "path_keys": [
+        "slot",
+        "attribute"
+      ],
+      "line": "{attribute} stirs on the {slot}",
+      "category": "change",
+      "fields": [
+        "attribute",
+        "slot"
+      ]
+    },
+    {
+      "type": "attribute.progressed",
+      "base": 0.55,
+      "throttle": true,
+      "path_keys": [
+        "slot",
+        "attribute"
+      ],
+      "line": "{attribute}: {pct}%",
+      "category": "change",
+      "fields": [
+        "attribute",
+        "pct",
+        "slot"
+      ]
+    },
+    {
+      "type": "stage.crossed",
+      "base": 0.75,
+      "path_keys": [
+        "slot",
+        "attribute"
+      ],
+      "line": "the {slot} reaches {stage}",
+      "category": "change",
+      "fields": [
+        "attribute",
+        "pct",
+        "slot",
+        "stage"
+      ]
+    },
+    {
+      "type": "attribute.reverted",
+      "base": 0.6,
+      "line": "the {slot} loses {attribute}",
+      "category": "change",
+      "fields": [
+        "slot",
+        "attribute",
+        "stage",
+        "pct"
+      ]
+    },
+    {
+      "type": "attribute.settled",
+      "base": 0.7,
+      "line": "{attribute} settles at {stage}",
+      "category": "change",
+      "fields": [
+        "attribute",
+        "slot",
+        "stage"
+      ]
+    },
+    {
+      "type": "ability.granted",
+      "base": 0.8,
+      "line": "she gains {name}",
+      "category": "ability",
+      "fields": [
+        "ability",
+        "name"
+      ]
+    },
+    {
+      "type": "practice.done",
+      "base": 0.5,
+      "throttle": true,
+      "line": "she practises {name} ({kind})",
+      "category": "ability",
+      "fields": [
+        "ability",
+        "kind",
+        "mastery",
+        "name"
+      ]
+    },
+    {
+      "type": "power.applied",
+      "base": 0.55,
+      "line": "{label}",
+      "category": "change",
+      "fields": [
+        "category",
+        "dose",
+        "label",
+        "power"
+      ]
+    },
+    {
+      "type": "power.resolved",
+      "base": 0.5,
+      "line": "",
+      "category": "change",
+      "fields": [
+        "category",
+        "note",
+        "power"
+      ]
+    },
+    {
+      "type": "resistance.raised",
+      "base": 0.7,
+      "mods": [
+        {
+          "when": {
+            "stat_min": {
+              "pain": 60
+            }
+          },
+          "add": 0.2
+        }
+      ],
+      "line": "she resists — {cause}",
+      "category": "mind",
+      "fields": [
+        "type",
+        "reason"
+      ]
+    },
+    {
+      "type": "reaction.awakened",
+      "base": 0.9,
+      "line": "a reaction awakens: {reaction}",
+      "category": "mind",
+      "fields": [
+        "reaction",
+        "type"
+      ]
+    },
+    {
+      "type": "body.modified",
+      "base": 0.65,
+      "line": "{slot} reshapes",
+      "category": "change",
+      "fields": [
+        "slot"
+      ]
+    },
+    {
+      "type": "notice",
+      "base": 0.85,
+      "line": "she notices {trait}",
+      "category": "perception",
+      "fields": [
+        "path",
+        "trait"
+      ]
+    },
+    {
+      "type": "observer.skill",
+      "base": 0.45,
+      "line": "the Observer's {skill} deepens",
+      "category": "ability",
+      "fields": [
+        "skill",
+        "value"
+      ]
+    },
+    {
+      "type": "genital.changed",
+      "base": 0.6,
+      "line": "her sex shifts — {policy}",
+      "category": "change",
+      "fields": [
+        "count",
+        "policy"
+      ]
+    },
+    {
+      "type": "sexuality.drifted",
+      "base": 0.4,
+      "line": "",
+      "category": "mind",
+      "fields": [
+        "drift"
+      ]
+    },
+    {
+      "type": "mind.drifted",
+      "base": 0.3,
+      "line": "",
+      "category": "mind",
+      "fields": [
+        "values"
+      ]
+    },
+    {
+      "type": "realization",
+      "base": 0.95,
+      "line": "it lands on her — she realizes something is happening",
+      "category": "mind",
+      "fields": [
+        "knowledge",
+        "sign",
+        "tier"
+      ]
+    },
+    {
+      "type": "preference.changed",
+      "base": 0.9,
+      "line": "a preference settles: {topic}",
+      "category": "mind",
+      "fields": [
+        "kind",
+        "tier",
+        "topic"
+      ]
+    },
+    {
+      "type": "growth.coupled",
+      "base": 0.25,
+      "line": "",
+      "category": "change",
+      "fields": [
+        "direction",
+        "factor"
+      ]
+    },
+    {
+      "type": "sex.session",
+      "base": 0.55,
+      "line": "",
+      "category": "sex",
+      "fields": [
+        "act",
+        "climax",
+        "id",
+        "null",
+        "recipient",
+        "supporting"
+      ]
+    },
+    {
+      "type": "sex.overload",
+      "base": 0.7,
+      "line": "the wanting starts making her decisions",
+      "category": "sex",
+      "fields": []
+    },
+    {
+      "type": "mood.shift",
+      "base": 0.35,
+      "line": "",
+      "category": "mind",
+      "fields": [
+        "valence"
+      ]
+    },
+    {
+      "type": "self.read",
+      "base": 0.4,
+      "line": "she looks at herself",
+      "category": "mind",
+      "fields": [
+        "tone"
+      ]
+    },
+    {
+      "type": "feral.locked",
+      "base": 0.95,
+      "line": "feral",
+      "category": "feral",
+      "fields": [
+        "profile"
+      ]
+    },
+    {
+      "type": "feral.recovered",
+      "base": 0.85,
+      "line": "she comes back to herself, more eager",
+      "category": "feral",
+      "fields": []
+    },
+    {
+      "type": "debt.recovered",
+      "base": 0.25,
+      "line": "",
+      "category": "feral",
+      "fields": []
+    },
+    {
+      "type": "temporal.shifted",
+      "base": 0.4,
+      "line": "{line}",
+      "category": "change",
+      "fields": [
+        "line"
+      ]
+    },
+    {
+      "type": "skip.landed",
+      "base": 0.3,
+      "line": "",
+      "category": "change",
+      "fields": [
+        "at",
+        "signals",
+        "ticks"
+      ]
+    },
+    {
+      "type": "interrupt.fired",
+      "base": 0.6,
+      "line": "",
+      "category": "world",
+      "fields": [
+        "interrupt",
+        "kind"
+      ]
+    },
+    {
+      "type": "town.moved",
+      "base": 0.3,
+      "line": "{agent} heads to {where}",
+      "category": "town",
+      "fields": [
+        "agent",
+        "at"
+      ]
+    },
+    {
+      "type": "town.late",
+      "base": 0.5,
+      "line": "she runs late to {obligation}",
+      "category": "town",
+      "fields": [
+        "obligation"
+      ]
+    },
+    {
+      "type": "town.missed",
+      "base": 0.9,
+      "line": "an obligation goes unmet: {note}",
+      "category": "town",
+      "fields": [
+        "note",
+        "obligation"
+      ]
+    },
+    {
+      "type": "inspect",
+      "base": 0.9,
+      "line": "she attends to it and finds {subject} changed",
+      "category": "perception",
+      "fields": [
+        "confirmed",
+        "focus",
+        "subject"
+      ]
+    },
+    {
+      "type": "inspect.concern",
+      "base": 0.5,
+      "line": "unease about the change sharpens into concern",
+      "category": "perception",
+      "fields": []
+    },
+    {
+      "type": "dialogue.spoken",
+      "base": 0.55,
+      "line": "",
+      "category": "social",
+      "fields": [
+        "key",
+        "speaker"
+      ]
+    },
+    {
+      "type": "beat.advanced",
+      "base": 0.3,
+      "line": "",
+      "category": "world",
+      "fields": [
+        "beat",
+        "scene",
+        "type"
+      ]
+    },
+    {
+      "type": "world.ambient",
+      "base": 0.55,
+      "line": "{line}",
+      "category": "world",
+      "fields": [
+        "line"
+      ]
+    },
+    {
+      "type": "social.reaction",
+      "base": 0.55,
+      "line": "{line}",
+      "category": "social",
+      "fields": [
+        "household",
+        "line",
+        "observer",
+        "reaction"
+      ]
+    },
+    {
+      "type": "bond.changed",
+      "base": 0.35,
+      "throttle": true,
+      "path_keys": [
+        "observer"
+      ],
+      "line": "{observer} feels {direction} toward {subject} after the change",
+      "category": "social",
+      "fields": [
+        "bond",
+        "delta",
+        "direction",
+        "observer",
+        "subject"
+      ]
+    },
+    {
+      "type": "town.event",
+      "base": 0.5,
+      "line": "{line}",
+      "category": "town",
+      "fields": [
+        "event",
+        "label",
+        "where"
+      ]
+    },
+    {
+      "type": "town.event.resolved",
+      "base": 0.4,
+      "throttle": true,
+      "path_keys": [
+        "event"
+      ],
+      "line": "{line}",
+      "category": "town",
+      "fields": [
+        "event",
+        "label",
+        "line",
+        "present",
+        "subjectPresent"
+      ]
+    },
+    {
+      "type": "town.consequence",
+      "base": 0.8,
+      "line": "{note}",
+      "category": "town",
+      "fields": [
+        "agent",
+        "id",
+        "note"
+      ]
+    },
+    {
+      "type": "world.quiet",
+      "base": 0.5,
+      "line": "the hours pass quietly",
+      "category": "world",
+      "fields": []
+    },
+    {
+      "type": "setting.changed",
+      "base": 0.4,
+      "line": "the {key} is now {value}",
+      "category": "world",
+      "fields": ["key", "value"]
+    }
+  ]
+}

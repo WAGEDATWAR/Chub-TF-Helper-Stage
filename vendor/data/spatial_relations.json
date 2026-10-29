@@ -1,0 +1,20 @@
+{
+  "spatial_version": 1,
+  "_comment": "Whitelisted spatial relations for the scene composer (blueprint §31.2). Each has a render template using {a} and {b}; `order` says whether a renders before or after the relation. Composer places everything before writing, so prose never contradicts the scene.",
+  "relations": {
+    "seated_at": { "render": "{a} seated at {b}", "order": "a" },
+    "standing_near": { "render": "{a} standing near {b}", "order": "a" },
+    "standing_at": { "render": "{a} standing at {b}", "order": "a" },
+    "holding": { "render": "{a} holding {b}", "order": "a" },
+    "beside": { "render": "{a} beside {b}", "order": "a" },
+    "facing": { "render": "{a} facing {b}", "order": "a" },
+    "behind": { "render": "{a} behind {b}", "order": "a" },
+    "in_front_of": { "render": "{a} in front of {b}", "order": "a" },
+    "under": { "render": "{a} under {b}", "order": "a" },
+    "on": { "render": "{a} on {b}", "order": "a" },
+    "between": { "render": "{a} between {b}", "order": "a" },
+    "lying_on": { "render": "{a} lying on {b}", "order": "a" },
+    "leaning_on": { "render": "{a} leaning on {b}", "order": "a" },
+    "reaching_for": { "render": "{a} reaching for {b}", "order": "a" }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "presets_version": 4,
+  "_comment": "Reworked to the six archetypes (D-193, M15.5g). Each preset mirrors an archetype id so the legacy `preset` lookup still resolves a personality seed + dispositions. Value ranges live in archetypes.json; these carry the seed + starting leanings only.",
+  "disposition_cap": 2,
+  "presets": [
+    { "id": "archetype.warm", "display_name": "Warm", "base_gender": "female", "personality_seed": "devoted", "dispositions": ["react.tail", "react.canid"], "stat_overrides": { "drive": 58, "composure": 60, "resonance": 58 } },
+    { "id": "archetype.bold", "display_name": "Bold", "base_gender": "male", "personality_seed": "bold", "dispositions": ["react.multi_limb", "react.large_size"], "stat_overrides": { "drive": 68, "composure": 45, "resonance": 48 } },
+    { "id": "archetype.wary", "display_name": "Wary", "base_gender": "female", "personality_seed": "wary", "dispositions": ["react.avian_wings", "react.insect_chitin"], "stat_overrides": { "drive": 45, "composure": 40, "resonance": 45 } },
+    { "id": "archetype.devoted", "display_name": "Devoted", "base_gender": "male", "personality_seed": "devoted", "dispositions": ["react.legless", "react.tail"], "stat_overrides": { "drive": 58, "composure": 62, "resonance": 60 } },
+    { "id": "archetype.stoic", "display_name": "Stoic", "base_gender": "male", "personality_seed": "stoic", "dispositions": ["react.large_size", "react.multi_limb"], "stat_overrides": { "drive": 50, "composure": 68, "resonance": 52 } },
+    { "id": "archetype.studious", "display_name": "Studious", "base_gender": "female", "personality_seed": "curious", "dispositions": ["react.tail", "react.feline"], "stat_overrides": { "drive": 52, "composure": 58, "resonance": 52 } }
+  ]
+}

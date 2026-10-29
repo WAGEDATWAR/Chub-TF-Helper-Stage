@@ -1,0 +1,16 @@
+{
+  "sex_actions_version": 1,
+  "_comment": "Sex/masturbation actions (D-190). Each is a composable act: category → action → target role (+ an optional supporting action). `plays_to` names a preference topic it favours; `topics` are tags it satisfies. `supporting` acts can run alongside a primary. Weighting is automatic from preferences/arousal/personality.",
+  "actions": [
+    { "id": "act.finger", "category": "penetration", "label": "Fingering", "targets": ["genital"], "arousal": 14, "topics": ["genital_tag"], "plays_to": ["topic.intersex"], "line": "Her fingers work herself with a familiar patience." },
+    { "id": "act.stroke", "category": "hands", "label": "Stroking", "targets": ["genital"], "arousal": 12, "line": "Sure strokes, slow at first." },
+    { "id": "act.paw", "category": "pawplay", "label": "Pawing", "targets": ["hand", "foot"], "arousal": 10, "plays_to": ["topic.pawplay"], "line": "She presses her padded palm against warm skin and likes the friction." },
+    { "id": "act.lick", "category": "pawplay", "label": "Licking", "targets": ["foot", "hand"], "arousal": 9, "supporting": true, "plays_to": ["topic.pawplay"], "line": "A broad, wet stroke of the tongue, testing." },
+    { "id": "act.suckle", "category": "lactation", "label": "Suckling", "targets": ["chest"], "arousal": 11, "plays_to": ["topic.lactation"], "topics": ["lactation_tag"], "line": "She draws on her own chest and something answers." },
+    { "id": "act.rut", "category": "penetration", "label": "Mounting", "targets": ["genital"], "arousal": 18, "requires": { "reaction": "react.canid" }, "line": "Instinct takes over; she mounts and sets a rhythm." },
+    { "id": "act.knot", "category": "penetration", "label": "Knotting", "targets": ["genital"], "arousal": 22, "requires": { "reaction": "react.canid" }, "line": "The swell catches and holds; she cannot pull away." },
+    { "id": "act.tail", "category": "tail", "label": "Tail work", "targets": ["tail"], "arousal": 8, "supporting": true, "requires": { "ability": "ability.prehensile_tail" }, "line": "Her tail curls and holds, dextrous enough to help." },
+    { "id": "act.grip", "category": "claws", "label": "Claw grip", "targets": ["hand"], "arousal": 7, "supporting": true, "requires": { "ability": "ability.retractable_claws" }, "line": "Claws sheathed, she grips hard enough to leave marks." },
+    { "id": "act.breathe", "category": "control", "label": "Held breathing", "arousal": 5, "requires": { "reaction": "react.feline" }, "line": "She slows her breathing and rides the edge instead of chasing it." }
+  ]
+}

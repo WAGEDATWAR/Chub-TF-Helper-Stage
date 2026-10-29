@@ -1,0 +1,18 @@
+{
+  "flags_version": 1,
+  "flags": [
+    { "id": "trained_today", "description": "She has trained today.", "lifetime": "day" },
+    { "id": "rested", "description": "She rested this day; enhanced regen applied.", "lifetime": "day" },
+    { "id": "observed_today", "description": "The player observed her today.", "lifetime": "day" },
+    { "id": "injected_today", "description": "An injection was administered today.", "lifetime": "day" },
+    { "id": "first_week", "description": "Still within the first seven days.", "lifetime": "week" },
+    { "id": "met_subject", "description": "The subject has been introduced.", "lifetime": "permanent" },
+    { "id": "feral_recovering", "description": "Recovering from a feral lock; +20 Drive for three days.", "lifetime": "timed" },
+    { "id": "stabilizer_locked", "description": "Lock Debt above 30; cannot hold the Stabilizer.", "lifetime": "condition" },
+    { "id": "limit_refused", "description": "She refused an injection at very low Trust.", "lifetime": "timed" },
+    { "id": "lose_imminent", "description": "Sustained low Trust; the arc is trending to a lose.", "lifetime": "condition" },
+    { "id": "endless_mode", "description": "A good ending was reached; endless mode is active.", "lifetime": "permanent" },
+    { "id": "mirror_used", "description": "She used the Mirror to inspect herself.", "lifetime": "timed" },
+    { "id": "journal_updated", "description": "The lab journal has a new entry.", "lifetime": "day" }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "criteria_version": 1,
+  "_comment": "Criteria groups (D-184): registered rules that award signed opinion to a topic when their `when` holds. Kinds: awakening (positive) or trauma (negative). Priority lets a specific rule beat a generic one on the same topic. Vocabulary extends scene_graph.evaluateCondition with mind/mood/perception keys.",
+  "groups": [
+    {
+      "id": "crit.stage_noticed_frightening",
+      "topic": "topic.canine",
+      "kind": "trauma",
+      "opinion": -30,
+      "priority": 5,
+      "when": {
+        "all_of": [
+          {
+            "has_part_tag": "canine_tag"
+          },
+          {
+            "awareness_max": 20
+          },
+          {
+            "stat_min": {
+              "pain": 40
+            }
+          },
+          {
+            "mood_valence_max": 45
+          }
+        ]
+      },
+      "name": "a noticed change that frightens her"
+    },
+    {
+      "id": "crit.stage_noticed_welcome",
+      "topic": "topic.canine",
+      "kind": "awakening",
+      "opinion": 28,
+      "priority": 5,
+      "when": {
+        "all_of": [
+          {
+            "has_part_tag": "canine_tag"
+          },
+          {
+            "mood_valence_min": 58
+          },
+          {
+            "mind_min": {
+              "curious": 55
+            }
+          }
+        ]
+      },
+      "name": "a noticed change she welcomes"
+    },
+    {
+      "id": "crit.generic_canine",
+      "topic": "topic.canine",
+      "kind": "awakening",
+      "opinion": 14,
+      "priority": 1,
+      "when": {
+        "has_part_tag": "canine_tag"
+      },
+      "name": "growing canine"
+    },
+    {
+      "id": "crit.tail_welcome",
+      "topic": "topic.tail",
+      "kind": "awakening",
+      "opinion": 22,
+      "when": {
+        "all_of": [
+          {
+            "has_part_tag": "tail_tag"
+          },
+          {
+            "mood_valence_min": 55
+          }
+        ]
+      },
+      "name": "growing a tail"
+    },
+    {
+      "id": "crit.tail_unease",
+      "topic": "topic.tail",
+      "kind": "trauma",
+      "opinion": -20,
+      "when": {
+        "all_of": [
+          {
+            "has_part_tag": "tail_tag"
+          },
+          {
+            "mood_valence_max": 45
+          }
+        ]
+      },
+      "name": "a tail she did not want"
+    },
+    {
+      "id": "crit.wings_alarming_unaware",
+      "topic": "topic.wings",
+      "kind": "trauma",
+      "opinion": -34,
+      "when": {
+        "all_of": [
+          {
+            "has_part_tag": "wings_tag"
+          },
+          {
+            "awareness_tier": "blind"
+          },
+          {
+            "allies_near": false
+          }
+        ]
+      },
+      "name": "wings before she understood"
+    },
+    {
+      "id": "crit.legless",
+      "topic": "topic.serpentine",
+      "kind": "trauma",
+      "opinion": -26,
+      "when": {
+        "all_of": [
+          {
+            "has_part_tag": "serpent_tag"
+          },
+          {
+            "awareness_max": 30
+          }
+        ]
+      },
+      "name": "losing her legs"
+    },
+    {
+      "id": "crit.large_size",
+      "topic": "topic.size",
+      "kind": "trauma",
+      "opinion": -18,
+      "when": {
+        "all_of": [
+          {
+            "has_part_tag": "size_tag"
+          },
+          {
+            "stat_max": {
+              "agility": 40
+            }
+          }
+        ]
+      },
+      "name": "growing large"
+    },
+    {
+      "id": "crit.masturbation_awakening",
+      "topic": "topic.pawplay",
+      "kind": "awakening",
+      "opinion": 18,
+      "when": {
+        "all_of": [
+          {
+            "flag": "masturbated"
+          },
+          {
+            "mood_arousal_min": 50
+          }
+        ]
+      },
+      "name": "a hand on herself"
+    }
+  ]
+}

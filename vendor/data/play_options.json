@@ -1,0 +1,427 @@
+{
+  "play_options_version": 1,
+  "beats_per_scene": 3,
+  "arousal_climax_at": 85,
+  "pain_gate": 60,
+  "options": [
+    {
+      "id": "play.cuddle",
+      "label": "Stay close",
+      "effect": {
+        "resonance": 3,
+        "composure": 1,
+        "arousal": 6
+      },
+      "hint": "quiet, warm, nothing asked of her",
+      "composure_min": 0,
+      "requires": null,
+      "kind": "base"
+    },
+    {
+      "id": "play.tease",
+      "label": "Tease",
+      "effect": {
+        "arousal": 12,
+        "drive": 3,
+        "resonance": 1
+      },
+      "hint": "light and testing",
+      "composure_min": 0,
+      "requires": null,
+      "kind": "base"
+    },
+    {
+      "id": "play.praise",
+      "label": "Praise the change",
+      "effect": {
+        "resonance": 3,
+        "drive": 2,
+        "composure": 1
+      },
+      "hint": "tell her what you see",
+      "composure_min": 0,
+      "requires": null,
+      "kind": "base"
+    },
+    {
+      "id": "play.explore",
+      "label": "Explore together",
+      "effect": {
+        "arousal": 14,
+        "drive": 4,
+        "resonance": 2
+      },
+      "hint": "slow, curious hands",
+      "composure_min": 25,
+      "requires": null,
+      "kind": "base"
+    },
+    {
+      "id": "play.surrender",
+      "label": "Let her lead",
+      "effect": {
+        "arousal": 18,
+        "resonance": 3,
+        "composure": 1
+      },
+      "hint": "she sets the pace",
+      "composure_min": 45,
+      "requires": null,
+      "kind": "base"
+    },
+    {
+      "id": "play.claw_tracing",
+      "label": "Claw tracing",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Retractable Claws, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.retractable_claws",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "sex.claw_grip",
+      "label": "Claw grip",
+      "effect": {
+        "arousal": 22,
+        "drive": 6,
+        "resonance": 3
+      },
+      "hint": "Retractable Claws, sex",
+      "composure_min": 55,
+      "requires": {
+        "ability": "ability.retractable_claws",
+        "at": 40
+      },
+      "kind": "sex"
+    },
+    {
+      "id": "sex.claw_restraint",
+      "label": "Claw restraint",
+      "effect": {
+        "arousal": 22,
+        "drive": 6,
+        "resonance": 3
+      },
+      "hint": "Retractable Claws, sex",
+      "composure_min": 55,
+      "requires": {
+        "ability": "ability.retractable_claws",
+        "at": 90
+      },
+      "kind": "sex"
+    },
+    {
+      "id": "play.scent_follow",
+      "label": "Scent follow",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Scent Tracking, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.scent_tracking",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "play.heat_reading",
+      "label": "Heat reading",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Thermal Sense, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.thermal_pit",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "play.nursing_tease",
+      "label": "Nursing tease",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Lactation, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.lactation",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "sex.milk_play",
+      "label": "Milk play",
+      "effect": {
+        "arousal": 22,
+        "drive": 6,
+        "resonance": 3
+      },
+      "hint": "Lactation, sex",
+      "composure_min": 55,
+      "requires": {
+        "ability": "ability.lactation",
+        "at": 50
+      },
+      "kind": "sex"
+    },
+    {
+      "id": "play.deference",
+      "label": "Deference",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Submission Reflex, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.submission_reflex",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "play.heat_confession",
+      "label": "Heat confession",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Heat Cycle, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.heat_cycle",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "play.nesting",
+      "label": "Nesting",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Breeding Instinct, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.breeding_instinct",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "play.endurance_test",
+      "label": "Endurance test",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Stamina, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.stamina",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "play.climbing",
+      "label": "Climbing",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Clinging, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.clinging",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "play.mosaic",
+      "label": "Mosaic",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Compound Vision, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.compound_eyes",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "play.pack_play",
+      "label": "Pack play",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Pack Instinct, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.pack_instinct",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "play.murmur",
+      "label": "Murmur",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Changed Voice, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.voice_change",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "play.growl_play",
+      "label": "Growl play",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Growl, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.growl",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "play.tail_hold",
+      "label": "Tail hold",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Prehensile Tail, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.prehensile_tail",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "sex.tail_wrap",
+      "label": "Tail wrap",
+      "effect": {
+        "arousal": 22,
+        "drive": 6,
+        "resonance": 3
+      },
+      "hint": "Prehensile Tail, sex",
+      "composure_min": 55,
+      "requires": {
+        "ability": "ability.prehensile_tail",
+        "at": 60
+      },
+      "kind": "sex"
+    },
+    {
+      "id": "play.afterglow",
+      "label": "Afterglow",
+      "effect": {
+        "arousal": 14,
+        "drive": 5,
+        "resonance": 2
+      },
+      "hint": "Bioluminescence, play",
+      "composure_min": 25,
+      "requires": {
+        "ability": "ability.bioluminescence",
+        "at": 25
+      },
+      "kind": "play"
+    },
+    {
+      "id": "play.nuzzle",
+      "label": "Nuzzle in",
+      "effect": {
+        "arousal": 12,
+        "resonance": 3,
+        "composure": 1
+      },
+      "hint": "a canine lean-in — a fetish opens the line",
+      "composure_min": 0,
+      "requires": { "reaction": "react.canid" },
+      "kind": "play"
+    },
+    {
+      "id": "play.scent_bask",
+      "label": "Bask in her scent",
+      "effect": {
+        "arousal": 14,
+        "drive": 4,
+        "resonance": 2
+      },
+      "hint": "reptile musk is a fetish here",
+      "composure_min": 15,
+      "requires": { "reaction": "react.reptile" },
+      "kind": "play"
+    },
+    {
+      "id": "play.tail_coil",
+      "label": "Let her coil round you",
+      "effect": {
+        "arousal": 16,
+        "resonance": 3
+      },
+      "hint": "a softness for the tail carries it",
+      "composure_min": 20,
+      "requires": { "reaction": "react.tail" },
+      "kind": "play"
+    },
+    {
+      "id": "play.spread_wide",
+      "label": "Spread wide (wings)",
+      "effect": {
+        "arousal": 12,
+        "drive": 4
+      },
+      "hint": "wings once frightened her — a phobia still stands between you",
+      "composure_min": 30,
+      "requires": { "reaction": "react.avian_wings" },
+      "kind": "play"
+    }
+  ]
+}

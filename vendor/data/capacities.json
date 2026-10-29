@@ -1,0 +1,14 @@
+{
+  "capacities_version": 1,
+  "_comment": "Capacities rules (S76). A body changes a few *legible* abilities rather than leaking into every system: a thumbless paw impairs manipulation, a beak impairs talking, digitigrade/hoof gait slows moving, wings cost energy. `scale` is permille (600 = x0.6); `affects` names the capacity. Read by the surface and by any system that wants the abstraction.",
+  "rules": [
+    { "id": "cap.thumbless", "when_attrs": ["attr.thumbless_paw"], "scale": 450, "affects": ["manipulation"] },
+    { "id": "cap.claws", "when_tags": ["claws_tag"], "scale": 850, "affects": ["manipulation"] },
+    { "id": "cap.beak", "when_tags": ["beak_tag"], "scale": 700, "affects": ["talking", "eating"] },
+    { "id": "cap.muzzle", "when_tags": ["muzzle_tag"], "scale": 850, "affects": ["talking"] },
+    { "id": "cap.hoof", "when_tags": ["hoof_tag"], "scale": 800, "affects": ["manipulation"] },
+    { "id": "cap.digitigrade", "when_tags": ["gait_tag"], "scale": 900, "affects": ["moving"] },
+    { "id": "cap.serpent", "when_tags": ["serpent_tag"], "scale": 700, "affects": ["moving", "manipulation"] },
+    { "id": "cap.chitin", "when_tags": ["chitin_tag"], "scale": 900, "affects": ["moving"] }
+  ]
+}

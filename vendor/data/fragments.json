@@ -1,0 +1,1224 @@
+{
+  "fragments_version": 1,
+  "attribute": {
+    "attr.mammalian_fur": {
+      "short": "furred",
+      "stages": [
+        "bare skin",
+        "downy with fine fur",
+        "thickly furred",
+        "carpeted in a full, coarse coat"
+      ]
+    },
+    "attr.scales": {
+      "short": "scaled",
+      "stages": [
+        "smooth skin",
+        "roughening into horny plates",
+        "sheathed in hard overlapping scales"
+      ]
+    },
+    "attr.feathers": {
+      "short": "feathered",
+      "stages": [
+        "smooth skin",
+        "prickling with down",
+        "covered in sleek, layered feathers"
+      ]
+    },
+    "attr.canine_claws": {
+      "short": "clawed",
+      "stages": [
+        "dull flat nails",
+        "thickening, curving nails",
+        "short curving claws",
+        "long sharp claws",
+        "keratin-hard claws that click"
+      ]
+    },
+    "attr.feline_claws": {
+      "short": "clawed",
+      "stages": [
+        "dull flat nails",
+        "thickening nails",
+        "curving retractable claws",
+        "razor retractable claws",
+        "keratin-hard claws, always ready"
+      ]
+    },
+    "attr.fixed_claws": {
+      "short": "clawed",
+      "stages": [
+        "dull flat nails",
+        "thickening nails",
+        "claws that stay extended",
+        "long immovable claws",
+        "keratin-hard claws that cannot retract"
+      ]
+    },
+    "attr.digitigrade": {
+      "short": "digitigrade",
+      "stages": [
+        "plantigrade, flat-footed",
+        "rising onto the balls of the feet",
+        "standing high on digitigrade toes"
+      ]
+    },
+    "attr.paw_pads": {
+      "short": "padded",
+      "stages": [
+        "bare soles",
+        "soft new pads",
+        "thick, springy paw pads"
+      ]
+    },
+    "attr.hooves": {
+      "short": "hooved",
+      "stages": [
+        "bare feet",
+        "thickening into horn",
+        "hard keratin hooves"
+      ]
+    },
+    "attr.muzzle": {
+      "short": "muzzled",
+      "stages": [
+        "a flat human face",
+        "a face pushing forward",
+        "a full animal muzzle"
+      ]
+    },
+    "attr.fangs": {
+      "short": "fanged",
+      "stages": [
+        "flat even teeth",
+        "canines lengthening to points",
+        "long curved fangs"
+      ]
+    },
+    "attr.venom_sac": {
+      "short": "venomed",
+      "stages": [
+        "flat",
+        "glands swelling under the jaw",
+        "full venom sacs"
+      ]
+    },
+    "attr.forked_tongue": {
+      "short": "forked-tongued",
+      "stages": [
+        "a flat human tongue",
+        "a tongue notching at the tip",
+        "a thin, forked tongue"
+      ]
+    },
+    "attr.canine_tongue": {
+      "short": "long-tongued",
+      "stages": [
+        "a human tongue",
+        "a longer, looser tongue",
+        "a broad canine tongue, quick to loll"
+      ]
+    },
+    "attr.mammary_row": {
+      "short": "rowed",
+      "stages": [
+        "two flat nipples",
+        "a wider spread of nipples",
+        "a full double row of teats"
+      ]
+    },
+    "attr.long_ears": {
+      "short": "long-eared",
+      "stages": [
+        "human ears",
+        "ears drawing upward",
+        "long, tall upright ears"
+      ]
+    },
+    "attr.canine_teeth": {
+      "short": "canine-toothed",
+      "stages": [
+        "even human teeth",
+        "teeth sharpening at the edges",
+        "a full set of pointed canine teeth"
+      ]
+    },
+    "attr.beak": {
+      "short": "beaked",
+      "stages": [
+        "a flat face",
+        "a protruding ridge",
+        "a hard beak"
+      ]
+    },
+    "attr.gynomorphic": {
+      "short": "gynomorphic",
+      "stages": [
+        "a level, neutral build",
+        "softening into rounded curves",
+        "fully gynomorphic curves"
+      ]
+    },
+    "attr.andromorphic": {
+      "short": "andromorphic",
+      "stages": [
+        "a level, neutral build",
+        "squaring into hard planes",
+        "fully andromorphic, hard and broad"
+      ]
+    },
+    "attr.hybrid_paw": {
+      "short": "pawed",
+      "stages": [
+        "human hands",
+        "half a paw with the thumb kept",
+        "a hybrid paw"
+      ]
+    },
+    "attr.cloaca": {
+      "short": "cloacal",
+      "stages": [
+        "human parts",
+        "a single vent forming",
+        "a single shared cloaca"
+      ]
+    },
+    "attr.hemipenis": {
+      "short": "hemipenal",
+      "stages": [
+        "a single shaft",
+        "two shafts budding",
+        "a pair of hemipenes"
+      ]
+    },
+    "attr.thermal_pit": {
+      "short": "heat-sensing",
+      "stages": [
+        "unremarkable",
+        "faint pits along the snout",
+        "deep heat pits that read warmth"
+      ]
+    },
+    "attr.mobile_ears": {
+      "short": "mobile-eared",
+      "stages": [
+        "fixed human ears",
+        "ears beginning to swivel",
+        "fully mobile animal ears"
+      ]
+    },
+    "attr.keen_smell": {
+      "short": "keen-nosed",
+      "stages": [
+        "a human nose",
+        "scent sharpening",
+        "a keen animal nose that reads the air"
+      ]
+    },
+    "attr.night_vision": {
+      "short": "night-eyed",
+      "stages": [
+        "human eyes",
+        "eyes gathering light",
+        "night-adapted eyes that see in the dark"
+      ]
+    },
+    "attr.echolocation": {
+      "short": "echo-sensing",
+      "stages": [
+        "silent",
+        "faint clicks in the throat",
+        "full echolocation, reading the room by sound"
+      ]
+    },
+    "attr.horns": {
+      "short": "horned",
+      "stages": [
+        "a smooth skull",
+        "horns budding through the scalp",
+        "short hardening horns",
+        "a full set of horns"
+      ]
+    },
+    "attr.wings_glide": {
+      "short": "winged",
+      "stages": [
+        "absent",
+        "wing nubs at the shoulders",
+        "partial wings, ribbed and thin",
+        "broad wings that catch the air"
+      ]
+    },
+    "attr.tail_growth": {
+      "short": "tailed",
+      "stages": [
+        "absent",
+        "a tail budding from the base of the spine",
+        "a full sweeping tail"
+      ]
+    },
+    "attr.muscle_density": {
+      "short": "dense-muscled",
+      "stages": [
+        "a soft baseline build",
+        "firming and tightening",
+        "densely, compactly muscled"
+      ]
+    },
+    "attr.muscle_density_heavy": {
+      "short": "heavy-muscled",
+      "stages": [
+        "a soft baseline build",
+        "heavy and thick",
+        "massively, heavily muscled"
+      ]
+    },
+    "attr.lactation": {
+      "short": "lactating",
+      "stages": [
+        "dry and flat",
+        "fullening and tender",
+        "lactating, heavy and warm"
+      ]
+    },
+    "attr.body_heat": {
+      "short": "warm-bodied",
+      "stages": [
+        "normal warmth",
+        "running hot to the touch",
+        "radiating heat like a furnace"
+      ]
+    },
+    "attr.pack_instinct": {
+      "short": "pack-minded",
+      "stages": [
+        "self-contained",
+        "watching others, leaning in",
+        "fully pack-minded, uneasy alone"
+      ]
+    },
+    "attr.submission_reflex": {
+      "short": "deferential",
+      "stages": [
+        "steady and even",
+        "softening under a firm hand",
+        "quick to submit, quick to roll over"
+      ]
+    },
+    "attr.heat_cycle": {
+      "short": "in heat",
+      "stages": [
+        "a level baseline",
+        "warming in cycles",
+        "fully in heat, restless and wanting"
+      ]
+    },
+    "attr.breeding_instinct": {
+      "short": "broody",
+      "stages": [
+        "a level baseline",
+        "restless and broody",
+        "driven hard to breed"
+      ]
+    },
+    "attr.coiled_posture": {
+      "short": "coiled",
+      "stages": [
+        "upright and human",
+        "loosening spine",
+        "coiled and serpentine"
+      ]
+    },
+    "attr.quadruped_sprint": {
+      "short": "sprint-legged",
+      "stages": [
+        "an even baseline stride",
+        "limbs lengthening for speed",
+        "built to run on all fours"
+      ]
+    },
+    "attr.stamina": {
+      "short": "enduring",
+      "stages": [
+        "an even baseline",
+        "tireless and steady",
+        "inexhaustible, never winded"
+      ]
+    },
+    "attr.clinging": {
+      "short": "clinging",
+      "stages": [
+        "unremarkable",
+        "a grippier hold",
+        "able to hang from anything"
+      ]
+    },
+    "attr.keen_sight": {
+      "short": "keen-sighted",
+      "stages": [
+        "human sight",
+        "sight sharpening",
+        "piercing sight that misses nothing"
+      ]
+    },
+    "attr.enhanced_intelligence": {
+      "short": "sharp-minded",
+      "stages": [
+        "a baseline mind",
+        "thinking quicker",
+        "sharply, coldly intelligent"
+      ]
+    },
+    "attr.feral_mind": {
+      "short": "feral",
+      "stages": [
+        "lucid and verbal",
+        "thought fraying at the edges",
+        "feral-minded, half in instinct"
+      ]
+    },
+    "attr.voice_deep": {
+      "short": "deep-voiced",
+      "stages": [
+        "a baseline voice",
+        "dropping lower",
+        "a deep chesty voice"
+      ]
+    },
+    "attr.voice_high": {
+      "short": "high-voiced",
+      "stages": [
+        "a baseline voice",
+        "rising in pitch",
+        "a high thin voice"
+      ]
+    },
+    "attr.growl": {
+      "short": "growling",
+      "stages": [
+        "clear speech",
+        "a rough edge under the words",
+        "a full chest growl"
+      ]
+    },
+    "attr.hiss": {
+      "short": "hissing",
+      "stages": [
+        "clear speech",
+        "a sibilant edge",
+        "a full hiss"
+      ]
+    },
+    "attr.size_baseline": {
+      "short": "baseline-sized",
+      "stages": [
+        "a baseline size"
+      ]
+    },
+    "attr.bulk_size": {
+      "short": "bulky",
+      "stages": [
+        "a baseline frame",
+        "broadening out",
+        "imposing, heavy bulk"
+      ]
+    },
+    "attr.gracile_size": {
+      "short": "gracile",
+      "stages": [
+        "a baseline frame",
+        "slimming down",
+        "fine and gracile"
+      ]
+    },
+    "attr.genital_masculine": {
+      "short": "male",
+      "stages": [
+        "a level baseline",
+        "shifting, tender",
+        "male genitals"
+      ]
+    },
+    "attr.genital_feminine": {
+      "short": "female",
+      "stages": [
+        "a level baseline",
+        "shifting, tender",
+        "female genitals"
+      ]
+    },
+    "attr.dexterous_fingers": {
+      "short": "nimble-fingered",
+      "stages": [
+        "a baseline grip",
+        "fingers quickening",
+        "remarkably deft fingers"
+      ]
+    },
+    "attr.thumbless_paw": {
+      "short": "pawed",
+      "stages": [
+        "human hands",
+        "clumsier, half-pawed",
+        "a blunt thumbless paw"
+      ]
+    },
+    "attr.thick_hide": {
+      "short": "thick-skinned",
+      "stages": [
+        "thin skin",
+        "toughening",
+        "a thick, leathery hide"
+      ]
+    },
+    "attr.bioluminescence": {
+      "short": "glowing",
+      "stages": [
+        "dark",
+        "a faint glow under the skin",
+        "bright pulsing bioluminescence"
+      ]
+    },
+    "attr.arousal_floor": {
+      "short": "flushed",
+      "stages": [
+        "a level baseline",
+        "easily flushed and warm",
+        "perpetually, distractingly aroused"
+      ]
+    },
+    "attr.pain_tolerance": {
+      "short": "hardened",
+      "stages": [
+        "a soft baseline",
+        "toughening up",
+        "nearly numb to pain"
+      ]
+    },
+    "attr.hollow_bones": {
+      "short": "hollow-boned",
+      "stages": [
+        "solid bones",
+        "bones lightening",
+        "hollow, bird-light bones"
+      ]
+    },
+    "attr.dense_bones": {
+      "short": "dense-boned",
+      "stages": [
+        "solid bones",
+        "bones densifying",
+        "dense, heavy bones"
+      ]
+    },
+    "attr.extra_limbs": {
+      "short": "multi-limbed",
+      "stages": [
+        "absent",
+        "limbs budding from the flanks",
+        "a full second set of limbs"
+      ]
+    },
+    "attr.scent_musk": {
+      "short": "musk-scented",
+      "stages": [
+        "a neutral scent",
+        "a faint musk rising",
+        "a strong, musky animal scent"
+      ]
+    },
+    "attr.cloven_toes": {
+      "short": "cloven",
+      "stages": [
+        "human toes",
+        "toes splitting",
+        "toes split into cloven pairs"
+      ]
+    },
+    "attr.prehensile_tail": {
+      "short": "prehensile-tailed",
+      "stages": [
+        "a plain tail",
+        "the tail growing grippier",
+        "a fully prehensile tail"
+      ]
+    },
+    "attr.venom_resist": {
+      "short": "venom-resistant",
+      "stages": [
+        "a level baseline",
+        "hardening against venom",
+        "venom-proof blood"
+      ]
+    },
+    "attr.heat_resist": {
+      "short": "heat-resistant",
+      "stages": [
+        "a level baseline",
+        "hardening against heat",
+        "heat-proof, cool-blooded"
+      ]
+    },
+    "attr.cold_resist": {
+      "short": "cold-resistant",
+      "stages": [
+        "a level baseline",
+        "hardening against cold",
+        "cold-proof, well insulated"
+      ]
+    },
+    "attr.wet_skin": {
+      "short": "damp-skinned",
+      "stages": [
+        "dry skin",
+        "damp to the touch",
+        "permanently wet, slick skin"
+      ]
+    },
+    "attr.chitin": {
+      "short": "chitinous",
+      "stages": [
+        "soft skin",
+        "hardening into shell",
+        "a chitinous shell"
+      ]
+    },
+    "attr.antennae": {
+      "short": "antennaed",
+      "stages": [
+        "absent",
+        "antennae budding from the brow",
+        "a full pair of antennae"
+      ]
+    },
+    "attr.compound_eyes": {
+      "short": "compound-eyed",
+      "stages": [
+        "single-lensed eyes",
+        "eyes breaking into facets",
+        "faceted, many-lensed compound eyes"
+      ]
+    },
+    "attr.species_genital": {
+      "short": "unsettled",
+      "stages": [
+        "unchanged",
+        "shifting, tender and over-sensitive",
+        "refashioned to the new species"
+      ]
+    }
+  },
+  "part": {
+    "part.human_head": {
+      "base": "a human head",
+      "short": "head"
+    },
+    "part.canine_head": {
+      "base": "a canine head",
+      "short": "muzzled head"
+    },
+    "part.human_fingernails": {
+      "base": "plain fingernails",
+      "short": "fingernails"
+    },
+    "part.canid_claws_hand": {
+      "base": "canid claws",
+      "short": "claws"
+    },
+    "part.human_hand": {
+      "base": "a human hand",
+      "short": "hand"
+    },
+    "part.human_foot": {
+      "base": "a human foot",
+      "short": "foot"
+    },
+    "part.digitigrade_foot": {
+      "base": "a digitigrade foot",
+      "short": "foot"
+    },
+    "part.tail_absent": {
+      "base": "no tail",
+      "short": "tail"
+    },
+    "part.bushy_tail": {
+      "base": "a bushy tail",
+      "short": "bushy tail"
+    },
+    "part.human_ears": {
+      "base": "human ears",
+      "short": "ears"
+    },
+    "part.mobile_ears": {
+      "base": "mobile animal ears",
+      "short": "ears"
+    },
+    "part.human_eyes": {
+      "base": "human eyes",
+      "short": "eyes"
+    },
+    "part.night_eyes": {
+      "base": "night-vision eyes",
+      "short": "eyes"
+    },
+    "part.human_horns_absent": {
+      "base": "a smooth skull",
+      "short": "skull"
+    },
+    "part.bovine_horns": {
+      "base": "bovine horns",
+      "short": "horns"
+    },
+    "part.wings_absent": {
+      "base": "no wings",
+      "short": "wings"
+    },
+    "part.membrane_wings": {
+      "base": "membrane wings",
+      "short": "wings"
+    },
+    "part.serpent_tail_segment": {
+      "base": "a long serpent's tail",
+      "short": "serpent tail"
+    },
+    "part.penis": {
+      "base": "a penis",
+      "short": "penis"
+    },
+    "part.partial_sheath_penis": {
+      "base": "a penis half-drawn into a forming sheath",
+      "short": "sheathing penis"
+    },
+    "part.sheath_penis": {
+      "base": "a sheathed penis",
+      "short": "sheath"
+    },
+    "part.equine_penis": {
+      "base": "a heavy equine penis",
+      "short": "equine cock"
+    },
+    "part.bovine_penis": {
+      "base": "a slim bovine penis",
+      "short": "bovine cock"
+    },
+    "part.hemipenes": {
+      "base": "a pair of hemipenes",
+      "short": "hemipenes"
+    },
+    "part.cloaca": {
+      "base": "a cloaca",
+      "short": "cloaca"
+    },
+    "part.avian_cloaca": {
+      "base": "a small feather-rimmed vent",
+      "short": "vent"
+    },
+    "part.scrotum": {
+      "base": "a scrotum",
+      "short": "scrotum"
+    },
+    "part.mammal_scrotum": {
+      "base": "a furred scrotum",
+      "short": "scrotum"
+    },
+    "part.vulva": {
+      "base": "a vulva",
+      "short": "vulva"
+    },
+    "part.canid_vulva": {
+      "base": "a swollen canid vulva",
+      "short": "vulva"
+    },
+    "part.feline_vulva": {
+      "base": "a tight feline vulva",
+      "short": "vulva"
+    },
+    "part.leporine_vulva": {
+      "base": "a leporine vulva",
+      "short": "vulva"
+    },
+    "part.chiropteran_vulva": {
+      "base": "a chiropteran vulva",
+      "short": "vulva"
+    },
+    "part.equine_vulva": {
+      "base": "a broad equine vulva",
+      "short": "vulva"
+    },
+    "part.bovine_vulva": {
+      "base": "a broad bovine vulva",
+      "short": "vulva"
+    },
+    "part.feline_head": {
+      "base": "a feline head",
+      "short": "feline head"
+    },
+    "part.rabbit_head": {
+      "base": "a leporine head",
+      "short": "leporine head"
+    },
+    "part.bovine_head": {
+      "base": "a bovine head",
+      "short": "bovine head"
+    },
+    "part.equine_head": {
+      "base": "an equine head",
+      "short": "equine head"
+    },
+    "part.avian_head": {
+      "base": "an avian head",
+      "short": "avian head"
+    },
+    "part.serpent_head": {
+      "base": "a serpent's head",
+      "short": "serpent head"
+    },
+    "part.bat_head": {
+      "base": "a chiropteran head",
+      "short": "bat head"
+    },
+    "part.human_face": {
+      "base": "human face",
+      "short": "human face"
+    },
+    "part.muzzled_face": {
+      "base": "muzzled face",
+      "short": "muzzled face"
+    },
+    "part.serpent_face": {
+      "base": "serpent face",
+      "short": "serpent face"
+    },
+    "part.human_hair": {
+      "base": "human hair",
+      "short": "human hair"
+    },
+    "part.long_ears": {
+      "base": "long leporine ears",
+      "short": "long leporine ears"
+    },
+    "part.curling_horns": {
+      "base": "curling horns",
+      "short": "curling horns"
+    },
+    "part.slit_eyes": {
+      "base": "slit-pupil eyes",
+      "short": "slit-pupil eyes"
+    },
+    "part.human_nose": {
+      "base": "human nose",
+      "short": "human nose"
+    },
+    "part.keen_nose": {
+      "base": "keen animal nose",
+      "short": "keen animal nose"
+    },
+    "part.human_mouth": {
+      "base": "human mouth",
+      "short": "human mouth"
+    },
+    "part.muzzled_mouth": {
+      "base": "muzzled mouth",
+      "short": "muzzled mouth"
+    },
+    "part.human_tongue": {
+      "base": "human tongue",
+      "short": "human tongue"
+    },
+    "part.forked_tongue": {
+      "base": "forked tongue",
+      "short": "forked tongue"
+    },
+    "part.canine_tongue": {
+      "base": "canine tongue",
+      "short": "canine tongue"
+    },
+    "part.human_teeth": {
+      "base": "human teeth",
+      "short": "human teeth"
+    },
+    "part.canine_teeth": {
+      "base": "canine teeth",
+      "short": "canine teeth"
+    },
+    "part.human_fangs_absent": {
+      "base": "flat dentition",
+      "short": "dentition"
+    },
+    "part.canid_fangs": {
+      "base": "canid fangs",
+      "short": "canid fangs"
+    },
+    "part.venom_fangs": {
+      "base": "venom fangs",
+      "short": "venom fangs"
+    },
+    "part.human_torso_upper": {
+      "base": "human upper torso",
+      "short": "human upper torso"
+    },
+    "part.muscular_torso_upper": {
+      "base": "muscular upper torso",
+      "short": "muscular upper torso"
+    },
+    "part.human_torso_lower": {
+      "base": "human lower torso",
+      "short": "human lower torso"
+    },
+    "part.human_chest": {
+      "base": "human chest",
+      "short": "human chest"
+    },
+    "part.lactating_chest": {
+      "base": "lactating chest",
+      "short": "lactating chest"
+    },
+    "part.flat_breasts": {
+      "base": "flat chest",
+      "short": "flat chest"
+    },
+    "part.full_breasts": {
+      "base": "full breasts",
+      "short": "full breasts"
+    },
+    "part.human_nipples": {
+      "base": "human nipples",
+      "short": "human nipples"
+    },
+    "part.human_back": {
+      "base": "human back",
+      "short": "human back"
+    },
+    "part.feathered_wings": {
+      "base": "feathered wings",
+      "short": "feathered wings"
+    },
+    "part.human_abdomen": {
+      "base": "human abdomen",
+      "short": "human abdomen"
+    },
+    "part.human_arm_upper": {
+      "base": "human upper arm",
+      "short": "human upper arm"
+    },
+    "part.human_arm_lower": {
+      "base": "human forearm",
+      "short": "human forearm"
+    },
+    "part.hybrid_paw": {
+      "base": "a hybrid paw",
+      "short": "paw"
+    },
+    "part.thumbless_paw": {
+      "base": "a thumbless paw",
+      "short": "paw"
+    },
+    "part.human_fingers": {
+      "base": "human fingers",
+      "short": "human fingers"
+    },
+    "part.sharpening_nails": {
+      "base": "sharpening nails",
+      "short": "sharpening nails"
+    },
+    "part.partial_claws": {
+      "base": "partial claws",
+      "short": "partial claws"
+    },
+    "part.human_toenails_intermediate": {
+      "base": "thickening toenails",
+      "short": "thickening toenails"
+    },
+    "part.tail_bud": {
+      "base": "tail bud",
+      "short": "tail bud"
+    },
+    "part.tail_short": {
+      "base": "short tail",
+      "short": "short tail"
+    },
+    "part.digitigrade_foot_partial": {
+      "base": "semi-digitigrade foot",
+      "short": "semi-digitigrade foot"
+    },
+    "part.hand_partial_paw": {
+      "base": "semi-paw hand",
+      "short": "semi-paw hand"
+    },
+    "part.horn_buds": {
+      "base": "horn buds",
+      "short": "horn buds"
+    },
+    "part.short_horns": {
+      "base": "short horns",
+      "short": "short horns"
+    },
+    "part.wing_nubs": {
+      "base": "wing nubs",
+      "short": "wing nubs"
+    },
+    "part.wing_membrane_partial": {
+      "base": "partial membrane wings",
+      "short": "partial membrane wings"
+    },
+    "part.serpent_tail_mid": {
+      "base": "lengthening serpent tail",
+      "short": "lengthening serpent tail"
+    },
+    "part.cloven_hoof": {
+      "base": "cloven hoof",
+      "short": "cloven hoof"
+    },
+    "part.scaled_patch": {
+      "base": "a patch of scales",
+      "short": "scales"
+    },
+    "part.furred_torso_upper": {
+      "base": "furred upper torso",
+      "short": "furred upper torso"
+    },
+    "part.human_pelvis": {
+      "base": "human pelvis",
+      "short": "human pelvis"
+    },
+    "part.human_genital_primary_absent": {
+      "base": "no primary genital",
+      "short": "genitals"
+    },
+    "part.human_genital_secondary_absent": {
+      "base": "no secondary genital",
+      "short": "genitals"
+    },
+    "part.short_tail": {
+      "base": "a short tail",
+      "short": "stub tail"
+    },
+    "part.human_leg_upper": {
+      "base": "human thigh",
+      "short": "human thigh"
+    },
+    "part.digitigrade_leg_upper": {
+      "base": "digitigrade thigh",
+      "short": "digitigrade thigh"
+    },
+    "part.human_leg_lower": {
+      "base": "human shin",
+      "short": "human shin"
+    },
+    "part.hoof": {
+      "base": "hoof",
+      "short": "hoof"
+    },
+    "part.human_toes": {
+      "base": "human toes",
+      "short": "human toes"
+    },
+    "part.paw_toes": {
+      "base": "padded toes",
+      "short": "paw toes"
+    },
+    "part.human_toenails": {
+      "base": "human toenails",
+      "short": "human toenails"
+    },
+    "part.canid_claws_foot": {
+      "base": "canid claws",
+      "short": "claws"
+    },
+    "part.multiple_nipples": {
+      "base": "a row of nipples",
+      "short": "mammary row"
+    },
+    "part.udder_nipples": {
+      "base": "a udder",
+      "short": "udder"
+    },
+    "part.tapetum_eyes": {
+      "base": "tapetum eyes",
+      "short": "tapetum eyes"
+    },
+    "part.whisker_ears": {
+      "base": "whisker ears",
+      "short": "whisker ears"
+    },
+    "part.rattle_ears": {
+      "base": "rattle ears",
+      "short": "rattle ears"
+    },
+    "part.intermediate_claws": {
+      "base": "hardened claws",
+      "short": "hardened claws"
+    },
+    "part.partial_horns": {
+      "base": "horn nubs",
+      "short": "horn nubs"
+    },
+    "part.intermediate_hoof": {
+      "base": "parting hoof",
+      "short": "parting hoof"
+    },
+    "part.budding_wings": {
+      "base": "wing buds",
+      "short": "wing buds"
+    },
+    "part.beak": {
+      "base": "a beak",
+      "short": "beak"
+    },
+    "part.avian_claws": {
+      "base": "avian claws",
+      "short": "claws"
+    },
+    "part.broadened_nose": {
+      "base": "a broadening nose",
+      "short": "broadening nose"
+    },
+    "part.sharpening_teeth": {
+      "base": "teeth sharpening to points",
+      "short": "sharpening teeth"
+    },
+    "part.growing_fangs": {
+      "base": "fangs pushing through the gums",
+      "short": "growing fangs"
+    },
+    "part.notched_tongue": {
+      "base": "a tongue splitting at the tip",
+      "short": "notched tongue"
+    },
+    "part.spreading_toes": {
+      "base": "toes spreading into a pad",
+      "short": "spreading toes"
+    },
+    "part.tender_mouth": {
+      "base": "a mouth narrowing and hardening",
+      "short": "narrowing mouth"
+    },
+    "part.broadening_head": {
+      "base": "a head broadening out",
+      "short": "broadening head"
+    },
+    "part.small_animal_head": {
+      "base": "a small animal head",
+      "short": "animal head"
+    },
+    "part.muzzle_partial_head": {
+      "base": "a half-muzzled head",
+      "short": "muzzling head"
+    },
+    "part.tendonous_thigh": {
+      "base": "a thigh tightening and shortening",
+      "short": "tightening thigh"
+    },
+    "part.canid_ears": {
+      "base": "upright canid ears",
+      "short": "ears"
+    },
+    "part.feline_ears": {
+      "base": "triangular feline ears",
+      "short": "ears"
+    },
+    "part.chiropteran_ears": {
+      "base": "large chiropteran ears",
+      "short": "ears"
+    },
+    "part.leporine_ears": {
+      "base": "long leporine ears",
+      "short": "ears"
+    },
+    "part.canid_sheath_penis": {
+      "base": "a sheathed canid penis",
+      "short": "sheath"
+    },
+    "part.feline_sheath_penis": {
+      "base": "a sheathed feline penis",
+      "short": "sheath"
+    },
+    "part.leporine_sheath_penis": {
+      "base": "a sheathed leporine penis",
+      "short": "sheath"
+    },
+    "part.chiropteran_sheath_penis": {
+      "base": "a sheathed chiropteran penis",
+      "short": "sheath"
+    },
+    "part.equine_scrotum": {
+      "base": "an equine scrotum",
+      "short": "scrotum"
+    },
+    "part.bovine_scrotum": {
+      "base": "a bovine scrotum",
+      "short": "scrotum"
+    },
+    "part.bovine_ears": {
+      "base": "broad bovine ears",
+      "short": "ears"
+    },
+    "part.equine_ears": {
+      "base": "tapered equine ears",
+      "short": "ears"
+    },
+    "part.avian_ears": {
+      "base": "small feathered ear tufts",
+      "short": "ear tufts"
+    },
+    "part.swelling_vulva": {
+      "base": "a swelling, reshaping vulva",
+      "short": "vulva"
+    },
+    "part.tightening_scrotum": {
+      "base": "a tightening scrotum",
+      "short": "scrotum"
+    },
+    "part.enlarging_penis": {
+      "base": "a lengthening, thickening penis",
+      "short": "penis"
+    },
+    "part.growing_hemipenes": {
+      "base": "a splitting, doubling phallus",
+      "short": "genitals"
+    },
+    "part.forming_cloaca": {
+      "base": "a vent drawing into a single opening",
+      "short": "cloaca"
+    }
+  },
+  "stage": {
+    "stage.keratin.00": "dull",
+    "stage.keratin.25": "thickened",
+    "stage.keratin.50": "curving",
+    "stage.keratin.75": "sharpening",
+    "stage.keratin.100": "keratin-hard",
+    "stage.fur.00": "bare",
+    "stage.fur.30": "downy",
+    "stage.fur.65": "thick",
+    "stage.fur.100": "full-coated",
+    "stage.tail.00": "absent",
+    "stage.tail.35": "budding",
+    "stage.tail.100": "full"
+  },
+  "ability": {
+    "ability.retractable_claws": {
+      "tier1": "claws she keeps forgetting about, catching on everything",
+      "tier2": "claws she can extend when she remembers",
+      "tier3": "claws she can flex on command",
+      "tier4": "claws that are simply part of her",
+      "forced": "claws that are out, and staying out"
+    },
+    "ability.fixed_claws": {
+      "tier1": "claws that snag on everything",
+      "tier2": "claws she has learned to keep clear",
+      "tier3": "claws she uses with care",
+      "tier4": "claws as natural as fingers",
+      "forced": "claws that will not retract"
+    },
+    "ability.scent_tracking": {
+      "tier1": "a nose that drowns her in every smell",
+      "tier2": "a nose she can follow when she tries",
+      "tier3": "a nose that reads a room",
+      "tier4": "a nose that never loses a trail",
+      "forced": "a nose locked onto the nearest scent"
+    }
+  }
+}
+

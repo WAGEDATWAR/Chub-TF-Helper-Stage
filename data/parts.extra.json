@@ -1,0 +1,20 @@
+{
+  "_comment": "Part patches (merged by id) fixing two inherited chicken-and-egg deadlocks: a morph attribute required a tag the human starting part lacked, so the morph could never begin.",
+  "parts": [
+    {
+      "id": "part.human_mouth",
+      "_patch": "attr.beak requires beak_tag and morphs the mouth; a human mouth lacked beak_tag, so birds never got a beak.",
+      "tags": ["mouth_tag", "human_tag", "beak_tag"]
+    },
+    {
+      "id": "part.human_toes",
+      "_patch": "attr.paw_pads requires foot_tag and morphs toes; human toes lacked foot_tag, so no genome ever got paw-toes.",
+      "tags": ["toes_tag", "skin_tag", "human_tag", "foot_tag"]
+    },
+    {
+      "id": "part.human_face",
+      "_patch": "attr.muzzle requires head_tag; a human face lacked it, so a face-sited muzzle could not apply (the head role carried it, so this is symmetry).",
+      "tags": ["face_tag", "skin_tag", "human_tag", "head_tag"]
+    }
+  ]
+}

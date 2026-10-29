@@ -1,0 +1,50 @@
+{
+  "dialogue_version": 1,
+  "keys": [
+    { "key": "train.setup", "speaker": "subject", "intent": "she sets up for a training session",
+      "variants": [
+        { "axes": { "frustration_band": "calm" }, "lines": ["\"Same as last time, or something harder?\""] },
+        { "lines": ["She rolls her shoulders and gets into position."] }
+      ] },
+    { "key": "train.warmup.success", "speaker": "subject", "intent": "she warms up cleanly",
+      "variants": [
+        { "axes": { "stance": "push" }, "lines": ["\"Easy. Let's not waste the easy ones.\""] },
+        { "lines": ["She moves through the warm-up without a hitch."] }
+      ] },
+    { "key": "train.warmup.fail", "speaker": "subject", "intent": "she fumbles the warm-up",
+      "variants": [
+        { "lines": ["\"Sorry — cold. Give me a second.\""] }
+      ] },
+    { "key": "train.rep.success", "speaker": "subject", "intent": "she completes a repetition",
+      "variants": [
+        { "axes": { "drive_band": "eager" }, "lines": ["\"Again. I can feel it working.\""] },
+        { "lines": ["Clean rep. She nods to herself."] }
+      ] },
+    { "key": "train.rep.fail", "speaker": "subject", "intent": "she fails a repetition and is frustrated but not stopping",
+      "variants": [
+        { "axes": { "stance": "push", "frustration_band": "strained" }, "weight": 3, "lines": ["Again. I can do it again, just give me a second."] },
+        { "axes": { "frustration_band": "strained" }, "weight": 2, "lines": ["That one didn't take. Try me again."] },
+        { "lines": ["Not that one."] }
+      ] },
+    { "key": "train.breakthrough", "speaker": "subject", "intent": "she has a breakthrough moment",
+      "variants": [
+        { "axes": { "stance": "push" }, "lines": ["\"Oh — oh, there it is. I've got it. I've got it!\""] },
+        { "lines": ["Something clicks, and her whole posture changes."] }
+      ] },
+    { "key": "train.plateau", "speaker": "subject", "intent": "the session plateaus with no breakthrough",
+      "variants": [
+        { "axes": { "frustration_band": "breaking" }, "lines": ["\"I'm stuck. I'm not getting anywhere. Again.\""] },
+        { "lines": ["She finishes the set flat, no edge to it."] }
+      ] },
+    { "key": "train.reward", "speaker": "subject", "intent": "she is rewarded after training",
+      "variants": [
+        { "axes": { "arousal": "high" }, "lines": ["\"Don't make me wait for it.\""] },
+        { "lines": ["She presses close, flushed from the work."] }
+      ] },
+    { "key": "train.frustration.cap", "speaker": "subject", "intent": "her frustration caps out",
+      "variants": [
+        { "axes": { "frustration_band": "breaking" }, "lines": ["\"Enough. I need a minute. Don't push me.\""] },
+        { "lines": ["She turns away, jaw tight."] }
+      ] }
+  ]
+}

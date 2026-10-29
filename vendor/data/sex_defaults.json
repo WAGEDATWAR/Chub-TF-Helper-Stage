@@ -1,0 +1,18 @@
+{
+  "sex_defaults_version": 1,
+  "sexes": {
+    "female": {
+      "genital_primary": null,
+      "genital_secondary": "part.vulva",
+      "overrides": {
+        "breasts.L": "part.full_breasts",
+        "breasts.R": "part.full_breasts"
+      }
+    },
+    "male": {
+      "genital_primary": "part.penis",
+      "genital_secondary": null,
+      "overrides": {}
+    }
+  }
+}

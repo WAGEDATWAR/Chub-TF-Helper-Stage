@@ -1,0 +1,11 @@
+{
+  "hooks_version": 1,
+  "_comment": "Hook points (S78). A bounded value hook lets a source nudge a value within a declared clamp; the engine combines (per `combiner`) and clamps. `product_permille` points use 1000 = unchanged. Sources declare `hook:{point,value,when?}` on attributes/parts/genomes. Bias never overrides a hard rule.",
+  "points": [
+    { "id": "needs.decay_modifier", "combiner": "product_permille", "neutral": 1000, "clamp": [500, 1500] },
+    { "id": "mood.valence_shift", "combiner": "sum", "neutral": 0, "clamp": [-40, 40] },
+    { "id": "social.bond_modifier", "combiner": "product_permille", "neutral": 1000, "clamp": [0, 2000] },
+    { "id": "perception.notice_modifier", "combiner": "product_permille", "neutral": 1000, "clamp": [500, 2000] },
+    { "id": "growth.rate_modifier", "combiner": "product_permille", "neutral": 1000, "clamp": [500, 1500] }
+  ]
+}

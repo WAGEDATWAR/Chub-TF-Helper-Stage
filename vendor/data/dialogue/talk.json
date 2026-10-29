@@ -1,0 +1,42 @@
+{
+  "dialogue_version": 1,
+  "keys": [
+    { "key": "talk.topic.prompt", "speaker": "player", "intent": "the player picks a topic of conversation",
+      "variants": [
+        { "lines": ["She waits to be asked something."] }
+      ] },
+    { "key": "talk.herself", "speaker": "subject", "intent": "she talks about herself",
+      "variants": [
+        { "axes": { "composure_band": "poised" }, "lines": ["\"Before this place? I was bored out of my mind. Now look at me.\""] },
+        { "axes": { "composure_band": "wary" }, "lines": ["\"I don't talk about before.\""] },
+        { "lines": ["\"Ask me something else. Or don't.\""] }
+      ] },
+    { "key": "talk.limits", "speaker": "subject", "intent": "she states a limit once Trust is high (S09)",
+      "variants": [
+        { "axes": { "composure_band": "steady" }, "lines": ["\"There's something I should tell you. I don't do wings. Not ever.\""] },
+        { "axes": { "composure_band": "poised" }, "lines": ["\"You've earned this: no extra limbs. That's my line.\""] },
+        { "lines": ["\"I'm not ready to say. Ask me later.\""] }
+      ] },
+    { "key": "talk.limit.learned", "speaker": "player", "intent": "the player records a newly learned limit",
+      "variants": [
+        { "lines": ["Noted. Now the line is known."] }
+      ] },
+    { "key": "talk.feeling", "speaker": "subject", "intent": "she shares how she feels about the changes",
+      "variants": [
+        { "axes": { "transform_state": "heavy_hybrid" }, "lines": ["\"It's a lot. But it's mine. I chose it.\""] },
+        { "axes": { "transform_state": "baseline" }, "lines": ["\"Some days I miss my old face. Most days I don't.\""] },
+        { "lines": ["\"I'm still figuring out how I feel about all of it.\""] }
+      ] },
+    { "key": "talk.relationship", "speaker": "subject", "intent": "she reflects on the relationship",
+      "variants": [
+        { "axes": { "resonance": "high", "composure_band": "poised" }, "lines": ["\"You know I'd follow you into anything. That should scare me more than it does.\""] },
+        { "axes": { "resonance": "low" }, "lines": ["\"This is a job. Let's keep it that way.\""] },
+        { "lines": ["\"I don't know what we are. Do you?\""] }
+      ] },
+    { "key": "talk.end", "speaker": "subject", "intent": "the conversation ends",
+      "variants": [
+        { "axes": { "resonance": "high" }, "lines": ["\"Thanks for that. Really.\""] },
+        { "lines": ["She goes back to what she was doing."] }
+      ] }
+  ]
+}

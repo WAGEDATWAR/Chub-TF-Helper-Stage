@@ -1,0 +1,73 @@
+project_name: "Chrysalis Transformation Helper"
+tagline: "Simulates a transformation per character so the prose follows a real progression."
+visibility: 'UNLISTED'
+position: 'ADJACENT'
+tags:
+  - 'Stage'
+  - 'Transformation'
+  - 'Simulation'
+config_schema:
+  type: object
+  properties:
+    seed:
+      type: integer
+      title: "World Seed"
+      description: "Deterministic seed for this chat. 0 = derive from the chat id."
+      default: 0
+    ticksPerMessage:
+      type: integer
+      title: "Hours per message"
+      description: "Simulated hours advanced on each of your messages."
+      minimum: 1
+      maximum: 168
+      default: 4
+    lunarCycleDays:
+      type: integer
+      title: "Lunar cycle (days)"
+      description: "Days per full moon. Shorter cycles make moon-driven change (e.g. werewolves) come round faster."
+      minimum: 4
+      maximum: 60
+      default: 28
+    statusMessage:
+      type: boolean
+      title: "Status line after each reply"
+      description: "Append a compact exposure/band readout after each bot message (does not alter the prose)."
+      default: true
+    transformationPace:
+      type: string
+      title: "Transformation pace"
+      description: "How fast a change settles. Normal is ~a month; Instant is a scene. A card may override this."
+      enum: ["slow", "normal", "fast", "quick", "instant"]
+      default: "normal"
+    guardProse:
+      type: boolean
+      title: "Correct drift in the prose"
+      description: "Replace a bot message with the facts floor only when it contradicts the sim. Off = never touch the prose."
+      default: true
+  required: []
+state_schema:
+  init:
+    type: object
+    properties:
+      seed:
+        type: integer
+  message:
+    type: object
+    properties:
+      save:
+        type: "string|null"
+      day:
+        type: integer
+  chat:
+    type: object
+    properties:
+      cast:
+        type: array
+        items:
+          type: object
+          properties:
+            id: { type: string }
+            name: { type: string }
+      playstyles:
+        type: object
+        description: "Per-character playstyle for a coupled genome (moon-only, emotional, hormonal, full)."

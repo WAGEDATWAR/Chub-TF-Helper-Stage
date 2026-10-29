@@ -1,0 +1,22 @@
+{
+  "locale": "qps",
+  "display_name": "Pseudo-locale (test)",
+  "strings": {
+    "ui.new_game": "[Ŋé ŵ Ġàɱé]",
+    "ui.continue": "[Çôŋţįŋùé]",
+    "ui.load": "[Ŀôàð]",
+    "ui.settings": "[Šéţţįŋĝš]",
+    "ui.quit": "[Qùįţ]",
+    "ui.hub": "[Ţĥé Ŀàƀ]",
+    "ui.subject": "[Šùƀĵéçţ]",
+    "ui.journal": "[Ŀàƀ Ĵôùŕŋàĺ]",
+    "ui.day": "[Ðàý]",
+    "ui.slots": "[Šĺôţš]",
+    "ui.energy": "[Éŋéŕĝý]",
+    "ui.hunger": "[Ĥùŋĝéŕ]",
+    "ui.health": "[Ĥéàĺţĥ]",
+    "ui.save": "[Šàνé]",
+    "ui.observe": "[Ôƀšéŕνé]",
+    "ui.mirror": "[Ĝŝéŕôŕ]"
+  }
+}

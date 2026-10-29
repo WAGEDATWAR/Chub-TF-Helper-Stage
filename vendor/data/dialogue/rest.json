@@ -1,0 +1,19 @@
+{
+  "dialogue_version": 1,
+  "keys": [
+    { "key": "rest.start", "speaker": "subject", "intent": "she settles in to rest",
+      "variants": [
+        { "axes": { "pain": "high" }, "lines": ["She eases down carefully, favouring what hurts."] },
+        { "lines": ["She stretches out and closes her eyes."] }
+      ] },
+    { "key": "rest.recover", "speaker": "subject", "intent": "she recovers while resting",
+      "variants": [
+        { "axes": { "stability_min": "low" }, "lines": ["Colour comes back into her. She breathes easier."] },
+        { "lines": ["She sleeps, and some of the strain eases."] }
+      ] },
+    { "key": "rest.end", "speaker": "subject", "intent": "rest ends",
+      "variants": [
+        { "lines": ["She wakes, slower and steadier than before."] }
+      ] }
+  ]
+}

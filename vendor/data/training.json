@@ -1,0 +1,85 @@
+{
+  "training_version": 1,
+  "frustration_cap": 12,
+  "breakthrough_window": [
+    7,
+    12
+  ],
+  "reps_per_session": 3,
+  "check": {
+    "base": 0.1,
+    "min": 0.05,
+    "max": 0.95,
+    "stat_weight": 1,
+    "mastery_weight": 0.4,
+    "drive_weight": 0.3,
+    "composure_weight": 0.2,
+    "frustration_weight": 2,
+    "fatigue_weight": 1.5
+  },
+  "gains": {
+    "success_mastery": 6,
+    "fail_mastery": 2,
+    "breakthrough_bonus": 10,
+    "plateau_mastery": 2,
+    "fatigue_per_rep": 4,
+    "taper": 0.0095,
+    "min_gain": 1
+  },
+  "categories": [
+    {
+      "id": "conditioning",
+      "label": "Conditioning",
+      "slots": 1,
+      "gain": "stat",
+      "cost": "fatigue",
+      "stat_gain": 1,
+      "fatigue": 12,
+      "line": "A workout that is only a workout."
+    },
+    {
+      "id": "control",
+      "label": "Control",
+      "slots": 1,
+      "gain": "mastery",
+      "cost": "frustration",
+      "line": "Drilling the one thing until it stops surprising her."
+    },
+    {
+      "id": "testing",
+      "label": "Testing",
+      "slots": 1,
+      "gain": "discovery",
+      "cost": "drive_on_fail",
+      "drive_on_fail": 4,
+      "line": "Finding out what she can actually do."
+    },
+    {
+      "id": "recovery",
+      "label": "Recovery",
+      "slots": 2,
+      "gain": "intelligence_debt",
+      "cost": "drive",
+      "drive": 6,
+      "line": "The least fun option. This is what overreaching costs."
+    },
+    {
+      "id": "bonding",
+      "label": "Bonding",
+      "slots": 1,
+      "gain": "composure_resonance",
+      "cost": "little",
+      "composure": 2,
+      "resonance": 2,
+      "line": "They stop pretending it is about the drill."
+    }
+  ],
+  "difficulty": {
+    "base": 30,
+    "per_tier": 12
+  },
+  "breakthrough": {
+    "in_window": 0.3,
+    "out_of_window": 0.1
+  }
+}

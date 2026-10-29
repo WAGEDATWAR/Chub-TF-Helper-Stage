@@ -1,0 +1,15 @@
+{
+  "feral_version": 1,
+  "profiles": [
+    { "id": "feral.wolf", "display_name": "Feral Wolf", "debt_mult": 1.0, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["pack", "hunt"] },
+    { "id": "feral.dog", "display_name": "Feral Dog", "debt_mult": 0.7, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["loyal", "eager"] },
+    { "id": "feral.cat", "display_name": "Feral Cat", "debt_mult": 0.9, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["aloof", "prowl"] },
+    { "id": "feral.fox", "display_name": "Feral Fox", "debt_mult": 0.95, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["wary", "clever"] },
+    { "id": "feral.rabbit", "display_name": "Feral Rabbit", "debt_mult": 0.8, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["skittish", "breed"] },
+    { "id": "feral.bovine", "display_name": "Feral Bovine", "debt_mult": 1.1, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["placid", "herd"] },
+    { "id": "feral.equine", "display_name": "Feral Equine", "debt_mult": 1.15, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["restless", "run"] },
+    { "id": "feral.raven", "display_name": "Feral Raven", "debt_mult": 1.2, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["hoard", "mimic"] },
+    { "id": "feral.serpent", "display_name": "Feral Serpent", "debt_mult": 1.4, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["coil", "strike"] },
+    { "id": "feral.bat", "display_name": "Feral Bat", "debt_mult": 1.25, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["roost", "screech"] }
+  ]
+}

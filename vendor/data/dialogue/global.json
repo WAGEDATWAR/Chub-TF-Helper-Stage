@@ -1,0 +1,52 @@
+{
+  "dialogue_version": 1,
+  "keys": [
+    { "key": "global.neutral", "speaker": "subject", "intent": "a neutral line when nothing more specific fits",
+      "variants": [
+        { "lines": ["..."] },
+        { "lines": ["Mm."] },
+        { "lines": ["What is it, then?"] }
+      ] },
+    { "key": "global.greeting", "speaker": "subject", "intent": "she greets the player at the start of a day",
+      "variants": [
+        { "axes": { "composure_band": "poised" }, "lines": ["There. I was waiting."] },
+        { "axes": { "composure_band": "steady" }, "lines": ["Morning. Ready when it is."] },
+        { "axes": { "composure_band": "wary" }, "lines": ["You're back."] },
+        { "lines": ["Morning."] }
+      ] },
+    { "key": "global.sleep", "speaker": "subject", "intent": "she settles down to sleep",
+      "variants": [
+        { "axes": { "transform_state": "near_animal" }, "lines": ["She circles once and folds down, already half-asleep."] },
+        { "lines": ["She stretches out and lets her eyes close."] }
+      ] },
+    { "key": "global.observe", "speaker": "player", "intent": "the player studies her and notes a change",
+      "variants": [
+        { "axes": { "transform_state": "light_hybrid" }, "lines": ["New colour at the edges. Gradual, but real."] },
+        { "axes": { "transform_state": "heavy_hybrid" }, "lines": ["She's more animal than last time. She knows it too."] },
+        { "lines": ["She breathes, and takes it in."] }
+      ] },
+    { "key": "global.mirror", "speaker": "subject", "intent": "she inspects herself in the mirror",
+      "variants": [
+        { "axes": { "drive_band": "ravenous" }, "lines": ["She turns slowly, drinking herself in. \"More. Look at me.\""] },
+        { "axes": { "transform_state": "baseline" }, "lines": ["She looks herself over. \"Still me. For now.\""] },
+        { "lines": ["She studies her reflection, tilting her head."] }
+      ] },
+    { "key": "global.stop_request", "speaker": "subject", "intent": "she asks the player to stop",
+      "variants": [
+        { "axes": { "frustration_band": "breaking" }, "lines": ["Stop. Stop, please, I mean it."] },
+        { "lines": ["Wait. Give me a second. Stop."] }
+      ] },
+    { "key": "global.limit_panic", "speaker": "subject", "intent": "she panics against a hard limit",
+      "variants": [
+        { "lines": ["No — no, not that. Get it away from me."] }
+      ] },
+    { "key": "global.blackout", "speaker": "subject", "intent": "she blacks out",
+      "variants": [
+        { "lines": ["Her eyes roll back and she goes limp."] }
+      ] },
+    { "key": "global.feral_lock", "speaker": "subject", "intent": "she locks into a feral state",
+      "variants": [
+        { "lines": ["The last of the words drains out of her. Something else looks out."] }
+      ] }
+  ]
+}
