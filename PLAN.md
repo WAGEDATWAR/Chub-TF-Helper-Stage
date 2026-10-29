@@ -83,8 +83,20 @@ milestone names the `DEFERRED.md` entry it closes (if any).
 | H16 | **Dose ruling** (implement / expose / drop) | planned | DOSE |
 | H17 | **Time model: infer elapsed time from message content** | planned | — |
 | H18 | **Transformation duration: a pace knob + card-inferred rate** | **done** | PACE |
+| H19 | **Mobile usability: collapse/hide the pane; list changed parts** | **done** | mobile |
+| H20 | **Part/skeleton visualizer: a visual body map of changed parts** | planned | — |
+
 Milestone order is a suggestion; H8–H12 are independent and can be resequenced.
 
+## H19 — Mobile usability — done
+
+The pane dominated a phone screen and the body block dumped the whole part list.
+Fixed: the pane **collapses to a one-line bar** (`▸ chrysalis` + a live cast summary
++ moon) via a header toggle, with the choice persisted so it stays hidden across
+reloads; a cast card lists **only affected parts**, grouped by part and ranked, each
+with its `(N%)` toward target, and the full composer dump sits behind a `full body`
+disclosure. Touch targets meet a 32px minimum. (A skeleton/part visualizer is still
+planned — see `DEFERRED.md`.)
 ## H18 — Transformation duration — done
 
 Shipped. The authored set settles in ~22–41 simulated days (median 30) — right for

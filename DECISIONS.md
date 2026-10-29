@@ -1,5 +1,16 @@
 # Decisions
 
+- **D-021b — The pane collapses; changed parts are listed, not dumped (H19).** Two
+  mobile-usability fixes. (a) The pane header has a **collapse/expand** toggle (a
+  one-line `▸ chrysalis` bar with a live cast summary + moon); the choice persists in
+  `localStorage`, so it stays hidden across reloads and reclaims the chat area on a
+  phone. The active tab is persisted too, and an alert dot (`●n`) flags pending
+  proposals while collapsed. (b) A cast card now shows an **affected-parts list** —
+  only attributes with progress, grouped by part (so "fur" is one line, not 18), each
+  with its `(N%)` toward target, most-progressed first; the full composer dump moves
+  behind a `full body` disclosure. The frame carries `parts` (label/pct/count) and the
+  digest locks it. Touch targets were bumped to a 32px min height.
+
 - **D-021 — A reload never shows a raw id as a name; images are removable.** Two
   small stage quirks. (a) When the chat-wide roster is absent on restore (a reload
   where chat state did not persist), `Stage` now falls back to card/user names by id

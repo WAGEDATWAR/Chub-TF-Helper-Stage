@@ -28,6 +28,8 @@ ledger is complete, not because anything is stubbed:
   Follow-ups noted in `PLAN.md` (before/after via `imageToImage`, aspect-ratio knob).
 - **H18 — Transformation duration. Shipped.** Pace knob + card inference; see the
   `DURATION` entry below for the one remaining gap (card-stated order/timing).
+- **H20 — Part/skeleton visualizer.** A visual body map (which parts are changed and
+  how far), on the menu — not stubbed yet. The H19 parts list is the textual stand-in.
 - **H12 — Stage polish.** Phone-width layout, a11y (real buttons, focus, aria-live),
   config knobs for existing toggles, status/guard UX.
 - **H15 — Voice (optional).** `generator.speak` for the status, `makeSound` foley on

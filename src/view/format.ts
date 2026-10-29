@@ -81,6 +81,7 @@ export function digest(frames: CastFrame[], moon: { phase: string; intensity: nu
     const c = coupling.find((x) => x.characterId === f.id);
     parts.push(frameHeadline(f) + (c ? ` · pressure ${Math.round(c.pressure * 100)}%${c.shifted ? " SHIFTED" : ""}` : ""));
     if (f.changing.length > 0) parts.push(`  changing: ${f.changing.join(", ")}`);
+    if (f.parts.length > 0) parts.push(`  parts: ${f.parts.map((p) => `${p.label}${p.count > 1 ? ` ×${p.count}` : ""} (${p.pct}%)`).join(", ")}`);
   }
   return parts.join("\n");
 }

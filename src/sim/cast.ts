@@ -34,6 +34,8 @@ export interface CastFrame {
   day: number;
   /** Changing part labels, most-progressed first (a compact read). */
   changing: string[];
+  /** Every affected part, grouped by attribute, with its progression toward target (0..100). */
+  parts: Array<{ label: string; pct: number; count: number }>;
   /** H10: awareness 0..100 toward realizing the change. */
   awareness: number;
   /** H10: true once the character has realized what is happening to them. */
@@ -149,12 +151,22 @@ export class Cast {
     for (const char of this.chars.values()) {
       const s = char.sim.subject;
       const band = s.derived.band ?? "band.baseline";
-      const changing = s.body
+      const changes = s.body
         .allInstances()
-        .flatMap((i) => i.attributes.filter((a) => a.progress > 0).map((a) => ({ slot: i.slot, id: a.id, p: a.progress })))
-        .sort((a, b) => b.p - a.p)
-        .slice(0, 6)
-        .map((a) => `${a.slot}: ${humanize(a.id)}`);
+        .flatMap((i) => i.attributes.filter((a) => a.progress > 0).map((a) => ({ slot: i.slot, id: a.id, p: a.progress, t: a.target_progress ?? 1000 })))
+        .sort((a, b) => b.p - a.p);
+      const changing = changes.slice(0, 6).map((a) => `${a.slot}: ${humanize(a.id)}`);
+      // affected parts only, grouped by attribute (so "fur" covers the whole body
+      // as one line), most-progressed first, each with its % toward target
+      const byPart = new Map<string, { label: string; pct: number; count: number }>();
+      for (const a of changes) {
+        const pct = Math.max(0, Math.min(100, Math.round((a.p / Math.max(1, a.t)) * 100)));
+        const label = humanize(a.id);
+        const cur = byPart.get(label);
+        if (cur) { cur.count += 1; if (pct > cur.pct) cur.pct = pct; }
+        else byPart.set(label, { label, pct, count: 1 });
+      }
+      const parts = [...byPart.values()].sort((a, b) => b.pct - a.pct || b.count - a.count);
       out.push({
         id: char.id,
         name: char.name,
@@ -165,6 +177,7 @@ export class Cast {
         describe: this.composer.describeBody(s as never),
         day: char.sim.session.clock.day,
         changing,
+        parts,
         awareness: Math.round(s.mind?.awareness ?? 0),
         realized: s.mind?.realized ?? false,
       });

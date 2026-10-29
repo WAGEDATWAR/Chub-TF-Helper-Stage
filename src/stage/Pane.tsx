@@ -2,6 +2,17 @@ import { useEffect, useState } from "react";
 import type { HelperGame } from "../game";
 import { bandRead, moonRead, speciesLabel, confidenceBand, proposalReason } from "../view/format";
 
+/** Persisted UI prefs (localStorage): the pane can be hidden to reclaim chat space. */
+const PREF_HIDDEN = "chrysalis.pane.hidden";
+const PREF_TAB = "chrysalis.pane.tab";
+
+function readPref(key: string): string | null {
+  try { return typeof localStorage !== "undefined" ? localStorage.getItem(key) : null; } catch { return null; }
+}
+function writePref(key: string, value: string): void {
+  try { if (typeof localStorage !== "undefined") localStorage.setItem(key, value); } catch { /* ignore */ }
+}
+
 /**
  * Dev convenience: `?cast=A,b,c&genome=…&days=N` drives a run for screenshots.
  * `?card=Mira=wolf,Tomas=eagle` registers cards so detection has something to find.
@@ -71,20 +82,43 @@ export function Pane({
   const refresh = () => bump((n) => n + 1);
   useAutoDrive(game, refresh);
 
-  const [tab, setTab] = useState<Tab>("cast");
+  const [tab, setTab] = useState<Tab>(() => (readPref(PREF_TAB) as Tab) ?? "cast");
+  const [hidden, setHidden] = useState(() => readPref(PREF_HIDDEN) === "1");
   const run = (fn: () => void) => { fn(); refresh(); };
   const view = game.view();
+
+  const pick = (t: Tab) => { setTab(t); writePref(PREF_TAB, t); };
+  const toggle = () => { setHidden((h) => { const next = !h; writePref(PREF_HIDDEN, next ? "1" : "0"); return next; }); };
+
+  // a one-line summary of the cast, shown while collapsed so the pane still informs
+  const summary = view.frames.length === 0
+    ? "no one tracked"
+    : view.frames.map((f) => `${f.name} ${f.exposure}%`).join(" · ");
+  const alerts = (view.proposals.length > 0 ? ` ●${view.proposals.length}` : "") + (view.coupling.some((c) => c.shifted) ? " ⚡" : "");
+
+  if (hidden) {
+    return (
+      <div style={css.collapsed}>
+        <button style={css.toggle} onClick={toggle} title="Show the pane" aria-expanded={false}>▸ chrysalis</button>
+        <span style={css.collapsedSummary} onClick={toggle}>{summary}{alerts}</span>
+        <span style={css.moonShort}>{moonRead(view.moon).replace(/, full in .*/, "")}</span>
+      </div>
+    );
+  }
 
   return (
     <div style={css.root}>
       <div style={css.head}>
+        <button style={css.toggle} onClick={toggle} title="Hide the pane" aria-expanded={true}>▾</button>
         <span style={css.title}>Chrysalis</span>
+        {alerts && <span style={css.alerts}>{alerts}</span>}
+        <span style={css.spacer} />
         <span style={css.moon}>{moonRead(view.moon)}</span>
       </div>
 
       <div style={css.tabs}>
         {(["cast", "detect", "tools"] as Tab[]).map((t) => (
-          <button key={t} style={{ ...css.tab, ...(tab === t ? css.tabOn : {}) }} onClick={() => setTab(t)}>
+          <button key={t} style={{ ...css.tab, ...(tab === t ? css.tabOn : {}) }} onClick={() => pick(t)}>
             {t}{t === "detect" && view.proposals.length > 0 ? ` (${view.proposals.length})` : ""}
           </button>
         ))}
@@ -175,8 +209,19 @@ function CastTab({
                 )}
               </div>
             )}
+            {f.parts.length > 0 ? (
+              <div style={css.parts}>
+                {f.parts.map((p, i) => (
+                  <span key={i} style={css.part}>
+                    {p.label}{p.count > 1 ? <span style={css.partCount}> ×{p.count}</span> : null} <span style={css.partPct}>({p.pct}%)</span>
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <div style={css.dim}>no changes yet</div>
+            )}
             <details style={css.details}>
-              <summary style={css.summary}>body</summary>
+              <summary style={css.summary}>full body</summary>
               <div style={css.describe}>{f.describe || "(unchanged)"}</div>
             </details>
           </div>
@@ -318,21 +363,26 @@ function ToolsTab({ game, run, getGuard, getSaveKb }: { game: HelperGame; run: (
 }
 
 const css: Record<string, React.CSSProperties> = {
-  root: { width: "100%", height: "100%", boxSizing: "border-box", fontFamily: "system-ui, sans-serif", color: "#d8e0e6", background: "#0e1620", display: "flex", flexDirection: "column", overflow: "hidden" },
-  head: { display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "10px 12px", borderBottom: "1px solid rgba(120,200,220,0.3)" },
+  root: { width: "100%", height: "100%", boxSizing: "border-box", fontFamily: "system-ui, sans-serif", color: "#d8e0e6", background: "rgba(14,22,32,0.92)", display: "flex", flexDirection: "column", overflow: "hidden" },
+  collapsed: { display: "flex", alignItems: "center", gap: 8, padding: "5px 10px", boxSizing: "border-box", fontFamily: "system-ui, sans-serif", color: "#d8e0e6", background: "rgba(14,22,32,0.92)", borderBottom: "1px solid rgba(120,200,220,0.25)", flexWrap: "nowrap", minHeight: 34 },
+  collapsedSummary: { fontSize: 12, color: "#9fb4be", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", cursor: "pointer", minWidth: 0, flex: 1 },
+  head: { display: "flex", alignItems: "center", gap: 8, padding: "6px 10px", borderBottom: "1px solid rgba(120,200,220,0.3)" },
+  toggle: { font: "inherit", fontSize: 13, lineHeight: 1, padding: "2px 7px", borderRadius: 4, border: "1px solid rgba(120,200,220,0.3)", background: "rgba(30,45,55,0.6)", color: "#cfe6ee", cursor: "pointer", whiteSpace: "nowrap" },
   title: { fontSize: 13, letterSpacing: 2, textTransform: "uppercase", color: "#7fd4e6" },
-  moon: { fontVariantNumeric: "tabular-nums", fontSize: 12, color: "#8fa3ad" },
-  tabs: { display: "flex", gap: 2, padding: "6px 12px", borderBottom: "1px solid rgba(120,200,220,0.15)" },
-  tab: { font: "inherit", fontSize: 11, letterSpacing: 1, textTransform: "uppercase", padding: "4px 8px", borderRadius: 4, border: "1px solid transparent", background: "transparent", color: "#6b8794", cursor: "pointer" },
+  alerts: { fontSize: 11, color: "#e6a9c0" },
+  moon: { fontVariantNumeric: "tabular-nums", fontSize: 11, color: "#8fa3ad", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
+  moonShort: { fontVariantNumeric: "tabular-nums", fontSize: 11, color: "#8fa3ad", whiteSpace: "nowrap", flexShrink: 0 },
+  tabs: { display: "flex", gap: 2, padding: "4px 10px", borderBottom: "1px solid rgba(120,200,220,0.15)" },
+  tab: { font: "inherit", fontSize: 11, letterSpacing: 1, textTransform: "uppercase", padding: "6px 10px", borderRadius: 4, border: "1px solid transparent", background: "transparent", color: "#6b8794", cursor: "pointer" },
   tabOn: { color: "#7fd4e6", border: "1px solid rgba(120,200,220,0.4)", background: "rgba(30,45,55,0.5)" },
-  body: { flex: 1, overflowY: "auto", padding: 12, display: "flex", flexDirection: "column", gap: 8 },
-  castCard: { border: "1px solid rgba(120,200,220,0.18)", borderLeft: "3px solid rgba(120,200,220,0.4)", borderRadius: 6, padding: 8, background: "rgba(20,30,40,0.4)", display: "flex", flexDirection: "column", gap: 5 },
+  body: { flex: 1, overflowY: "auto", padding: 8, display: "flex", flexDirection: "column", gap: 6, WebkitOverflowScrolling: "touch" },
+  castCard: { border: "1px solid rgba(120,200,220,0.18)", borderLeft: "3px solid rgba(120,200,220,0.4)", borderRadius: 6, padding: 7, background: "rgba(20,30,40,0.4)", display: "flex", flexDirection: "column", gap: 4 },
   card: { border: "1px solid rgba(120,200,220,0.15)", borderRadius: 5, padding: 6, background: "rgba(15,25,35,0.5)", display: "flex", flexDirection: "column", gap: 4 },
   name: { fontSize: 15 },
   label: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: "#6b8794", marginTop: 4 },
-  row: { display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" },
+  row: { display: "flex", flexWrap: "wrap", gap: 5, alignItems: "center" },
   spacer: { flex: 1 },
-  btn: { font: "inherit", fontSize: 12, padding: "6px 10px", borderRadius: 5, border: "1px solid rgba(120,200,220,0.35)", background: "rgba(30,45,55,0.6)", color: "#cfe6ee", cursor: "pointer" },
+  btn: { font: "inherit", fontSize: 12, padding: "7px 11px", borderRadius: 5, border: "1px solid rgba(120,200,220,0.35)", background: "rgba(30,45,55,0.6)", color: "#cfe6ee", cursor: "pointer", minHeight: 32 },
   btnSel: { border: "1px solid rgba(230,169,192,0.7)", background: "rgba(60,40,55,0.6)" },
   input: { font: "inherit", fontSize: 12, padding: "5px 7px", borderRadius: 4, border: "1px solid rgba(120,200,220,0.35)", background: "rgba(20,30,40,0.6)", color: "#cfe6ee" },
   textarea: { font: "inherit", fontSize: 12, padding: "5px 7px", borderRadius: 4, border: "1px solid rgba(120,200,220,0.35)", background: "rgba(20,30,40,0.6)", color: "#cfe6ee", resize: "vertical" },
@@ -342,6 +392,10 @@ const css: Record<string, React.CSSProperties> = {
   band: { fontSize: 10, letterSpacing: 0.5, color: "#0e1620", borderRadius: 3, padding: "1px 5px", textTransform: "uppercase" },
   pip: { display: "inline-block", width: 90, height: 7, borderRadius: 4, background: "rgba(120,200,220,0.15)", verticalAlign: "middle", overflow: "hidden" },
   pipFill: { display: "inline-block", height: 7, borderRadius: 4 },
+  parts: { display: "flex", flexWrap: "wrap", gap: "2px 4px" },
+  part: { fontSize: 11, color: "#bcd3dc", background: "rgba(120,200,220,0.1)", border: "1px solid rgba(120,200,220,0.2)", borderRadius: 4, padding: "1px 6px" },
+  partPct: { color: "#7fd4e6", fontVariantNumeric: "tabular-nums" },
+  partCount: { color: "#8fa3ad" },
   details: { marginTop: 2 },
   summary: { fontSize: 11, color: "#6b8794", cursor: "pointer" },
   describe: { fontFamily: "ui-monospace, monospace", fontSize: 11, whiteSpace: "pre-wrap", color: "#8fb0bc", marginTop: 4 },
