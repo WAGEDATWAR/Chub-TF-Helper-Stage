@@ -120,6 +120,54 @@
         "a broad canine tongue, quick to loll"
       ]
     },
+    "attr.feline_tongue": {
+      "short": "rough-tongued",
+      "stages": [
+        "a human tongue",
+        "a roughening, narrowing tongue",
+        "a fine, rasping feline tongue"
+      ]
+    },
+    "attr.leporine_tongue": {
+      "short": "quick-tongued",
+      "stages": [
+        "a human tongue",
+        "a small, quick tongue",
+        "a small, dense leporine tongue"
+      ]
+    },
+    "attr.bovine_tongue": {
+      "short": "broad-tongued",
+      "stages": [
+        "a human tongue",
+        "a broadening, rough tongue",
+        "a long, rasping bovine tongue"
+      ]
+    },
+    "attr.equine_tongue": {
+      "short": "flat-tongued",
+      "stages": [
+        "a human tongue",
+        "a flattening, broadening tongue",
+        "a long, flat equine tongue"
+      ]
+    },
+    "attr.avian_tongue": {
+      "short": "narrow-tongued",
+      "stages": [
+        "a human tongue",
+        "a thin, narrowing tongue",
+        "a narrow, hardened avian tongue"
+      ]
+    },
+    "attr.chiropteran_tongue": {
+      "short": "tapering-tongued",
+      "stages": [
+        "a human tongue",
+        "a thin, tapering tongue",
+        "a fine, ribbed chiropteran tongue"
+      ]
+    },
     "attr.mammary_row": {
       "short": "rowed",
       "stages": [
@@ -834,6 +882,30 @@
       "base": "canine tongue",
       "short": "canine tongue"
     },
+    "part.feline_tongue": {
+      "base": "feline tongue",
+      "short": "feline tongue"
+    },
+    "part.leporine_tongue": {
+      "base": "leporine tongue",
+      "short": "leporine tongue"
+    },
+    "part.bovine_tongue": {
+      "base": "bovine tongue",
+      "short": "bovine tongue"
+    },
+    "part.equine_tongue": {
+      "base": "equine tongue",
+      "short": "equine tongue"
+    },
+    "part.avian_tongue": {
+      "base": "avian tongue",
+      "short": "avian tongue"
+    },
+    "part.chiropteran_tongue": {
+      "base": "chiropteran tongue",
+      "short": "chiropteran tongue"
+    },
     "part.human_teeth": {
       "base": "human teeth",
       "short": "human teeth"
@@ -1081,6 +1153,14 @@
     "part.growing_fangs": {
       "base": "fangs pushing through the gums",
       "short": "growing fangs"
+    },
+    "part.thickening_tongue": {
+      "base": "a tongue thickening at the root",
+      "short": "thickening tongue"
+    },
+    "part.furrowing_tongue": {
+      "base": "a tongue furrowing along its length",
+      "short": "furrowing tongue"
     },
     "part.notched_tongue": {
       "base": "a tongue splitting at the tip",

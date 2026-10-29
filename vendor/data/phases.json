@@ -5,7 +5,7 @@
   "spread": 10,
   "default": {
     "phases": [
-      { "id": "marks", "label": "the marks", "families": ["claws", "ears", "eyes", "horns", "tail", "voice"] },
+      { "id": "marks", "label": "the marks", "families": ["claws", "ears", "eyes", "horns", "tail", "voice"], "roles": ["tongue"] },
       { "id": "cover", "label": "the cover", "families": ["coat", "skin", "muscle", "size", "gait"] },
       { "id": "frame", "label": "the frame", "families": ["bone", "structure", "wings"] },
       { "id": "deeper", "label": "what runs deeper", "families": ["genital"] }
@@ -14,8 +14,8 @@
   "plans": {
     "genome.wolf": {
       "phases": [
-        { "id": "claws_teeth", "label": "claws, teeth and the face", "families": ["claws", "eyes", "voice"], "tags": ["fangs_tag", "nail_tag", "teeth_tag", "nose_tag"], "roles": ["nose", "mouth", "tongue"] },
-        { "id": "coat", "label": "the coat and ears", "families": ["coat", "skin", "ears"] },
+        { "id": "claws_teeth", "label": "claws, fangs and the face", "families": ["claws", "eyes", "voice"], "tags": ["fangs_tag", "nail_tag", "nose_tag", "tongue_tag"], "roles": ["nose", "mouth"] },
+        { "id": "coat", "label": "the coat, ears and teeth", "families": ["coat", "skin", "ears"], "tags": ["teeth_tag"] },
         { "id": "gait", "label": "the gait", "families": ["gait", "muscle", "tail", "size"] },
         { "id": "skull", "label": "the skull and frame", "families": ["bone", "structure"], "exposure_min": 40, "when": { "stability_min": 40 } },
         { "id": "full_form", "label": "the full form", "families": ["genital"], "feral_only": true }
@@ -23,32 +23,32 @@
     },
     "genome.dog": {
       "phases": [
-        { "id": "claws_teeth", "label": "claws, teeth and the face", "families": ["claws"], "tags": ["fangs_tag", "nail_tag", "teeth_tag"] },
-        { "id": "coat", "label": "the coat and ears", "families": ["coat", "skin", "ears"] },
+        { "id": "claws_teeth", "label": "claws, fangs and the face", "families": ["claws"], "tags": ["fangs_tag", "nail_tag", "tongue_tag"] },
+        { "id": "coat", "label": "the coat, ears and teeth", "families": ["coat", "skin", "ears"], "tags": ["teeth_tag"] },
         { "id": "gait", "label": "the gait", "families": ["gait", "muscle", "tail", "size"] },
         { "id": "skull", "label": "the skull and frame", "families": ["bone", "structure"], "exposure_min": 40, "when": { "stability_min": 40 } }
       ]
     },
     "genome.cat": {
       "phases": [
-        { "id": "claws_eyes", "label": "claws, teeth and eyes", "families": ["claws", "eyes"], "tags": ["fangs_tag", "teeth_tag"] },
-        { "id": "coat", "label": "the coat and ears", "families": ["coat", "skin", "ears"] },
+        { "id": "claws_eyes", "label": "claws, fangs and eyes", "families": ["claws", "eyes"], "tags": ["fangs_tag", "tongue_tag"] },
+        { "id": "coat", "label": "the coat, ears and teeth", "families": ["coat", "skin", "ears"], "tags": ["teeth_tag"] },
         { "id": "gait", "label": "the gait", "families": ["gait", "muscle", "tail", "size"] },
         { "id": "skull", "label": "the skull and frame", "families": ["bone", "structure"], "exposure_min": 40, "when": { "stability_min": 40 } }
       ]
     },
     "genome.fox": {
       "phases": [
-        { "id": "claws_eyes", "label": "claws, teeth and eyes", "families": ["claws", "eyes"], "tags": ["fangs_tag", "teeth_tag"] },
-        { "id": "coat", "label": "the coat and ears", "families": ["coat", "skin", "ears"] },
+        { "id": "claws_eyes", "label": "claws, fangs and eyes", "families": ["claws", "eyes"], "tags": ["fangs_tag", "tongue_tag"] },
+        { "id": "coat", "label": "the coat, ears and teeth", "families": ["coat", "skin", "ears"], "tags": ["teeth_tag"] },
         { "id": "gait", "label": "the gait", "families": ["gait", "muscle", "tail", "size"] },
         { "id": "skull", "label": "the skull and frame", "families": ["bone", "structure"], "exposure_min": 40, "when": { "stability_min": 40 } }
       ]
     },
     "genome.rabbit": {
       "phases": [
-        { "id": "ears_teeth", "label": "the ears and teeth", "families": ["ears"], "tags": ["long_ears_tag", "mobile_ears_tag", "teeth_tag"] },
-        { "id": "coat", "label": "the coat", "families": ["coat", "skin"] },
+        { "id": "ears", "label": "the ears", "families": ["ears"], "tags": ["long_ears_tag", "mobile_ears_tag"] },
+        { "id": "coat", "label": "the coat and teeth", "families": ["coat", "skin"], "tags": ["teeth_tag"] },
         { "id": "gait", "label": "the gait", "families": ["gait", "muscle", "tail", "size"] },
         { "id": "rhythm", "label": "the cycles", "families": ["genital", "bone"], "exposure_min": 35 }
       ]

@@ -735,6 +735,252 @@
       ]
     },
     {
+      "id": "attr.feline_tongue",
+      "display_name": "Feline Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag",
+        "feline_tag"
+      ],
+      "target_roles": [
+        "tongue"
+      ],
+      "requires_part_tags": [
+        "tongue_tag"
+      ],
+      "priority": 44,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "morph_track": "morph.tongue_to_feline",
+      "effects": {
+        "speech_mult": 0.95
+      },
+      "description_key": "desc.attr.feline_tongue",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Human Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Roughening, Narrowing Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Fine, Rasping Feline Tongue",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.leporine_tongue",
+      "display_name": "Leporine Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag",
+        "rabbit_tag"
+      ],
+      "target_roles": [
+        "tongue"
+      ],
+      "requires_part_tags": [
+        "tongue_tag"
+      ],
+      "priority": 44,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "morph_track": "morph.tongue_to_leporine",
+      "effects": {
+        "speech_mult": 0.94
+      },
+      "description_key": "desc.attr.leporine_tongue",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Human Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Small, Quick Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Small, Dense Leporine Tongue",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.bovine_tongue",
+      "display_name": "Bovine Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag",
+        "bovine_tag"
+      ],
+      "target_roles": [
+        "tongue"
+      ],
+      "requires_part_tags": [
+        "tongue_tag"
+      ],
+      "priority": 44,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "morph_track": "morph.tongue_to_bovine",
+      "effects": {
+        "speech_mult": 0.9
+      },
+      "description_key": "desc.attr.bovine_tongue",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Human Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Broadening, Rough Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Long, Rasping Bovine Tongue",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.equine_tongue",
+      "display_name": "Equine Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag",
+        "equine_tag"
+      ],
+      "target_roles": [
+        "tongue"
+      ],
+      "requires_part_tags": [
+        "tongue_tag"
+      ],
+      "priority": 44,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "morph_track": "morph.tongue_to_equine",
+      "effects": {
+        "speech_mult": 0.9
+      },
+      "description_key": "desc.attr.equine_tongue",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Human Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Flattening, Broadening Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Long, Flat Equine Tongue",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.avian_tongue",
+      "display_name": "Avian Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag",
+        "avian_tag"
+      ],
+      "target_roles": [
+        "tongue"
+      ],
+      "requires_part_tags": [
+        "tongue_tag"
+      ],
+      "priority": 44,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "morph_track": "morph.tongue_to_avian",
+      "effects": {
+        "speech_mult": 0.88
+      },
+      "description_key": "desc.attr.avian_tongue",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Human Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Thin, Narrowing Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Narrow, Hardened Avian Tongue",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
+      "id": "attr.chiropteran_tongue",
+      "display_name": "Chiropteran Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag",
+        "bat_tag"
+      ],
+      "target_roles": [
+        "tongue"
+      ],
+      "requires_part_tags": [
+        "tongue_tag"
+      ],
+      "priority": 44,
+      "stack_mode": "replace",
+      "mutation_cost": 2,
+      "hidden": false,
+      "morph_track": "morph.tongue_to_chiropteran",
+      "effects": {
+        "speech_mult": 0.94
+      },
+      "description_key": "desc.attr.chiropteran_tongue",
+      "stages": [
+        {
+          "at": 0,
+          "name": "A Human Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 0.5,
+          "name": "A Thin, Tapering Tongue",
+          "pain_on_stage": 0
+        },
+        {
+          "at": 1,
+          "name": "A Fine, Ribbed Chiropteran Tongue",
+          "pain_on_stage": 1
+        }
+      ]
+    },
+    {
       "id": "attr.thermal_pit",
       "display_name": "Thermal Pits",
       "family": "structure",

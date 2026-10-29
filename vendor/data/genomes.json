@@ -160,7 +160,7 @@
         "trait.keen_smell",
         "trait.voice_high",
         "trait.digitigrade_legs",
-        "trait.canine_tongue",
+        "trait.feline_tongue",
         "trait.mammary_row",
         "trait.canine_teeth",
         "trait.hybrid_paw",
@@ -307,6 +307,7 @@
         "trait.hybrid_paw",
         "trait.thumbless_paw",
         "trait.canine_teeth",
+        "trait.leporine_tongue",
         "trait.species_genital"
       ],
       "priority": 3,
@@ -371,6 +372,7 @@
         "trait.scent_musk",
         "trait.mammary_row",
         "trait.mammary_row",
+        "trait.bovine_tongue",
         "trait.species_genital",
         "trait.mobile_ears"
       ],
@@ -430,6 +432,7 @@
         "trait.bulk_size",
         "trait.keen_smell",
         "trait.voice_deep",
+        "trait.equine_tongue",
         "trait.species_genital",
         "trait.mobile_ears"
       ],
@@ -492,6 +495,7 @@
         "trait.cold_resist",
         "trait.cloaca",
         "trait.beak",
+        "trait.avian_tongue",
         "trait.species_genital",
         "trait.mobile_ears"
       ],
@@ -625,6 +629,7 @@
         "trait.hybrid_paw",
         "trait.thumbless_paw",
         "trait.mammary_row",
+        "trait.chiropteran_tongue",
         "trait.species_genital"
       ],
       "priority": 5,

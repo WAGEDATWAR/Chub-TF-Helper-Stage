@@ -1032,6 +1032,168 @@
       "criticality": "minor"
     },
     {
+      "id": "part.feline_tongue",
+      "display_name": "Feline Tongue",
+      "tags": [
+        "tongue_tag",
+        "feline_tag",
+        "animal_tag"
+      ],
+      "occupies_role": "tongue",
+      "layers": [
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.feline_tongue"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "voice"
+      ],
+      "integrity": 20,
+      "mass": 0.05,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.leporine_tongue",
+      "display_name": "Leporine Tongue",
+      "tags": [
+        "tongue_tag",
+        "rabbit_tag",
+        "animal_tag"
+      ],
+      "occupies_role": "tongue",
+      "layers": [
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.leporine_tongue"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "voice"
+      ],
+      "integrity": 18,
+      "mass": 0.04,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.bovine_tongue",
+      "display_name": "Bovine Tongue",
+      "tags": [
+        "tongue_tag",
+        "bovine_tag",
+        "animal_tag"
+      ],
+      "occupies_role": "tongue",
+      "layers": [
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.bovine_tongue"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "voice"
+      ],
+      "integrity": 20,
+      "mass": 0.07,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.equine_tongue",
+      "display_name": "Equine Tongue",
+      "tags": [
+        "tongue_tag",
+        "equine_tag",
+        "animal_tag"
+      ],
+      "occupies_role": "tongue",
+      "layers": [
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.equine_tongue"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "voice"
+      ],
+      "integrity": 20,
+      "mass": 0.06,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.avian_tongue",
+      "display_name": "Avian Tongue",
+      "tags": [
+        "tongue_tag",
+        "avian_tag",
+        "animal_tag"
+      ],
+      "occupies_role": "tongue",
+      "layers": [
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.avian_tongue"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "voice"
+      ],
+      "integrity": 16,
+      "mass": 0.03,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.chiropteran_tongue",
+      "display_name": "Chiropteran Tongue",
+      "tags": [
+        "tongue_tag",
+        "bat_tag",
+        "animal_tag"
+      ],
+      "occupies_role": "tongue",
+      "layers": [
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [
+        "attr.chiropteran_tongue"
+      ],
+      "mutable_aspects": [
+        "skin",
+        "structure",
+        "voice"
+      ],
+      "integrity": 16,
+      "mass": 0.03,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
       "id": "part.human_teeth",
       "display_name": "Human Teeth",
       "tags": [
@@ -3950,6 +4112,52 @@
         "size"
       ],
       "integrity": 14,
+      "mass": 0.03,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.thickening_tongue",
+      "display_name": "Thickening Tongue",
+      "tags": [
+        "tongue_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "tongue",
+      "layers": [
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "size"
+      ],
+      "integrity": 14,
+      "mass": 0.04,
+      "size_class": "small",
+      "criticality": "minor"
+    },
+    {
+      "id": "part.furrowing_tongue",
+      "display_name": "Furrowing Tongue",
+      "tags": [
+        "tongue_tag",
+        "transitional_tag"
+      ],
+      "occupies_role": "tongue",
+      "layers": [
+        "muscle"
+      ],
+      "merge_policy": "none",
+      "provides": [],
+      "innate_attributes": [],
+      "mutable_aspects": [
+        "structure",
+        "size"
+      ],
+      "integrity": 12,
       "mass": 0.03,
       "size_class": "small",
       "criticality": "minor"

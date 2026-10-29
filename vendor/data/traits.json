@@ -268,6 +268,126 @@
       "conflicts_with_families": []
     },
     {
+      "id": "trait.feline_tongue",
+      "display_name": "Feline Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag"
+      ],
+      "tier": 2,
+      "grants": [
+        "attr.feline_tongue"
+      ],
+      "targets": {
+        "match_roles": [
+          "tongue"
+        ]
+      },
+      "priority": 44,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.leporine_tongue",
+      "display_name": "Leporine Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag"
+      ],
+      "tier": 2,
+      "grants": [
+        "attr.leporine_tongue"
+      ],
+      "targets": {
+        "match_roles": [
+          "tongue"
+        ]
+      },
+      "priority": 44,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.bovine_tongue",
+      "display_name": "Bovine Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag"
+      ],
+      "tier": 2,
+      "grants": [
+        "attr.bovine_tongue"
+      ],
+      "targets": {
+        "match_roles": [
+          "tongue"
+        ]
+      },
+      "priority": 44,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.equine_tongue",
+      "display_name": "Equine Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag"
+      ],
+      "tier": 2,
+      "grants": [
+        "attr.equine_tongue"
+      ],
+      "targets": {
+        "match_roles": [
+          "tongue"
+        ]
+      },
+      "priority": 44,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.avian_tongue",
+      "display_name": "Avian Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag"
+      ],
+      "tier": 2,
+      "grants": [
+        "attr.avian_tongue"
+      ],
+      "targets": {
+        "match_roles": [
+          "tongue"
+        ]
+      },
+      "priority": 44,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
+      "id": "trait.chiropteran_tongue",
+      "display_name": "Chiropteran Tongue",
+      "family": "structure",
+      "tags": [
+        "tongue_tag"
+      ],
+      "tier": 2,
+      "grants": [
+        "attr.chiropteran_tongue"
+      ],
+      "targets": {
+        "match_roles": [
+          "tongue"
+        ]
+      },
+      "priority": 44,
+      "min_coverage": 0.3,
+      "conflicts_with_families": []
+    },
+    {
       "id": "trait.thermal_pit",
       "display_name": "Thermal Pits",
       "family": "structure",

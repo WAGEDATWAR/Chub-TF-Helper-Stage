@@ -331,12 +331,12 @@
         {
           "at": 0.5,
           "part": "part.sharpening_teeth",
-          "phase": 0
+          "phase": 1
         },
         {
           "at": 1,
           "part": "part.canine_teeth",
-          "phase": 1
+          "phase": 2
         }
       ],
       "on_step": {
@@ -350,7 +350,8 @@
       "steps": [
         {
           "at": 0,
-          "part": "part.human_fangs_absent"
+          "part": "part.human_fangs_absent",
+          "phase": 0
         },
         {
           "at": 0.5,
@@ -360,7 +361,7 @@
         {
           "at": 1,
           "part": "part.canid_fangs",
-          "phase": 1
+          "phase": 0
         }
       ],
       "on_step": {
@@ -374,7 +375,8 @@
       "steps": [
         {
           "at": 0,
-          "part": "part.human_fangs_absent"
+          "part": "part.human_fangs_absent",
+          "phase": 0
         },
         {
           "at": 0.5,
@@ -384,7 +386,7 @@
         {
           "at": 1,
           "part": "part.venom_fangs",
-          "phase": 1
+          "phase": 0
         }
       ],
       "on_step": {
@@ -398,15 +400,23 @@
       "steps": [
         {
           "at": 0,
-          "part": "part.human_tongue"
+          "part": "part.human_tongue",
+          "phase": 0
         },
         {
-          "at": 0.45,
-          "part": "part.notched_tongue"
+          "at": 0.5,
+          "part": "part.thickening_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.75,
+          "part": "part.notched_tongue",
+          "phase": 1
         },
         {
           "at": 1,
-          "part": "part.forked_tongue"
+          "part": "part.forked_tongue",
+          "phase": 2
         }
       ],
       "on_step": {
@@ -420,15 +430,203 @@
       "steps": [
         {
           "at": 0,
-          "part": "part.human_tongue"
+          "part": "part.human_tongue",
+          "phase": 0
         },
         {
           "at": 0.5,
-          "part": "part.notched_tongue"
+          "part": "part.thickening_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.75,
+          "part": "part.furrowing_tongue",
+          "phase": 1
         },
         {
           "at": 1,
-          "part": "part.canine_tongue"
+          "part": "part.canine_tongue",
+          "phase": 2
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 1,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.tongue_to_feline",
+      "occupies_role": "tongue",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.5,
+          "part": "part.thickening_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.75,
+          "part": "part.furrowing_tongue",
+          "phase": 1
+        },
+        {
+          "at": 1,
+          "part": "part.feline_tongue",
+          "phase": 2
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 1,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.tongue_to_leporine",
+      "occupies_role": "tongue",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.5,
+          "part": "part.thickening_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.75,
+          "part": "part.furrowing_tongue",
+          "phase": 1
+        },
+        {
+          "at": 1,
+          "part": "part.leporine_tongue",
+          "phase": 2
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 1,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.tongue_to_bovine",
+      "occupies_role": "tongue",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.5,
+          "part": "part.thickening_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.75,
+          "part": "part.furrowing_tongue",
+          "phase": 1
+        },
+        {
+          "at": 1,
+          "part": "part.bovine_tongue",
+          "phase": 2
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 1,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.tongue_to_equine",
+      "occupies_role": "tongue",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.5,
+          "part": "part.thickening_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.75,
+          "part": "part.furrowing_tongue",
+          "phase": 1
+        },
+        {
+          "at": 1,
+          "part": "part.equine_tongue",
+          "phase": 2
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 1,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.tongue_to_avian",
+      "occupies_role": "tongue",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.5,
+          "part": "part.thickening_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.75,
+          "part": "part.furrowing_tongue",
+          "phase": 1
+        },
+        {
+          "at": 1,
+          "part": "part.avian_tongue",
+          "phase": 2
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 1,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.tongue_to_chiropteran",
+      "occupies_role": "tongue",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.5,
+          "part": "part.thickening_tongue",
+          "phase": 0
+        },
+        {
+          "at": 0.75,
+          "part": "part.furrowing_tongue",
+          "phase": 1
+        },
+        {
+          "at": 1,
+          "part": "part.chiropteran_tongue",
+          "phase": 2
         }
       ],
       "on_step": {
