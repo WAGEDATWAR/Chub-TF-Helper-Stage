@@ -301,6 +301,8 @@ export class Subject {
         slot: inst.slot,
         integrity: inst.integrity,
         flags: [...inst.flags],
+        // live appearance (D-249): a staged recolour must survive a reload
+        ...(Object.keys(inst.appearance).length > 0 ? { appearance: { ...inst.appearance } } : {}),
         attributes: inst.attributes.map((a: PartAttributeEntry) => ({
           id: a.id,
           progress: a.progress,

@@ -31,18 +31,31 @@ ledger is complete, not because anything is stubbed:
 - **H20 — Part/skeleton visualizer.** A visual body map (which parts are changed and
   how far), on the menu — not stubbed yet. The H19 parts list is the textual stand-in.
 - **H21 — Lycan curse. Shipped.** Bite → permanent phase 0; later phases + genitals
-  gated on the moon (D-023), via the parent's phase `when` gate (D-248).
+  gated on the moon (D-023), via the parent's phase `when` gate (D-248). The genome,
+  feral profile and phase plan now live in the **parent base data** (D-249); the helper
+  keeps only the coupling + detect wiring and absorbs on sync.
 
 ## MOON-GATED-OTHER-SPECIES — only the werewolf uses the lunar phase gate
 
 - **Status:** GAP (only werewolf; grows per exotic species)
-- **Where:** `data/phases.extra.json`, `src/sim/subject.ts` (`whenOpenFor`).
+- **Where:** parent `data/phases.json` (`genome.werewolf` plan), `src/sim/subject.ts`
+  (`whenOpenFor`).
 - **What:** D-248 lets any phase gate on world state (`moon_min`/`moon_phase`), but
   only `genome.werewolf` uses it. Other species whose fiction is moon/light/tide-bound
   (a lunar-tide species, a sun-fearing one) could gate phases the same way; it is
   content, not engine. Vanilla `genome.wolf` stays ungated (it is the plain animal).
 - **Decide:** which future species gate on which world state, and whether to add more
   world-state criteria keys (time-of-day, season) alongside the lunar ones.
+
+## WEREWOLF-SOURCE-OF-TRUTH — parent owns it, helper must not shadow
+
+- **Status:** resolved by convention (D-249); watch on future edits
+- **Where:** parent `data/genomes.json` + `feral.json` + `phases.json` vs helper
+  `data/genomes.extra.json` / `feral.extra.json` / `phases.extra.json`.
+- **What:** the werewolf genome, feral profile and lycan plan were **moved to the
+  parent** and stripped from the helper overlays. A helper entry with the same id
+  *shadows* the parent (overlays replace arrays), so re-adding one there would silently
+  win. Keep only helper-specific werewolf bits (coupling, detect cues) in the helper.
 
 - **H12 — Stage polish.** Phone-width layout, a11y (real buttons, focus, aria-live),
   config knobs for existing toggles, status/guard UX.

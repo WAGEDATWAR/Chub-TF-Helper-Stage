@@ -2,41 +2,390 @@
   "feral_version": 1,
   "_comment": "Helper-stage feral profiles for the H6 genomes. Merged onto the parent's feral.json.",
   "profiles": [
-    { "id": "feral.lion", "display_name": "Feral Lion", "debt_mult": 1.1, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["proud", "hunt"] },
-    { "id": "feral.tiger", "display_name": "Feral Tiger", "debt_mult": 1.1, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["prowl", "hunt"] },
-    { "id": "feral.panther", "display_name": "Feral Panther", "debt_mult": 1.0, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["stalk", "hunt"] },
-    { "id": "feral.leopard", "display_name": "Feral Leopard", "debt_mult": 1.0, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["climb", "hunt"] },
-    { "id": "feral.lynx", "display_name": "Feral Lynx", "debt_mult": 0.95, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["wary", "prowl"] },
-    { "id": "feral.cheetah", "display_name": "Feral Cheetah", "debt_mult": 1.0, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["sprint", "hunt"] },
-    { "id": "feral.coyote", "display_name": "Feral Coyote", "debt_mult": 0.9, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["scavenge", "howl"] },
-    { "id": "feral.jackal", "display_name": "Feral Jackal", "debt_mult": 0.9, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["pack", "scavenge"] },
-    { "id": "feral.husky", "display_name": "Feral Husky", "debt_mult": 0.7, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["pack", "tireless"] },
-    { "id": "feral.hyena", "display_name": "Feral Hyena", "debt_mult": 1.0, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["clan", "scavenge"] },
-    { "id": "feral.bear", "display_name": "Feral Bear", "debt_mult": 1.2, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["bulk", "hibernate"] },
-    { "id": "feral.badger", "display_name": "Feral Badger", "debt_mult": 1.0, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["dig", "fierce"] },
-    { "id": "feral.otter", "display_name": "Feral Otter", "debt_mult": 0.8, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["swim", "play"] },
-    { "id": "feral.weasel", "display_name": "Feral Weasel", "debt_mult": 0.85, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["dart", "burrow"] },
-    { "id": "feral.mouse", "display_name": "Feral Mouse", "debt_mult": 0.8, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["skitter", "breed"] },
-    { "id": "feral.rat", "display_name": "Feral Rat", "debt_mult": 0.85, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["gnaw", "swarm"] },
-    { "id": "feral.squirrel", "display_name": "Feral Squirrel", "debt_mult": 0.8, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["cache", "climb"] },
-    { "id": "feral.hare", "display_name": "Feral Hare", "debt_mult": 0.85, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["bolt", "breed"] },
-    { "id": "feral.goat", "display_name": "Feral Goat", "debt_mult": 1.0, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["climb", "browse"] },
-    { "id": "feral.ram", "display_name": "Feral Ram", "debt_mult": 1.05, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["butt", "herd"] },
-    { "id": "feral.sheep", "display_name": "Feral Sheep", "debt_mult": 0.9, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["flock", "graze"] },
-    { "id": "feral.deer", "display_name": "Feral Deer", "debt_mult": 0.95, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["bolt", "browse"] },
-    { "id": "feral.boar", "display_name": "Feral Boar", "debt_mult": 1.15, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["charge", "root"] },
-    { "id": "feral.zebra", "display_name": "Feral Zebra", "debt_mult": 1.1, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["herd", "kick"] },
-    { "id": "feral.donkey", "display_name": "Feral Donkey", "debt_mult": 1.05, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["stubborn", "bray"] },
-    { "id": "feral.eagle", "display_name": "Feral Eagle", "debt_mult": 1.15, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["soar", "dive"] },
-    { "id": "feral.owl", "display_name": "Feral Owl", "debt_mult": 1.1, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["roost", "hunt"] },
-    { "id": "feral.hawk", "display_name": "Feral Hawk", "debt_mult": 1.1, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["soar", "stoop"] },
-    { "id": "feral.lizard", "display_name": "Feral Lizard", "debt_mult": 1.2, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["bask", "skitter"] },
-    { "id": "feral.crocodile", "display_name": "Feral Crocodile", "debt_mult": 1.35, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["lurk", "deathroll"] },
-    { "id": "feral.frog", "display_name": "Feral Frog", "debt_mult": 0.9, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["croak", "leap"] },
-    { "id": "feral.shark", "display_name": "Feral Shark", "debt_mult": 1.3, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["circle", "feed"] },
-    { "id": "feral.wasp", "display_name": "Feral Wasp", "debt_mult": 1.2, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["swarm", "sting"] },
-    { "id": "feral.moth", "display_name": "Feral Moth", "debt_mult": 1.1, "drive_bonus_on_recovery": 20, "voice": "reduced", "traits": ["flit", "seek"] },
-    { "id": "feral.werewolf", "display_name": "Feral Wolf-Man", "debt_mult": 1.2, "drive_bonus_on_recovery": 24, "voice": "reduced", "traits": ["hunt", "howl"] },
-    { "id": "feral.vampire", "display_name": "Feral Vampire", "debt_mult": 1.15, "drive_bonus_on_recovery": 24, "voice": "reduced", "traits": ["feed", "lurk"] }
+    {
+      "id": "feral.lion",
+      "display_name": "Feral Lion",
+      "debt_mult": 1.1,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "proud",
+        "hunt"
+      ]
+    },
+    {
+      "id": "feral.tiger",
+      "display_name": "Feral Tiger",
+      "debt_mult": 1.1,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "prowl",
+        "hunt"
+      ]
+    },
+    {
+      "id": "feral.panther",
+      "display_name": "Feral Panther",
+      "debt_mult": 1,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "stalk",
+        "hunt"
+      ]
+    },
+    {
+      "id": "feral.leopard",
+      "display_name": "Feral Leopard",
+      "debt_mult": 1,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "climb",
+        "hunt"
+      ]
+    },
+    {
+      "id": "feral.lynx",
+      "display_name": "Feral Lynx",
+      "debt_mult": 0.95,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "wary",
+        "prowl"
+      ]
+    },
+    {
+      "id": "feral.cheetah",
+      "display_name": "Feral Cheetah",
+      "debt_mult": 1,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "sprint",
+        "hunt"
+      ]
+    },
+    {
+      "id": "feral.coyote",
+      "display_name": "Feral Coyote",
+      "debt_mult": 0.9,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "scavenge",
+        "howl"
+      ]
+    },
+    {
+      "id": "feral.jackal",
+      "display_name": "Feral Jackal",
+      "debt_mult": 0.9,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "pack",
+        "scavenge"
+      ]
+    },
+    {
+      "id": "feral.husky",
+      "display_name": "Feral Husky",
+      "debt_mult": 0.7,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "pack",
+        "tireless"
+      ]
+    },
+    {
+      "id": "feral.hyena",
+      "display_name": "Feral Hyena",
+      "debt_mult": 1,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "clan",
+        "scavenge"
+      ]
+    },
+    {
+      "id": "feral.bear",
+      "display_name": "Feral Bear",
+      "debt_mult": 1.2,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "bulk",
+        "hibernate"
+      ]
+    },
+    {
+      "id": "feral.badger",
+      "display_name": "Feral Badger",
+      "debt_mult": 1,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "dig",
+        "fierce"
+      ]
+    },
+    {
+      "id": "feral.otter",
+      "display_name": "Feral Otter",
+      "debt_mult": 0.8,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "swim",
+        "play"
+      ]
+    },
+    {
+      "id": "feral.weasel",
+      "display_name": "Feral Weasel",
+      "debt_mult": 0.85,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "dart",
+        "burrow"
+      ]
+    },
+    {
+      "id": "feral.mouse",
+      "display_name": "Feral Mouse",
+      "debt_mult": 0.8,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "skitter",
+        "breed"
+      ]
+    },
+    {
+      "id": "feral.rat",
+      "display_name": "Feral Rat",
+      "debt_mult": 0.85,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "gnaw",
+        "swarm"
+      ]
+    },
+    {
+      "id": "feral.squirrel",
+      "display_name": "Feral Squirrel",
+      "debt_mult": 0.8,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "cache",
+        "climb"
+      ]
+    },
+    {
+      "id": "feral.hare",
+      "display_name": "Feral Hare",
+      "debt_mult": 0.85,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "bolt",
+        "breed"
+      ]
+    },
+    {
+      "id": "feral.goat",
+      "display_name": "Feral Goat",
+      "debt_mult": 1,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "climb",
+        "browse"
+      ]
+    },
+    {
+      "id": "feral.ram",
+      "display_name": "Feral Ram",
+      "debt_mult": 1.05,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "butt",
+        "herd"
+      ]
+    },
+    {
+      "id": "feral.sheep",
+      "display_name": "Feral Sheep",
+      "debt_mult": 0.9,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "flock",
+        "graze"
+      ]
+    },
+    {
+      "id": "feral.deer",
+      "display_name": "Feral Deer",
+      "debt_mult": 0.95,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "bolt",
+        "browse"
+      ]
+    },
+    {
+      "id": "feral.boar",
+      "display_name": "Feral Boar",
+      "debt_mult": 1.15,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "charge",
+        "root"
+      ]
+    },
+    {
+      "id": "feral.zebra",
+      "display_name": "Feral Zebra",
+      "debt_mult": 1.1,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "herd",
+        "kick"
+      ]
+    },
+    {
+      "id": "feral.donkey",
+      "display_name": "Feral Donkey",
+      "debt_mult": 1.05,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "stubborn",
+        "bray"
+      ]
+    },
+    {
+      "id": "feral.eagle",
+      "display_name": "Feral Eagle",
+      "debt_mult": 1.15,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "soar",
+        "dive"
+      ]
+    },
+    {
+      "id": "feral.owl",
+      "display_name": "Feral Owl",
+      "debt_mult": 1.1,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "roost",
+        "hunt"
+      ]
+    },
+    {
+      "id": "feral.hawk",
+      "display_name": "Feral Hawk",
+      "debt_mult": 1.1,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "soar",
+        "stoop"
+      ]
+    },
+    {
+      "id": "feral.lizard",
+      "display_name": "Feral Lizard",
+      "debt_mult": 1.2,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "bask",
+        "skitter"
+      ]
+    },
+    {
+      "id": "feral.crocodile",
+      "display_name": "Feral Crocodile",
+      "debt_mult": 1.35,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "lurk",
+        "deathroll"
+      ]
+    },
+    {
+      "id": "feral.frog",
+      "display_name": "Feral Frog",
+      "debt_mult": 0.9,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "croak",
+        "leap"
+      ]
+    },
+    {
+      "id": "feral.shark",
+      "display_name": "Feral Shark",
+      "debt_mult": 1.3,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "circle",
+        "feed"
+      ]
+    },
+    {
+      "id": "feral.wasp",
+      "display_name": "Feral Wasp",
+      "debt_mult": 1.2,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "swarm",
+        "sting"
+      ]
+    },
+    {
+      "id": "feral.moth",
+      "display_name": "Feral Moth",
+      "debt_mult": 1.1,
+      "drive_bonus_on_recovery": 20,
+      "voice": "reduced",
+      "traits": [
+        "flit",
+        "seek"
+      ]
+    },
+    {
+      "id": "feral.vampire",
+      "display_name": "Feral Vampire",
+      "debt_mult": 1.15,
+      "drive_bonus_on_recovery": 24,
+      "voice": "reduced",
+      "traits": [
+        "feed",
+        "lurk"
+      ]
+    }
   ]
 }

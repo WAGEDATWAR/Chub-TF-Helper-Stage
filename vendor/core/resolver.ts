@@ -406,6 +406,20 @@ export class Resolver {
     return { ready, events };
   }
 
+  /**
+   * Stamp a morph step's appearance values onto an instance (D-249). Only keys the
+   * instance's template actually accepts are written, so a track never invents a
+   * slot; writing the same value is a no-op (idempotent).
+   */
+  private _stampAppearance(instance: PartInstance, values: Record<string, string>): void {
+    const schema = instance.template.appearance;
+    if (!schema) return;
+    for (const [key, value] of Object.entries(values)) {
+      if (!(key in schema)) continue;
+      if (instance.appearance[key] !== value) instance.appearance[key] = value;
+    }
+  }
+
   private _fireMorphTracks(subject: SubjectLike, events: TickEvent[]): void {
     if (!this.library || !this.morphTracks) return;
     for (const instance of subject.body.allInstances()) {
@@ -436,6 +450,10 @@ export class Resolver {
         if (!trackId || !this.morphTracks.has(trackId)) continue;
         if (this.morphTracks.get(trackId)!.occupies_role !== instance.role) continue;
         const target = this.morphTracks.partAt(trackId, entry.progress / 1000);
+        // stage any per-step appearance (D-249), even when the part itself does not
+        // change — so a track can recolour (shifting eye colour) without a swap
+        const step = this.morphTracks.get(trackId)!.steps[this.morphTracks.stepIndexFor(trackId, entry.progress / 1000)];
+        if (step?.appearance) this._stampAppearance(instance, step.appearance);
         if (target && instance.id !== target) {
           const template = this.library.get(target);
           const from = instance.id;

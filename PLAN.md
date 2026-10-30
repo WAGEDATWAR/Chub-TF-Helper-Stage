@@ -107,11 +107,20 @@ planned — see `DEFERRED.md`.)
 ## H21 — Lycan curse — done
 
 The werewolf is bite-then-moon (D-023). A bite alone lands **phase 0** (fangs, claws,
-tongue — the mark) permanently and on its own timetable; later phases are gated on
-`moon_min` so the change deepens only under the moon, and the genitals sit in phase 1
-behind that gate (the moon brings the genital change and the heat cycle). Built on
-the parent's `when` gate + lunar criteria keys (D-248, vendored); the plan is a
-werewolf-only overlay. `tools/lycan.ts` locks it.
+tongue, and the amber eye tell — the mark) permanently and on its own timetable; later
+phases are gated on `moon_min` so the change deepens only under the moon, and the
+genitals sit in phase 1 behind that gate (the moon brings the genital change and the
+heat cycle). The genome, its feral profile and its phase plan **live in the parent
+base data** now (D-249); the helper keeps only its coupling + detect wiring.
+`tools/lycan.ts` locks it.
+
+## D-249 (parent) — eyes first + staged colour — absorbed
+
+Every phase plan lands `eyes` in phase 0 and a morph step may carry `appearance`, so a
+track recolours across progress (brown → amber → gold) rather than only swapping parts;
+amber is valid on every eye part. The werewolf uses `morph.eyes_to_tapetum`, the
+serpent `morph.eyes_to_slit`. `tools/eyes.ts` locks it.
+
 ## H18 — Transformation duration — done
 
 Shipped. The authored set settles in ~22–41 simulated days (median 30) — right for
@@ -246,7 +255,7 @@ a wall clock. The per-message config is the *fallback*, not the rule.
 
 `npm run check` = `typecheck` + `validate` + `lint:authoring` + `data-check` +
 `smoke` + `detect` + `detect-eval` + `coupling` + `pace` + `name-restore` + `time` +
-`lycan` + `drive` + `visualize` + `golden` + `persist`. All must be green
+`lycan` + `eyes` + `drive` + `visualize` + `golden` + `persist`. All must be green
 for any content or code change. `data-check` fails if a new genome lands < 5
 attributes, never settles, or (if fantasy) is missing its coupling block.
 

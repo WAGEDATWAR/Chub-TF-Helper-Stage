@@ -604,7 +604,8 @@
       },
       "morph_role_tracks": {
         "head": "morph.head_to_serpent",
-        "fangs": "morph.fangs_to_venom"
+        "fangs": "morph.fangs_to_venom",
+        "eyes": "morph.eyes_to_slit"
       }
     },
     {
@@ -684,6 +685,90 @@
       "stability_cost": 0,
       "stat_modifiers": {},
       "feral_profile": null
+    },
+    {
+      "id": "genome.werewolf",
+      "display_name": "Werewolf",
+      "class": "fantasy_lycan",
+      "familiarity_class": "canine",
+      "limit_tags": [
+        "canine_tag",
+        "tail_tag",
+        "moon_tag"
+      ],
+      "traits": [
+        "trait.mammalian_fur",
+        "trait.body_heat",
+        "trait.canine_claws",
+        "trait.snout_nose",
+        "trait.keen_smell",
+        "trait.mobile_ears",
+        "trait.tail_growth",
+        "trait.digitigrade_legs",
+        "trait.canine_tongue",
+        "trait.muscle_density",
+        "trait.heavy_muscle",
+        "trait.dense_bones",
+        "trait.pack_instinct",
+        "trait.canine_teeth",
+        "trait.thumbless_paw",
+        "trait.fangs",
+        "trait.growl",
+        "trait.night_vision",
+        "trait.keen_sight",
+        "trait.pain_tolerance",
+        "trait.bulk_size",
+        "trait.mammary_row",
+        "trait.species_genital"
+      ],
+      "priority": 6,
+      "saturation_point": 1,
+      "overshoot_threshold": 1.8,
+      "stability_cost": 30,
+      "stat_modifiers": {
+        "strength": 20,
+        "perception": 12,
+        "endurance": 10,
+        "intelligence": -4
+      },
+      "mentality": {
+        "aggressive": 18,
+        "dominant": 12,
+        "nervous": -6,
+        "confident": 8
+      },
+      "feral_profile": "feral.werewolf",
+      "genital": {
+        "penis": {
+          "to": "part.canid_sheath_penis",
+          "via": "part.partial_sheath_penis"
+        },
+        "scrotum": {
+          "to": "part.mammal_scrotum",
+          "via": "part.tightening_scrotum"
+        },
+        "vulva": {
+          "to": "part.canid_vulva",
+          "via": "part.swelling_vulva"
+        }
+      },
+      "morph_role_tracks": {
+        "head": "morph.head_to_canine",
+        "ears": "morph.ears_to_canid",
+        "eyes": "morph.eyes_to_tapetum"
+      },
+      "moon_coupling": {
+        "cycle": "lunar",
+        "full_shift": "peak",
+        "pre_cues": [
+          "hairier",
+          "sharper_nails",
+          "keener_senses"
+        ],
+        "onset_days": 3,
+        "falloff_days": 2
+      },
+      "description_key": "desc.genome.werewolf"
     }
   ]
 }

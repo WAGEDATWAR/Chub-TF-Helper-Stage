@@ -3,7 +3,7 @@ Mira — exposure 39% · light hybrid · visibly between
   changing: head: pack instinct, nose: keen smell, fangs.L: fangs, fangs.R: fangs, arms.upper.L: mammalian fur, arms.upper.R: mammalian fur
   parts: mammalian fur ×11 (100%), canine claws ×3 (100%), fangs ×2 (100%), pack instinct (100%), keen smell (100%), canine tongue (75%), body heat ×21 (13%), mobile ears ×2 (12%), canine teeth (10%)
   interior: tier aware, neutral-still, nervous 37/confident 56/curious 56
-Wren — exposure 19% · cosmetic · a first shimmer · pressure 100% SHIFTED
-  changing: fangs.L: fangs, nails.hand.L: canine claws, nails.hand.R: canine claws, pelvis: mammalian fur, nails.foot.L: canine claws, nails.foot.R: canine claws
-  parts: mammalian fur ×12 (100%), canine claws ×4 (100%), fangs ×2 (100%), keen smell (22%), growl (22%), canine tongue (22%), body heat ×30 (18%), muzzle ×2 (17%), mammary row ×2 (5%), mobile ears ×2 (5%), species genital ×2 (5%), pain tolerance (5%), canine teeth (4%)
-  interior: tier dim, neutral-still, nervous 38/confident 56/curious 56
+Wren — exposure 9% · cosmetic · a first shimmer · pressure 100% SHIFTED
+  changing: fangs.L: fangs, nails.hand.L: canine claws, nails.hand.R: canine claws, nails.foot.L: canine claws, nails.foot.R: canine claws, eyes.R: keen sight
+  parts: fangs ×2 (100%), canine claws ×4 (50%), keen sight ×2 (30%), keen smell (22%), growl (22%), canine tongue (22%)
+  interior: tier dim, neutral-still, nervous 38/confident 57/curious 56

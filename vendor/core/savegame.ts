@@ -46,7 +46,7 @@ export function rehydrate(save: Record<string, unknown>, content: SaveContent): 
     baseGender?: string;
     personalitySeed?: string | null;
     stats?: Record<string, number>;
-    parts?: Array<{ template: string; slot: string; integrity?: number; flags?: string[]; attributes?: Array<{ id: string; progress: number; stage_index?: number; target_progress?: number; dose_mult?: number; start_delay?: number; phase_index?: number; phase_feral_only?: boolean; phase_exposure_min?: number; phase_when?: Record<string, unknown>; morph_chain?: string[] }> }>;
+    parts?: Array<{ template: string; slot: string; integrity?: number; flags?: string[]; appearance?: Record<string, string>; attributes?: Array<{ id: string; progress: number; stage_index?: number; target_progress?: number; dose_mult?: number; start_delay?: number; phase_index?: number; phase_feral_only?: boolean; phase_exposure_min?: number; phase_when?: Record<string, unknown>; morph_chain?: string[] }> }>;
     pronouns?: string;
     age?: number | null;
     height?: number | null;
@@ -106,6 +106,7 @@ export function rehydrate(save: Record<string, unknown>, content: SaveContent): 
       entry.stage_index = attr.stage_index ?? 0;
     }
     for (const flag of part.flags ?? []) inst.flags.push(flag);
+    if (part.appearance) inst.appearance = { ...part.appearance };
   }
   if (s.pronouns) subject.pronouns = s.pronouns;
   if (typeof s.sexualityDrift === "number") subject.sexualityDrift = s.sexualityDrift;

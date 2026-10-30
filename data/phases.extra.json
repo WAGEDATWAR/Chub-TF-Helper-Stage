@@ -1,13 +1,5 @@
 {
   "phases_version": 1,
-  "_comment": "Werewolf-only overlay (helper). The lycan curse (D-248): a bite alone lands phase 0 permanently on its own timetable; later phases are gated on the MOON (`moon_min`), so the change only deepens as the moon fills. Genitals sit in phase 1 so the cycle drives them (heat). Phase 0 is deliberately tight — fangs, claws, tongue: the mark the bite leaves.",
-  "plans": {
-    "genome.werewolf": {
-      "phases": [
-        { "id": "bite_mark", "label": "the bite's mark", "families": ["claws"], "tags": ["fangs_tag", "nail_tag", "tongue_tag", "nose_tag"], "roles": ["nose", "mouth", "tongue"] },
-        { "id": "the_turn", "label": "the turn comes with the moon", "families": ["coat", "skin", "ears", "genital", "voice"], "tags": ["teeth_tag", "scent_tag", "muzzle_tag"], "when": { "moon_min": 0.5 } },
-        { "id": "wild_shape", "label": "the wild shape under the full moon", "families": ["gait", "muscle", "tail", "structure"], "when": { "moon_min": 0.8 } }
-      ]
-    }
-  }
+  "_comment": "Phase overlay (helper). genome.werewolf and its moon-gated lycan plan now live in the parent base data (D-249); this overlay is kept for any future helper-only phase tweaks and merges harmlessly when empty.",
+  "plans": {}
 }

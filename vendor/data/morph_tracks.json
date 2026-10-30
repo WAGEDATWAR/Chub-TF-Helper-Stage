@@ -1011,7 +1011,112 @@
         "integrity_cost": 2,
         "pain_on_stage": 1
       }
+    },
+    {
+      "id": "morph.eyes_colour",
+      "occupies_role": "eyes",
+      "_comment": "Generic beast-eye tell: the colour shifts first (phase 0), structure stays human.",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_eyes",
+          "appearance": {
+            "colour": "brown"
+          }
+        },
+        {
+          "at": 0.35,
+          "part": "part.human_eyes",
+          "appearance": {
+            "colour": "amber"
+          }
+        },
+        {
+          "at": 1,
+          "part": "part.human_eyes",
+          "appearance": {
+            "colour": "gold"
+          }
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 1,
+        "pain_on_stage": 0
+      }
+    },
+    {
+      "id": "morph.eyes_to_tapetum",
+      "occupies_role": "eyes",
+      "_comment": "Canine/feline: colour first (phase 0), the reflective night eye later (moon).",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_eyes",
+          "appearance": {
+            "colour": "brown"
+          }
+        },
+        {
+          "at": 0.3,
+          "part": "part.human_eyes",
+          "appearance": {
+            "colour": "amber"
+          }
+        },
+        {
+          "at": 0.6,
+          "part": "part.night_eyes",
+          "appearance": {
+            "colour": "amber"
+          },
+          "phase": 1
+        },
+        {
+          "at": 1,
+          "part": "part.tapetum_eyes",
+          "appearance": {
+            "colour": "gold"
+          },
+          "phase": 2
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
+    },
+    {
+      "id": "morph.eyes_to_slit",
+      "occupies_role": "eyes",
+      "_comment": "Serpent: the colour warms to gold, then the pupil slits.",
+      "steps": [
+        {
+          "at": 0,
+          "part": "part.human_eyes",
+          "appearance": {
+            "colour": "brown"
+          }
+        },
+        {
+          "at": 0.4,
+          "part": "part.human_eyes",
+          "appearance": {
+            "colour": "gold"
+          }
+        },
+        {
+          "at": 1,
+          "part": "part.slit_eyes",
+          "appearance": {
+            "colour": "gold"
+          },
+          "phase": 1
+        }
+      ],
+      "on_step": {
+        "integrity_cost": 2,
+        "pain_on_stage": 1
+      }
     }
   ]
 }
-

@@ -1,5 +1,13 @@
 # Decisions
 
+- **D-025 — Eyes are a first-class phase-0 tell; eye colour stages (D-249).** Every
+  phase plan now lands `eyes` in phase 0, and a morph step may carry `appearance` so a
+  track can recolour across progress (brown → amber → gold for a beast strain) instead
+  of only swapping parts. Amber is a valid colour on every eye part. The werewolf's
+  eye tell is `morph.eyes_to_tapetum` (amber now, tapetum under the moon); the serpent
+  uses `morph.eyes_to_slit`. Built on the parent's staged-appearance + phase changes
+  (vendored). `tools/eyes.ts` locks it.
+
 - **D-024 — The helper configures the moon; the core supplies the default (D-248).**
   The parent core now owns a stateless lunar clock (`core/moon.ts`, fixed 29.53-day
   synodic month) and auto-wires `phaseWhenOpen(session)` as the resolver's gate. The

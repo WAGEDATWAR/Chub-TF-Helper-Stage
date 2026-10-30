@@ -8,6 +8,12 @@ export interface MorphStep {
    *  phase is held until that phase opens, so a first-phase track can stop partway
    *  (e.g. reach "sharpening nails") and only continue once the next phase opens. */
   phase?: number;
+  /**
+   * Appearance values this step stamps onto the instance as it is reached (D-249),
+   * e.g. `{ colour: "amber" }`. Lets a track stage a *recolour* (shifting eye colour)
+   * across progress/phases, not only a part swap. Applied idempotently each tick.
+   */
+  appearance?: Record<string, string>;
 }
 
 export interface MorphTrack {
