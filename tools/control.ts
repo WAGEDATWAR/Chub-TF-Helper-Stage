@@ -149,5 +149,68 @@ function check(name: string, cond: boolean, detail = ""): void {
   check("the floor uses BUDDING for early parts", /BUDDING/.test(dirText) || view.frames[0]!.parts.every((p) => p.pct >= 30), dirText);
 }
 
+// an override survives a reload via the durable control state, and beats a card
+// re-scan (the "wasp re-applied after reload; snapshot gone" bug). H24.
+{
+  const g = new HelperGame(20);
+  g.track("sarah", "Sarah");
+  g.knowCard({ id: "sarah", names: ["Sarah"], text: "Sarah is as busy as a bee." });
+  g.autoApplyPending(1.0);
+  g.override("sarah", null); // user clears a would-be auto-bind
+  const control = g.controlState();
+  const h = new HelperGame(20);
+  h.track("sarah", "Sarah");
+  h.restore(g.save()!, [{ id: "sarah", name: "Sarah" }]);
+  h.applyControlState(control);                      // reload re-applies controls
+  h.knowCard({ id: "sarah", names: ["Sarah"], text: "Sarah is as busy as a bee." }); // then the card scan
+  h.autoApplyPending(1.0);
+  check("a human override survives a reload", h.cast.get("sarah")!.sim.subject.genomes.length === 0, JSON.stringify(h.cast.get("sarah")!.sim.subject.genomes));
+  check("the override flag survives a reload", h.detector.overrideFor("sarah") === null);
+}
+
+// a genome override survives a reload with the tag intact
+{
+  const g = new HelperGame(21);
+  g.track("s", "Sarah");
+  g.override("s", "genome.werewolf");
+  const control = g.controlState();
+  const h = new HelperGame(21);
+  h.track("s", "Sarah");
+  h.restore(g.save()!, [{ id: "s", name: "Sarah" }]);
+  h.applyControlState(control);
+  check("a genome override survives a reload", h.view().frames[0]!.genome === "genome.werewolf", String(h.view().frames[0]!.genome));
+}
+
+// a snapshot survives a reload
+{
+  const g = new HelperGame(22);
+  g.track("s", "S");
+  g.bestow("s", "genome.wolf", 3);
+  g.advance(days(5));
+  g.snapshot("checkpoint");
+  const h = new HelperGame(22);
+  h.track("s", "S");
+  h.applyControlState(g.controlState());
+  check("a snapshot survives a reload", h.snapshotCount() === 1 && h.listSnapshots()[0]!.label === "checkpoint", String(h.snapshotCount()));
+}
+
+// a REWOUND state (bestow + advance) is what the next reload pulls — the reported
+// "overwrote with human, reloaded, and the change was back" case
+{
+  const g = new HelperGame(23);
+  g.track("s", "Sarah");
+  g.bestow("s", "genome.wasp", 3);
+  g.advance(days(3));
+  g.override("s", null);        // human
+  const control = g.controlState();
+  const h = new HelperGame(23);
+  h.track("s", "Sarah");
+  h.restore(g.save()!, [{ id: "s", name: "Sarah" }]);
+  h.applyControlState(control);
+  h.knowCard({ id: "s", names: ["Sarah"], text: "Sarah tends the garden." });
+  h.autoApplyPending(1.0);
+  check("a cleared change does not come back on reload", h.cast.get("s")!.sim.subject.genomes.length === 0, JSON.stringify(h.cast.get("s")!.sim.subject.genomes));
+}
+
 console.log(failures === 0 ? "\nCONTROL PASS" : `\nCONTROL FAIL (${failures})`);
 process.exit(failures === 0 ? 0 : 1);

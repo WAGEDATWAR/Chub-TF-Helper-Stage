@@ -108,8 +108,24 @@ export class Detector {
     this.push("override", id, genome ? `set to ${genome}` : "set to human");
   }
 
+  /** Toggle chat evidence-gating (a chat species auto-binds only with a name/cue tie). */
+  setEvidenceOnly(on: boolean): void {
+    this.evidenceOnly = on;
+  }
+  private evidenceOnly = true;
+
   overrideFor(id: string): string | null | undefined {
     return this.overrides.get(id);
+  }
+
+  /** Every override, for chat-wide persistence (H24). */
+  allOverrides(): Array<[string, string | null]> {
+    return [...this.overrides.entries()];
+  }
+
+  /** Set the override flag without touching the body (used on reload restore). */
+  setOverrideSilent(id: string, genome: string | null): void {
+    this.overrides.set(id, genome);
   }
 
   /** Scan a chat message and propose, per character, genomes and change signals. */
@@ -117,7 +133,7 @@ export class Detector {
     if (!this.tables.settings.autoBindFromChat) return { species: [], changes: [], unattributed: [], named: [], unresolved: [] };
     // a speaker is a strong attribution prior; to a named card, to their own text
     const speaker = id && this.chars.has(id) ? [{ id, names: this.chars.get(id)!.names, gender: this.chars.get(id)!.gender }] : [...this.chars.values()];
-    const res = detectInText(text, speaker, this.tables, "chat", this.attrOpts(null, true));
+    const res = detectInText(text, speaker, this.tables, "chat", this.attrOpts(null, this.evidenceOnly));
     // the writer naming someone makes them the focus for the next bare sentences
     if (res.named.length > 0) this.focus = res.named[res.named.length - 1]!;
     this.captureNpcs(text, res, tick);

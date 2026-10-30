@@ -55,6 +55,23 @@ export function textHasPositive(tokens: Token[], cue: string): boolean {
 /** Negation words that, immediately before a cue, flip its meaning ("not a wolf"). */
 const NEGATORS = new Set(["not", "no", "never", "nor", "isn", "wasn", "aren", "weren", "ain", "without", "unlike", "hardly", "barely"]);
 
+/** Simile markers: "busy AS A bee", "LIKE a fox" — a comparison, not identity. */
+const SIMILES = new Set(["like", "as", "unlike", "resembling"]);
+
+/**
+ * True if the cue at `at` sits in a simile ("as a bee", "like a fox") — a comparison
+ * rather than an identity. Scans two tokens left past an article.
+ */
+export function isSimile(tokens: Token[], at: number): boolean {
+  for (let i = at - 1; i >= Math.max(0, at - 3); i--) {
+    const w = tokens[i]!.text;
+    if (SIMILES.has(w)) return true;
+    if (/^(a|an|the|my|his|her|its|their|our|your)$/.test(w)) continue;
+    break;
+  }
+  return false;
+}
+
 /**
  * True if the cue at token index `at` is negated by a nearby negator ("not a wolf",
  * "no fur", "wasn't a fox but"). Scans the two tokens to the left.

@@ -26,26 +26,37 @@ the item is picked up by that milestone; it is not dropped.
 - **Decide:** whether a rewind should also remap the per-message branch save, or is
   sim-only by design (current).
 
-## NPC-CANDIDATE-HEURISTIC — a capitalized-word scan, not an NER pass
+## PANE-PERSIST-BUDGET — every pane action writes chat state
 
-- **Status:** GAP (deliberately loose)
-- **Where:** `src/detect/detect.ts` (`npcCandidates`), `src/detect/engine.ts`.
-- **What:** candidates come from capitalized words beside a species with a
-  not-a-name stoplist. It can still surface a place or title as a "possible NPC"; the
-  pane lets the player confirm, so a false positive is cheap. Once the optional LLM
-  classifier runs it could name NPCs directly.
-- **Decide:** whether to feed the classifier an NPC-extraction task.
+- **Status:** GAP (watch)
+- **Where:** `src/stage/Stage.tsx` (`persist`), `src/stage/Pane.tsx` (`run`).
+- **What:** each pane action calls `messenger.updateChatState` with the full
+  `chatState` (roster + controls + snapshots). Snapshots carry their full save payload
+  in `chatState`, so many snapshots grow the chat-state blob. Chat state is not the
+  per-message budget, but it is not free.
+- **Decide:** a snapshot cap, or move snapshot payloads to message state.
 
-## MOON-OFFSET-VS-CYCLE — setting the moon re-bases an offset, keeping the cycle
+## GENITAL-POLICY-DEFAULT — chat-wide default only, no per-genome nuance
 
 - **Status:** DEFERRED
-- **Where:** `src/sim/lunar.ts` (`offsetTicks`), `src/game.ts` (`setMoon`).
-- **What:** `setMoon` moves a tick offset so the *phase* changes without moving the day
-  clock. The lunar cycle length is unchanged. There is no "freeze the moon" or
-  "advance the cycle counter" view yet.
-- **Decide:** whether a player wants to set the cycle day/season, not just the phase.
+- **Where:** `src/sim/genital.ts`, `src/stage/types.ts` (`genitalPolicy` config).
+- **What:** the policy is per character (or one chat-wide default). A genome cannot
+  declare "animate by default, additive for a futa body" — the player picks.
+- **Decide:** whether a genome should carry a preferred policy.
 
----
+## CONTROL-REWIND-SCOPE-END
+
+## RATE-UNITS-AUDIT — no guard prevents an un-converted speed_base
+
+- **Status:** GAP (partial guard)
+- **Where:** `vendor/data/attributes.json`, `tools/genital.ts`.
+- **What:** when D-250 made the tick a minute, two attributes (`mammalian_fur`,
+  `canine_claws`) kept hour-scale `speed_base` (~180× the default) and snapped a body
+  to full in a day. `tools/genital.ts` now asserts no attribute carries a
+  `speed_base > 0.01`, but the *right* value (a multiple of `DEFAULT_SPEED_BASE`) is
+  still hand-picked per attribute.
+- **Decide:** express `speed_base` as a multiple of the default in data, so a unit
+  change can never strand a value again.
 
 ## Planned work with no current stub (tracked so it is not lost)
 

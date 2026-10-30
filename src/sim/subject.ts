@@ -9,6 +9,7 @@ import { createSession, type Session } from "@core/session";
 import { createObserver } from "@core/observer";
 import { TimeEngine } from "@core/time_engine";
 import { resolvePower, powerFromInjector, type PowerResolution } from "@core/powers";
+import { type GenitalPolicy } from "@core/genital";
 import { buildCriteriaContext } from "@core/mind_wiring";
 import { matches, type CriteriaContext } from "@core/criteria";
 import { createComposer, buildFragmentLibrary, buildToneLibrary, type Composer } from "@core/composer";
@@ -105,14 +106,19 @@ export const DEFAULT_DOSE = 3.0;
  * engine-driven triggers (a moon-shift, an emotional forced change) that are not
  * the player spending charge.
  */
-export function bestowForced(sim: Sim, genomeId: string, dose = DEFAULT_DOSE): PowerResolution {
+export function bestowForced(sim: Sim, genomeId: string, dose = DEFAULT_DOSE, policy: GenitalPolicy = "preserve"): PowerResolution {
   sim.session.observer.charge = sim.session.observer.chargeMax;
   sim.session.cooldowns.clear();
-  return bestow(sim, genomeId, dose);
+  return bestow(sim, genomeId, dose, policy);
 }
 
-/** Apply a genome as a bestow (preserve genitals). */
-export function bestow(sim: Sim, genomeId: string, dose = DEFAULT_DOSE): PowerResolution {
+/**
+ * Apply a genome as a bestow. `policy` is the genital policy (D-162): `preserve`
+ * keeps her genitals, `additive` keeps both (→ intersex), `replace`/`swap` land the
+ * genome's own form. The default is settle-safe; the caller threads the player's
+ * choice.
+ */
+export function bestow(sim: Sim, genomeId: string, dose = DEFAULT_DOSE, policy: GenitalPolicy = "preserve"): PowerResolution {
   const id = mutagenPowerId(genomeId);
   const slug = id.replace(/^power\./, "");
   const injector = sim.regs.injectors.get(`injector.${slug}`);
@@ -139,7 +145,7 @@ export function bestow(sim: Sim, genomeId: string, dose = DEFAULT_DOSE): PowerRe
     dose,
     injector,
     genome,
-    policy: "preserve",
+    policy,
   });
 }
 

@@ -16,6 +16,7 @@ import { createLunar, offsetForPhase } from "./sim/lunar";
 import { days as daysToTicks, TICKS_PER_DAY } from "./sim/time";
 import { createTriggerEngine, type TriggerEvent } from "./sim/triggers";
 import { feel, DEFAULT_DOSE } from "./sim/subject";
+import { GENITAL_OPTIONS, isGenitalPolicy, profileOf, applyNow as applyGenitalNow, type GenitalPolicy } from "./sim/genital";
 import { applyPace, currentPace, PACES, type PaceId } from "./sim/pace";
 
 export type { CastFrame } from "./sim/cast";
@@ -55,6 +56,17 @@ export interface SavePayload {
 }
 
 type TriggerEngine = ReturnType<typeof createTriggerEngine>;
+
+/** Durable, chat-wide pane controls (H24) — persist via `messenger.updateChatState`. */
+export interface ControlState {
+  overrides: Array<[string, string | null]>;
+  genital: Array<[string, GenitalPolicy]>;
+  defaultGenital: GenitalPolicy;
+  pace: PaceId;
+  moonOffset: number;
+  snapshots: Array<{ id: string; label: string; atTick: number; payload: SavePayload; roster: Array<{ id: string; name: string }> }>;
+  seq: number;
+}
 
 /** The cast, its shared world, and the narrative detector (H2). */
 export class HelperGame {
@@ -201,10 +213,11 @@ export class HelperGame {
    * "human" truly clears a lycan and "werewolf" replaces an auto-bound "wolf". The
    * character keeps their identity, clock and mind.
    */
-  override(id: string, genomeId: string | null): boolean {
+  override(id: string, genomeId: string | null, policy?: GenitalPolicy): boolean {
     if (genomeId !== null && !this.regs.genomes.get(genomeId)) return false;
     const char = this.cast.get(id);
     if (!char) return false;
+    const use = policy ?? this.policyFor(id);
     const realized = char.sim.subject.mind?.realized ?? false;
     const awareness = char.sim.subject.mind?.awareness ?? 0;
     this.cast.reset(id);
@@ -220,15 +233,53 @@ export class HelperGame {
     // the coupling engine keys off subject.genomes; drop any state for genomes no
     // longer carried so a stale coupling cannot keep drawing a removed lycan
     this.triggers.prune(id, fresh ? fresh.sim.subject.genomes : []);
-    if (genomeId) this.cast.bind(id, genomeId, 1.0);
+    if (genomeId) this.cast.bind(id, genomeId, 1.0, use);
     return true;
+  }
+
+  /** A character's chosen genital policy (preserve | replace | additive | swap). */
+  policyFor(id: string): GenitalPolicy {
+    return this.genitalPolicies.get(id) ?? this.defaultPolicy;
+  }
+
+  /** Set a character's genital policy; applies to the live body at once. */
+  setGenitalPolicy(id: string, policy: GenitalPolicy): void {
+    if (!isGenitalPolicy(policy)) return;
+    this.genitalPolicies.set(id, policy);
+    const char = this.cast.get(id);
+    const genome = char?.sim.subject.genomes[char.sim.subject.genomes.length - 1];
+    if (char && genome) applyGenitalNow(char.sim.subject, this.regs.genomes.get(genome)!, this.regs.library, policy);
+  }
+
+  /** The default policy applied to a character with no explicit choice. */
+  get defaultPolicy(): GenitalPolicy {
+    return this.defaultGenitalPolicy;
+  }
+
+  /** Set the chat-wide default genital policy (from config). */
+  setDefaultGenitalPolicy(policy: string): void {
+    if (isGenitalPolicy(policy)) this.defaultGenitalPolicy = policy;
+  }
+
+  private genitalPolicies = new Map<string, GenitalPolicy>();
+  private defaultGenitalPolicy: GenitalPolicy = "preserve";
+
+  /** The offered genital policies, for the pane. */
+  genitalOptions(): Array<{ id: GenitalPolicy; label: string; note: string }> {
+    return GENITAL_OPTIONS;
+  }
+
+  /** A character's current genital profile (male | female | intersex | none). */
+  genitalProfileOf(id: string): string {
+    const char = this.cast.get(id);
+    return char ? profileOf(char.sim.subject) : "none";
   }
 
   /** Apply the strongest pending proposal for a character (or a specific one). */
   applyProposal(proposalId: string, dose = DEFAULT_DOSE): boolean {
     const p = this.detector.proposals.find((q) => q.id === proposalId && q.status === "pending");
     if (!p) return false;
-    if (!this.cast.bind(p.characterId, p.genome, dose)) return false;
+    if (!this.cast.bind(p.characterId, p.genome, dose, this.policyFor(p.characterId))) return false;
     this.detector.mark(p.id, "applied");
     this.applyRelated(p.characterId, p.genome);
     return true;
@@ -260,6 +311,11 @@ export class HelperGame {
     this.detector.observe(speakerId, text, this.cast.worldTick);
   }
 
+  /** Toggle chat evidence-gating for detection (config knob, H12). */
+  setEvidenceOnly(on: boolean): void {
+    this.detector.setEvidenceOnly(on);
+  }
+
   /** Candidate NPCs the prose named beside a species, for the pane to offer. */
   candidates(): Array<{ name: string; genome: string; family: string }> {
     return this.detector.candidates.map((c) => ({ name: c.name, genome: c.genome, family: c.family }));
@@ -274,7 +330,7 @@ export class HelperGame {
     if (!cand) return null;
     const id = name.toLowerCase().replace(/\s+/g, "_");
     const tracked = this.track(id, name);
-    if (tracked && cand.genome) this.cast.bind(id, cand.genome, DEFAULT_DOSE);
+    if (tracked && cand.genome) this.cast.bind(id, cand.genome, DEFAULT_DOSE, this.policyFor(id));
     this.detector.forgetCandidate(name);
     return tracked;
   }
@@ -301,8 +357,8 @@ export class HelperGame {
   }
 
   /** Bind a genome to a tracked character directly (forced). */
-  bestow(id: string, genomeId: string, dose = DEFAULT_DOSE): boolean {
-    return this.cast.bind(id, genomeId, dose);
+  bestow(id: string, genomeId: string, dose = DEFAULT_DOSE, policy?: GenitalPolicy): boolean {
+    return this.cast.bind(id, genomeId, dose, policy ?? this.policyFor(id));
   }
 
   /** Advance the whole cast on the shared clock, firing any coupling triggers. */
@@ -458,6 +514,47 @@ export class HelperGame {
     }
     if (payload.coupling) this.triggers.loadJSON(payload.coupling, this.cast.entries());
     return any;
+  }
+
+  // --- durable control state (H24) -----------------------------------------
+  //
+  // The framework only persists on a message send; a pane action (override,
+  // snapshot, moon, pace, genital policy) mutates memory and would be lost on a
+  // reload. These controls are chat-wide and persist immediately via the Stage's
+  // `messenger.updateChatState`, then re-applied here on load — BEFORE the card
+  // scan, so a manual override beats an auto-bind ("busy as a bee" → wasp).
+
+  /** The durable pane controls, for chat-wide persistence. */
+  controlState(): ControlState {
+    return {
+      overrides: this.detector.allOverrides(),
+      genital: [...this.genitalPolicies.entries()],
+      defaultGenital: this.defaultGenitalPolicy,
+      pace: this.pace,
+      moonOffset: this.lunar.offsetTicks,
+      snapshots: this.snapshots.map((s) => ({ id: s.id, label: s.label, atTick: s.atTick, payload: s.payload, roster: s.roster })),
+      seq: this.snapshotSeq,
+    };
+  }
+
+  /** Re-apply durable controls on load (overrides win over a later card scan). */
+  applyControlState(state: ControlState | null | undefined): void {
+    if (!state) return;
+    if (state.pace) this.setPace(state.pace);
+    if (typeof state.moonOffset === "number") this.applyLunarOffset(state.moonOffset);
+    if (state.defaultGenital) this.defaultGenitalPolicy = state.defaultGenital;
+    for (const [id, p] of state.genital ?? []) if (isGenitalPolicy(p)) this.genitalPolicies.set(id, p);
+    // restore snapshots (their rosters may differ; names resolve against the live cast)
+    for (const s of state.snapshots ?? []) this.snapshots.push({ id: s.id, label: s.label, atTick: s.atTick, payload: s.payload, roster: s.roster });
+    this.snapshotSeq = Math.max(this.snapshotSeq, state.seq ?? 0);
+    // overrides: record the flag and re-bind the genome so the body matches. Done
+    // here so it precedes/overrides the card scan in the Stage constructor.
+    for (const [id, genome] of state.overrides ?? []) {
+      if (!this.cast.get(id)) continue;
+      this.detector.setOverrideSilent(id, genome);
+      if (genome) { this.cast.reset(id); this.cast.bind(id, genome, 1.0, this.policyFor(id)); }
+      else this.cast.reset(id);
+    }
   }
 }
 

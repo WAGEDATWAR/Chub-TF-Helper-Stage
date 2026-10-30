@@ -31,7 +31,7 @@
       },
       "description_key": "desc.attr.mammalian_fur",
       "progress": {
-        "speed_base": 0.06,
+        "speed_base": 0.001,
         "curve": "ease_in_out",
         "reverse_mult": 1.8,
         "stall_below_stability": 20,
@@ -209,7 +209,7 @@
       "grants_ability": "ability.retractable_claws",
       "description_key": "desc.attr.canine_claws",
       "progress": {
-        "speed_base": 0.055,
+        "speed_base": 0.00092,
         "curve": "ease_in_out",
         "reverse_mult": 1.8,
         "stall_below_stability": 20,

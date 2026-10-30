@@ -9,6 +9,7 @@
  * renders them.
  */
 import { startSubject, bestow, buildComposer, saveSim, DEFAULT_DOSE, type Sim } from "./subject";
+import { applyNow, type GenitalPolicy } from "./genital";
 import { runDailyMind } from "./mind";
 import type { Registries } from "./registries";
 import { TimeEngine } from "@core/time_engine";
@@ -158,10 +159,14 @@ export class Cast {
   }
 
   /** Apply a genome to a tracked character (forced/narrative trigger). */
-  bind(id: string, genomeId: string, dose = DEFAULT_DOSE): boolean {
+  bind(id: string, genomeId: string, dose = DEFAULT_DOSE, policy: GenitalPolicy = "preserve"): boolean {
     const char = this.chars.get(id);
-    if (!char || !this.regs.genomes.get(genomeId)) return false;
-    bestow(char.sim, genomeId, dose);
+    const genome = this.regs.genomes.get(genomeId);
+    if (!char || !genome) return false;
+    // bind with no genital change, then apply the policy ourselves: the engine's own
+    // `additive` is asymmetric (a no-op from a male), so we target the empty socket.
+    bestow(char.sim, genomeId, dose, "preserve");
+    if (policy !== "preserve") applyNow(char.sim.subject, genome, this.regs.library, policy);
     return true;
   }
 

@@ -10,7 +10,7 @@
  * then the nearest following one. So "Mira's skin prickles… like a fox, while Tomas
  * grows eagle wings" credits fox→Mira and eagle→Tomas.
  */
-import { tokenize, findSpecies, findFamilies, findImplied, findAnatomySignatures, hasChangeCue, anatomyMentions, type Token } from "./match";
+import { tokenize, findSpecies, findFamilies, findImplied, findAnatomySignatures, hasChangeCue, anatomyMentions, isSimile, type Token } from "./match";
 import type { DetectTables } from "./tables";
 
 export interface KnownCharacter {
@@ -208,16 +208,20 @@ export function detectInText(text: string, chars: KnownCharacter[], tables: Dete
   if (speciesHits.some((h) => !h.weak)) speciesHits = speciesHits.filter((h) => !h.weak);
 
   for (const hit of speciesHits) {
+    // a simile ("busy as a bee") is a comparison, not an identity — weak evidence
+    const simile = isSimile(tokens, hit.at);
     if (source === "card") {
       const id = sole ?? attribute(segs, hit.at, tokens, named, opts).id;
-      result.species.push({ characterId: id ?? "", genome: hit.genome, family: hit.family, confidence: 0.85, source, token: hit.token, evidence: true });
+      // a card simile lands lower-confidence and waits for the player unless the
+      // token is distinctive; a plain "Sarah is a wolf" stays a strong card bind
+      result.species.push({ characterId: id ?? "", genome: hit.genome, family: hit.family, confidence: simile ? 0.5 : 0.85, source, token: hit.token, evidence: !simile });
       continue;
     }
     const a = attribute(segs, hit.at, tokens, named, opts);
     // chat strictness: a bare species word with no name tie and no change cue is a
     // mere mention — record it as an unresolved candidate AND still propose (so the
     // pane can offer it), but flag `evidence:false` so auto-apply leaves it alone.
-    const evidence = !opts.requireEvidence || a.named || changeNear(hit.at);
+    const evidence = (!opts.requireEvidence || a.named || changeNear(hit.at)) && !simile;
     if (!evidence) result.unresolved.push({ token: hit.token, genome: hit.genome, family: hit.family, at: hit.at });
     const id = sole ?? a.id;
     // push even when unresolved: the engine can still claim it via the focus/sole

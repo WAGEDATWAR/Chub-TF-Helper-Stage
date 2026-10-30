@@ -1,5 +1,23 @@
 # Decisions
 
+- **D-033 — A simile is not an identity (detect).** "Busy as a bee" no longer binds a
+  wasp. A species cue preceded by `like`/`as`/`unlike` is a comparison: it proposes at
+  lower confidence and waits for the player (chat), and a card simile does not
+  auto-bind. `tools/detect.ts` / `control` cover it.
+
+- **D-032 — Durable pane controls persist on action, not on message (H24).** The
+  framework only persists state when a message is sent, so a pane action (override,
+  snapshot, moon, pace) lived only in memory; a reload pulled the last message's
+  state and re-applied an auto-bind the user had cleared. Durable controls now ride
+  `chatState.control`, written immediately via `messenger.updateChatState`, and
+  re-apply on load *before* the card scan so a manual override beats an auto-bind.
+
+- **D-031 — Genital policy is a per-character switch; additive → intersex (H23).**
+  The parent supports four policies but the helper hardcoded `preserve`, so intersex
+  was unreachable. Exposed as a switch (preserve | replace | additive | swap), with
+  `additive` filling the empty socket so any body can become intersex; a chat-wide
+  `genitalPolicy` config sets the default. `tools/genital.ts` locks it.
+
 - **D-030 — Override replaces; a minute tick; manual control (D-250/D-251).** The
   parent's atomic tick is now **one minute** (D-250), so `advance(n)` advances n
   minutes and every helper hour/day site goes through `src/sim/time` (`days()`/

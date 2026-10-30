@@ -87,8 +87,29 @@ milestone names the `DEFERRED.md` entry it closes (if any).
 | H20 | **Part/skeleton visualizer: a visual body map of changed parts** | planned | — |
 | H21 | **Lycan curse: bite→permanent mark, later phases on the moon** | **done** | — |
 | H22 | **Manual control: override-replace, evidence-gated detect, NPCs, moon reset, snapshots; LLM pacing** | **done** | D-250 |
+| H23 | **Genital policy / intersex: preserve \| replace \| additive \| swap** | **done** | genital |
+| H24 | **Durable pane controls: persist override/snapshot/moon on action** | **done** | reload |
 
 Milestone order is a suggestion; H8–H12 are independent and can be resequenced.
+
+## H23 — Genital policy / intersex — done
+
+The parent engine supports four genital policies but the helper hardcoded
+`preserve`, so a change never touched the genitals and intersex was unreachable.
+Now a per-character switch (preserve | replace | additive | swap); `additive` fills
+the empty socket, so any body can become **intersex** (both forms). Set from the
+pane or via a chat-wide `genital` config default. `tools/genital.ts` locks it — and
+also locks the legacy-rate regression below.
+
+## H24 — Durable pane controls — done
+
+The framework only persists state when a message is *sent*, so a pane action
+(override, snapshot, moon, pace, genital) lived in memory and a reload pulled the
+last message's state — re-applying an auto-bind the user had cleared. Durable
+controls are now chat-wide (`chatState.control`) and persisted **on the action** via
+`messenger.updateChatState`, then re-applied on load *before* the card scan so a
+manual override always beats an auto-bind. `tools/control.ts` locks reload
+round-trips.
 
 ## H22 — Manual control + pacing truthfulness — done
 
@@ -283,7 +304,7 @@ a wall clock. The per-message config is the *fallback*, not the rule.
 
 `npm run check` = `typecheck` + `validate` + `lint:authoring` + `data-check` +
 `smoke` + `detect` + `detect-eval` + `coupling` + `pace` + `name-restore` + `time` +
-`lycan` + `eyes` + `drive` + `visualize` + `golden` + `persist` + `control`. All must be green
+`lycan` + `eyes` + `drive` + `visualize` + `golden` + `persist` + `control` + `genital`. All must be green
 for any content or code change. `data-check` fails if a new genome lands < 5
 attributes, never settles, or (if fantasy) is missing its coupling block.
 

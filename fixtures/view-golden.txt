@@ -1,6 +1,6 @@
 moon: full moon (95%)
-Mira — exposure 40% · light hybrid · visibly between
-  changing: head: pack instinct, nose: keen smell, fangs.L: fangs, fangs.R: fangs, torso.upper: mammalian fur, arms.upper.L: mammalian fur
+Mira — exposure 36% · light hybrid · visibly between
+  changing: head: pack instinct, nose: keen smell, fangs.L: fangs, fangs.R: fangs, arms.upper.R: mammalian fur, torso.lower: mammalian fur
   parts: mammalian fur ×11 (100%), canine claws ×3 (100%), fangs ×2 (100%), pack instinct (100%), keen smell (100%), canine tongue (75%), body heat ×21 (11%), mobile ears ×2 (10%), canine teeth (9%)
   interior: tier aware, neutral-still, nervous 37/confident 56/curious 56
 Wren — exposure 9% · cosmetic · a first shimmer · pressure 100% SHIFTED

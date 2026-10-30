@@ -50,10 +50,16 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
     const save = (data.messageState as MessageStateType | null)?.save;
     if (save) this.game.restore(save, namedRoster);
     else for (const r of namedRoster) this.game.track(r.id, r.name);
+
+    // durable pane controls (overrides, snapshots, moon, pace, genital) re-apply
+    // BEFORE the card scan below, so a manual override beats the card auto-bind
+    this.game.applyControlState(data.chatState?.control);
     // re-apply chat-wide playstyle choices (a swipe keeps them)
     for (const [id, byGenome] of Object.entries(data.chatState?.playstyles ?? {})) {
       for (const [genome, style] of Object.entries(byGenome)) this.game.setPlaystyle(id, genome, style);
     }
+    // re-apply chat-wide genital-policy choices (H23)
+    for (const [id, policy] of Object.entries(data.chatState?.genital ?? {})) this.game.setGenitalPolicy(id, policy as never);
 
     // scan every character card for a species (attributed to that character)
     const seen = new Set<string>();
@@ -91,6 +97,11 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
       const inferred = inferPace(...[...this.cards.values()].map((c) => c.text));
       if (inferred !== "normal") this.game.setPace(inferred);
     }
+    // H23: a chat-wide default genital policy (config), else preserve
+    if (data.config?.genitalPolicy) this.game.setDefaultGenitalPolicy(data.config.genitalPolicy);
+    // H12: detection strictness + the optional classifier are config knobs
+    if (data.config?.detectEvidenceOnly === false) this.game.setEvidenceOnly(false);
+    this.canClassify = data.config?.useClassifier !== false;
   }
 
   async load(): Promise<Partial<{ success: boolean; error: string | null; initState: InitStateType | null }>> {
@@ -180,7 +191,21 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
       const style = this.game.triggers.playstyleFor(c.id);
       if (style) playstyles[c.id] = { [this.couplingGenome(c.id) ?? ""]: style };
     }
-    return { cast: this.roster(), playstyles };
+    const genital: Record<string, string> = {};
+    for (const c of this.game.cast.list()) {
+      const p = this.game.policyFor(c.id);
+      if (p !== this.game.defaultPolicy) genital[c.id] = p;
+    }
+    return { cast: this.roster(), playstyles, genital, control: this.game.controlState() };
+  }
+
+  /**
+   * Persist the current chat state immediately (H24). Called after a pane action
+   * (override, snapshot, moon, pace) so a reload pulls the *live* state, not the
+   * last message's. Non-blocking; a failure is non-fatal.
+   */
+  persist(): void {
+    try { void this.messenger.updateChatState(this.chatState()); } catch { /* staging/mock */ }
   }
 
   private couplingGenome(characterId: string): string | null {
@@ -244,6 +269,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
         getVisual={(id) => this.visuals.get(id)}
         onVisualize={(id, seed) => { void this.visualize(id, seed); }}
         onClearVisual={(id) => this.clearVisual(id)}
+        onPersist={() => this.persist()}
       />
     );
   }

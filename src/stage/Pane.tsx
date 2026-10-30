@@ -40,6 +40,11 @@ function useAutoDrive(game: HelperGame, refresh: () => void): void {
       const genome = char?.sim.subject.genomes[0];
       if (char && genome && style) game.setPlaystyle(char.id, genome, style);
     }
+    for (const spec of (q.get("genital") ?? "").split(",").filter(Boolean)) {
+      const [who, policy] = spec.split(":");
+      const char = game.cast.list().find((c) => c.id === who.toLowerCase());
+      if (char && policy) game.setGenitalPolicy(char.id, policy as never);
+    }
     const days = Number(q.get("days") ?? 0);
     if (days > 0) game.advance(24 * days);
     refresh();
@@ -70,6 +75,7 @@ export function Pane({
   getVisual,
   onVisualize,
   onClearVisual,
+  onPersist,
 }: {
   game: HelperGame;
   getGuard?: () => string[];
@@ -77,6 +83,7 @@ export function Pane({
   getVisual?: (id: string) => VisualState | undefined;
   onVisualize?: (id: string, seed?: number) => void;
   onClearVisual?: (id: string) => void;
+  onPersist?: () => void;
 }) {
   const [, bump] = useState(0);
   const refresh = () => bump((n) => n + 1);
@@ -84,7 +91,9 @@ export function Pane({
 
   const [tab, setTab] = useState<Tab>(() => (readPref(PREF_TAB) as Tab) ?? "cast");
   const [hidden, setHidden] = useState(() => readPref(PREF_HIDDEN) === "1");
-  const run = (fn: () => void) => { fn(); refresh(); };
+  // every pane action mutates durable control state, so persist it immediately —
+  // otherwise a reload pulls the last message's state (H24)
+  const run = (fn: () => void) => { fn(); onPersist?.(); refresh(); };
   const view = game.view();
 
   const pick = (t: Tab) => { setTab(t); writePref(PREF_TAB, t); };
@@ -111,7 +120,7 @@ export function Pane({
         <span style={css.title}>Chrysalis</span>
         {alerts && <span style={css.alerts}>{alerts}</span>}
         <span style={css.spacer} />
-        <span style={css.moon}>{moonRead(view.moon)}</span>
+        <span style={css.moon} aria-live="polite">{moonRead(view.moon)}</span>
       </div>
 
       <div style={css.tabs}>
@@ -201,6 +210,9 @@ function CastTab({
                 <span style={css.attr}>{c.kind} pressure {Math.round(c.pressure * 100)}%{c.cues.length ? ` · ${c.cues.slice(0, 2).join(", ")}` : ""}</span>
               </div>
             )}
+            <div style={css.row}>
+              <span style={css.attr}>genitals {game.genitalProfileOf(f.id)} · policy {game.policyFor(f.id)}</span>
+            </div>
             {v && (v.url || v.pending || v.error) && (
               <div style={css.visual}>
                 {v.pending && <div style={css.dim}>rendering…</div>}
@@ -349,12 +361,28 @@ function ToolsTab({ game, run, getGuard, getSaveKb }: { game: HelperGame; run: (
         <button style={css.btn} disabled={!active} onClick={() => run(() => active && game.bestow(active, selected || "genome.wolf", 3.0))}>bestow ×3</button>
       </div>
 
+      <div style={css.label}>Genitals on {game.cast.get(active ?? "")?.name ?? "—"} — now {game.cast.get(active ?? "") ? game.genitalProfileOf(active!) : "—"}</div>
+      <div style={css.row}>
+        {game.genitalOptions().map((o) => (
+          <button
+            key={o.id}
+            style={{ ...css.btn, ...(active && game.policyFor(active) === o.id ? css.btnSel : {}), padding: "3px 8px" }}
+            title={o.note}
+            disabled={!active}
+            onClick={() => run(() => { if (active) game.setGenitalPolicy(active, o.id); })}
+          >
+            {o.label}
+          </button>
+        ))}
+      </div>
+      <div style={css.attr}>{game.genitalOptions().find((o) => active && o.id === game.policyFor(active))?.note}</div>
+
       <div style={css.label}>Time</div>
       <div style={css.row}>
         <button style={css.btn} onClick={() => run(() => game.advanceMinutes(5))}>+5m</button>
-        <button style={css.btn} onClick={() => run(() => game.advance(1))}>+1h</button>
-        <button style={css.btn} onClick={() => run(() => game.advance(24))}>+1d</button>
-        <button style={css.btn} onClick={() => run(() => game.advance(24 * 7))}>+1w</button>
+        <button style={css.btn} onClick={() => run(() => game.advance(60))}>+1h</button>
+        <button style={css.btn} onClick={() => run(() => game.advance(1440))}>+1d</button>
+        <button style={css.btn} onClick={() => run(() => game.advance(1440 * 7))}>+1w</button>
       </div>
       {game.partialMinutes > 0 && <div style={css.attr}>{game.partialMinutes}m banked toward the next hour</div>}
 
