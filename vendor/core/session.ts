@@ -1,4 +1,5 @@
 import { createRng, type Rng } from "./rng";
+import { TICKS_PER_HOUR } from "./time";
 import { ask } from "./hooks";
 import { TraceRing } from "./trace";
 import { Journal } from "./journal";
@@ -256,7 +257,8 @@ export class Session {
 
   /** A clean boundary where an autosave may fire: block change, hub return, sleep. */
   atBoundary(): boolean {
-    return this.clock.tick % 4 === 0;
+    // a town block (TICKS_PER_BLOCK hours) is the coarse boundary (D-292)
+    return this.clock.tick % (4 * TICKS_PER_HOUR) === 0;
   }
 
   /** Context for the scene condition DSL. */

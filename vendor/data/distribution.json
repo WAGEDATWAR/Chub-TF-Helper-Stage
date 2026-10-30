@@ -4,8 +4,8 @@
     "miss_base": 0.35,
     "miss_min": 0.18,
     "coverage_jitter": 0.2,
-    "tier_delay": 3,
-    "delay_spread": 3
+    "tier_delay": 180,
+    "delay_spread": 180
   },
   "default_order": [
     [

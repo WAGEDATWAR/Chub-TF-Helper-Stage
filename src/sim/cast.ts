@@ -135,6 +135,22 @@ export class Cast {
     return this.chars.delete(id);
   }
 
+  /**
+   * Rebuild a character from a fresh baseline at the current world tick, keeping
+   * their id/name/gender/seed. Used by an override so "set to human" truly clears
+   * the body and genome list, and "set to X" starts clean rather than stacking X
+   * onto whatever they already carried.
+   */
+  reset(id: string): TrackedCharacter | null {
+    const char = this.chars.get(id);
+    if (!char) return null;
+    const seed = (this.baseSeed ^ hashString(id)) >>> 0;
+    const sim = startSubject({ name: char.name, seed, baseGender: char.baseGender, regs: this.regs, lunar: this.lunar });
+    char.sim = sim;
+    if (this.worldTick > 0) sim.engine.advance(this.worldTick);
+    return char;
+  }
+
   /** Rename a tracked character (their card name may be revealed later). */
   rename(id: string, name: string): void {
     const char = this.chars.get(id);

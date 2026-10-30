@@ -3,7 +3,7 @@
   "_comment": "Closed event registry (blueprint §3.3, D-135). Emitting an unregistered type throws. `base` is salience 0..1; `mods` add when their condition holds; `line` is the story-log template (tokens from the payload); `throttle` suppresses a repeat on the same path within the window unless the event carries final:true.",
   "config": {
     "floor": 0.5,
-    "throttle_window": 3,
+    "throttle_window": 180,
     "quiet_threshold": 12
   },
   "events": [

@@ -7,14 +7,17 @@ import { coupledGrowth } from "./transformation_coupling";
 import { runSocialReactions } from "./social";
 import { evaluateConsequences } from "./consequences";
 import { buildReason } from "./reason";
+import { TICKS_PER_HOUR, dayOf, isHourTick, isDayTick } from "./time";
 import type { Session } from "./session";
 
 /**
  * The time engine (blueprint §29). Divergence D-107: the reference's fixed
- * `ACTION_SLOTS = 4` day becomes a tick/hour clock with a fixed advance order.
- * Nothing moves time except `advance`.
+ * `ACTION_SLOTS = 4` day becomes a tick clock with a fixed advance order; D-292
+ * makes the atomic tick a **minute** so growth slides smoothly, while hourly/daily
+ * cadences stay on their own gates. Nothing moves time except `advance`.
  */
 
+/** Hours per town block (M16a) — kept as a count of hours, converted to minutes. */
 export const TICKS_PER_BLOCK = 4;
 export const BLOCKS = Object.freeze(["dawn", "morning", "midday", "afternoon", "evening", "night"] as const);
 export type Block = (typeof BLOCKS)[number];
@@ -22,7 +25,8 @@ export type Block = (typeof BLOCKS)[number];
 export const SPEEDS = Object.freeze([1, 8, 24, 168] as const);
 
 export function blockOf(tick: number): Block {
-  const index = Math.floor((tick % (TICKS_PER_BLOCK * BLOCKS.length)) / TICKS_PER_BLOCK);
+  const blockTicks = TICKS_PER_BLOCK * TICKS_PER_HOUR;
+  const index = Math.floor((tick % (blockTicks * BLOCKS.length)) / blockTicks);
   return BLOCKS[index] ?? "night";
 }
 
@@ -45,8 +49,9 @@ export interface AdvanceResult {
 }
 
 export interface TickHooks {
-  /** optional: resolve an injected dose into growth ticking (wired by the caller) */
-  onTick?(session: Session, ticks: number): void;
+  /** optional: resolve an injected dose into growth ticking (wired by the caller).
+   *  `onHour` is true on the hour boundary; callers gate their own hourly work off it. */
+  onTick?(session: Session, ticks: number, onHour: boolean): void;
   /** optional: apply drift under unstable bands */
   onDrift?(session: Session, ticks: number): void;
   /** optional: self-driven practice (§48.5); called once per day. */
@@ -68,18 +73,24 @@ export class TimeEngine {
     this.interest = interest ?? defaultInterestRegistry();
   }
 
-  /** Advance `ticks` hours in the fixed order (blueprint §29.3). */
+  /**
+   * Advance `ticks` **minutes** in the fixed order (blueprint §29.3). Growth is
+   * sub-stepped every minute so a change slides smoothly; the hourly cadences
+   * (drift, interrupts, Observer charge) fire on the hour, and the daily · block
+   * boundaries on their own multiples, so no rate changes with the unit.
+   */
   advance(ticks = 1): AdvanceResult {
     const session = this.session;
     const result: AdvanceResult = { ticks, stagesCrossed: 0, events: [] };
     for (let i = 0; i < ticks; i++) {
       const prevView = this.interest ? viewOf(session) : null;
       session.clock.tick += 1;
-      session.clock.day = Math.floor(session.clock.tick / 24) + 1;
+      session.clock.day = dayOf(session.clock.tick);
       session.setFlag(`tick_${session.clock.tick}`);
+      const onHour = isHourTick(session.clock.tick);
 
-      // 1. world/schedule hooks
-      this.hooks.onTick?.(session, 1);
+      // 1. world/schedule hooks (callers gate their own hourly work off `onHour`)
+      this.hooks.onTick?.(session, 1, onHour);
       // 2. incubation release
       session.incubation.advance(1);
       // 3. growth: advance any scheduled attribute toward its target (D-123);
@@ -123,18 +134,18 @@ export class TimeEngine {
           session.markDirty();
         }
       }
-      // 4. drift under unstable bands
-      this.hooks.onDrift?.(session, 1);
-      // 4b. interrupts: evaluate pressure each tick (M14.10)
-      this.hooks.onInterrupt?.(session);
-      // 5. Observer charge + wellbeing
-      session.observer.tick();
-      // 6. daily boundary
-      if (session.clock.tick % 24 === 0) {
+      // 4. hourly cadences: drift, interrupts, Observer charge
+      if (onHour) {
+        this.hooks.onDrift?.(session, 1);
+        this.hooks.onInterrupt?.(session);
+        session.observer.tick();
+      }
+      // 5. daily boundary
+      if (isDayTick(session.clock.tick)) {
         this.dailyBoundary();
       }
-      // 7. town block boundary (M16a): every 4 hours, agents choose, converge, move
-      if (session.town && session.clock.tick % TICKS_PER_BLOCK === 0) {
+      // 6. town block boundary (M16a): every 4 hours, agents choose, converge, move
+      if (session.town && session.clock.tick % (TICKS_PER_BLOCK * TICKS_PER_HOUR) === 0) {
         this.blockBoundary();
       }
       // remember where something interesting happened (rewind marker, §29.4)
@@ -144,6 +155,11 @@ export class TimeEngine {
     this.session.bus.emit("world.tick", { tick: session.clock.tick, day: session.clock.day, block: blockOf(session.clock.tick) });
     session.bus.noteTick();
     return result;
+  }
+
+  /** Advance by a whole number of *hours* (ergonomic shorthand over minute ticks). */
+  advanceHours(hours: number): AdvanceResult {
+    return this.advance(hours * TICKS_PER_HOUR);
   }
 
   /** Skip to the next tick the sim marks interesting (blueprint §29.4). */
@@ -321,7 +337,8 @@ export class TimeEngine {
       for (const o of obligations.forAgent("subject")) {
         if (!o.window.includes(block)) continue;
         if (obligations.blocked(o, gate)) {
-          const res = town.noteLateness("subject", TICKS_PER_BLOCK, o.lateness_window);
+          // a block is TICKS_PER_BLOCK hours of minutes; the window is in minutes
+          const res = town.noteLateness("subject", TICKS_PER_BLOCK * TICKS_PER_HOUR, o.lateness_window);
           const gateTag = o.gated_by_tags?.find((t) => gate.tags.includes(t));
           const gateAttr = o.gated_by_attrs?.find((a) => gate.attrs.includes(a));
           const capGate = o.gated_by_capacity && (gate.capacities?.[o.gated_by_capacity.key] ?? 1000) < o.gated_by_capacity.below ? o.gated_by_capacity : null;

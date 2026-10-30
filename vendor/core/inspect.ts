@@ -45,7 +45,8 @@ export function createInspectState(): InspectState {
   return { cooldown: 0, count: 0, last: null };
 }
 
-const COOLDOWN_TICKS = 24 * 2;
+/** Cooldown in *days* (it ticks down once per daily boundary). */
+const COOLDOWN_TICKS = 2;
 
 /**
  * The chance she inspects today. Curiosity and confidence drive it; a rattled,

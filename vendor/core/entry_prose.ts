@@ -1,4 +1,5 @@
 import type { Session } from "./session";
+import { hourOf } from "./time";
 import type { TimelineEntry } from "./timeline";
 import { humanize } from "./events";
 import { axesFor } from "./voice";
@@ -77,7 +78,7 @@ function sceneParagraph(moment: TimelineEntry[]): Paragraph | null {
 /** Her action/reaction paragraph: how she feels and what she is doing. */
 function actionParagraph(session: Session, moment: TimelineEntry[], rng: Rng): Paragraph | null {
   const s = session.subject;
-  const hour = (moment[0]?.tick ?? 0) % 24;
+  const hour = hourOf(moment[0]?.tick ?? 0);
   const mood = s.mood ? s.mood.label() : "even";
   const arousal = Math.round(s.stats.arousal ?? 0);
   const arousalNote = arousal >= 70 ? "flushed and restless" : arousal >= 40 ? "warm" : "collected";

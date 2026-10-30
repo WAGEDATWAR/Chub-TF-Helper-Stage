@@ -171,7 +171,7 @@ export interface SelectContext {
 
 /** Score and return the `n` most relevant memories, best first, each with reasons. */
 export function selectRelevant(store: readonly Memory[], ctx: SelectContext, n = 5): Relevant[] {
-  const recent = ctx.recentTicks ?? 48;
+  const recent = ctx.recentTicks ?? 48 * 60;
   const scored: Relevant[] = store.map((m) => {
     let score = m.importance;
     const reasons: Reason[] = [{ kind: "important", value: m.importance }];

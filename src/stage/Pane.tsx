@@ -95,7 +95,6 @@ export function Pane({
     ? "no one tracked"
     : view.frames.map((f) => `${f.name} ${f.exposure}%`).join(" · ");
   const alerts = (view.proposals.length > 0 ? ` ●${view.proposals.length}` : "") + (view.coupling.some((c) => c.shifted) ? " ⚡" : "");
-
   if (hidden) {
     return (
       <div style={css.collapsed}>
@@ -268,6 +267,23 @@ function DetectTab({ game, run }: { game: HelperGame; run: (fn: () => void) => v
         <button style={css.btn} disabled={!feedText.trim()} onClick={() => run(() => { game.observe(null, feedText); setFeedText(""); })}>observe as chat</button>
       </div>
 
+      {view.candidates.length > 0 && (
+        <>
+          <div style={css.label}>Possible NPCs — named beside a species</div>
+          {view.candidates.map((c) => (
+            <div key={c.name} style={css.card}>
+              <div style={css.row}>
+                <b>{c.name}</b>
+                <span style={css.tag}>{speciesLabel(c.genome)}</span>
+                <span style={css.spacer} />
+                <button style={css.btn} disabled={game.full} onClick={() => run(() => game.trackCandidate(c.name))}>track</button>
+                <button style={css.btn} onClick={() => run(() => game.dismissCandidate(c.name))}>×</button>
+              </div>
+            </div>
+          ))}
+        </>
+      )}
+
       {view.journal.length > 0 && (
         <>
           <div style={css.label}>Detection journal</div>
@@ -341,6 +357,33 @@ function ToolsTab({ game, run, getGuard, getSaveKb }: { game: HelperGame; run: (
         <button style={css.btn} onClick={() => run(() => game.advance(24 * 7))}>+1w</button>
       </div>
       {game.partialMinutes > 0 && <div style={css.attr}>{game.partialMinutes}m banked toward the next hour</div>}
+
+      <div style={css.label}>Moon — {moonRead(view.moon)}</div>
+      <div style={css.row}>
+        <button style={css.btn} onClick={() => run(() => game.setMoon("new"))}>new</button>
+        <button style={css.btn} onClick={() => run(() => game.setMoon("first_quarter"))}>first ¼</button>
+        <button style={css.btn} onClick={() => run(() => game.setMoon("full"))}>full</button>
+        <button style={css.btn} onClick={() => run(() => game.setMoon("last_quarter"))}>last ¼</button>
+        <span style={css.spacer} />
+        <button style={css.btn} onClick={() => run(() => game.nudgeMoonDays(-1))}>−1d</button>
+        <button style={css.btn} onClick={() => run(() => game.nudgeMoonDays(1))}>+1d</button>
+      </div>
+
+      <div style={css.label}>Snapshots</div>
+      <div style={css.row}>
+        <button style={css.btn} onClick={() => run(() => game.snapshot())}>save state</button>
+        <span style={css.attr}>{game.snapshotCount()} saved</span>
+      </div>
+      {game.listSnapshots().map((s) => (
+        <div key={s.id} style={css.card}>
+          <div style={css.row}>
+            <span style={css.attr}>day {s.day} · {s.label}</span>
+            <span style={css.spacer} />
+            <button style={css.btn} onClick={() => run(() => game.rewind(s.id))}>rewind</button>
+            <button style={{ ...css.btn, padding: "2px 7px" }} onClick={() => run(() => game.deleteSnapshot(s.id))}>×</button>
+          </div>
+        </div>
+      ))}
 
       <div style={css.label}>Transformation pace</div>
       <div style={css.row}>

@@ -1,8 +1,8 @@
 {
   "phases_version": 1,
   "_comment": "Transformation sequencing (M14.5, S46). A genome's change lands in ordered *phases* — what comes before what. Within a phase, parts still spread procedurally by tempo. A phase marked feral_only opens only at the feral stage. Missing genome plans fall back to `default`.",
-  "spacing": 18,
-  "spread": 10,
+  "spacing": 1080,
+  "spread": 600,
   "default": {
     "phases": [
       {

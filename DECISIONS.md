@@ -1,5 +1,23 @@
 # Decisions
 
+- **D-030 — Override replaces; a minute tick; manual control (D-250/D-251).** The
+  parent's atomic tick is now **one minute** (D-250), so `advance(n)` advances n
+  minutes and every helper hour/day site goes through `src/sim/time` (`days()`/
+  `hours()`), never a bare `24`. An override now **replaces** rather than stacks: the
+  body and genome reset to baseline first, so "human" truly clears a lycan and a
+  manual X replaces an auto-bound Y (fixes "override barely works"). The parent
+  restores `subject.genomes` on rehydrate again (D-251) — the "human tag + live
+  coupling after reload" bug. Chat detection requires **evidence** (a named tie or a
+  nearby change cue) before auto-binding; a passing "a wolf" only proposes. New: NPC
+  suggestions, moon reset/nudge, snapshots (save + rewind). `tools/control.ts` locks
+  it; the driving floor marks sub-30% parts BUDDING so the LLM stops front-running.
+
+- **D-029 — The LLM paces off per-part progress, not the whole baseline body.** The
+  floor now annotates each changing part with its progress and a BUDDING/GROWING
+  marker, plus a rule that a budding part is only a faint hint. This is the fix for
+  "claws called out at the 2% mark": the model no longer reads a barely-started part
+  as fully present.
+
 - **D-025 — Eyes are a first-class phase-0 tell; eye colour stages (D-249).** Every
   phase plan now lands `eyes` in phase 0, and a morph step may carry `appearance` so a
   track can recolour across progress (brown → amber → gold for a beast strain) instead

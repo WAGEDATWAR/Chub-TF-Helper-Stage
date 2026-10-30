@@ -4,6 +4,7 @@
  * — all with no DOM and no framework.
  */
 import { HelperGame, MAX_CAST } from "../src/game";
+import { days } from "../src/sim/time";
 
 let failures = 0;
 function check(name: string, cond: boolean, detail = ""): void {
@@ -20,7 +21,7 @@ check("cast tracks two", game.tracked === 2);
 
 game.bestow("mira", "genome.wolf", 2.0);
 game.bestow("tomas", "genome.raven", 2.0);
-game.advance(24 * 21);
+game.advance(days(21));
 
 const view = game.view();
 check("both characters have frames", view.frames.length === 2);
@@ -34,9 +35,9 @@ game.track("lin", "Lin");
 const lin = game.cast.get("lin")!;
 check("late joiner is at the world tick", lin.sim.session.clock.tick === before, `${lin.sim.session.clock.tick} vs ${before}`);
 
-// advancing moves everyone together
-game.advance(24);
-check("advance is shared", game.cast.list().every((c) => c.sim.session.clock.tick === before + 24));
+// advancing moves everyone together (advance is in minutes now, D-292)
+game.advance(days(1));
+check("advance is shared", game.cast.list().every((c) => c.sim.session.clock.tick === before + days(1)));
 
 // cast cap
 for (let i = 0; i < 10; i++) game.track(`x${i}`, `X${i}`);
@@ -51,8 +52,8 @@ check("restore rebuilds the cast", clone.tracked === MAX_CAST);
 check("restore keeps exposure", clone.cast.get("mira")!.sim.subject.derived.exposure === game.cast.get("mira")!.sim.subject.derived.exposure);
 
 // determinism across runs
-const a = new HelperGame(7); a.track("p", "P"); a.bestow("p", "genome.fox", 1.5); a.advance(24 * 14);
-const b = new HelperGame(7); b.track("p", "P"); b.bestow("p", "genome.fox", 1.5); b.advance(24 * 14);
+const a = new HelperGame(7); a.track("p", "P"); a.bestow("p", "genome.fox", 1.5); a.advance(days(14));
+const b = new HelperGame(7); b.track("p", "P"); b.bestow("p", "genome.fox", 1.5); b.advance(days(14));
 check("deterministic across runs", a.view().frames[0]!.exposure === b.view().frames[0]!.exposure && a.view().frames[0]!.describe === b.view().frames[0]!.describe);
 
 console.log(failures === 0 ? "\nSMOKE PASS" : `\nSMOKE FAIL (${failures})`);

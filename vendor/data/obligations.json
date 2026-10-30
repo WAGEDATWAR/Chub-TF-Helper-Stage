@@ -3,13 +3,13 @@
   "_comment": "Obligations (M16a, §46; D-064). A shift, a class, an errand, with a lateness window and a real consequence. `gated_by_tags`/`gated_by_attrs` make an obligation impossible once the body changes past it — a transformation that gates a life task. The subject's obligation is `obl.subject.work`.",
   "obligations": [
     { "id": "obl.subject.work", "agent": "subject", "activity": "act.work", "window": ["morning", "midday", "afternoon"],
-      "lateness_window": 8, "consequence": { "need": "need.duty", "amount": 25, "bond": -6, "note": "word gets around that she is slipping" },
+      "lateness_window": 480, "consequence": { "need": "need.duty", "amount": 25, "bond": -6, "note": "word gets around that she is slipping" },
       "gated_by_tags": ["paw_tag"], "gated_by_attrs": ["attr.thumbless_paw", "attr.canine_claws"], "gated_by_capacity": { "key": "manipulation", "below": 500 } },
     { "id": "obl.coworker.work", "agent": "agent.coworker", "activity": "act.work", "window": ["morning", "midday", "afternoon"],
-      "lateness_window": 10, "consequence": { "need": "need.duty", "amount": 20 } },
+      "lateness_window": 600, "consequence": { "need": "need.duty", "amount": 20 } },
     { "id": "obl.kid.school", "agent": "agent.kid", "activity": "act.school", "window": ["morning", "midday"],
-      "lateness_window": 10, "consequence": { "need": "need.duty", "amount": 15 } },
+      "lateness_window": 600, "consequence": { "need": "need.duty", "amount": 15 } },
     { "id": "obl.neighbour.errand", "agent": "agent.neighbour", "activity": "act.errand", "window": ["midday"],
-      "lateness_window": 6, "consequence": { "need": "need.duty", "amount": 12, "note": "the errand goes undone" } }
+      "lateness_window": 360, "consequence": { "need": "need.duty", "amount": 12, "note": "the errand goes undone" } }
   ]
 }

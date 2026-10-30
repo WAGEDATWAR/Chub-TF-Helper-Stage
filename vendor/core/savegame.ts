@@ -46,6 +46,8 @@ export function rehydrate(save: Record<string, unknown>, content: SaveContent): 
     baseGender?: string;
     personalitySeed?: string | null;
     stats?: Record<string, number>;
+    /** Bound genomes (order matters: the last is the subject's current species). */
+    genomes?: string[];
     parts?: Array<{ template: string; slot: string; integrity?: number; flags?: string[]; appearance?: Record<string, string>; attributes?: Array<{ id: string; progress: number; stage_index?: number; target_progress?: number; dose_mult?: number; start_delay?: number; phase_index?: number; phase_feral_only?: boolean; phase_exposure_min?: number; phase_when?: Record<string, unknown>; morph_chain?: string[] }> }>;
     pronouns?: string;
     age?: number | null;
@@ -75,6 +77,7 @@ export function rehydrate(save: Record<string, unknown>, content: SaveContent): 
     displayName: s.displayName,
     baseGender: s.baseGender,
     stats: s.stats,
+    genomes: s.genomes,
     personalitySeed: s.personalitySeed ?? null,
     dispositions: s.dispositions ?? [],
     pronouns: s.pronouns,

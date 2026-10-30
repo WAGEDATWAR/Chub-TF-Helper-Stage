@@ -5,6 +5,7 @@
  */
 import { HelperGame } from "../src/game";
 import { visualBundle, visualKey, salientParts, VISUAL_STYLE, VISUAL_NEGATIVE } from "../src/view/visualize";
+import { days as dayTicks } from "../src/sim/time";
 
 let failures = 0;
 function check(name: string, cond: boolean, detail = ""): void {
@@ -16,7 +17,7 @@ function frameOf(seed: number, genome: string, days: number) {
   const g = new HelperGame(seed);
   g.track("mira", "Mira", "female");
   g.bestow("mira", genome, 2);
-  g.advance(24 * days);
+  g.advance(dayTicks(days));
   return { g, frame: g.view().frames[0]! };
 }
 
@@ -54,9 +55,9 @@ function frameOf(seed: number, genome: string, days: number) {
   const g = new HelperGame(4);
   g.track("mira", "Mira");
   g.bestow("mira", "genome.wolf", 1);
-  g.advance(24 * 3);
+  g.advance(dayTicks(3));
   const early = visualKey(g.view().frames[0]!);
-  g.advance(24 * 30);
+  g.advance(dayTicks(30));
   const late = visualKey(g.view().frames[0]!);
   check("key changes as the body changes", early !== late);
 }

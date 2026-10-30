@@ -5,6 +5,7 @@
  */
 import { HelperGame } from "../src/game";
 import { ambientAt } from "../src/sim/coupling";
+import { days } from "../src/sim/time";
 
 let failures = 0;
 function check(name: string, cond: boolean, detail = ""): void {
@@ -17,7 +18,7 @@ function check(name: string, cond: boolean, detail = ""): void {
   const g = new HelperGame(1, { cycleDays: 28 });
   const l = g.lunar;
   check("phase 0 at new moon", Math.abs(l.phase(0)) < 0.001);
-  check("intensity peaks at full (phase 0.5)", Math.abs(l.intensity(14 * 24) - 1) < 0.001);
+  check("intensity peaks at full (phase 0.5)", Math.abs(l.intensity(days(14)) - 1) < 0.001);
   check("intensity 0 at new", Math.abs(l.intensity(0)) < 0.001);
   check("deterministic", g.lunar.intensity(300) === new HelperGame(1, { cycleDays: 28 }).lunar.intensity(300));
 }
@@ -30,8 +31,8 @@ function check(name: string, cond: boolean, detail = ""): void {
   const sim = g.cast.get("w")!.sim;
   const at = (tick: number) => g.triggers.readout("w", sim, tick, () => ({}))[0]!;
   check("new moon → low pressure", at(0).pressure < 0.2, `${at(0).pressure}`);
-  check("full moon → high pressure", at(14 * 24).pressure > 0.6, `${at(14 * 24).pressure}`);
-  check("pressure names the moon source", at(14 * 24).breakdown.some((b) => b.source === "moon"));
+  check("full moon → high pressure", at(days(14)).pressure > 0.6, `${at(days(14)).pressure}`);
+  check("pressure names the moon source", at(days(14)).breakdown.some((b) => b.source === "moon"));
 }
 
 // an emotion can force a shift on the FULL playstyle, not on classic
@@ -59,7 +60,7 @@ function check(name: string, cond: boolean, detail = ""): void {
   const g = new HelperGame(4, { cycleDays: 28 });
   g.track("w", "Wren");
   g.bestow("w", "genome.werewolf", 0.5);
-  g.advance(13 * 24); // walk into the full moon
+  g.advance(days(13)); // walk into the full moon
   const shifted = g.view().coupling.find((c) => c.characterId === "w")?.shifted ?? false;
   check("full moon forces the shift", shifted, JSON.stringify(g.view().coupling));
   check("the shift is logged", g.view().triggers.some((t) => t.kind === "shift"));
@@ -70,9 +71,9 @@ function check(name: string, cond: boolean, detail = ""): void {
   const g = new HelperGame(5, { cycleDays: 28 });
   g.track("w", "Wren");
   g.bestow("w", "genome.werewolf", 0.5);
-  g.advance(14 * 24);
+  g.advance(days(14));
   check("shifted at full", g.view().coupling.find((c) => c.characterId === "w")?.shifted === true);
-  g.advance(14 * 24); // through to the next new moon
+  g.advance(days(14)); // through to the next new moon
   check("reverted after the moon wanes", g.view().coupling.find((c) => c.characterId === "w")?.shifted === false);
 }
 
@@ -87,8 +88,8 @@ function check(name: string, cond: boolean, detail = ""): void {
 
 // determinism
 {
-  const a = new HelperGame(7); a.track("w", "Wren"); a.bestow("w", "genome.werewolf", 1); a.advance(14 * 24);
-  const b = new HelperGame(7); b.track("w", "Wren"); b.bestow("w", "genome.werewolf", 1); b.advance(14 * 24);
+  const a = new HelperGame(7); a.track("w", "Wren"); a.bestow("w", "genome.werewolf", 1); a.advance(days(14));
+  const b = new HelperGame(7); b.track("w", "Wren"); b.bestow("w", "genome.werewolf", 1); b.advance(days(14));
   check("coupling deterministic", a.view().frames[0]!.exposure === b.view().frames[0]!.exposure);
 }
 
@@ -127,7 +128,7 @@ function check(name: string, cond: boolean, detail = ""): void {
   const g = new HelperGame(10, { cycleDays: 28 });
   g.track("mira", "Mira");
   g.bestow("mira", "genome.wolf", 2);
-  g.advance(24 * 30);
+  g.advance(days(30));
   const f = g.view().frames[0]!;
   check("awareness rises with the change", f.awareness > 0, `${f.awareness}`);
   check("a strong change leads to realization", f.realized === true);
@@ -139,8 +140,8 @@ function check(name: string, cond: boolean, detail = ""): void {
   g.track("vee", "Vee");
   g.bestow("vee", "genome.vampire", 1);
   const profile = g.triggers.profileFor("genome.vampire")!;
-  const night = ambientAt(profile, 2)!; // hour 2 = night
-  const day = ambientAt(profile, 12)!; // hour 12 = day
+  const night = ambientAt(profile, 2 * 60)!; // 02:00 = night
+  const day = ambientAt(profile, 12 * 60)!; // 12:00 = day
   check("night restores the vampire", night.delta > 0 && night.thriving, JSON.stringify(night));
   check("day wearies the vampire", day.delta < 0 && !day.thriving, JSON.stringify(day));
 }

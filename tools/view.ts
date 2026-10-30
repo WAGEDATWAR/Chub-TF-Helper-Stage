@@ -4,10 +4,12 @@
  * read.
  */
 import { HelperGame } from "../src/game";
-import { bandRead, frameHeadline, speciesLabel, moonRead, digest } from "../src/view/format";
+import { bandRead, frameHeadline, speciesLabel, moonRead,
+ digest } from "../src/view/format";
 import { readFileSync, existsSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { days } from "../src/sim/time";
 
 const GOLDEN = fileURLToPath(new URL("../fixtures/view-golden.txt", import.meta.url));
 let failures = 0;
@@ -22,7 +24,7 @@ g.track("mira", "Mira");
 g.track("wren", "Wren");
 g.bestow("mira", "genome.wolf", 2);
 g.bestow("wren", "genome.werewolf", 0.5);
-g.advance(24 * 12);
+g.advance(days(12));
 
 const view = g.view();
 
@@ -42,7 +44,7 @@ check("digest names both characters", d.includes("Mira") && d.includes("Wren"));
   const p = new HelperGame(99);
   p.track("mira", "Mira");
   p.bestow("mira", "genome.wolf", 2);
-  p.advance(24 * 8);
+  p.advance(days(8));
   const frame = p.view().frames[0]!;
   check("parts list is non-empty once changing", frame.parts.length > 0, String(frame.parts.length));
   check("every part carries a 0..100 %", frame.parts.every((x) => x.pct >= 0 && x.pct <= 100), JSON.stringify(frame.parts));

@@ -9,14 +9,16 @@ import { compress, stretch, phaseShift } from "./temporal";
 import { clampStat } from "./stats";
 import { attemptAwakening, reactionsMatching, type FormedReaction } from "./reactions";
 import { phaseWhenOpen } from "./mind_wiring";
+import { fromHours } from "./time";
 import type { Session } from "./session";
 import type { ResolverRegistries } from "./types";
 import type { Injector } from "./injectors";
 import type { Genome } from "./genomes";
 import type { AttributeRegistry } from "./attributes";
 
-export const ONSET_TICKS = 40;
-export const ONSET_MIN_TICKS = 12;
+/** Onset span for a fresh dose, in minutes (D-292: was 40 hours). */
+export const ONSET_TICKS = fromHours(40);
+export const ONSET_MIN_TICKS = fromHours(12);
 export const RESONANCE_FORGIVES_AT = 70;
 
 /** The power palette (blueprint §11). A power is the Observer's verb; until M11
@@ -599,10 +601,10 @@ export function resolvePower(args: {
       break;
     }
     case "hold": {
-      const ticks = power.hold?.ticks ?? 24;
+      const ticks = power.hold?.ticks ?? fromHours(24);
       session.growthHoldUntil = Math.max(session.growthHoldUntil, now + ticks);
       applyStatEffects(session, power.effects, dose, false);
-      note = `${power.label} for ${ticks} tick(s)`;
+      note = `${power.label} for ${Math.round(ticks / 60)}h`;
       break;
     }
     case "unmake": {

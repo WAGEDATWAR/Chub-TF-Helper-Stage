@@ -1,16 +1,49 @@
 /**
- * Time model. One `tick` is the simulation's atomic step; every timing value
- * (growth speed, incubation, recovery) is expressed in ticks or derives from
- * this constant. **Tick length is provisional** (D-091) — tuning may change it,
- * so nothing should hardcode seconds or hours elsewhere.
+ * Time model. One `tick` is the simulation's atomic step — **one minute** (D-292):
+ * the growth/onset machinery is sub-stepped per minute so a change reads as a smooth
+ * slide rather than hourly jumps, and every authored duration is a count of minutes.
+ * Hourly/weekly cadences (drift, ambient, town blocks, daily recovery) fire on a
+ * tick-modulo gate so their *rates* are unchanged; only discrete durations convert.
+ * Nothing should hardcode seconds or hours elsewhere.
  */
-export const SECONDS_PER_TICK = 3600;
-export const TICK_MINUTES = SECONDS_PER_TICK / 60;
+export const SECONDS_PER_TICK = 60;
+export const TICK_MINUTES = 1;
 
-export const TICKS_PER_HOUR = 1;
+export const MINUTES_PER_HOUR = 60;
+export const TICKS_PER_HOUR = MINUTES_PER_HOUR;
 export const HOURS_PER_DAY = 24;
 export const TICKS_PER_DAY = TICKS_PER_HOUR * HOURS_PER_DAY;
 export const TICKS_PER_WEEK = TICKS_PER_DAY * 7;
+
+/** The engine day (1-based) for a tick. */
+export function dayOf(tick: number): number {
+  return Math.floor(tick / TICKS_PER_DAY) + 1;
+}
+
+/** The hour of the day (0..23) for a tick. */
+export function hourOf(tick: number): number {
+  return Math.floor((((tick % TICKS_PER_DAY) + TICKS_PER_DAY) % TICKS_PER_DAY) / TICKS_PER_HOUR);
+}
+
+/** Does this tick land on an hour boundary? (drift/ambient/observer cadence) */
+export function isHourTick(tick: number): boolean {
+  return tick % TICKS_PER_HOUR === 0;
+}
+
+/** Does this tick land on a day boundary? (daily recovery/regen) */
+export function isDayTick(tick: number): boolean {
+  return tick % TICKS_PER_DAY === 0;
+}
+
+/** Minutes for `n` hours — for converting an authored hour span to ticks. */
+export function fromHours(n: number): number {
+  return Math.round(n * TICKS_PER_HOUR);
+}
+
+/** Whole hours in `n` ticks (floored). */
+export function toHours(n: number): number {
+  return Math.floor(n / TICKS_PER_HOUR);
+}
 
 /** Target span for a default (dose 1.0) transformation, at default curve. */
 export const DEFAULT_TRANSFORMATION_DAYS = 7;

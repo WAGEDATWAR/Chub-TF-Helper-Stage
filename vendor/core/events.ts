@@ -1,4 +1,5 @@
 import { ContentError, indexById } from "./loader";
+import { dayOf } from "./time";
 import { evaluateCondition, type ConditionContext } from "./scene_graph";
 import { displayValue } from "./narration";
 
@@ -268,7 +269,7 @@ export class EventBus {
     // mirror every emit into the timeline (a skip must account for all of them);
     // the event sink is only set by a session, so a bare bus stays cheap.
     if (this.eventSink && def) {
-      this.eventSink({ id: record.id, tick: record.tick, day: Math.floor(record.tick / 24) + 1, type, sal: record.sal, text: this.lineFor(def, payload), causes: opts.causes ?? [], path: this.pathKey(def, opts, record), pay: payload });
+      this.eventSink({ id: record.id, tick: record.tick, day: dayOf(record.tick), type, sal: record.sal, text: this.lineFor(def, payload), causes: opts.causes ?? [], path: this.pathKey(def, opts, record), pay: payload });
     }
     this.quietTicks = 0;
     return record;
@@ -304,7 +305,7 @@ export class EventBus {
     const line: StoryLine = {
       id: record.id,
       tick: record.tick,
-      day: Math.floor(record.tick / 24) + 1,
+      day: dayOf(record.tick),
       type: record.type,
       sal: record.sal,
       text,
@@ -320,7 +321,7 @@ export class EventBus {
   private pushStoryFallback(record: EventRecord, payload: Record<string, unknown>): void {
     const text = typeof payload.message === "string" ? payload.message : "";
     if (!text) return;
-    this.story.push({ id: record.id, tick: record.tick, day: Math.floor(record.tick / 24) + 1, type: record.type, sal: 0.5, text, causes: [], path: record.type, pay: payload });
+    this.story.push({ id: record.id, tick: record.tick, day: dayOf(record.tick), type: record.type, sal: 0.5, text, causes: [], path: record.type, pay: payload });
   }
 
   /** Call once per tick; fires `world.quiet` when the story has stalled. */

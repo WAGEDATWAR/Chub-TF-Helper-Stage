@@ -1,4 +1,5 @@
 import type { Session } from "./session";
+import { hourOf } from "./time";
 import type { TimelineEntry } from "./timeline";
 import { humanize } from "./events";
 import { axesFor } from "./voice";
@@ -104,7 +105,7 @@ export function buildDayView(session: Session): SnapshotDay[] {
       const block = buildEntryProse(session, moment, root.id);
       const chips = moment.filter((e) => e.kind === "event").map((c) => ({ id: c.id, type: c.type, text: c.text, kind: c.kind }));
       const changeCount = chips.filter((c) => /attribute|stage|notice|power|reaction|preference|genital|realization|ability|stance|stop|dose/.test(c.type)).length;
-      entries.push({ id: root.id, tick, hour: tick % 24, kind: root.kind, type: root.type, paragraphs: block.paragraphs, text: proseOf(block), chips, markers: [...root.markers], changeCount });
+      entries.push({ id: root.id, tick, hour: hourOf(tick), kind: root.kind, type: root.type, paragraphs: block.paragraphs, text: proseOf(block), chips, markers: [...root.markers], changeCount });
     }
     days.push({ day, entries, changed: changedValuesFor(dayEntries), summary: daySummary(session, day, dayEntries, createRng(day * 40503)) });
   }

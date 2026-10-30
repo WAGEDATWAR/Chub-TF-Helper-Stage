@@ -10,6 +10,7 @@
  */
 import { serializeSession } from "@core/savegame";
 import { serialize } from "@core/persistence";
+import { TICKS_PER_DAY } from "@core/time";
 import type { Session } from "@core/session";
 
 export interface CompactOptions {
@@ -59,7 +60,7 @@ function trimAll(save: SaveShape, opts: CompactOptions): void {
   if (save.story) save.story.story = capView(save.story.story, opts.storyCap, cutoff);
   // day-scoped block flags are only read within the current day
   if (Array.isArray(save.flags)) {
-    const cutoffDay = Math.floor(cutoff / 24) + 1;
+    const cutoffDay = Math.floor(cutoff / TICKS_PER_DAY) + 1;
     save.flags = save.flags.filter((f) => {
       const m = /^block_.*_(\d+)$/.exec(f);
       return !m || Number(m[1]) >= cutoffDay;

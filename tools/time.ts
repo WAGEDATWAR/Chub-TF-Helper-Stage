@@ -1,9 +1,10 @@
 /**
- * Time-flow groundwork (H17): the clock's unit is whole hours, so sub-hour amounts
- * must bank and roll over. `advanceMinutes` is the seam the future time-parse will
- * feed. Locks the accumulation, the rollover, and that it persists.
+ * Time flow (H17, D-292). The parent's sim tick is now one minute, so `advance` and
+ * `advanceMinutes` are the same unit. This locks the minute mapping, the day/hour
+ * reads, and that elapsed minutes persist.
  */
 import { HelperGame } from "../src/game";
+import { TICKS_PER_DAY, TICKS_PER_HOUR } from "../src/sim/time";
 
 let failures = 0;
 function check(name: string, cond: boolean, detail = ""): void {
@@ -11,49 +12,45 @@ function check(name: string, cond: boolean, detail = ""): void {
   else { failures++; console.log(` FAIL ${name} ${detail}`); }
 }
 
-// 5 minutes twelve times advances exactly one hour
-{
-  const g = new HelperGame(1);
-  g.track("m", "Mira");
-  const start = g.view().worldTick;
-  for (let i = 0; i < 12; i++) g.advanceMinutes(5);
-  check("12×5min advances exactly 1 hour", g.view().worldTick - start === 1, String(g.view().worldTick - start));
-  check("no minutes banked after a clean hour", g.partialMinutes === 0, String(g.partialMinutes));
-}
+// one tick is one minute; a day is TICKS_PER_DAY minutes
+check("a day is 1440 minutes", TICKS_PER_DAY === 1440, String(TICKS_PER_DAY));
+check("an hour is 60 minutes", TICKS_PER_HOUR === 60, String(TICKS_PER_HOUR));
 
-// a partial amount banks toward the next hour
-{
-  const g = new HelperGame(1);
-  g.track("m", "Mira");
-  const start = g.view().worldTick;
-  g.advanceMinutes(90); // 1h + 30m banked
-  check("90 min advances 1 hour", g.view().worldTick - start === 1, String(g.view().worldTick - start));
-  check("90 min banks 30", g.partialMinutes === 30, String(g.partialMinutes));
-  g.advanceMinutes(30); // now the bank fills
-  check("the bank rolls into a second hour", g.view().worldTick - start === 2, String(g.view().worldTick - start));
-  check("the bank is empty again", g.partialMinutes === 0);
-}
-
-// 5 minutes alone does not move the clock yet (sub-hour)
+// 5 minutes advances the clock by 5 (native minute unit, no hoarding)
 {
   const g = new HelperGame(1);
   g.track("m", "Mira");
   const start = g.view().worldTick;
   g.advanceMinutes(5);
-  check("5 min alone does not advance the hour", g.view().worldTick === start);
-  check("5 min banks", g.partialMinutes === 5);
+  check("advanceMinutes(5) advances 5 ticks", g.view().worldTick - start === 5, String(g.view().worldTick - start));
 }
 
-// the bank survives a save/restore round trip
+// advance() is the same minute unit
+{
+  const g = new HelperGame(1);
+  g.track("m", "Mira");
+  const start = g.view().worldTick;
+  g.advance(90);
+  check("advance(90) advances 90 minutes", g.view().worldTick - start === 90, String(g.view().worldTick - start));
+}
+
+// a day of minutes rolls the day counter
 {
   const g = new HelperGame(2);
   g.track("m", "Mira");
+  g.advance(TICKS_PER_DAY);
+  check("a full day advances the day", g.view().day === 2, String(g.view().day));
+}
+
+// elapsed minutes persist across a save/restore
+{
+  const g = new HelperGame(3);
+  g.track("m", "Mira");
   g.advanceMinutes(45);
   const save = g.save()!;
-  check("save carries the bank", save.pendingMinutes === 45, String(save.pendingMinutes));
-  const h = new HelperGame(2);
+  const h = new HelperGame(3);
   h.restore(save, [{ id: "m", name: "Mira" }]);
-  check("restore keeps the bank", h.partialMinutes === 45, String(h.partialMinutes));
+  check("restore keeps elapsed minutes", h.partialMinutes === 45, String(h.partialMinutes));
 }
 
 console.log(failures === 0 ? "\nTIME PASS" : `\nTIME FAIL (${failures})`);

@@ -6,6 +6,7 @@
  */
 import { HelperGame } from "../src/game";
 import { whenOpenFor } from "../src/sim/subject";
+import { days } from "../src/sim/time";
 
 let failures = 0;
 function check(name: string, cond: boolean, detail = ""): void {
@@ -52,7 +53,7 @@ const progressSum = (sim: ReturnType<typeof bite>["sim"], minPhase: number) => {
   const evalWhen = whenOpenFor(sim);
   sim.session.clock.tick = 0; // new moon (intensity 0)
   check("moon_min fails at new moon", evalWhen({ moon_min: 0.5 }) === false);
-  sim.session.clock.tick = 24 * 28; // ~full on the 56d test cycle (intensity 1)
+  sim.session.clock.tick = days(28); // ~full on the 56d test cycle (intensity 1)
   check("moon_min holds at full moon", evalWhen({ moon_min: 0.8 }) === true);
   check("moon_max fails at full moon", evalWhen({ moon_max: 0.3 }) === false);
 }
@@ -60,7 +61,7 @@ const progressSum = (sim: ReturnType<typeof bite>["sim"], minPhase: number) => {
 // a bite alone lands phase 0 and NOT the later phases
 {
   const { g, sim } = bite();
-  g.advance(24 * 4); // a few days, moon not full
+  g.advance(days(4)); // a few days, moon not full
   const p0 = sim.subject.body.allInstances().flatMap((i) => i.attributes.filter((a) => ((a as { phase_index?: number }).phase_index ?? -1) === 0).map((a) => a.progress));
   const later = sim.subject.body.allInstances().flatMap((i) => i.attributes.filter((a) => ((a as { phase_index?: number }).phase_index ?? -1) >= 1).map((a) => a.progress));
   check("a bite alone starts the mark", p0.some((v) => v > 0), JSON.stringify(p0));
@@ -79,7 +80,7 @@ const progressSum = (sim: ReturnType<typeof bite>["sim"], minPhase: number) => {
         if (p >= 1) a.start_delay = 0;
       }
     const before = progressSum(sim, 1);
-    g.advance(24 * 6);
+    g.advance(days(6));
     return progressSum(sim, 1) - before;
   };
   const atNew = run(3);

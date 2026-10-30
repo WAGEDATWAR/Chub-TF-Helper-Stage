@@ -182,7 +182,7 @@ function alliesPresent(session: Session): boolean {
 function peakMemorySignificance(session: Session): number {
   const store = session.town?.state("subject")?.memory;
   if (!store) return 0.5;
-  const recent = store.relevant({ tick: session.clock.tick, recentTicks: 48 }, 3);
+  const recent = store.relevant({ tick: session.clock.tick, recentTicks: 48 * 60 }, 3);
   if (recent.length === 0) return 0.4;
   const peak = Math.max(...recent.map((r) => r.memory.importance));
   return Math.max(0.3, Math.min(1, peak / 60));

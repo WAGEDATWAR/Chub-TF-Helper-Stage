@@ -1,11 +1,12 @@
 import { ContentError } from "./loader";
 import { clamp } from "./rng";
 import { TraceRing } from "./trace";import { strain } from "./health";
+import { fromHours } from "./time";
 
 /** A later phase unlocks once every earlier phase is this fraction done (D-202). */
 export const PHASE_GATE = 0.55;
-/** Max random ticks a part's first application is staggered by (D-219). */
-export const ONSET_JITTER_TICKS = 10;
+/** Max random minutes a part's first application is staggered by (D-219, D-292). */
+export const ONSET_JITTER_TICKS = fromHours(10);
 
 /** A stable 0..N jitter from a slot id, for when no rng is present. */
 function stableJitter(slot: string): number {
@@ -378,7 +379,9 @@ export class Resolver {
         // a small per-tick jitter so parts move unevenly but never out of order
         const jitter = this.rng ? 0.7 + this.rng.next("transform") * 0.6 : 1;
         const delta = growthDelta(block, entry.progress, doseMult, stability, ticks, jitter);
-        entry.progress = Math.min(cap, Math.max(0, Math.round(entry.progress + delta)));
+        // progress is a Float (D-292): at a one-minute tick a per-step delta is well
+        // under 1, so rounding here would stall a slow change at 0. The read rounds.
+        entry.progress = Math.min(cap, Math.max(0, entry.progress + delta));
         const stages = this.attributes.get(entry.id)?.stages ?? block.stages;
         const beforeStage = stageIndexFor(stages, before / PROGRESS_MAX);
         const afterStage = stageIndexFor(stages, entry.progress / PROGRESS_MAX);
@@ -423,11 +426,12 @@ export class Resolver {
   private _fireMorphTracks(subject: SubjectLike, events: TickEvent[]): void {
     if (!this.library || !this.morphTracks) return;
     for (const instance of subject.body.allInstances()) {
-      for (const entry of instance.attributes) {
-        // a per-entry chain (D-202, e.g. species genitals) walks by progress; it
-        // needs no registered track and works on any socket.
-        if (entry.morph_chain && entry.morph_chain.length >= 2) {
-          const target = chainPart(entry.morph_chain, entry.progress / 1000);
+      // a per-entry chain (D-202, e.g. species genitals) walks by progress; it needs
+      // no registered track and owns its socket outright, so it is handled alone.
+      const chained = instance.attributes.filter((e) => e.morph_chain && e.morph_chain.length >= 2);
+      if (chained.length > 0) {
+        for (const entry of chained) {
+          const target = chainPart(entry.morph_chain!, entry.progress / 1000);
           if (target && instance.id !== target) {
             const template = this.library.get(target);
             if (template) {
@@ -437,32 +441,37 @@ export class Resolver {
               events.push({ slot: instance.slot, attribute: entry.id, from: 0, to: 0, stageName: null, pain: 0, morph: "morph.species_genital", ...{ fromPart: from, toPart: target } } as TickEvent);
             }
           }
-          continue;
         }
-        const attr = this.attributes.get(entry.id);
-        const byRole = attr?.morph_tracks_by_role?.[instance.role];
-        // a genome may override the role's track (D-202): a shared muzzle driver
-        // lands a species' own head, not one hardcoded track.
-        const genomeTrack = (subject as { genomes?: string[] }).genomes
-          ?.map((gid) => this.genomes?.get(gid)?.morph_role_tracks?.[instance.role])
-          .find((t) => t && this.morphTracks!.has(t));
-        const trackId = genomeTrack ?? byRole ?? attr?.morph_track ?? (entry.progress_block as ProgressBlock | undefined)?.morph_track;
-        if (!trackId || !this.morphTracks.has(trackId)) continue;
-        if (this.morphTracks.get(trackId)!.occupies_role !== instance.role) continue;
-        const target = this.morphTracks.partAt(trackId, entry.progress / 1000);
-        // stage any per-step appearance (D-249), even when the part itself does not
-        // change — so a track can recolour (shifting eye colour) without a swap
-        const step = this.morphTracks.get(trackId)!.steps[this.morphTracks.stepIndexFor(trackId, entry.progress / 1000)];
-        if (step?.appearance) this._stampAppearance(instance, step.appearance);
-        if (target && instance.id !== target) {
-          const template = this.library.get(target);
-          const from = instance.id;
-          if (template) {
-            instance.template = template as PartInstance["template"];
-            instance.integrity = Math.min(instance.integrity, template.integrity ?? 100);
-          }
-          events.push({ slot: instance.slot, attribute: entry.id, from: 0, to: 0, stageName: null, pain: 0, morph: trackId, ...{ fromPart: from, toPart: target } } as TickEvent);
+        continue;
+      }
+      // A track occupies a *role*, and a genome role-track applies it to every
+      // attribute on that role — so several attributes (a head's heat, muzzle,
+      // instinct…) can each resolve the same track off their own progress. If they
+      // disagree the template flips every tick. Drive the socket from one entry: the
+      // one whose progress is furthest, so it reflects the most-advanced driver and
+      // never regresses when a laggard is iterated later. (D-292 surfaced the flip;
+      // it pre-existed at 1h, masked by every driver landing together.)
+      let driver: PartAttributeEntry | null = null;
+      let trackId: string | null = null;
+      for (const entry of instance.attributes) {
+        const tid = this._morphTrackId(subject, instance, entry);
+        if (!tid) continue;
+        if (driver === null || entry.progress > driver.progress) { driver = entry; trackId = tid; }
+      }
+      if (!driver || !trackId) continue;
+      const target = this.morphTracks.partAt(trackId, driver.progress / 1000);
+      // stage any per-step appearance (D-249), even when the part itself does not
+      // change — so a track can recolour (shifting eye colour) without a swap
+      const step = this.morphTracks.get(trackId)!.steps[this.morphTracks.stepIndexFor(trackId, driver.progress / 1000)];
+      if (step?.appearance) this._stampAppearance(instance, step.appearance);
+      if (target && instance.id !== target) {
+        const template = this.library.get(target);
+        const from = instance.id;
+        if (template) {
+          instance.template = template as PartInstance["template"];
+          instance.integrity = Math.min(instance.integrity, template.integrity ?? 100);
         }
+        events.push({ slot: instance.slot, attribute: driver.id, from: 0, to: 0, stageName: null, pain: 0, morph: trackId, ...{ fromPart: from, toPart: target } } as TickEvent);
       }
     }
   }

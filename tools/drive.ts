@@ -1,10 +1,12 @@
 /**
  * H4 headless test: the driving layer builds a per-character facts floor (one
  * block per character, multiple at once), forbids invention, and the guard passes
- * faithful prose while replacing hard drift with the floor.
+ * fait
+hful prose while replacing hard drift with the floor.
  */
 import { HelperGame } from "../src/game";
 import { directions, guardMessage, floorText, floorFor, interiorLine, instrumentRead, type DriveInput } from "../src/drive/drive";
+import { days } from "../src/sim/time";
 
 let failures = 0;
 function check(name: string, cond: boolean, detail = ""): void {
@@ -30,7 +32,7 @@ function inputFor(g: HelperGame): DriveInput {
   g.track("tomas", "Tomas", "male");
   g.bestow("mira", "genome.wolf", 2);
   g.bestow("tomas", "genome.eagle", 2);
-  g.advance(24 * 20);
+  g.advance(days(20));
   const dir = directions(inputFor(g));
   check("directions name both characters", dir.includes("Mira") && dir.includes("Tomas"));
   check("directions forbid invention", /do not invent/i.test(dir) || /Do NOT invent/i.test(dir));
@@ -44,7 +46,7 @@ function inputFor(g: HelperGame): DriveInput {
   const g = new HelperGame(2);
   g.track("mira", "Mira");
   g.bestow("mira", "genome.wolf", 2);
-  g.advance(24 * 20);
+  g.advance(days(20));
   const inp = inputFor(g);
   const floor = floorText(inp);
   const ok = guardMessage(floor, inp);
@@ -56,7 +58,7 @@ function inputFor(g: HelperGame): DriveInput {
   const g = new HelperGame(3);
   g.track("mira", "Mira");
   g.bestow("mira", "genome.wolf", 2);
-  g.advance(24 * 20);
+  g.advance(days(20));
   const inp = inputFor(g);
   const drifted = guardMessage("Mira's skin prickles at 999 degrees.", inp);
   check("unknown numbers are caught", drifted.ok === false, JSON.stringify(drifted.failures));
@@ -81,7 +83,7 @@ function inputFor(g: HelperGame): DriveInput {
   const g = new HelperGame(4, { cycleDays: 28 });
   g.track("w", "Wren");
   g.bestow("w", "genome.werewolf", 1);
-  g.advance(13 * 24);
+  g.advance(days(13));
   const dir = directions(inputFor(g));
   check("bright moon adds a moon directive", /moon:/i.test(dir));
 }
@@ -91,7 +93,7 @@ function inputFor(g: HelperGame): DriveInput {
   const g = new HelperGame(5);
   g.track("mira", "Mira");
   g.bestow("mira", "genome.wolf", 1);
-  g.advance(24 * 5);
+  g.advance(days(5));
   const read = instrumentRead(inputFor(g));
   check("instrument read names the character", read.includes("Mira"));
   check("instrument read is multi-line-ish/compact", read.split("\n").length <= 8);
@@ -111,7 +113,7 @@ function inputFor(g: HelperGame): DriveInput {
   const human = new HelperGame(8);
   human.track("pat", "Pat");
   check("a blind human has no interior line", interiorLine(human.view().frames[0]!) === "");
-  g.advance(24 * 12);
+  g.advance(days(12));
   const f = g.view().frames[0]!;
   const line = interiorLine(f);
   check("an aware subject carries an interior line", line.length > 0, line);

@@ -35,8 +35,13 @@ export function progressBlockFor(attribute: { progress?: ProgressBlock } | null 
   return attribute?.progress ?? (DEFAULT_PROGRESS_BLOCK as ProgressBlock);
 }
 
+/**
+ * Clamp progress into range. **Not rounded** (D-292): at a one-minute tick a single
+ * step is well under 1, so rounding every write would leave a slow change pinned at
+ * 0. Callers round at the edges (snapshot/ledger) where a whole number is wanted.
+ */
 export function clampProgress(value: number): number {
-  return Math.max(PROGRESS_MIN, Math.min(PROGRESS_MAX, Math.round(value)));
+  return Math.max(PROGRESS_MIN, Math.min(PROGRESS_MAX, value));
 }
 
 /**

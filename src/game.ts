@@ -12,7 +12,8 @@ import { Cast, type CastFrame } from "./sim/cast";
 import { contentBundle } from "./sim/bundle";
 import { Detector, type JournalEntry, type Proposal } from "./detect/engine";
 import { buildClassifierPrompt, parseClassifierReply, tokenLookup } from "./detect/classifier";
-import { createLunar } from "./sim/lunar";
+import { createLunar, offsetForPhase } from "./sim/lunar";
+import { days as daysToTicks, TICKS_PER_DAY } from "./sim/time";
 import { createTriggerEngine, type TriggerEvent } from "./sim/triggers";
 import { feel, DEFAULT_DOSE } from "./sim/subject";
 import { applyPace, currentPace, PACES, type PaceId } from "./sim/pace";
@@ -30,6 +31,8 @@ export interface CastView {
   moon: { phase: string; intensity: number; daysToFull: number };
   coupling: Array<{ characterId: string; genome: string; kind: string; pressure: number; breakdown: Array<{ source: string; value: number }>; cues: string[]; shifted: boolean; playstyle: string; playstyles: Array<{ id: string; note: string }>; canCall: boolean }>;
   triggers: TriggerEvent[];
+  /** Suggested NPCs (named beside a species, not yet tracked). */
+  candidates: Array<{ name: string; genome: string; family: string }>;
 }
 
 export interface CardInput {
@@ -47,6 +50,8 @@ export interface SavePayload {
   coupling: ReturnType<TriggerEngine["toJSON"]>;
   /** Minutes banked toward the next whole hour (H17 groundwork). */
   pendingMinutes?: number;
+  /** The lunar tick offset, so a reset moon survives a reload. */
+  moonOffset?: number;
 }
 
 type TriggerEngine = ReturnType<typeof createTriggerEngine>;
@@ -112,6 +117,39 @@ export class HelperGame {
   }
   private pace: PaceId = "normal";
 
+  /**
+   * Set the moon to a named phase or an arbitrary 0..1 phase without moving the
+   * day clock, by re-basing every Lunar's tick offset so all phase gates agree.
+   */
+  setMoon(target: "new" | "first_quarter" | "full" | "last_quarter" | number): void {
+    const want = typeof target === "number" ? target
+      : target === "new" ? 0
+        : target === "first_quarter" ? 0.25
+          : target === "full" ? 0.5
+            : 0.75;
+    const off = offsetForPhase(want, this.cast.worldTick, this.lunar.config.cycleDays);
+    this.applyLunarOffset(off);
+  }
+
+  /** Nudge the moon by whole days (positive = later phase, wraps). */
+  nudgeMoonDays(days: number): void {
+    this.applyLunarOffset(this.lunar.offsetTicks + daysToTicks(days));
+  }
+
+  /** Apply a tick offset to every Lunar so game, triggers and sims stay in lockstep. */
+  private applyLunarOffset(off: number): void {
+    const cycleTicks = this.lunar.config.cycleDays * TICKS_PER_DAY;
+    const normalized = ((off % cycleTicks) + cycleTicks) % cycleTicks;
+    this.lunar.offsetTicks = normalized;
+    this.triggers.setLunarOffset(normalized);
+    for (const char of this.cast.entries()) char.sim.lunar.offsetTicks = normalized;
+  }
+
+  /** The moon's tick offset (persisted with the save). */
+  moonOffset(): number {
+    return this.lunar.offsetTicks;
+  }
+
   /** H10: a realized character on a voluntary playstyle calls the shift on purpose. */
   callShift(characterId: string): boolean {
     const char = this.cast.get(characterId);
@@ -127,7 +165,7 @@ export class HelperGame {
     // register the name with the detector too, so a plain `track` is attributable
     this.detector.rename(id, [name], baseGender);
     const char = this.cast.get(id);
-    if (char) applyPace(char.sim, this.pace);
+    if (char) { applyPace(char.sim, this.pace); char.sim.lunar.offsetTicks = this.lunar.offsetTicks; }
     return id;
   }
 
@@ -157,10 +195,31 @@ export class HelperGame {
     return card.id;
   }
 
-  /** Force a genome on a tracked character (override; wins over detection). */
+  /**
+   * Force a genome on a tracked character (override; wins over detection). This is
+   * a **replace**, not a stack: the body and genome list reset to baseline first, so
+   * "human" truly clears a lycan and "werewolf" replaces an auto-bound "wolf". The
+   * character keeps their identity, clock and mind.
+   */
   override(id: string, genomeId: string | null): boolean {
     if (genomeId !== null && !this.regs.genomes.get(genomeId)) return false;
+    const char = this.cast.get(id);
+    if (!char) return false;
+    const realized = char.sim.subject.mind?.realized ?? false;
+    const awareness = char.sim.subject.mind?.awareness ?? 0;
+    this.cast.reset(id);
+    const fresh = this.cast.get(id);
+    if (fresh) {
+      // carry the interior read across the reset so a re-override does not erase
+      // what she already knows about herself
+      if (fresh.sim.subject.mind) { fresh.sim.subject.mind.realized = realized; fresh.sim.subject.mind.awareness = awareness; }
+      applyPace(fresh.sim, this.pace);
+      fresh.sim.lunar.offsetTicks = this.lunar.offsetTicks;
+    }
     this.detector.setOverride(id, genomeId);
+    // the coupling engine keys off subject.genomes; drop any state for genomes no
+    // longer carried so a stale coupling cannot keep drawing a removed lycan
+    this.triggers.prune(id, fresh ? fresh.sim.subject.genomes : []);
     if (genomeId) this.cast.bind(id, genomeId, 1.0);
     return true;
   }
@@ -179,11 +238,16 @@ export class HelperGame {
     this.detector.mark(proposalId, "dismissed");
   }
 
-  /** Bind any pending proposal for a character that has no genome yet. */
+  /**
+   * Bind any pending **evidenced** proposal for a character that has no genome yet.
+   * A bare-mention proposal (a passing "wolf") waits for the player; an evidenced
+   * one (a card, a named species, or a species beside a change cue) auto-binds.
+   */
   autoApplyPending(dose = DEFAULT_DOSE): string[] {
     const applied: string[] = [];
     for (const p of [...this.detector.proposals]) {
       if (p.status !== "pending") continue;
+      if (!p.evidence) continue;
       const char = this.cast.get(p.characterId);
       if (!char || char.sim.subject.genomes.length > 0) continue;
       if (this.applyProposal(p.id, dose)) applied.push(p.characterId);
@@ -194,6 +258,30 @@ export class HelperGame {
   /** Observe a chat message (the bot's prose) for species + change signals. */
   observe(speakerId: string | null, text: string): void {
     this.detector.observe(speakerId, text, this.cast.worldTick);
+  }
+
+  /** Candidate NPCs the prose named beside a species, for the pane to offer. */
+  candidates(): Array<{ name: string; genome: string; family: string }> {
+    return this.detector.candidates.map((c) => ({ name: c.name, genome: c.genome, family: c.family }));
+  }
+
+  /**
+   * Track a suggested NPC and bind the genome the prose implied. The id is derived
+   * from the name, so it round-trips with the roster.
+   */
+  trackCandidate(name: string): string | null {
+    const cand = this.detector.candidates.find((c) => c.name.toLowerCase() === name.toLowerCase());
+    if (!cand) return null;
+    const id = name.toLowerCase().replace(/\s+/g, "_");
+    const tracked = this.track(id, name);
+    if (tracked && cand.genome) this.cast.bind(id, cand.genome, DEFAULT_DOSE);
+    this.detector.forgetCandidate(name);
+    return tracked;
+  }
+
+  /** Dismiss a suggested NPC without tracking. */
+  dismissCandidate(name: string): void {
+    this.detector.forgetCandidate(name);
   }
 
   /** A classifier prompt for the current prose (optional second-opinion layer). */
@@ -232,24 +320,64 @@ export class HelperGame {
   }
 
   /**
-   * Advance by **minutes** (H17 groundwork): the clock's unit is whole hours, so
-   * sub-hour amounts accumulate until they cross an hour. `advanceMinutes(5)` twelve
-   * times advances one hour; 90 minutes advances an hour and banks 30. This is what
-   * the future time-parse system will feed, and what the 5-minute pace option uses.
+   * Advance by **minutes** (D-292): the sim tick is one minute, so this is now the
+   * native unit — `advance(1)` is a minute. Kept as a named seam so time-parse and
+   * the 5-minute control read clearly. `advanceMinutes` and `advance` are the same
+   * operation now; the minute bank only exists for display of sub-hour granularity.
    */
   advanceMinutes(minutes: number): void {
     if (minutes <= 0) return;
-    this.pendingMinutes += Math.round(minutes);
-    const hours = Math.floor(this.pendingMinutes / 60);
-    this.pendingMinutes -= hours * 60;
-    if (hours > 0) this.advance(hours);
+    const m = Math.round(minutes);
+    this.pendingMinutes += m;
+    this.advance(m);
   }
 
-  /** Minutes banked toward the next whole hour (0..59). */
+  /** Minutes elapsed since load, for the pane's running total (0..). */
   get partialMinutes(): number {
     return this.pendingMinutes;
   }
   private pendingMinutes = 0;
+
+  // --- snapshots (manual save + rewind) ------------------------------------
+
+  private snapshots: Array<{ id: string; label: string; atTick: number; payload: SavePayload; roster: Array<{ id: string; name: string }> }> = [];
+  private snapshotSeq = 0;
+
+  /** Record the full cast + world state as a named snapshot (manual save). */
+  snapshot(label?: string): string {
+    const payload = this.save();
+    if (!payload) return "";
+    const at = this.cast.worldTick;
+    const id = `snap${++this.snapshotSeq}`;
+    const name = label?.trim() || `day ${Math.floor(at / TICKS_PER_DAY) + 1}`;
+    const roster = this.cast.list().map((c) => ({ id: c.id, name: c.name }));
+    this.snapshots.push({ id, label: name, atTick: at, payload: JSON.parse(JSON.stringify(payload)), roster });
+    return id;
+  }
+
+  /** The recorded snapshots, newest first (for the pane). */
+  listSnapshots(): Array<{ id: string; label: string; atTick: number; day: number }> {
+    return [...this.snapshots].reverse().map((s) => ({ id: s.id, label: s.label, atTick: s.atTick, day: Math.floor(s.atTick / TICKS_PER_DAY) + 1 }));
+  }
+
+  /** Rewind the live cast to a snapshot (keeps the snapshot list itself). */
+  rewind(snapshotId: string): boolean {
+    const snap = this.snapshots.find((s) => s.id === snapshotId);
+    if (!snap) return false;
+    // clear the live cast, then restore the snapshot's state onto fresh entries
+    for (const c of this.cast.list()) this.cast.remove(c.id);
+    this.cast.worldTick = 0;
+    this.restore(snap.payload, snap.roster);
+    return true;
+  }
+
+  deleteSnapshot(snapshotId: string): void {
+    this.snapshots = this.snapshots.filter((s) => s.id !== snapshotId);
+  }
+
+  snapshotCount(): number {
+    return this.snapshots.length;
+  }
 
   /** The current read of the whole cast plus the detection feed and coupling. */
   view(): CastView {
@@ -269,6 +397,7 @@ export class HelperGame {
       moon: { phase: this.lunar.phaseName(tick), intensity: Math.round(this.lunar.intensity(tick) * 100) / 100, daysToFull: Math.round(this.lunar.daysToFull(tick) * 10) / 10 },
       coupling,
       triggers: this.triggerLog.slice(-12),
+      candidates: this.candidates(),
     };
   }
 
@@ -297,7 +426,7 @@ export class HelperGame {
   /** Serialize the whole cast + detection + coupling state to checksummed saves. */
   save(): SavePayload | null {
     if (this.cast.size === 0) return null;
-    return { worldTick: this.cast.worldTick, chars: this.cast.saveAll(), detect: this.detector.toJSON(), coupling: this.triggers.toJSON(), pendingMinutes: this.pendingMinutes };
+    return { worldTick: this.cast.worldTick, chars: this.cast.saveAll(), detect: this.detector.toJSON(), coupling: this.triggers.toJSON(), pendingMinutes: this.pendingMinutes, moonOffset: this.lunar.offsetTicks };
   }
 
   /** The serialized byte size of the current save (for the budget gate). */
@@ -320,7 +449,8 @@ export class HelperGame {
       else this.pace = found;
     }
     this.cast.worldTick = Math.max(this.cast.worldTick, payload.worldTick ?? 0);
-    this.pendingMinutes = Math.max(0, Math.min(59, payload.pendingMinutes ?? 0));
+    this.pendingMinutes = Math.max(0, payload.pendingMinutes ?? 0);
+    if (typeof payload.moonOffset === "number") this.applyLunarOffset(payload.moonOffset);
     if (payload.detect) {
       this.detector.loadJSON(payload.detect);
       // re-register names only (cards are re-scanned on load) so attribution works

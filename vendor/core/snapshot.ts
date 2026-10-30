@@ -1,5 +1,6 @@
 import type { Session } from "./session";
 import { blockOf } from "./time_engine";
+import { dayOf } from "./time";
 import { OBSERVER_SKILLS } from "./observer";
 import { sexualCoherence, sexualityRead } from "./sexuality";
 import { sexualFrustration } from "./sex";
@@ -351,7 +352,7 @@ function buildTownMap(session: Session): ObserverSnapshot["town"] {
   const memories = (subject?.memory.relevant({ tick: session.clock.tick }, 5) ?? []).map((r) => ({
     key: r.memory.summary_key,
     importance: r.memory.importance,
-    when: `day ${Math.floor(r.memory.tick / 24) + 1}`,
+    when: `day ${dayOf(r.memory.tick)}`,
   }));
   return { agents, locations, events, relationships, memories };
 }

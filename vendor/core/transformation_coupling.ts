@@ -1,4 +1,5 @@
 import type { Session } from "./session";
+import { TICKS_PER_HOUR } from "./time";
 
 /**
  * Transformation coupling (M15.5e, D-172). Her mind has a hand on the wheel: how
@@ -49,7 +50,8 @@ export function slotDesire(session: Session, partTags: readonly string[]): numbe
 /** The effective growth multiplier: temporal powers × mind stance (D-172). */
 export function coupledGrowth(session: Session, temporalRate: number): number {
   const mind = mindGrowthFactor(session);
-  if (couplingIsNotable(mind) && session.clock.tick % 12 === 0) {
+  // a 12-hour cadence (D-292: `% 12` was hours at the old tick length, now minutes)
+  if (couplingIsNotable(mind) && session.clock.tick % (12 * TICKS_PER_HOUR) === 0) {
     session.bus.emit("growth.coupled", { factor: Number(mind.toFixed(2)), direction: mind > 1 ? "fast" : "slow" }, { final: false });
   }
   return temporalRate * mind;

@@ -5,6 +5,7 @@
  * any restored entry still carrying its id.
  */
 import { HelperGame } from "../src/game";
+import { days } from "../src/sim/time";
 
 let failures = 0;
 function check(name: string, cond: boolean, detail = ""): void {
@@ -17,7 +18,7 @@ const g = new HelperGame(1);
 g.track("1", "Mira");
 g.track("2", "Wren");
 g.bestow("1", "genome.wolf", 3);
-g.advance(24);
+g.advance(days(1));
 const save = g.save()!;
 
 // reload #1: chat roster present → names preserved

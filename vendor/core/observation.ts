@@ -1,4 +1,5 @@
 import type { Session } from "./session";
+import { hourOf } from "./time";
 import type { SceneComposer, SceneRender } from "./scene_composer";
 import type { InterruptSystem } from "./interrupts";
 import type { SceneGraph } from "./scene_graph";
@@ -169,7 +170,7 @@ export class ObservationLoop {
   }
 
   private blockOf(session: Session): string {
-    const index = Math.floor((session.clock.tick % 24) / 4);
+    const index = Math.floor(hourOf(session.clock.tick) / 4);
     const blocks = ["dawn", "morning", "midday", "afternoon", "evening", "night"];
     return blocks[index] ?? "night";
   }

@@ -17,6 +17,7 @@
     { "id": "injector.booster_serum", "display_name": "Intelligence Booster", "type": "chemical", "genome_reference": null, "base_dose": 1.0, "dose_range": [0.5, 2.0], "effects": [{ "stat": "intelligence_debt", "op": "add", "value": -8, "scales_with": "none" }, { "stat": "stability", "op": "add", "value": -25, "scales_with": "none" }], "incubation_seconds": 10, "onset_curve": "ease_in", "batch_id": "batch_004" },
 
     { "id": "injector.stabilizer", "display_name": "Stabilizer", "type": "stabilizing", "subtype": "stabilizer", "genome_reference": null, "base_dose": 1.0, "dose_range": [0.5, 2.0], "effects": [], "incubation_seconds": 0, "onset_curve": "linear", "batch_id": "batch_005" },
-    { "id": "injector.reverter", "display_name": "Reverter", "type": "stabilizing", "subtype": "reverter", "genome_reference": "genome.human_baseline", "base_dose": 1.0, "dose_range": [0.5, 3.0], "effects": [], "incubation_seconds": 0, "onset_curve": "linear", "batch_id": "batch_005" }
+    { "id": "injector.reverter", "display_name": "Reverter", "type": "stabilizing", "subtype": "reverter", "genome_reference": "genome.human_baseline", "base_dose": 1.0, "dose_range": [0.5, 3.0], "effects": [], "incubation_seconds": 0, "onset_curve": "linear", "batch_id": "batch_005" },
+    { "id": "injector.werewolf_mutagen", "display_name": "Werewolf Mutagen", "type": "mutagenic", "genome_reference": "genome.werewolf", "base_dose": 1.0, "dose_range": [0.1, 5.0], "effects": [{ "stat": "pain", "op": "add", "value": 5, "scales_with": "dose" }], "incubation_seconds": 50, "onset_curve": "ease_in", "batch_id": "batch_019" }
   ]
 }

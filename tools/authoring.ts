@@ -9,6 +9,7 @@ import { mergedContentSet } from "./content";
 import { buildRegistries } from "../src/sim/registries";
 import { startSubject, bestow, advance, mutagenPowerId } from "../src/sim/subject";
 import { runDailyMind } from "../src/sim/mind";
+import { days } from "../src/sim/time";
 
 interface Finding {
   level: "error" | "warn";
@@ -46,7 +47,7 @@ function lintGenome(genomeId: string): void {
   const scheduled = subject.body.allInstances().flatMap((i) => i.attributes.map((a) => ({ slot: i.slot, a })));
 
   let settledTick: number | null = null;
-  for (let t = 0; t < 90 * 24; t++) {
+  for (let t = 0; t < days(90); t++) {
     const day = sim.session.clock.day;
     advance(sim, 1);
     // a `when: { realized: true }` phase (the serpent's endoskeleton) only opens once

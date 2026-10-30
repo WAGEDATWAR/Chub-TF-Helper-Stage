@@ -1,4 +1,5 @@
 import type { Session } from "./session";
+import { fromHours, dayOf } from "./time";
 
 /**
  * Temporal powers (blueprint §27, M14). Time as a tool: compress a slow change so
@@ -24,27 +25,29 @@ export function createTemporalState(): { growth: number; modifiers: GrowthModifi
 }
 
 /** A fast-forward: grow change several times faster for a span. */
-export function compress(session: Session, factor = 3, ticks = 48): GrowthModifier {
-  const mod: GrowthModifier = { id: `temporal.compress.${session.clock.tick}`, rate: factor, untilTick: session.clock.tick + ticks };
+export function compress(session: Session, factor = 3, hours = 48): GrowthModifier {
+  const span = fromHours(hours);
+  const mod: GrowthModifier = { id: `temporal.compress.${session.clock.tick}`, rate: factor, untilTick: session.clock.tick + span };
   session.temporal.modifiers.push(mod);
-  session.journal.recordObservation({ tick: session.clock.tick, day: session.clock.day, note: `Time runs fast: change lands ${factor}x for ${ticks}h.` });
+  session.journal.recordObservation({ tick: session.clock.tick, day: session.clock.day, note: `Time runs fast: change lands ${factor}x for ${hours}h.` });
   session.markDirty();
   return mod;
 }
 
 /** A stretch: grow change more slowly for a span, gentler. */
-export function stretch(session: Session, factor = 0.5, ticks = 72): GrowthModifier {
-  const mod: GrowthModifier = { id: `temporal.stretch.${session.clock.tick}`, rate: factor, untilTick: session.clock.tick + ticks };
+export function stretch(session: Session, factor = 0.5, hours = 72): GrowthModifier {
+  const span = fromHours(hours);
+  const mod: GrowthModifier = { id: `temporal.stretch.${session.clock.tick}`, rate: factor, untilTick: session.clock.tick + span };
   session.temporal.modifiers.push(mod);
-  session.journal.recordObservation({ tick: session.clock.tick, day: session.clock.day, note: `Time runs slow: change lands ${factor}x for ${ticks}h.` });
+  session.journal.recordObservation({ tick: session.clock.tick, day: session.clock.day, note: `Time runs slow: change lands ${factor}x for ${hours}h.` });
   session.markDirty();
   return mod;
 }
 
 /** A phase shift: move the clock a few hours, so a scene lands at another block. */
 export function phaseShift(session: Session, hours = 6): number {
-  session.clock.tick = Math.max(0, session.clock.tick + hours);
-  session.clock.day = Math.floor(session.clock.tick / 24) + 1;
+  session.clock.tick = Math.max(0, session.clock.tick + fromHours(hours));
+  session.clock.day = dayOf(session.clock.tick);
   session.journal.recordObservation({ tick: session.clock.tick, day: session.clock.day, note: `The hour is nudged ${hours > 0 ? "forward" : "back"}.` });
   session.markDirty();
   return session.clock.tick;

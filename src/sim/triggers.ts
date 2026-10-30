@@ -15,6 +15,7 @@
 import { bestowForced, type Sim } from "./subject";
 import { ambientAt, buildCouplingData, canWillShift, createCouplingState, readPressure, stepCoupling, type CouplingData, type CouplingProfile, type CouplingState } from "./coupling";
 import type { Lunar } from "./lunar";
+import { TICKS_PER_DAY, TICKS_PER_HOUR } from "@core/time";
 
 export interface TriggerEvent {
   characterId: string;
@@ -47,6 +48,12 @@ export class TriggerEngine {
 
   profileFor(genomeId: string): CouplingProfile | null {
     return this.data.profiles.find((p) => p.genome === genomeId) ?? null;
+  }
+
+  /** Re-base the shared lunar offset (a moon reset). The engine holds the same
+   *  Lunar as the game, so this just mirrors it for callers that reach here. */
+  setLunarOffset(off: number): void {
+    this.lunar.offsetTicks = off;
   }
 
   playstyles(genomeId: string): Array<{ id: string; note: string }> {
@@ -95,18 +102,32 @@ export class TriggerEngine {
   }
 
   /**
-   * Step every coupled character `ticks` forward. Returns the events that fired.
-   * `hoursPerCheck` throttles how often pressure is evaluated.
+   * Drop coupling state for genomes the subject no longer carries (an override
+   * removed a lycan), keeping any still-held genome's state and playstyle. Without
+   * this a removed genome keeps drawing its change forever.
+   */
+  prune(characterId: string, keptGenomes: readonly string[]): void {
+    const list = this.perChar.get(characterId);
+    if (!list) return;
+    const keep = new Set(keptGenomes);
+    const filtered = list.filter((c) => keep.has(c.profile.genome));
+    if (filtered.length > 0) this.perChar.set(characterId, filtered);
+    else this.perChar.delete(characterId);
+  }
+
+  /**
+   * Step every coupled character `ticks` (minutes) forward. Returns the events that
+   * fired. Pressure is evaluated once per `checkEveryHours` worth of ticks.
    */
   step(characters: Array<{ id: string; sim: Sim }>, ticks: number, tick: number, emotionOf: (sim: Sim) => Record<string, number>): TriggerEvent[] {
     const events: TriggerEvent[] = [];
-    const hours = this.data.settings.checkEveryHours;
-    const checks = Math.max(1, Math.floor(ticks / hours));
+    const checkTicks = this.data.settings.checkEveryHours * TICKS_PER_HOUR;
+    const checks = Math.max(1, Math.floor(ticks / checkTicks));
     for (const { id, sim } of characters) {
       const list = this.sync(id, sim);
       for (const c of list) {
         for (let k = 0; k < checks; k++) {
-          const at = tick - ticks + (k + 1) * hours;
+          const at = tick - ticks + (k + 1) * checkTicks;
           this.doTick(id, sim, c, at, emotionOf, events);
         }
       }
@@ -121,7 +142,7 @@ export class TriggerEngine {
       tick,
       lunar: this.lunar,
       emotions: emotion,
-      cyclePhase: tick / 24, // the subject's own cycle rides the world clock
+      cyclePhase: tick / TICKS_PER_DAY, // the subject's own cycle rides the world clock
       arousal: sim.subject.stats.arousal ?? 0,
       realized,
       willShift: c.willShift,
@@ -139,7 +160,7 @@ export class TriggerEngine {
     }
 
     // the draw: a partial dose as the pressure builds, re-applied as it climbs
-    if (c.profile.draw && readout.pressure >= 0.2 && tick - c.lastDrawTick >= 24 * 3) {
+    if (c.profile.draw && readout.pressure >= 0.2 && tick - c.lastDrawTick >= 3 * TICKS_PER_DAY) {
       const dose = readout.pressure >= c.profile.shift_at ? c.profile.draw.dose_at_shift : c.profile.draw.dose_at_draw;
       bestowForced(sim, c.profile.genome, dose * 0.25);
       c.lastDrawTick = tick;
@@ -177,7 +198,7 @@ export class TriggerEngine {
     const list = this.sync(characterId, sim);
     const realized = sim.subject.mind?.realized ?? false;
     return list.map((c) => {
-      const r = readPressure(c.profile, c.playstyle, { tick, lunar: this.lunar, emotions: emotionOf(sim), cyclePhase: tick / 24, arousal: sim.subject.stats.arousal ?? 0, realized, willShift: false });
+      const r = readPressure(c.profile, c.playstyle, { tick, lunar: this.lunar, emotions: emotionOf(sim), cyclePhase: tick / TICKS_PER_DAY, arousal: sim.subject.stats.arousal ?? 0, realized, willShift: false });
       return { genome: c.profile.genome, kind: c.profile.kind, pressure: r.pressure, breakdown: r.breakdown, cues: r.cues, shifted: c.state.shifted, playstyle: c.playstyle, playstyles: this.playstyles(c.profile.genome), canCall: canWillShift(c.profile, c.playstyle, realized) };
     });
   }

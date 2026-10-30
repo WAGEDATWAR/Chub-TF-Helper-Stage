@@ -9,6 +9,7 @@
 import { mergedContentSet } from "./content";
 import { buildRegistries } from "../src/sim/registries";
 import { startSubject, bestow, advance } from "../src/sim/subject";
+import { days } from "../src/sim/time";
 
 const regs = buildRegistries(mergedContentSet());
 const data = mergedContentSet();
@@ -32,7 +33,7 @@ for (const genome of regs.genomes.all()) {
     rows.push({ id: genome.id, attrs: -1, morphs: 0, settleDay: -1, exposure: 0, band: "BESTOW-FAIL", coupled: "" });
     continue;
   }
-  for (let t = 0; t < 90 * 24; t++) {
+  for (let t = 0; t < days(90); t++) {
     advance(sim, 1);
     sim.session.trace.all?.();
     if (settleDay < 0 && settled(sim.subject)) { settleDay = sim.session.clock.day; break; }

@@ -31,13 +31,29 @@ const RULES = [
   "Render the bodies below in third-person present.",
   "Do NOT invent objects, change numbers, move people, or let them know an observer exists.",
   "A character may only show what their band and cues allow — nothing further along the change.",
+  "A part marked BUDDING is only just starting: name it as a faint hint (a prickle, a tingle, a first change), never as fully present.",
+  "A part marked GROWING is partly there; only a part with no marker is fully in.",
 ];
 
-/** The composed floor for one character: what prose must agree with. */
+/** How a part reads by how far along it is (0..100): only a nudge until it lands. */
+function partRead(pct: number): string {
+  if (pct < 30) return "budding";
+  if (pct < 75) return "growing";
+  return "in";
+}
+
+/**
+ * The composed floor for one character: what prose must agree with. Parts are
+ * annotated by progress so the model can pace itself — at 2% a claw *buds*, it is
+ * not yet a full claw (the front-running fix).
+ */
 export function floorFor(frame: CastFrame, coupling?: CouplingRow): string {
   const band = frame.band.replace(/^band\./, "").replace(/_/g, " ");
   const cues = coupling?.cues.length ? ` (moon-stirred: ${coupling.cues.join(", ")})` : "";
-  return `${frame.name} — exposure ${frame.exposure}%, ${band}${cues}. ${frame.describe}${interiorLine(frame)}`;
+  const parts = frame.parts.length > 0
+    ? `\n  changing parts: ${frame.parts.map((p) => `${p.label} ${partRead(p.pct).toUpperCase()} (${p.pct}%)`).join(", ")}`
+    : "";
+  return `${frame.name} — exposure ${frame.exposure}%, ${band}${cues}.${parts} ${frame.describe}${interiorLine(frame)}`;
 }
 
 /**

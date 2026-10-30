@@ -27,6 +27,12 @@ export interface SpeciesProposal {
   confidence: number;
   source: "card" | "chat";
   token: string;
+  /**
+   * True when the prose *evidences* this attribution: the species word sits by a
+   * known name, or a change cue is near it (or it came from a card). A weak
+   * mention ("a wolf crossed the road") proposes but does not auto-bind.
+   */
+  evidence: boolean;
 }
 
 export interface ChangeSignal {
@@ -42,6 +48,8 @@ export interface DetectResult {
   unattributed: string[];
   /** Characters whose names appear in this text (for focus tracking). */
   named: string[];
+  /** Species tokens with no known character nearby (candidate NPCs). */
+  unresolved: Array<{ token: string; genome: string; family: string; at: number }>;
 }
 
 /** Extra attribution context: a fallback focus, genders for pronouns, sole char. */
@@ -49,6 +57,12 @@ export interface AttributeOpts {
   fallbackId?: string | null;
   genders?: Record<string, string>;
   soleId?: string | null;
+  /**
+   * Chat-prose strictness: when true, a species word only proposes if it is tied to
+   * a known name OR a change cue sits nearby. Stops a passing "a wolf crossed the
+   * road" from binding anyone. Cards are always strong and ignore this.
+   */
+  requireEvidence?: boolean;
 }
 
 /** Names lowercased + first-name tokens, so "Mira Vance" also matches "Mira". */
@@ -122,13 +136,16 @@ function pronounNear(tokens: Token[], at: number, radius = 8): string | null {
  * nearest name anywhere → a pronoun's single gendered match → the focus → the
  * sole character. This is deliberately forgiving: roleplay prose often says
  * "a wolf bit her" with no name in the sentence.
+ *
+ * `named` reports whether the outcome came from an actual name (a strong tie) or a
+ * pronoun/focus/sole fallback (weak) — so chat prose can require evidence.
  */
-function attribute(segs: Segment[], at: number, tokens: Token[], named: Array<{ id: string; toks: string[] }>, opts: AttributeOpts): string | null {
+function attribute(segs: Segment[], at: number, tokens: Token[], named: Array<{ id: string; toks: string[] }>, opts: AttributeOpts): { id: string | null; named: boolean } {
   const own = segs.findIndex((s) => at >= s.start && at <= s.end);
-  if (own >= 0 && segs[own]!.name) return segs[own]!.name;
+  if (own >= 0 && segs[own]!.name) return { id: segs[own]!.name, named: true };
   if (own >= 0) {
-    for (let i = own - 1; i >= 0; i--) if (segs[i]!.name) return segs[i]!.name;
-    for (let i = own + 1; i < segs.length; i++) if (segs[i]!.name) return segs[i]!.name;
+    for (let i = own - 1; i >= 0; i--) if (segs[i]!.name) return { id: segs[i]!.name, named: true };
+    for (let i = own + 1; i < segs.length; i++) if (segs[i]!.name) return { id: segs[i]!.name, named: true };
   }
   // a name anywhere in the message, nearest by token distance
   let best: string | null = null;
@@ -141,19 +158,19 @@ function attribute(segs: Segment[], at: number, tokens: Token[], named: Array<{ 
       }
     }
   }
-  if (best) return best;
+  if (best) return { id: best, named: true };
   // a pronoun → the focus if it matches, else a lone candidate, else the first of
   // that gender. Ambiguous pronominal prose ("a wolf bit her") should still propose.
   const g = pronounNear(tokens, at);
   if (g && opts.genders) {
     const cands = named.filter((c) => opts.genders![c.id] === g);
-    if (cands.length === 1) return cands[0]!.id;
-    if (opts.fallbackId && cands.some((c) => c.id === opts.fallbackId)) return opts.fallbackId;
-    if (cands.length > 1) return cands[0]!.id;
+    if (cands.length === 1) return { id: cands[0]!.id, named: false };
+    if (opts.fallbackId && cands.some((c) => c.id === opts.fallbackId)) return { id: opts.fallbackId, named: false };
+    if (cands.length > 1) return { id: cands[0]!.id, named: false };
   }
-  if (opts.fallbackId) return opts.fallbackId;
-  if (opts.soleId) return opts.soleId;
-  return named.length === 1 ? named[0]!.id : null;
+  if (opts.fallbackId) return { id: opts.fallbackId, named: false };
+  if (opts.soleId) return { id: opts.soleId, named: false };
+  return { id: named.length === 1 ? named[0]!.id : null, named: false };
 }
 
 /** Which known characters are named in this text (for focus tracking). */
@@ -167,13 +184,19 @@ function namesPresent(tokens: Token[], named: Array<{ id: string; toks: string[]
 
 export function detectInText(text: string, chars: KnownCharacter[], tables: DetectTables, source: "card" | "chat", opts: AttributeOpts = {}): DetectResult {
   const tokens = tokenize(text);
-  const result: DetectResult = { species: [], changes: [], unattributed: [], named: [] };
+  const result: DetectResult = { species: [], changes: [], unattributed: [], named: [], unresolved: [] };
   if (tokens.length === 0) return result;
 
   const named = chars.map((c) => ({ id: c.id, toks: nameTokens(c.names) }));
   const segs = segment(tokens, named);
   result.named = namesPresent(tokens, named);
   const sole = opts.soleId ?? (chars.length === 1 ? chars[0]!.id : null);
+  const changeNear = (at: number): boolean => {
+    for (let i = Math.max(0, at - 6); i <= Math.min(tokens.length - 1, at + 6); i++) {
+      if (tables.changeCues.has(tokens[i]!.text)) return true;
+    }
+    return false;
+  };
 
   // A common-word token ("ass", "kid") is dropped when a stronger species token is
   // also present in the same text — so "a wolf with a nice ass" is wolf, not donkey.
@@ -185,37 +208,48 @@ export function detectInText(text: string, chars: KnownCharacter[], tables: Dete
   if (speciesHits.some((h) => !h.weak)) speciesHits = speciesHits.filter((h) => !h.weak);
 
   for (const hit of speciesHits) {
-    const id = sole ?? attribute(segs, hit.at, tokens, named, opts);
+    if (source === "card") {
+      const id = sole ?? attribute(segs, hit.at, tokens, named, opts).id;
+      result.species.push({ characterId: id ?? "", genome: hit.genome, family: hit.family, confidence: 0.85, source, token: hit.token, evidence: true });
+      continue;
+    }
+    const a = attribute(segs, hit.at, tokens, named, opts);
+    // chat strictness: a bare species word with no name tie and no change cue is a
+    // mere mention — record it as an unresolved candidate AND still propose (so the
+    // pane can offer it), but flag `evidence:false` so auto-apply leaves it alone.
+    const evidence = !opts.requireEvidence || a.named || changeNear(hit.at);
+    if (!evidence) result.unresolved.push({ token: hit.token, genome: hit.genome, family: hit.family, at: hit.at });
+    const id = sole ?? a.id;
     // push even when unresolved: the engine can still claim it via the focus/sole
-    result.species.push({ characterId: id ?? "", genome: hit.genome, family: hit.family, confidence: source === "card" ? 0.85 : 0.7, source, token: hit.token });
+    result.species.push({ characterId: id ?? "", genome: hit.genome, family: hit.family, confidence: evidence ? 0.7 : 0.5, source, token: hit.token, evidence });
   }
 
   const speciesFamilies = new Set(result.species.filter((s) => s.characterId).map((s) => `${s.characterId}:${s.family}`));
   for (const hit of findFamilies(tokens, tables)) {
-    const id = sole ?? attribute(segs, hit.at, tokens, named, opts);
-    if (!id) continue;
-    if (speciesFamilies.has(`${id}:${hit.family}`)) continue;
+    const a = sole ? { id: sole, named: true } : attribute(segs, hit.at, tokens, named, opts);
+    if (!a.id) continue;
+    if (speciesFamilies.has(`${a.id}:${hit.family}`)) continue;
     // a family-only hit still proposes the family's representative genome
     const genome = tables.familyRep[hit.family] ?? "";
-    result.species.push({ characterId: id, genome, family: hit.family, confidence: source === "card" ? 0.55 : 0.45, source, token: hit.token });
+    result.species.push({ characterId: a.id, genome, family: hit.family, confidence: source === "card" ? 0.55 : 0.45, source, token: hit.token, evidence: true });
   }
 
   // implied species: a cue combination with no explicit species word ("a bite and a
   // growl"). Only when no explicit species for that character+family was found.
   for (const hit of findImplied(tokens, tables)) {
-    const id = sole ?? attribute(segs, hit.at, tokens, named, opts);
-    if (!id) continue;
-    if (result.species.some((s) => s.characterId === id && s.family === hit.family)) continue;
-    result.species.push({ characterId: id, genome: hit.genome, family: hit.family, confidence: hit.confidence, source, token: `~${hit.token}` });
+    const a = sole ? { id: sole, named: true } : attribute(segs, hit.at, tokens, named, opts);
+    if (!a.id) continue;
+    if (result.species.some((s) => s.characterId === a.id && s.family === hit.family)) continue;
+    result.species.push({ characterId: a.id, genome: hit.genome, family: hit.family, confidence: hit.confidence, source, token: `~${hit.token}`, evidence: true });
   }
 
   // anatomy-only: a signature of co-occurring anatomy cues ("fur + ears + muzzle")
   // with no species word at all. Weakest channel; only when nothing else claimed it.
   for (const hit of findAnatomySignatures(tokens, tables)) {
-    const id = sole ?? attribute(segs, hit.at, tokens, named, opts);
-    if (!id) continue;
-    if (result.species.some((s) => s.characterId === id && s.family === hit.family)) continue;
-    result.species.push({ characterId: id, genome: hit.genome, family: hit.family, confidence: hit.confidence, source, token: `#${hit.token}` });
+    const a = sole ? { id: sole, named: true } : attribute(segs, hit.at, tokens, named, opts);
+    if (!a.id) continue;
+    if (result.species.some((s) => s.characterId === a.id && s.family === hit.family)) continue;
+    result.species.push({ characterId: a.id, genome: hit.genome, family: hit.family, confidence: hit.confidence, source, token: `#${hit.token}`, evidence: true });
   }
 
   // One genome per character per family: keep the highest-confidence claim, so a
@@ -229,8 +263,8 @@ export function detectInText(text: string, chars: KnownCharacter[], tables: Dete
       // credit to whoever the species/anatomy cues point at; fall back to the focus
       const counts = new Map<string, string[]>();
       for (const hit of [...speciesHits, ...findImplied(tokens, tables)]) {
-        const id = sole ?? attribute(segs, hit.at, tokens, named, opts);
-        if (id) counts.set(id, [...(counts.get(id) ?? []), hit.token]);
+        const a = sole ? { id: sole, named: true } : attribute(segs, hit.at, tokens, named, opts);
+        if (a.id) counts.set(a.id, [...(counts.get(a.id) ?? []), hit.token]);
       }
       if (counts.size === 0) {
         const id = opts.fallbackId ?? sole;
@@ -244,7 +278,31 @@ export function detectInText(text: string, chars: KnownCharacter[], tables: Dete
 }
 
 export function mergeResults(a: DetectResult, b: DetectResult): DetectResult {
-  return { species: [...a.species, ...b.species], changes: [...a.changes, ...b.changes], unattributed: [...a.unattributed, ...b.unattributed], named: [...a.named, ...b.named] };
+  return { species: [...a.species, ...b.species], changes: [...a.changes, ...b.changes], unattributed: [...a.unattributed, ...b.unattributed], named: [...a.named, ...b.named], unresolved: [...a.unresolved, ...b.unresolved] };
+}
+
+/** Common capitalized words that are not names (sentence starts, months, days). */
+const NOT_NAMES = new Set(["the", "a", "an", "and", "but", "he", "she", "they", "it", "her", "his", "their", "its", "when", "then", "we", "you", "i", "as", "if", "so", "yet", "for", "nor", "or", "at", "in", "on", "of", "to", "by", "with", "from", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december", "god", "lord", "mister", "missus", "mrs", "mr", "ms", "dr",
+  // common sentence-opening words / adverbs that a naive capitalisation scan picks up
+  "outside", "inside", "above", "below", "behind", "beyond", "beneath", "around", "across", "along", "over", "under", "near", "here", "there", "now", "soon", "later", "still", "just", "only", "even", "once", "twice", "again", "perhaps", "maybe", "suddenly", "finally", "meanwhile", "however", "still", "yes", "no", "oh", "ah", "well", "back", "down", "up", "out", "off", "way", "something", "someone", "nothing", "everyone", "everything", "somewhere", "anywhere", "everywhere", "this", "that", "these", "those", "what", "which", "who", "why", "how", "where", "after", "before", "during", "since", "until", "because", "although", "though", "while", "whether", "ever", "never", "always", "sometimes", "often", "rather", "quite", "very", "too", "much", "many", "more", "most", "less", "least", "other", "another", "same", "each", "both", "either", "neither", "some", "any", "all", "none"]);
+
+/**
+ * Capitalized words in the raw text that are not a known character's name and not a
+ * species word — the raw material for a "possible NPC" suggestion. Deliberately
+ * loose (a suggestion only); the pane lets the player confirm a track.
+ */
+export function npcCandidates(text: string, knownToks: Set<string>, speciesToks: Set<string>): string[] {
+  const out = new Set<string>();
+  for (const m of text.matchAll(/\b([A-Z][a-z]{2,})\b/g)) {
+    const raw = m[0]!;
+    const lower = raw.toLowerCase();
+    if (NOT_NAMES.has(lower)) continue;
+    if (knownToks.has(lower)) continue;
+    if (speciesToks.has(lower)) continue;
+    // must be a real word (skip ALLCAPS/initials)
+    out.add(raw);
+  }
+  return [...out];
 }
 
 /**

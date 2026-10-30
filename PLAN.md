@@ -86,8 +86,36 @@ milestone names the `DEFERRED.md` entry it closes (if any).
 | H19 | **Mobile usability: collapse/hide the pane; list changed parts** | **done** | mobile |
 | H20 | **Part/skeleton visualizer: a visual body map of changed parts** | planned | — |
 | H21 | **Lycan curse: bite→permanent mark, later phases on the moon** | **done** | — |
+| H22 | **Manual control: override-replace, evidence-gated detect, NPCs, moon reset, snapshots; LLM pacing** | **done** | D-250 |
 
 Milestone order is a suggestion; H8–H12 are independent and can be resequenced.
+
+## H22 — Manual control + pacing truthfulness — done
+
+Reported live: override barely worked (a werewolf override did not clear the human
+tag), a human reset did nothing, a reload dropped the genome, species matching was
+too eager, NPCs were missed, the moon could not be reset, there was no manual save,
+and the LLM front-ran the pace (claws "at 2%"). Fixes:
+
+- **Override replaces.** `game.override` resets the body + genome to baseline, then
+  applies the target (or nothing for human); coupling for a removed genome is pruned.
+  Human now truly clears a lycan; X replaces an auto-bound Y. Identity, clock, mind
+  and interior read survive.
+- **Reload keeps the genome.** Parent `rehydrate` restores `subject.genomes`
+  (D-251); before, every reload reset it, leaving a human tag over live coupling.
+- **Evidence-gated detection.** A chat species word only auto-binds when it is tied
+  to a known name or a change cue is near; a passing "a wolf" proposes but waits.
+- **NPC suggestions.** A capitalized stranger beside a species appears in the pane as
+  a trackable candidate; tracking binds the implied genome.
+- **Moon reset.** `setMoon(new|first_quarter|full|last_quarter)` and `nudgeMoonDays`
+  re-base a lunar offset (no day-clock move); the offset persists.
+- **Snapshots.** Save the current cast+world; rewind to any snapshot.
+- **Pacing truth.** The floor annotates each part with its progress and a
+  BUDDING/GROWING marker so a sub-30% part reads as only a hint.
+- **Minute tick.** Absorbed the parent's D-250 (tick = one minute); helper hour/day
+  math funnels through `src/sim/time`.
+
+`tools/control.ts` locks the control surface.
 
 ## H19 — Mobile usability — done
 
@@ -255,7 +283,7 @@ a wall clock. The per-message config is the *fallback*, not the rule.
 
 `npm run check` = `typecheck` + `validate` + `lint:authoring` + `data-check` +
 `smoke` + `detect` + `detect-eval` + `coupling` + `pace` + `name-restore` + `time` +
-`lycan` + `eyes` + `drive` + `visualize` + `golden` + `persist`. All must be green
+`lycan` + `eyes` + `drive` + `visualize` + `golden` + `persist` + `control`. All must be green
 for any content or code change. `data-check` fails if a new genome lands < 5
 attributes, never settles, or (if fantasy) is missing its coupling block.
 

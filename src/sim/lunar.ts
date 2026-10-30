@@ -8,6 +8,8 @@
  */
 export const DEFAULT_LUNAR_CYCLE_DAYS = 28;
 
+import { TICKS_PER_DAY } from "@core/time";
+
 export interface LunarConfig {
   cycleDays: number;
   /** Days either side of full that count as "full enough" to shift at peak. */
@@ -18,6 +20,13 @@ export const DEFAULT_LUNAR: LunarConfig = Object.freeze({ cycleDays: DEFAULT_LUN
 
 export class Lunar {
   readonly config: LunarConfig;
+  /**
+   * A tick offset added to every read (H22). Lets the moon be *set* to a phase
+   * without moving the shared day clock — "reset the moon to new" adds the delta
+   * between the current phase and new. The same offset is applied to every Lunar
+   * (game, triggers, each sim) so all phase gates stay in lockstep.
+   */
+  offsetTicks = 0;
 
   constructor(config: Partial<LunarConfig> = {}) {
     const cycleDays = config.cycleDays && config.cycleDays >= 4 ? config.cycleDays : DEFAULT_LUNAR.cycleDays;
@@ -26,7 +35,7 @@ export class Lunar {
 
   /** Moon phase 0..1 (0 new, 0.5 full), from a tick. */
   phase(tick: number): number {
-    const day = tick / 24;
+    const day = (tick + this.offsetTicks) / TICKS_PER_DAY;
     const p = (day / this.config.cycleDays) % 1;
     return p < 0 ? p + 1 : p;
   }
@@ -65,4 +74,13 @@ export class Lunar {
 
 export function createLunar(config?: Partial<LunarConfig>): Lunar {
   return new Lunar(config);
+}
+
+/** The tick offset that puts the moon at `targetPhase` (0..1) at `tick`. */
+export function offsetForPhase(targetPhase: number, tick: number, cycleDays: number): number {
+  const want = ((targetPhase % 1) + 1) % 1;
+  // phase(tick) = (((tick+off)/TICKS_PER_DAY)/cycle)%1 = want
+  const cycleTicks = cycleDays * TICKS_PER_DAY;
+  const off = want * cycleTicks - tick;
+  return ((off % cycleTicks) + cycleTicks) % cycleTicks;
 }

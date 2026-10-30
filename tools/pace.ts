@@ -4,6 +4,7 @@
  */
 import { HelperGame } from "../src/game";
 import { inferPace, applyPace, currentPace } from "../src/sim/pace";
+import { days, toDays } from "../src/sim/time";
 
 let failures = 0;
 function check(name: string, cond: boolean, detail = ""): void {
@@ -17,10 +18,10 @@ function settleDays(seed: number, pace: "slow" | "normal" | "fast" | "quick" | "
   g.setPace(pace);
   g.bestow("m", "genome.wolf", 3.0);
   const sim = g.cast.get("m")!.sim;
-  for (let t = 0; t < 500 * 24; t++) {
+  for (let t = 0; t < days(500); t++) {
     g.advance(1);
     const done = sim.subject.body.allInstances().every((i) => i.attributes.filter((a) => !a.phase_feral_only).every((a) => a.progress >= (a.target_progress ?? 1000)));
-    if (done) return Math.ceil(sim.session.clock.tick / 24);
+    if (done) return Math.ceil(toDays(sim.session.clock.tick));
   }
   return 999;
 }
@@ -76,8 +77,8 @@ function settleDays(seed: number, pace: "slow" | "normal" | "fast" | "quick" | "
 
 // determinism
 {
-  const g = new HelperGame(4); g.track("m", "Mira"); g.setPace("fast"); g.bestow("m", "genome.wolf", 3); g.advance(24 * 10);
-  const h = new HelperGame(4); h.track("m", "Mira"); h.setPace("fast"); h.bestow("m", "genome.wolf", 3); h.advance(24 * 10);
+  const g = new HelperGame(4); g.track("m", "Mira"); g.setPace("fast"); g.bestow("m", "genome.wolf", 3); g.advance(days(10));
+  const h = new HelperGame(4); h.track("m", "Mira"); h.setPace("fast"); h.bestow("m", "genome.wolf", 3); h.advance(days(10));
   check("pace is deterministic", g.view().frames[0]!.exposure === h.view().frames[0]!.exposure);
 }
 

@@ -1,4 +1,5 @@
 import { ContentError } from "./loader";
+import { TICKS_PER_DAY } from "./time";
 
 /**
  * Preferences + the reaction log (blueprint §22; D-184–D-188; M15.5c).
@@ -161,8 +162,10 @@ export class Preferences {
     let dropped = 0;
     const kept: ReactionMemory[] = [];
     for (const r of this.log) {
-      const age = Math.max(0, tick - r.touchedAtTick);
-      const loss = (rate * age) / 100 / (0.4 + r.importance); // importance slows loss
+      // age in DAYS, scaled by 24 so the per-day loss matches the old hour-tick rate
+      // (D-292): the unit changed, the felt pace did not.
+      const age = Math.max(0, tick - r.touchedAtTick) / TICKS_PER_DAY;
+      const loss = (rate * age * 24) / 100 / (0.4 + r.importance); // importance slows loss
       r.opinion = r.opinion - Math.sign(r.opinion || 1) * loss;
       if (Math.abs(r.opinion) >= 2) kept.push(r);
       else dropped++;

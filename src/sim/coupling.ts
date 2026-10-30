@@ -9,6 +9,7 @@
  * transient shift's growth. The base genome still grows normally underneath.
  */
 import type { Lunar } from "./lunar";
+import { hourOf } from "@core/time";
 
 export interface CouplingProfile {
   id: string;
@@ -97,7 +98,7 @@ function sourcePressure(src: CouplingSource, input: PressureInput): number {
       return src.weight * input.lunar.intensity(input.tick);
     case "time": {
       // night = the dark hours (18:00–06:00)
-      const hour = input.tick % 24;
+      const hour = hourOf(input.tick);
       const night = hour >= 18 || hour < 6;
       return night ? src.weight : 0;
     }
@@ -167,7 +168,7 @@ export function canWillShift(profile: CouplingProfile, playstyleId: string, real
  */
 export function ambientAt(profile: CouplingProfile, tick: number): { delta: number; thriving: boolean } | null {
   if (!profile.ambient) return null;
-  const hour = ((tick % 24) + 24) % 24;
+  const hour = hourOf(tick);
   const night = hour >= 20 || hour < 6;
   const thriving = profile.ambient.thrive_band === "night" ? night : !night;
   const delta = night ? profile.ambient.night_recovery : -profile.ambient.sun_weariness;

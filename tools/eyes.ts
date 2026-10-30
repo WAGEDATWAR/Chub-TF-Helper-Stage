@@ -6,6 +6,7 @@
 import { buildRegistries } from "../src/sim/registries";
 import { contentBundle } from "../src/sim/bundle";
 import { startSubject, bestow, advance } from "../src/sim/subject";
+import { days } from "../src/sim/time";
 
 const regs = buildRegistries(contentBundle());
 
@@ -45,7 +46,7 @@ function check(name: string, cond: boolean, detail = ""): void {
   check("the eye change is phase 0", (ke as { phase_index?: number })?.phase_index === 0 || (ke as { phase_index?: number })?.phase_index === undefined);
 
   const seen = new Set<string>();
-  for (let t = 0; t < 24 * 30; t++) { advance(g, 1); seen.add(eyeColour()); }
+  for (let t = 0; t < days(30); t++) { advance(g, 1); seen.add(eyeColour()); }
   check("colour passes through amber", seen.has("amber"), [...seen].join(","));
   check("colour ends gold", eyeColour() === "gold", String(eyeColour()));
 }

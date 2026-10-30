@@ -16,6 +16,35 @@ Do not silently resolve these — update this file (and `DECISIONS.md` for a rul
 Milestones referenced as **H…** are in `PLAN.md`. A status of "scheduled: Hn" means
 the item is picked up by that milestone; it is not dropped.
 
+## CONTROL-REWIND-SCOPE — rewind restores the cast, not the message history
+
+- **Status:** DEFERRED
+- **Where:** `src/game.ts` (`snapshot`/`rewind`), `src/stage/Pane.tsx`.
+- **What:** a snapshot captures the cast + world and `rewind` restores it, but it does
+  not (cannot) rewind the *chat* itself. "Rewind to day 5" resets the sim to day 5
+  while the transcript stays whole.
+- **Decide:** whether a rewind should also remap the per-message branch save, or is
+  sim-only by design (current).
+
+## NPC-CANDIDATE-HEURISTIC — a capitalized-word scan, not an NER pass
+
+- **Status:** GAP (deliberately loose)
+- **Where:** `src/detect/detect.ts` (`npcCandidates`), `src/detect/engine.ts`.
+- **What:** candidates come from capitalized words beside a species with a
+  not-a-name stoplist. It can still surface a place or title as a "possible NPC"; the
+  pane lets the player confirm, so a false positive is cheap. Once the optional LLM
+  classifier runs it could name NPCs directly.
+- **Decide:** whether to feed the classifier an NPC-extraction task.
+
+## MOON-OFFSET-VS-CYCLE — setting the moon re-bases an offset, keeping the cycle
+
+- **Status:** DEFERRED
+- **Where:** `src/sim/lunar.ts` (`offsetTicks`), `src/game.ts` (`setMoon`).
+- **What:** `setMoon` moves a tick offset so the *phase* changes without moving the day
+  clock. The lunar cycle length is unchanged. There is no "freeze the moon" or
+  "advance the cycle counter" view yet.
+- **Decide:** whether a player wants to set the cycle day/season, not just the phase.
+
 ---
 
 ## Planned work with no current stub (tracked so it is not lost)

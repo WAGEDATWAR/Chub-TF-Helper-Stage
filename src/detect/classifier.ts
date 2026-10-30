@@ -53,7 +53,7 @@ export function parseClassifierReply(
     if (species === "human" || species === "none") continue;
     const hit = genomeByToken(species);
     if (!hit) continue;
-    out.push({ characterId: id, genome: hit.genome, family: hit.family, confidence: 0.6, source: "chat", token: species });
+    out.push({ characterId: id, genome: hit.genome, family: hit.family, confidence: 0.6, source: "chat", token: species, evidence: true });
   }
   return out;
 }
