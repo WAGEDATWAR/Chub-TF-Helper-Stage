@@ -41,7 +41,13 @@ function readAll(): Record<string, MirroredControl> {
 function writeAll(all: Record<string, MirroredControl>): void {
   const ls = store();
   if (!ls) return;
-  try { ls.setItem(KEY, JSON.stringify(all)); } catch { /* quota: keep the in-memory copy */ }
+  try { ls.setItem(KEY, JSON.stringify(all)); return; } catch { /* quota */ }
+  // quota: drop the oldest half of every chat's snapshots and retry, then give up
+  for (const c of Object.keys(all)) {
+    const s = all[c]?.snapshots;
+    if (s && s.length > 1) all[c]!.snapshots = s.slice(Math.ceil(s.length / 2));
+  }
+  try { ls.setItem(KEY, JSON.stringify(all)); } catch { /* still too big: keep memory */ }
 }
 
 /** Read this chat's mirrored control, if any. */
@@ -84,7 +90,7 @@ export function forgetSnapshot(chat: string, id: string): void {
 }
 
 /** Cap the mirror so localStorage never balloons: keep the newest `max` snapshots. */
-export function capMirror(chat: string, max = 12): void {
+export function capMirror(chat: string, max = 6): void {
   const all = readAll();
   const cur = all[chat];
   if (!cur?.snapshots || cur.snapshots.length <= max) return;

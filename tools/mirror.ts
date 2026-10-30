@@ -76,6 +76,15 @@ function check(name: string, cond: boolean, detail = ""): void {
   check("capMirror keeps the newest 12", kept.length === 12 && kept[11]!.id === "s19", String(kept.length));
 }
 
+// the default cap is 6 (snapshots are ~180KB each)
+{
+  const chat = chatKey(["defcap"], []);
+  const snaps = Array.from({ length: 10 }, (_, i) => ({ id: `s${i}`, label: `d${i}`, atTick: i, payload: {}, roster: [] }));
+  writeMirror(chat, { snapshots: snaps });
+  capMirror(chat);
+  check("the default cap keeps 6", (readMirror(chat)?.snapshots?.length ?? 0) === 6);
+}
+
 // the mirror is per chat: another chat is unaffected
 {
   const a = chatKey(["one"], []);

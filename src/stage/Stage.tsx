@@ -220,6 +220,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
   persist(): void {
     const control = this.game.controlState();
     writeMirror(this.chat, { snapshots: control.snapshots, overrides: control.overrides, seq: control.seq });
+    capMirror(this.chat, 6);
     try { void this.messenger.updateChatState(this.chatState()); } catch { /* staging/mock */ }
   }
 
@@ -227,7 +228,8 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
   private mirrorControl(): void {
     const control = this.game.controlState();
     writeMirror(this.chat, { snapshots: control.snapshots, overrides: control.overrides, seq: control.seq });
-    capMirror(this.chat);
+    // snapshots carry a full cast save (~180 KB each); keep the mirror small
+    capMirror(this.chat, 6);
   }
 
   /** Delete a snapshot everywhere (in-memory, chat state, mirror). */
