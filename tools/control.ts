@@ -194,8 +194,7 @@ function check(name: string, cond: boolean, detail = ""): void {
   check("a snapshot survives a reload", h.snapshotCount() === 1 && h.listSnapshots()[0]!.label === "checkpoint", String(h.snapshotCount()));
 }
 
-// a REWOUND state (bestow + advance) is what the next reload pulls — the reported
-// "overwrote with human, reloaded, and the change was back" case
+// a cleared change does not come back on reload
 {
   const g = new HelperGame(23);
   g.track("s", "Sarah");
@@ -210,6 +209,22 @@ function check(name: string, cond: boolean, detail = ""): void {
   h.knowCard({ id: "s", names: ["Sarah"], text: "Sarah tends the garden." });
   h.autoApplyPending(1.0);
   check("a cleared change does not come back on reload", h.cast.get("s")!.sim.subject.genomes.length === 0, JSON.stringify(h.cast.get("s")!.sim.subject.genomes));
+}
+
+// re-applying control state twice is idempotent and keeps restored body progress
+{
+  const g = new HelperGame(24);
+  g.track("s", "Sarah");
+  g.override("s", "genome.wolf");
+  g.advance(days(8));
+  const exp = g.view().frames[0]!.exposure;
+  check("the character has progressed", exp > 0);
+  const control = g.controlState();
+  const h = new HelperGame(24);
+  h.restore(g.save()!, [{ id: "s", name: "Sarah" }]);
+  h.applyControlState(control); // chat state
+  h.applyControlState(control); // then mirror — must not double-reset
+  check("a double control-apply keeps body progress", h.view().frames[0]!.exposure === exp, `${h.view().frames[0]!.exposure} vs ${exp}`);
 }
 
 console.log(failures === 0 ? "\nCONTROL PASS" : `\nCONTROL FAIL (${failures})`);

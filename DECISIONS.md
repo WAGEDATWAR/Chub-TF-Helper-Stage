@@ -1,5 +1,13 @@
 # Decisions
 
+- **D-034 — Durable controls mirror to localStorage; a failed generation cannot
+  wipe them (H25).** Chub reverts/re-inits chat state when a generation fails (a
+  common provider hiccup, e.g. Venice "received empty response from API"); snapshots
+  lived only in chat state, so a failed send deleted them. Controls now mirror to a
+  per-chat `localStorage` key on every action and at send time, merged back on load
+  after chat state. `applyControlState` is idempotent so a restored body keeps its
+  progress. `tools/mirror.ts` locks it.
+
 - **D-033 — A simile is not an identity (detect).** "Busy as a bee" no longer binds a
   wasp. A species cue preceded by `like`/`as`/`unlike` is a comparison: it proposes at
   lower confidence and waits for the player (chat), and a card simile does not

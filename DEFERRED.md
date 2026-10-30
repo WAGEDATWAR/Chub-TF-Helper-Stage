@@ -44,8 +44,27 @@ the item is picked up by that milestone; it is not dropped.
   declare "animate by default, additive for a futa body" — the player picks.
 - **Decide:** whether a genome should carry a preferred policy.
 
-## CONTROL-REWIND-SCOPE-END
+## MIRROR-PER-BROWSER — the mirror is local, not synced
 
+- **Status:** GAP (by design, watch)
+- **Where:** `src/stage/mirror.ts`, `src/stage/Stage.tsx`.
+- **What:** the control mirror lives in the browser's `localStorage`, keyed per chat.
+  It protects against a chat-state revert on the same machine, but a snapshot taken
+  on one device is not on another, and clearing site data drops it. Chat state
+  remains the shared source; the mirror is a safety net.
+- **Decide:** whether to also persist snapshots into message state (shared, but
+  budgeted) so they survive cross-device.
+
+## PROVIDER-EMPTY-RESPONSE — Venice intermittent empty reply (not ours)
+
+- **Status:** external
+- **Where:** Chub provider layer; surfaces as "received empty response from API".
+- **What:** Venice intermittently returns an empty completion; Chub aborts the send
+  and does not call `afterResponse`. Our stage cannot prevent it, but the H25 mirror
+  ensures a snapshot/override taken before the send is not lost when it happens.
+- **Decide:** nothing on our side; revisit if a retry hook appears.
+
+## CONTROL-REWIND-SCOPE-END
 ## RATE-UNITS-AUDIT — no guard prevents an un-converted speed_base
 
 - **Status:** GAP (partial guard)

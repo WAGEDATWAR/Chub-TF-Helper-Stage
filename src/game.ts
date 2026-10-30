@@ -544,17 +544,26 @@ export class HelperGame {
     if (typeof state.moonOffset === "number") this.applyLunarOffset(state.moonOffset);
     if (state.defaultGenital) this.defaultGenitalPolicy = state.defaultGenital;
     for (const [id, p] of state.genital ?? []) if (isGenitalPolicy(p)) this.genitalPolicies.set(id, p);
-    // restore snapshots (their rosters may differ; names resolve against the live cast)
-    for (const s of state.snapshots ?? []) this.snapshots.push({ id: s.id, label: s.label, atTick: s.atTick, payload: s.payload, roster: s.roster });
-    this.snapshotSeq = Math.max(this.snapshotSeq, state.seq ?? 0);
-    // overrides: record the flag and re-bind the genome so the body matches. Done
-    // here so it precedes/overrides the card scan in the Stage constructor.
-    for (const [id, genome] of state.overrides ?? []) {
-      if (!this.cast.get(id)) continue;
-      this.detector.setOverrideSilent(id, genome);
-      if (genome) { this.cast.reset(id); this.cast.bind(id, genome, 1.0, this.policyFor(id)); }
-      else this.cast.reset(id);
+    // restore snapshots (their rosters may differ; names resolve against the live
+    // cast). Union by id so a chat-state copy and a local mirror never duplicate.
+    for (const s of state.snapshots ?? []) {
+      if (this.snapshots.some((e) => e.id === s.id)) continue;
+      this.snapshots.push({ id: s.id, label: s.label, atTick: s.atTick, payload: s.payload, roster: s.roster });
     }
+    // overrides: record the flag, and re-bind only when the body does not already
+    // match — so a reload that already restored the saved body keeps its progress,
+    // and a second applyControlState (chat state then mirror) is a no-op.
+    for (const [id, genome] of state.overrides ?? []) {
+      const char = this.cast.get(id);
+      if (!char) continue;
+      this.detector.setOverrideSilent(id, genome);
+      const current = char.sim.subject.genomes[char.sim.subject.genomes.length - 1] ?? null;
+      const want = genome ?? null;
+      if (current === want) continue;
+      this.cast.reset(id);
+      if (genome) this.cast.bind(id, genome, 1.0, this.policyFor(id));
+    }
+    this.snapshotSeq = Math.max(this.snapshotSeq, state.seq ?? 0);
   }
 }
 

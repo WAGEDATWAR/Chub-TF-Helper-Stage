@@ -6,6 +6,7 @@ import { Pane, type VisualState } from "./Pane";
 import { directions as buildDirections, guardMessage, instrumentRead, type DriveInput } from "../drive/drive";
 import { visualBundle } from "../view/visualize";
 import { inferPace, type PaceId } from "../sim/pace";
+import { chatKey, readMirror, writeMirror, forgetSnapshot, capMirror } from "./mirror";
 
 /**
  * The thin framework adapter. All loop logic lives in the library-free
@@ -22,6 +23,8 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
   /** Objects/ambient present in the current scene, for the guard's haystack. */
   private sceneObjects: string[] = [];
   private sceneAmbient = "";
+  /** A per-chat key for the local control mirror (H25). */
+  private chat = "";
 
   constructor(data: InitialData<InitStateType, ChatStateType, MessageStateType, ConfigType>) {
     super(data);
@@ -52,8 +55,13 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
     else for (const r of namedRoster) this.game.track(r.id, r.name);
 
     // durable pane controls (overrides, snapshots, moon, pace, genital) re-apply
-    // BEFORE the card scan below, so a manual override beats the card auto-bind
+    // BEFORE the card scan below, so a manual override beats the card auto-bind.
+    // Chat state first, then the local mirror last (H25): the mirror is written on
+    // the very latest action, so on a chat-state revert (a failed generation) it
+    // wins ties and fills the gap — a snapshot or override is never lost.
+    this.chat = chatKey(Object.keys(data.characters ?? {}), Object.keys(data.users ?? {}));
     this.game.applyControlState(data.chatState?.control);
+    this.game.applyControlState(readMirror(this.chat) as never);
     // re-apply chat-wide playstyle choices (a swipe keeps them)
     for (const [id, byGenome] of Object.entries(data.chatState?.playstyles ?? {})) {
       for (const [genome, style] of Object.entries(byGenome)) this.game.setPlaystyle(id, genome, style);
@@ -119,6 +127,9 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
     this.game.autoApplyPending(1.0);
     this.game.advanceMinutes(this.minutesPerMessage);
     this.direction = buildDirections(this.driveInput());
+    // mirror here too: if the generation then fails (a provider hiccup), a chat-state
+    // revert must not lose a snapshot taken since the last action (H25)
+    this.mirrorControl();
     return { stageDirections: this.direction, messageState: this.branchState(), chatState: this.chatState() };
   }
 
@@ -142,6 +153,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
     } else {
       this.lastGuard = [];
     }
+    this.mirrorControl();
     return {
       modifiedMessage: modified,
       systemMessage: this.statusMessage ? instrumentRead(this.driveInput()) : null,
@@ -200,12 +212,29 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
   }
 
   /**
-   * Persist the current chat state immediately (H24). Called after a pane action
-   * (override, snapshot, moon, pace) so a reload pulls the *live* state, not the
-   * last message's. Non-blocking; a failure is non-fatal.
+   * Persist the current chat state immediately (H24) and mirror it locally (H25).
+   * Called after a pane action (override, snapshot, moon, pace) so a reload pulls
+   * the *live* state, not the last message's, and a chat-state revert does not lose
+   * a snapshot. Non-blocking; a failure is non-fatal.
    */
   persist(): void {
+    const control = this.game.controlState();
+    writeMirror(this.chat, { snapshots: control.snapshots, overrides: control.overrides, seq: control.seq });
     try { void this.messenger.updateChatState(this.chatState()); } catch { /* staging/mock */ }
+  }
+
+  /** Mirror just the durable controls locally (no chat-state write). */
+  private mirrorControl(): void {
+    const control = this.game.controlState();
+    writeMirror(this.chat, { snapshots: control.snapshots, overrides: control.overrides, seq: control.seq });
+    capMirror(this.chat);
+  }
+
+  /** Delete a snapshot everywhere (in-memory, chat state, mirror). */
+  deleteSnapshot(id: string): void {
+    this.game.deleteSnapshot(id);
+    forgetSnapshot(this.chat, id);
+    this.persist();
   }
 
   private couplingGenome(characterId: string): string | null {

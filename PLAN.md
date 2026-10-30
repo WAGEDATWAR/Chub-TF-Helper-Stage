@@ -89,8 +89,19 @@ milestone names the `DEFERRED.md` entry it closes (if any).
 | H22 | **Manual control: override-replace, evidence-gated detect, NPCs, moon reset, snapshots; LLM pacing** | **done** | D-250 |
 | H23 | **Genital policy / intersex: preserve \| replace \| additive \| swap** | **done** | genital |
 | H24 | **Durable pane controls: persist override/snapshot/moon on action** | **done** | reload |
+| H25 | **Control mirror: snapshots survive a chat-state revert (failed generation)** | **done** | reload |
 
 Milestone order is a suggestion; H8–H12 are independent and can be resequenced.
+
+## H25 — Control mirror (survive a failed generation) — done
+
+A provider hiccup (Venice "received empty response from API") makes Chub abort the
+send and revert/re-init chat state; because snapshots lived only in chat state, a
+failed generation wiped them. `src/stage/mirror.ts` now mirrors snapshots +
+overrides to `localStorage` (per chat) on every action and at send time, and merges
+them back on load *after* chat state — so a revert cannot lose them. A reverted body
+is re-derived from the mirror; a snapshot cap keeps the mirror small.
+`tools/mirror.ts` locks it; `tools/control.ts` locks the reload-cannot-lose paths.
 
 ## H23 — Genital policy / intersex — done
 
@@ -304,7 +315,7 @@ a wall clock. The per-message config is the *fallback*, not the rule.
 
 `npm run check` = `typecheck` + `validate` + `lint:authoring` + `data-check` +
 `smoke` + `detect` + `detect-eval` + `coupling` + `pace` + `name-restore` + `time` +
-`lycan` + `eyes` + `drive` + `visualize` + `golden` + `persist` + `control` + `genital`. All must be green
+`lycan` + `eyes` + `drive` + `visualize` + `golden` + `persist` + `control` + `genital` + `mirror`. All must be green
 for any content or code change. `data-check` fails if a new genome lands < 5
 attributes, never settles, or (if fantasy) is missing its coupling block.
 
