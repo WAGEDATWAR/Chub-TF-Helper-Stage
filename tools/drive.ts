@@ -121,5 +121,21 @@ function inputFor(g: HelperGame): DriveInput {
   check("the interior rides in the floor", floorFor(f).includes("temperament") || floorFor(f).includes("realized"));
 }
 
+// H27: arousal and libido stay visible and the mover traits do not drop out of the
+// list as they near neutral
+{
+  const g = new HelperGame(9);
+  g.track("mira", "Mira");
+  g.bestow("mira", "genome.wolf", 3);
+  const early = g.view().frames[0]!.interior;
+  check("libido is exposed", early.libido !== null);
+  check("arousal is exposed as a number", typeof early.arousal === "number");
+  const earlyIds = early.traits.map((t) => t.id);
+  check("a mover trait is listed (libidinous)", earlyIds.includes("libidinous"), earlyIds.join(","));
+  g.advance(days(10));
+  const late = g.view().frames[0]!.interior;
+  check("the mover trait is still listed after 10 days", late.traits.map((t) => t.id).includes("libidinous"), late.traits.map((t) => t.id).join(","));
+}
+
 console.log(failures === 0 ? "\nDRIVE PASS" : `\nDRIVE FAIL (${failures})`);
 process.exit(failures === 0 ? 0 : 1);

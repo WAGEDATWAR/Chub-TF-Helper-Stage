@@ -1,9 +1,13 @@
 /**
  * Authoring gate (adapted from the parent's tools/authoring-lint.ts). For every
  * genome in the merged set: bestow it and prove the change starts, does not
- * stall, settles within 90 days, and has no degenerate morph chain / short
+ * stall, settles within 50 days, and has no degenerate morph chain / short
  * target. A new genome that does not fully land fails here. Exit non-zero on
  * any error-level finding.
+ *
+ * Coarsened like the parent (D-254): a 120-minute step over a 50-day horizon —
+ * this gate checks *structure* (settles, no stall, no degenerate chain), not exact
+ * timing, so the sample can be coarse. `AFFECTED_GENOMES` narrows the run.
  */
 import { mergedContentSet } from "./content";
 import { buildRegistries } from "../src/sim/registries";
@@ -23,6 +27,13 @@ const fragments = (data.fragments as { attribute?: Record<string, unknown> }) ??
 const attributes = (data.attributes as { attributes: Array<{ id: string; hidden?: boolean; morph_track?: string }> }).attributes;
 const tracks = (data.morph_tracks as { morph_tracks: Array<{ id: string; steps: unknown[] }> }).morph_tracks;
 const trackById = new Map(tracks.map((t) => [t.id, t]));
+
+/** How coarse the sim sample is, and how far it runs (structure only; see header). */
+const STEP = 120;
+const HORIZON_DAYS = 50;
+
+/** A genome filter from `AFFECTED_GENOMES` (comma list); absent/`all` = every genome. */
+const only = (process.env.AFFECTED_GENOMES ?? "").split(",").map((s) => s.trim()).filter((s) => s && s !== "all");
 
 const findings: Finding[] = [];
 const flag = (level: Finding["level"], genome: string, message: string): void => {
@@ -47,21 +58,22 @@ function lintGenome(genomeId: string): void {
   const scheduled = subject.body.allInstances().flatMap((i) => i.attributes.map((a) => ({ slot: i.slot, a })));
 
   let settledTick: number | null = null;
-  for (let t = 0; t < days(90); t++) {
-    const day = sim.session.clock.day;
-    advance(sim, 1);
-    // a `when: { realized: true }` phase (the serpent's endoskeleton) only opens once
-    // the subject realizes — which the real cast drives per day, so the lint must too
-    if (sim.session.clock.day !== day) runDailyMind(sim);
+  for (let t = 0; t < days(HORIZON_DAYS); t += STEP) {
+    const before = sim.session.clock.day;
+    // the mind step runs per whole day crossed (a coarse step can skip several)
+    advance(sim, STEP);
+    for (let d = before; d < sim.session.clock.day; d++) runDailyMind(sim);
     if (settledTick === null && settled(subject)) {
       settledTick = sim.session.clock.tick;
       break;
     }
   }
-  if (settledTick === null) flag("error", genomeId, "transformation did not settle within 90 days");
+  if (settledTick === null) flag("error", genomeId, `transformation did not settle within ${HORIZON_DAYS} days`);
   for (const { slot, a } of scheduled) {
     if ((a.target_progress ?? 1000) < 1000 && a.target_progress !== 0) flag("warn", genomeId, `short target ${slot}:${a.id} = ${a.target_progress}`);
-    if (settledTick !== null && !a.phase_feral_only && a.progress < (a.target_progress ?? 1000)) flag("error", genomeId, `stalled change ${slot}:${a.id} at ${a.progress}`);
+    // a slow creep (phase_rate_mult < 1, D-256) trails long after settle by design
+    const creeping = ((a as { phase_rate_mult?: number }).phase_rate_mult ?? 1) < 1;
+    if (settledTick !== null && !a.phase_feral_only && !creeping && a.progress < (a.target_progress ?? 1000)) flag("error", genomeId, `stalled change ${slot}:${a.id} at ${a.progress}`);
   }
   for (const inst of subject.body.allInstances()) {
     for (const entry of inst.attributes) {
@@ -73,7 +85,8 @@ function lintGenome(genomeId: string): void {
   if (!changed) flag("error", genomeId, "bestow produced no change");
 }
 
-for (const genome of regs.genomes.all()) lintGenome(genome.id);
+const genomes = regs.genomes.all().filter((g) => only.length === 0 || only.includes(g.id));
+for (const genome of genomes) lintGenome(genome.id);
 
 for (const attr of attributes) {
   if (attr.hidden) continue;

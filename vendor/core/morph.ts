@@ -30,11 +30,24 @@ export interface MorphStepEvent extends MorphStep {
 
 export class MorphTrackRegistry {
   private readonly byId: Map<string, MorphTrack>;
+  /** trackId -> prefix-max of reachable `at` per open phase (O(1) cap lookups). */
+  private readonly caps = new Map<string, number[]>();
   readonly library: PartLibrary | null;
 
   constructor(tracks: MorphTrack[], library: PartLibrary | null = null) {
     this.byId = indexById(tracks, "morph_tracks.json");
     this.library = library;
+    for (const track of tracks) {
+      const phases = track.steps.map((s) => s.phase ?? 0);
+      const maxPhase = Math.max(0, ...phases);
+      const caps = new Array<number>(maxPhase + 1).fill(0);
+      let running = 0;
+      for (let p = 0; p <= maxPhase; p++) {
+        for (const s of track.steps) if ((s.phase ?? 0) === p) running = Math.max(running, s.at);
+        caps[p] = running;
+      }
+      this.caps.set(track.id, caps);
+    }
     for (const track of tracks) {
       if (typeof track.occupies_role !== "string") {
         throw new ContentError(`morph track "${track.id}" is missing "occupies_role"`, "morph_tracks.json");
@@ -88,11 +101,11 @@ export class MorphTrackRegistry {
   capForPhase(trackId: string, openPhase: number): number {
     const track = this.get(trackId);
     if (!track) return 1;
-    let cap = 0;
-    for (const step of track.steps) {
-      if ((step.phase ?? 0) <= openPhase) cap = Math.max(cap, step.at);
-    }
-    return cap;
+    // precomputed per track: the furthest `at` reachable at each open phase (built
+    // once in the constructor), so this is a table read, not a step scan per tick.
+    const caps = this.caps.get(trackId);
+    if (!caps) return 0;
+    return caps[Math.min(Math.max(0, openPhase), caps.length - 1)] ?? 0;
   }
 
   all(): MorphTrack[] {

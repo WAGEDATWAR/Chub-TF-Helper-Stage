@@ -13,6 +13,7 @@ import { applyNow, type GenitalPolicy } from "./genital";
 import { runDailyMind } from "./mind";
 import type { Registries } from "./registries";
 import { TimeEngine } from "@core/time_engine";
+import { TICKS_PER_DAY } from "@core/time";
 import { loadSession } from "@core/savegame";
 import { createLunar } from "./lunar";
 import type { Subject } from "@core/subject";
@@ -73,6 +74,10 @@ export interface InteriorRead {
   feelings: Array<{ emotion: string; value: number }>;
   /** Her most-characterful mind values, as label pairs (e.g. "nervous 72"). */
   traits: Array<{ id: string; label: string; value: number }>;
+  /** The arousal stat (0..100), so it is always visible (H27). */
+  arousal: number;
+  /** Her libido mind value (0..100), or null when absent (H27). */
+  libido: number | null;
 }
 
 const STATUS: Record<string, string> = {
@@ -239,17 +244,27 @@ export class Cast {
     if (char) char.genomeHistory = entries.slice();
   }
 
-  /** Advance the whole cast by `ticks`, keeping every clock in lockstep. */
+  /**
+   * Advance the whole cast by `ticks` minutes, keeping every clock in lockstep.
+   *
+   * Stepped in **day-sized chunks** so the daily mind step runs at each real day
+   * boundary — an `advance(1440)` is identical to 1440 × `advance(1)` for identity
+   * progress and any `when: { realized }` gate. Batching the whole span and running
+   * the mind step only at the end diverged (the realization landed days late).
+   */
   advance(ticks: number): void {
     if (ticks <= 0) return;
-    for (const char of this.chars.values()) {
-      const before = char.sim.session.clock.day;
-      char.sim.engine.advance(ticks);
-      const after = char.sim.session.clock.day;
-      // one identity step per day crossed, so realization/awareness progress
-      for (let d = before; d < after; d++) runDailyMind(char.sim);
+    let remaining = ticks;
+    while (remaining > 0) {
+      // advance to the next day boundary (or the remainder, if shorter)
+      const toBoundary = TICKS_PER_DAY - (this.worldTick % TICKS_PER_DAY);
+      const step = Math.min(remaining, toBoundary);
+      for (const char of this.chars.values()) char.sim.engine.advance(step);
+      this.worldTick += step;
+      remaining -= step;
+      // a day just completed for everyone: one identity step
+      if (this.worldTick % TICKS_PER_DAY === 0) for (const char of this.chars.values()) runDailyMind(char.sim);
     }
-    this.worldTick += ticks;
   }
 
   /** Per-character reads, in insertion order. */
@@ -307,28 +322,38 @@ function humanize(id: string): string {
 }
 
 /**
+ * Mind values always surfaced when present (H27): the ones a transformation most
+ * moves, so they do not silently drop out of the top-3 as they near neutral and
+ * become impossible to watch.
+ */
+const PINNED_TRAITS = ["libidinous", "dominant", "aggressive", "nervous", "calm", "curious"];
+
+/**
  * The interior read (H11): her awareness tier, mood, strongest feelings and most
  * characteristic mind values. Pure over the subject; the pane shows it and the
  * driving floor may name it (from *her* POV, never the Observer's).
  */
 function interiorOf(s: Subject): InteriorRead {
   const mind = s.mind as (Subject["mind"] & { labels?: Map<string, string> }) | null;
-  if (!mind) return { tier: "blind", mood: null, feelings: [], traits: [] };
+  if (!mind) return { tier: "blind", mood: null, feelings: [], traits: [], arousal: Math.round(s.stats.arousal ?? 0), libido: null };
   const tier = mind.tier();
   const feelings = mindEmotions(s)
     .map((e) => ({ emotion: e, value: Math.round(s.mood?.get(e) ?? 0) }))
     .filter((x) => x.value >= 25)
     .sort((a, b) => b.value - a.value)
     .slice(0, 3);
-  // the mind values furthest from a bland 50 — the ones that characterise her now
-  const traits = mind
-    .ids()
-    .map((id) => ({ id, label: mind.labels?.get(id) ?? id, value: Math.round(mind.read(id)) }))
-    .sort((a, b) => Math.abs(b.value - 50) - Math.abs(a.value - 50))
-    .slice(0, 3);
+  // the pinned movers first (stable), then the remaining strongest deviations, so a
+  // value stays watchable as it approaches neutral instead of vanishing
+  const all = mind.ids().map((id) => ({ id, label: mind.labels?.get(id) ?? id, value: Math.round(mind.read(id)) }));
+  const pinned = all.filter((t) => PINNED_TRAITS.includes(t.id));
+  const rest = all
+    .filter((t) => !PINNED_TRAITS.includes(t.id))
+    .sort((a, b) => Math.abs(b.value - 50) - Math.abs(a.value - 50));
+  const traits = [...pinned, ...rest].slice(0, 6);
   const p = s.mood?.point();
   const mood = s.mood && p ? { valence: Math.round(p.valence), arousal: Math.round(p.arousal), band: s.mood.band() } : null;
-  return { tier, mood, feelings, traits };
+  const libido = all.find((t) => t.id === "libidinous")?.value ?? null;
+  return { tier, mood, feelings, traits, arousal: Math.round(s.stats.arousal ?? 0), libido };
 }
 
 /** The emotion ids the mood model carries (read defensively; the data owns them). */
@@ -347,6 +372,10 @@ function restoreSim(save: string, regs: Registries, lunar?: { cycleDays?: number
       bands: regs.exposureBands,
       attributes: regs.attributes,
       events: regs.events,
+      // mind + mood content, else rehydrate drops them (realization/awareness and
+      // emotion values silently vanished on every reload; H27)
+      mindData: regs.data.mind,
+      moodData: regs.data.mood,
     });
     return { subject: loaded.session.subject, session: loaded.session, engine: new TimeEngine(loaded.session), regs, lunar: createLunar(lunar) };
   } catch {

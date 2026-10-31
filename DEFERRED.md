@@ -65,6 +65,26 @@ the item is picked up by that milestone; it is not dropped.
 - **Decide:** nothing on our side; revisit if a retry hook appears.
 
 ## CONTROL-REWIND-SCOPE-END
+
+## SHIFT-DRAWN-BODY — a clear does not recede the drawn partial body
+
+- **Status:** GAP
+- **Where:** `src/sim/triggers.ts` (`clearShift`).
+- **What:** a manual clear flips the `SHIFTED` flag and suppresses re-shift, but the
+  parts already drawn by the shift stay grown; there is no body-level recede. Only the
+  natural `revert` path (below `revert_below`) approaches that. A clear therefore
+  reads as "stop here", not "undo".
+- **Decide:** whether a clear should also pull the drawn attributes back to baseline
+  (a real recede) or stay a flag/suppress only (current).
+
+## RATE-UNIT-REGRESSION — none of the helper gates read phase_rate_mult
+
+- **Status:** WATCH
+- **Where:** `tools/authoring.ts`, `tools/data-check.ts`.
+- **What:** `authoring` exempts a slow creep from its stall check, but `data-check`
+  still counts a creeping part as "landed" by progress alone. Fine now (one creeping
+  family), but a genome that creeps a *core* family could read as settled early.
+- **Decide:** make data-check's settle check creep-aware too if a genome creeps more.
 ## RATE-UNITS-AUDIT — no guard prevents an un-converted speed_base
 
 - **Status:** GAP (partial guard)

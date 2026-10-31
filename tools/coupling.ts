@@ -63,7 +63,25 @@ function check(name: string, cond: boolean, detail = ""): void {
   g.advance(days(13)); // walk into the full moon
   const shifted = g.view().coupling.find((c) => c.characterId === "w")?.shifted ?? false;
   check("full moon forces the shift", shifted, JSON.stringify(g.view().coupling));
-  check("the shift is logged", g.view().triggers.some((t) => t.kind === "shift"));
+  const shift = g.view().triggers.find((t) => t.kind === "shift");
+  check("the shift is logged", !!shift);
+  // the log names the actual factors and the threshold, not just "pressure" (H27)
+  check("the shift log gives the factors and threshold", !!shift && /moon \d+%/.test(shift.note) && /≥ \d+%/.test(shift.note), shift?.note);
+}
+
+// a shift can be cleared by hand and STAYS cleared under a full moon; then forced back
+{
+  const g = new HelperGame(12, { cycleDays: 28 });
+  g.track("w", "Wren");
+  g.bestow("w", "genome.werewolf", 0.5);
+  g.advance(days(13));
+  check("shifted at the full moon", g.view().coupling.find((c) => c.characterId === "w")?.shifted === true);
+  check("a manual clear works", g.clearShift("w"));
+  check("the clear takes effect", g.view().coupling.find((c) => c.characterId === "w")?.shifted === false);
+  g.advance(days(1));
+  check("the clear holds while the moon is still full", g.view().coupling.find((c) => c.characterId === "w")?.shifted === false);
+  check("a manual force works", g.forceShift("w"));
+  check("forced shifted", g.view().coupling.find((c) => c.characterId === "w")?.shifted === true);
 }
 
 // pressure falling again reverts

@@ -50,8 +50,11 @@ function partRead(pct: number): string {
 export function floorFor(frame: CastFrame, coupling?: CouplingRow): string {
   const band = frame.band.replace(/^band\./, "").replace(/_/g, " ");
   const cues = coupling?.cues.length ? ` (moon-stirred: ${coupling.cues.join(", ")})` : "";
-  const parts = frame.parts.length > 0
-    ? `\n  changing parts: ${frame.parts.map((p) => `${p.label} ${partRead(p.pct).toUpperCase()} (${p.pct}%)`).join(", ")}`
+  // the most-progressed parts only: a pacing hint, not a full catalogue (parts is
+  // already sorted most-progressed first, and the body line below names the rest)
+  const shown = frame.parts.slice(0, 6);
+  const parts = shown.length > 0
+    ? `\n  changing parts: ${shown.map((p) => `${p.label} ${partRead(p.pct).toUpperCase()} (${p.pct}%)`).join(", ")}`
     : "";
   return `${frame.name} — exposure ${frame.exposure}%, ${band}${cues}.${parts} ${frame.describe}${interiorLine(frame)}`;
 }

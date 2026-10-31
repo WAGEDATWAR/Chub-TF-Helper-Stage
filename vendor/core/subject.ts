@@ -309,13 +309,14 @@ export class Subject {
           stage_index: a.stage_index,
           ...(a.target_progress !== undefined && a.target_progress !== a.progress ? { target_progress: a.target_progress } : {}),
           ...(a.dose_mult !== undefined ? { dose_mult: a.dose_mult } : {}),
-          ...((a.start_delay ?? 0) > 0 ? { start_delay: a.start_delay } : {}),
+          ...(a.start_delay !== undefined ? { start_delay: a.start_delay } : {}),
           ...(a.phase_index !== undefined ? { phase_index: a.phase_index } : {}),
           // the phase gates must survive a reload, or a saved feral/exposure/`when`
           // change reopens and lands ahead of its phase (R6, D-248).
           ...(a.phase_feral_only ? { phase_feral_only: true } : {}),
           ...((a.phase_exposure_min ?? 0) > 0 ? { phase_exposure_min: a.phase_exposure_min } : {}),
           ...(a.phase_when ? { phase_when: a.phase_when } : {}),
+          ...(a.phase_rate_mult !== undefined ? { phase_rate_mult: a.phase_rate_mult } : {}),
           ...(a.morph_chain ? { morph_chain: a.morph_chain } : {}),
         })),
       })),

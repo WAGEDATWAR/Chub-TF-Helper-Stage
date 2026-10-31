@@ -51,6 +51,8 @@ export interface PartAttributeEntry {
   /** The phase's `when` gate (D-248): the entry waits until the caller's world
    *  state satisfies it (e.g. `{ moon_min: 0.8 }`). */
   phase_when?: Record<string, unknown>;
+  /** The phase's growth-rate multiplier (D-256): a slow coat creep vs a snap. Default 1. */
+  phase_rate_mult?: number;
   /** An optional intra-phase priority; lower goes first, default 0. */
   phase_priority?: number;
   progress_block?: unknown;

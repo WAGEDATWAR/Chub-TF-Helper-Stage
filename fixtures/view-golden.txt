@@ -1,9 +1,9 @@
 moon: full moon (95%)
-Mira — exposure 36% · light hybrid · visibly between
-  changing: head: pack instinct, nose: keen smell, fangs.L: fangs, fangs.R: fangs, arms.upper.R: mammalian fur, torso.lower: mammalian fur
-  parts: mammalian fur ×11 (100%), canine claws ×3 (100%), fangs ×2 (100%), pack instinct (100%), keen smell (100%), canine tongue (75%), body heat ×21 (11%), mobile ears ×2 (10%), canine teeth (9%)
-  interior: tier aware, neutral-still, nervous 37/confident 56/curious 56
-Wren — exposure 9% · cosmetic · a first shimmer · pressure 100% SHIFTED
+Mira — exposure 18% · cosmetic · a first shimmer
+  changing: head: pack instinct, nose: keen smell, fangs.L: fangs, fangs.R: fangs, nails.hand.L: canine claws, nails.hand.R: canine claws
+  parts: canine claws ×3 (100%), fangs ×2 (100%), pack instinct (100%), keen smell (100%), canine tongue (75%), mammary row ×2 (10%), mobile ears ×2 (10%), species genital ×2 (10%), canine teeth (9%), body heat ×21 (2%), mammalian fur ×11 (2%)
+  interior: tier aware, neutral-still, calm 50/dominant 55/libidinous 52/nervous 38/aggressive 50/curious 56
+Wren — exposure 8% · cosmetic · a first shimmer · pressure 100% SHIFTED
   changing: fangs.L: fangs, nails.hand.L: canine claws, nails.hand.R: canine claws, nails.foot.L: canine claws, nails.foot.R: canine claws, eyes.R: keen sight
-  parts: fangs ×2 (100%), canine claws ×4 (50%), keen sight ×2 (30%), canine tongue (19%), growl (19%), keen smell (19%)
-  interior: tier dim, neutral-still, nervous 41/curious 56/dominant 55
+  parts: fangs ×2 (100%), canine claws ×4 (50%), keen sight ×2 (30%), canine tongue (19%), keen smell (19%), growl (19%)
+  interior: tier dim, unpleasant-charged, fear 29, calm 50/dominant 55/libidinous 52/nervous 43/aggressive 50/curious 56

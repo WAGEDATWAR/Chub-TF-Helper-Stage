@@ -34,6 +34,8 @@ interface Coupling {
   lastDrawTick: number;
   /** H10: the character has chosen to shift on the next step (voluntary). */
   willShift: boolean;
+  /** Manually cleared: suppressed until pressure drops below `revert_below` again. */
+  cleared: boolean;
 }
 
 export class TriggerEngine {
@@ -71,7 +73,7 @@ export class TriggerEngine {
     // record a pending playstyle so it survives even before the coupling is synced
     const profile = this.profileFor(genomeId);
     if (profile?.playstyles[playstyle]) {
-      list.push({ profile, state: createCouplingState(), playstyle, lastDrawTick: -999, willShift: false });
+      list.push({ profile, state: createCouplingState(), playstyle, lastDrawTick: -999, willShift: false, cleared: false });
     }
   }
 
@@ -95,7 +97,7 @@ export class TriggerEngine {
     if (!list) { list = []; this.perChar.set(characterId, list); }
     for (const profile of this.couplingsFor(sim)) {
       if (!list.some((c) => c.profile.genome === profile.genome)) {
-        list.push({ profile, state: createCouplingState(), playstyle: this.data.defaultPlaystyle, lastDrawTick: -999, willShift: false });
+        list.push({ profile, state: createCouplingState(), playstyle: this.data.defaultPlaystyle, lastDrawTick: -999, willShift: false, cleared: false });
       }
     }
     return list;
@@ -147,6 +149,12 @@ export class TriggerEngine {
       realized,
       willShift: c.willShift,
     });
+    // a manual clear holds while the pressure stays at/above revert_below; only once
+    // it genuinely falls (and would revert anyway) do we release the suppression
+    if (c.cleared) {
+      if (readout.pressure < c.profile.revert_below) { c.cleared = false; c.state.shifted = false; }
+      else { c.state.shifted = false; c.state.lastPressure = readout.pressure; c.willShift = false; return; }
+    }
     const action = stepCoupling(c.profile, c.state, readout.pressure, tick);
     const willed = c.willShift && readout.breakdown.some((b) => b.source === "choice");
     c.willShift = false;
@@ -168,10 +176,10 @@ export class TriggerEngine {
     }
     if (action === "shift") {
       bestowForced(sim, c.profile.genome, c.profile.draw?.dose_at_shift ?? 2.0);
-      const why = willed ? "called on purpose" : (readout.breakdown.map((b) => b.source).join("+") || "pressure");
-      events.push({ characterId, genome: c.profile.genome, kind: "shift", pressure: readout.pressure, cues: readout.cues, note: `${c.profile.kind} shift forced (${why})` });
+      const why = willed ? "called on purpose" : describeBreakdown(readout.breakdown, readout.pressure, c.profile.shift_at);
+      events.push({ characterId, genome: c.profile.genome, kind: "shift", pressure: readout.pressure, cues: readout.cues, note: `${c.profile.kind} shift forced — ${why}` });
     } else if (action === "revert") {
-      events.push({ characterId, genome: c.profile.genome, kind: "revert", pressure: readout.pressure, cues: [], note: `${c.profile.kind} recedes` });
+      events.push({ characterId, genome: c.profile.genome, kind: "revert", pressure: readout.pressure, cues: [], note: `${c.profile.kind} recedes (pressure ${pct(readout.pressure)} fell below ${pct(c.profile.revert_below)})` });
     }
   }
 
@@ -193,6 +201,41 @@ export class TriggerEngine {
     return list.some((c) => canWillShift(c.profile, c.playstyle, realized));
   }
 
+  /**
+   * Force the full shift now regardless of pressure or playstyle (a manual override).
+   * The body gets the shift dose; the coupling is marked shifted after the world next
+   * steps, so a later fall below `revert_below` will still recede it normally.
+   */
+  forceShift(characterId: string, sim: Sim): string[] {
+    const list = this.sync(characterId, sim);
+    const shifted: string[] = [];
+    for (const c of list) {
+      if (c.state.shifted) continue;
+      bestowForced(sim, c.profile.genome, c.profile.draw?.dose_at_shift ?? 2.0);
+      c.state.shifted = true;
+      c.state.shiftedAtTick = sim.session.clock.tick;
+      shifted.push(c.profile.genome);
+    }
+    return shifted;
+  }
+
+  /**
+   * Clear the shift now: mark it receded and suppress re-shifting until the pressure
+   * genuinely falls below `revert_below` and climbs again — so a manually cleared
+   * shift does not instantly re-fire on the next tick while the moon is still full.
+   */
+  clearShift(characterId: string, sim: Sim): string[] {
+    const list = this.sync(characterId, sim);
+    const cleared: string[] = [];
+    for (const c of list) {
+      if (!c.state.shifted) continue;
+      c.state.shifted = false;
+      c.cleared = true;
+      cleared.push(c.profile.genome);
+    }
+    return cleared;
+  }
+
   /** A per-character read for the pane: pressure, breakdown, cues, playstyle. */
   readout(characterId: string, sim: Sim, tick: number, emotionOf: (sim: Sim) => Record<string, number>): Array<{ genome: string; kind: string; pressure: number; breakdown: Array<{ source: string; value: number }>; cues: string[]; shifted: boolean; playstyle: string; playstyles: Array<{ id: string; note: string }>; canCall: boolean }> {
     const list = this.sync(characterId, sim);
@@ -203,13 +246,13 @@ export class TriggerEngine {
     });
   }
 
-  toJSON(): Record<string, { genome: string; shifted: boolean; shiftedAtTick: number; playstyle: string }[]> {
-    const out: Record<string, Array<{ genome: string; shifted: boolean; shiftedAtTick: number; playstyle: string }>> = {};
-    for (const [id, list] of this.perChar) out[id] = list.map((c) => ({ genome: c.profile.genome, shifted: c.state.shifted, shiftedAtTick: c.state.shiftedAtTick, playstyle: c.playstyle }));
+  toJSON(): Record<string, { genome: string; shifted: boolean; shiftedAtTick: number; playstyle: string; cleared: boolean; lastDrawTick: number }[]> {
+    const out: Record<string, Array<{ genome: string; shifted: boolean; shiftedAtTick: number; playstyle: string; cleared: boolean; lastDrawTick: number }>> = {};
+    for (const [id, list] of this.perChar) out[id] = list.map((c) => ({ genome: c.profile.genome, shifted: c.state.shifted, shiftedAtTick: c.state.shiftedAtTick, playstyle: c.playstyle, cleared: c.cleared, lastDrawTick: c.lastDrawTick }));
     return out;
   }
 
-  loadJSON(data: Record<string, Array<{ genome: string; shifted: boolean; shiftedAtTick: number; playstyle: string }>> | null, characters: Array<{ id: string; sim: Sim }>): void {
+  loadJSON(data: Record<string, Array<{ genome: string; shifted: boolean; shiftedAtTick: number; playstyle: string; cleared?: boolean; lastDrawTick?: number }>> | null, characters: Array<{ id: string; sim: Sim }>): void {
     if (!data) return;
     this.perChar.clear();
     for (const { id, sim } of characters) {
@@ -220,7 +263,7 @@ export class TriggerEngine {
       for (const rec of saved) {
         const profile = this.profileFor(rec.genome);
         if (!profile) continue;
-        list.push({ profile, state: { shifted: rec.shifted, shiftedAtTick: rec.shiftedAtTick, lastPressure: 0 }, playstyle: rec.playstyle, lastDrawTick: -999, willShift: false });
+        list.push({ profile, state: { shifted: rec.shifted, shiftedAtTick: rec.shiftedAtTick, lastPressure: 0 }, playstyle: rec.playstyle, lastDrawTick: rec.lastDrawTick ?? -999, willShift: false, cleared: rec.cleared === true });
       }
       if (list.length > 0) this.perChar.set(id, list);
     }
@@ -230,4 +273,21 @@ export class TriggerEngine {
 export function createTriggerEngine(couplingData: unknown, lunar: Lunar): TriggerEngine {
   return new TriggerEngine(couplingData, lunar);
 }
+
+/** A pressure value as a whole percent. */
+function pct(value: number): string {
+  return `${Math.round(value * 100)}%`;
+}
+
+/**
+ * Explain a threshold crossing with the actual factors: each contributing source and
+ * its value against the threshold, e.g. "moon 94% + hormonal 38% = 132% ≥ 62%". This
+ * is so a shift says *why* the criteria were met, not just that they were.
+ */
+function describeBreakdown(breakdown: Array<{ source: string; value: number }>, pressure: number, threshold: number): string {
+  if (breakdown.length === 0) return `pressure ${pct(pressure)} ≥ ${pct(threshold)}`;
+  const parts = breakdown.map((b) => `${b.source} ${pct(b.value)}`);
+  return `${parts.join(" + ")} = ${pct(pressure)} ≥ ${pct(threshold)}`;
+}
+
 

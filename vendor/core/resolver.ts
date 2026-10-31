@@ -93,6 +93,8 @@ export interface Candidate extends DistributionWinner {
   phaseExposureMin?: number;
   /** The phase's `when` gate (D-248), stamped by schedule(). */
   phaseWhen?: Record<string, unknown> | null;
+  /** The phase's growth-rate multiplier (D-256), stamped by schedule(). */
+  phaseRateMult?: number;
 }
 
 export function matchesTargets(instance: Pick<PartInstance, "tags" | "role">, targets: { match_tags?: string[]; match_roles?: string[] } | undefined): boolean {
@@ -254,17 +256,40 @@ export class Resolver {
    * The morph track an entry walks, or null (genome role-override > role map >
    * attribute track > progress-block track).
    */
+  /** Per-tick cache of genome role-tracks (roles are few; the genome list is fixed). */
+  private _genomeRoleTick = -1;
+  private readonly _genomeRoleTracks = new Map<string, string | null>();
+
+  /** The genome's role-track override for a role, resolved at most once per tick. */
+  private _genomeRoleTrack(subject: SubjectLike, role: string): string | null {
+    if (this._genomeRoleTick !== this._tickStamp) {
+      this._genomeRoleTick = this._tickStamp;
+      this._genomeRoleTracks.clear();
+    }
+    const hit = this._genomeRoleTracks.get(role);
+    if (hit !== undefined) return hit;
+    const genomes = (subject as { genomes?: string[] }).genomes;
+    const track = genomes
+      ?.map((gid) => this.genomes?.get(gid)?.morph_role_tracks?.[role])
+      .find((t) => t && this.morphTracks!.has(t)) ?? null;
+    this._genomeRoleTracks.set(role, track);
+    return track;
+  }
+
+  private _trackCacheTick = -1;
+  private readonly _trackCache = new Map<PartAttributeEntry, string | null>();
+
   private _morphTrackId(subject: SubjectLike, instance: PartInstance, entry: PartAttributeEntry): string | null {
     if (!this.morphTracks) return null;
+    if (this._trackCacheTick !== this._tickStamp) { this._trackCacheTick = this._tickStamp; this._trackCache.clear(); }
+    const cached = this._trackCache.get(entry);
+    if (cached !== undefined) return cached;
     const attr = this.attributes.get(entry.id);
     const byRole = attr?.morph_tracks_by_role?.[instance.role];
-    const genomeTrack = (subject as { genomes?: string[] }).genomes
-      ?.map((gid) => this.genomes?.get(gid)?.morph_role_tracks?.[instance.role])
-      .find((t) => t && this.morphTracks!.has(t));
-    const trackId = genomeTrack ?? byRole ?? attr?.morph_track ?? (entry.progress_block as ProgressBlock | undefined)?.morph_track;
-    if (!trackId || !this.morphTracks.has(trackId)) return null;
-    if (this.morphTracks.get(trackId)!.occupies_role !== instance.role) return null;
-    return trackId;
+    const trackId = this._genomeRoleTrack(subject, instance.role) ?? byRole ?? attr?.morph_track ?? (entry.progress_block as ProgressBlock | undefined)?.morph_track;
+    const resolved = !trackId || !this.morphTracks.has(trackId) || this.morphTracks.get(trackId)!.occupies_role !== instance.role ? null : trackId;
+    this._trackCache.set(entry, resolved);
+    return resolved;
   }
 
   /**
@@ -273,10 +298,17 @@ export class Resolver {
    * track stops partway (e.g. "sharpening nails") and only continues once the next
    * phase opens (D-245).
    */
+  private _ptMemo = new Map<PartAttributeEntry, { phase: number; value: number }>();
+  private _ptTick = -1;
+
   private _phaseTarget(subject: SubjectLike, instance: PartInstance, entry: PartAttributeEntry, phase: number): number {
+    if (this._ptTick !== this._tickStamp) { this._ptTick = this._tickStamp; this._ptMemo.clear(); }
+    const hit = this._ptMemo.get(entry);
+    if (hit && hit.phase === phase) return hit.value;
     const trackId = this._morphTrackId(subject, instance, entry);
-    if (trackId) return Math.max(1, Math.round(this.morphTracks!.capForPhase(trackId, phase) * PROGRESS_MAX));
-    return entry.target_progress ?? PROGRESS_MAX;
+    const value = trackId ? Math.max(1, Math.round(this.morphTracks!.capForPhase(trackId, phase) * PROGRESS_MAX)) : entry.target_progress ?? PROGRESS_MAX;
+    this._ptMemo.set(entry, { phase, value });
+    return value;
   }
 
   /**
@@ -294,16 +326,40 @@ export class Resolver {
     return open;
   }
 
+  /**
+   * Fraction of a phase's attributes that have reached their (phase-aware) target.
+   * Cheapened by a per-instance signature (attributes and their done-ness) so a tick
+   * where nothing crossed a boundary reuses the previous map instead of re-scanning the
+   * whole body and re-running `_phaseTarget`. Any structural or progress change breaks
+   * the signature. (An "incremental counter" proper is impossible without writes, and
+   * the counts here are tiny, so this is the low-risk equivalent.)
+   */
+  private _doneTick = -1;
+  private readonly _doneMemo = new Map<PartAttributeEntry, { progress: number; done: boolean }>();
+
+  /** Whether an entry has reached its (phase-aware) target — memoised on progress. */
+  private _isDone(subject: SubjectLike, instance: PartInstance, entry: PartAttributeEntry, phase: number): boolean {
+    const memo = this._doneMemo.get(entry);
+    if (memo && memo.progress === entry.progress) return memo.done;
+    const done = entry.progress >= this._phaseTarget(subject, instance, entry, phase);
+    this._doneMemo.set(entry, { progress: entry.progress, done });
+    return done;
+  }
+
   /** Fraction of a phase's attributes that have reached their (phase-aware) target. */
   private _phaseCompletion(subject: SubjectLike): Map<number, number> {
+    if (this._doneTick !== this._tickStamp) { this._doneTick = this._tickStamp; this._doneMemo.clear(); }
     const totals = new Map<number, { done: number; all: number }>();
     for (const instance of subject.body.allInstances()) {
       for (const entry of instance.attributes) {
         const p = entry.phase_index;
         if (p === undefined) continue;
+        // a slow creep (a coat over the whole gestation, rate_mult < 1) must not hold the
+        // gate: later phases open on the *fast* parts of the phase, while the creep trails.
+        if ((entry.phase_rate_mult ?? 1) < 1) continue;
         const b = totals.get(p) ?? { done: 0, all: 0 };
         b.all += 1;
-        if (entry.progress >= this._phaseTarget(subject, instance, entry, p)) b.done += 1;
+        if (this._isDone(subject, instance, entry, p)) b.done += 1;
         totals.set(p, b);
       }
     }
@@ -312,7 +368,10 @@ export class Resolver {
     return out;
   }
 
+  private _tickStamp = 0;
+
   tick(subject: SubjectLike, ticks = 1, rateMult = 1, onsetMult = 1): { ready: unknown[]; events: TickEvent[] } {
+    this._tickStamp += 1;
     const ready = this.incubation ? this.incubation.advance(ticks) : [];
     const events: TickEvent[] = [];
     // phase gate: an attribute in phase N only grows once every earlier phase is
@@ -374,7 +433,7 @@ export class Resolver {
           entry.start_delay = (entry.start_delay ?? 0) - ticks * onsetMult;
           continue;
         }
-        const doseMult = (entry.dose_mult ?? 1) * rateMult;
+        const doseMult = (entry.dose_mult ?? 1) * rateMult * (entry.phase_rate_mult ?? 1);
         const before = entry.progress;
         // a small per-tick jitter so parts move unevenly but never out of order
         const jitter = this.rng ? 0.7 + this.rng.next("transform") * 0.6 : 1;
@@ -529,6 +588,8 @@ export class Resolver {
       if (winner.phaseExposureMin !== undefined) entry.phase_exposure_min = winner.phaseExposureMin;
       // a `when` gate (D-248): hold the entry until the caller's world state holds
       if (winner.phaseWhen) entry.phase_when = winner.phaseWhen;
+      // a phase may slow or speed its parts (D-256): a coat creeps over the gestation
+      if (winner.phaseRateMult !== undefined && winner.phaseRateMult !== 1) entry.phase_rate_mult = winner.phaseRateMult;
       // a jittered onset (D-219): stagger first application so parts scheduled in
       // the same phase do not all fire at once; preserve an existing delay on re-dose.
       if (entry.start_delay === undefined) {

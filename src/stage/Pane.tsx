@@ -175,7 +175,7 @@ function CastTab({
             <div style={css.row}>
               <b style={css.name}>{f.name}</b>
               <span style={css.tag}>{speciesLabel(f.genome)}</span>
-              {c?.shifted && <span style={css.shifted}>SHIFTED</span>}
+              {c?.shifted && <span style={css.shifted} title="the shift has begun; the body grows in">SHIFTED</span>}
               {f.realized && <span style={css.tag}>REALIZED</span>}
               <span style={css.spacer} />
               {onVisualize && (
@@ -206,8 +206,9 @@ function CastTab({
             {f.interior.traits.length > 0 && (
               <div style={css.row}>
                 <span style={css.attr}>
-                  {f.interior.mood ? `${f.interior.mood.band} · ` : ""}
-                  {f.interior.traits.map((t) => `${t.label} ${t.value}`).join(" · ")}
+                  {f.interior.mood ? f.interior.mood.band + " · " : ""}
+                  arousal {f.interior.arousal}{f.interior.libido !== null ? " · libido " + f.interior.libido : ""}
+                  {" · "}{f.interior.traits.map((t) => `${t.label} ${t.value}`).join(" · ")}
                 </span>
               </div>
             )}
@@ -327,10 +328,13 @@ function ToolsTab({ game, run, getGuard, getSaveKb }: { game: HelperGame; run: (
               <div style={css.row}>
                 <b>{game.cast.get(c.characterId)?.name ?? c.characterId}</b>
                 <span style={css.tag}>{c.kind}</span>
-                {c.shifted && <span style={css.shifted}>SHIFTED</span>}
+                {c.shifted && <span style={css.shifted} title="the shift has begun; the body grows in">SHIFTED</span>}
                 <span style={css.dim}>pressure {Math.round(c.pressure * 100)}%</span>
               </div>
-              <div style={css.attr}>{c.breakdown.map((b) => `${b.source} ${b.value}`).join(" · ") || "no pressure"}</div>
+              <div style={css.attr}>
+                {c.breakdown.map((b) => `${b.source} ${Math.round(b.value * 100)}%`).join(" + ") || "no pressure"}
+                {" → "}{Math.round(c.pressure * 100)}%
+              </div>
               <div style={css.row}>
                 <span style={css.dim}>playstyle</span>
                 <select style={css.input} value={c.playstyle} onChange={(e) => run(() => game.setPlaystyle(c.characterId, c.genome, e.target.value))}>
@@ -345,6 +349,11 @@ function ToolsTab({ game, run, getGuard, getSaveKb }: { game: HelperGame; run: (
                 ))}
                 {c.canCall && (
                   <button style={{ ...css.btn, ...css.btnSel, padding: "2px 6px" }} onClick={() => run(() => game.callShift(c.characterId))}>call shift</button>
+                )}
+                {c.shifted ? (
+                  <button style={{ ...css.btn, padding: "2px 6px" }} onClick={() => run(() => game.clearShift(c.characterId))}>clear shift</button>
+                ) : (
+                  <button style={{ ...css.btn, padding: "2px 6px" }} onClick={() => run(() => game.forceShift(c.characterId))}>force shift</button>
                 )}
               </div>
             </div>

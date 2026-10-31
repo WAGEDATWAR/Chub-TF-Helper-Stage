@@ -29,6 +29,12 @@ export interface Phase {
   feral_only?: boolean;
   /** Opens only while this condition holds (D-194): a mind/mood/stat gate. */
   when?: Record<string, unknown>;
+  /** Multiplies growth rate for parts in this phase (D-256): a slow creep (a coat over
+   *  the whole gestation) vs a snap (a full form). Default 1. */
+  rate_mult?: number;
+  /** The families `rate_mult` applies to (default: every family in the phase). Lets a
+   *  cover phase crawl only its coat/skin while ears/teeth/genitals keep normal pace. */
+  rate_families?: string[];
 }
 
 export interface PhasePlan {
@@ -66,6 +72,8 @@ export interface Sequencable {
   /** Filled by schedule(): the phase's `when` gate (D-248), so the resolver can
    *  hold the entry until the caller's world state satisfies it (e.g. a full moon). */
   phaseWhen?: Record<string, unknown> | null;
+  /** Filled by schedule(): the phase's growth-rate multiplier, so the resolver applies it. */
+  phaseRateMult?: number;
 }
 
 export interface PhaseRegistry {
@@ -145,7 +153,10 @@ export class PhaseSequencer {
       const base = phaseStart.get(index) ?? 0;
       // stamp the phase's gate onto the winner (R6) so the resolver can honour a
       // feral-only / exposure_min / when-gated phase without re-reading the genome.
-      return { ...w, phaseIndex: index, phaseId: phase.id, delay: base + within, phaseFeralOnly: phase.feral_only ?? false, phaseExposureMin: phase.exposure_min ?? 0, phaseWhen: phase.when ?? null };
+      // rate_mult applies only to the families it names (else all); a narrowed cover
+      // phase therefore crawls its coat/skin while ears/teeth keep the normal pace.
+      const rateApplies = phase.rate_mult !== undefined && (!phase.rate_families || (w.attr.family !== undefined && phase.rate_families.includes(w.attr.family)));
+      return { ...w, phaseIndex: index, phaseId: phase.id, delay: base + within, phaseFeralOnly: phase.feral_only ?? false, phaseExposureMin: phase.exposure_min ?? 0, phaseWhen: phase.when ?? null, phaseRateMult: rateApplies ? phase.rate_mult : 1 };
     });
   }
 

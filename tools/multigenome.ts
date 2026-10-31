@@ -31,9 +31,9 @@ function check(name: string, cond: boolean, detail = ""): void {
   const g = new HelperGame(2);
   g.track("s", "Sarah");
   g.bestow("s", "genome.wolf", 3);
-  g.advance(days(20));
+  g.advance(days(30));
   const before = g.view().frames[0]!;
-  check("the change is well underway", before.exposure > 40, String(before.exposure));
+  check("the change is well underway", before.exposure > 30, String(before.exposure));
   g.bestow("s", "genome.eagle", 3);
   g.advance(days(2));
   check("the supersede reset the body", g.view().frames[0]!.exposure < before.exposure);

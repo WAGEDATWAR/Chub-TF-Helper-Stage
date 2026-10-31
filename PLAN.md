@@ -91,8 +91,25 @@ milestone names the `DEFERRED.md` entry it closes (if any).
 | H24 | **Durable pane controls: persist override/snapshot/moon on action** | **done** | reload |
 | H25 | **Control mirror: snapshots survive a chat-state revert (failed generation)** | **done** | reload |
 | H26 | **Multi-genome: second species supersedes; revertable history; weak-bind guard** | **done** | applyRelated |
+| H27 | **Parent catch-up: fast harness; per-phase rate; shift/mind clarity** | **done** | D-254/D-255/D-256 |
 
 Milestone order is a suggestion; H8–H12 are independent and can be resequenced.
+
+## H27 — Parent catch-up — done
+
+Three parent changes absorbed (D-254/D-255/D-256):
+
+- **Faster gate.** `tools/check.ts` content-hash-skips the content stages when
+  `vendor/` is unchanged and narrows genome-scoped stages to the diff via
+  `tools/affected.ts`; `authoring`/`data-check` coarsen to a 120-min step / 50-day
+  horizon (structure, not timing) and honour `AFFECTED_GENOMES`; `persist` runs a
+  120-day/2-year horizon. `advance()` now steps in day chunks so a batched jump keeps
+  the daily mind step at each boundary (it diverged before).
+- **Per-phase rate (D-256).** Coat/skin/genital moved to phase 1 with a tiny
+  `rate_mult`; the helper needed no core change (the growth delta already folds it),
+  but the floor now caps its pacing hint to 6 parts and `authoring` exempts slow
+  creeps from its stall check.
+- **Shift/mind clarity + two reload bugs.** See D-037/D-038 below.
 
 ## H26 — Multi-genome: supersede (revertable) — done
 
@@ -330,7 +347,7 @@ a wall clock. The per-message config is the *fallback*, not the rule.
 
 `npm run check` = `typecheck` + `validate` + `lint:authoring` + `data-check` +
 `smoke` + `detect` + `detect-eval` + `coupling` + `pace` + `name-restore` + `time` +
-`lycan` + `eyes` + `drive` + `visualize` + `golden` + `persist` + `control` + `genital` + `mirror` + `multigenome`. All must be green
+`lycan` + `eyes` + `drive` + `visualize` + `golden` + `persist` + `control` + `genital` + `mirror` + `multigenome`. All must be green; content stages skip on an unchanged `vendor/` and narrow to the diff (`tools/check.ts`).
 for any content or code change. `data-check` fails if a new genome lands < 5
 attributes, never settles, or (if fantasy) is missing its coupling block.
 

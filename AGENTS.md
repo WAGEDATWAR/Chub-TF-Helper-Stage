@@ -25,7 +25,8 @@ systems and content gaps.
 
 | Command | Does |
 |---|---|
-| `npm run check` | typecheck + validate + authoring + data-check + smoke + detect + coupling + drive + golden + persist |
+| `npm run check` | all gates; content-hash-skips content stages when `vendor/` is unchanged and narrows genome-scoped stages to the diff (`--all` forces) |
+| `npm run check:full` | every gate, all genomes (what CI effectively runs) |
 | `npm run dev` | dev server with the offline test runner |
 | `npm run dev:staging` | dev server for a live chat (Chat Settings → Staging URL) — plain **http** on 5173 |
 | `npm run restart` | **kill running node, then start a fresh staging server on 5173** (see below) |

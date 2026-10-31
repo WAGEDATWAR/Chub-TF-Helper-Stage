@@ -28,7 +28,16 @@
           "skin",
           "muscle",
           "size",
-          "gait"
+          "gait",
+          "genital"
+        ],
+        "tags": [
+          "mammary_tag"
+        ],
+        "rate_mult": 0.06,
+        "rate_families": [
+          "coat",
+          "skin"
         ]
       },
       {
@@ -77,10 +86,17 @@
           "families": [
             "coat",
             "skin",
-            "ears"
+            "ears",
+            "genital"
           ],
           "tags": [
-            "teeth_tag"
+            "teeth_tag",
+            "mammary_tag"
+          ],
+          "rate_mult": 0.06,
+          "rate_families": [
+            "coat",
+            "skin"
           ]
         },
         {
@@ -136,10 +152,17 @@
           "families": [
             "coat",
             "skin",
-            "ears"
+            "ears",
+            "genital"
           ],
           "tags": [
-            "teeth_tag"
+            "teeth_tag",
+            "mammary_tag"
+          ],
+          "rate_mult": 0.06,
+          "rate_families": [
+            "coat",
+            "skin"
           ]
         },
         {
@@ -186,10 +209,17 @@
           "families": [
             "coat",
             "skin",
-            "ears"
+            "ears",
+            "genital"
           ],
           "tags": [
-            "teeth_tag"
+            "teeth_tag",
+            "mammary_tag"
+          ],
+          "rate_mult": 0.06,
+          "rate_families": [
+            "coat",
+            "skin"
           ]
         },
         {
@@ -236,10 +266,17 @@
           "families": [
             "coat",
             "skin",
-            "ears"
+            "ears",
+            "genital"
           ],
           "tags": [
-            "teeth_tag"
+            "teeth_tag",
+            "mammary_tag"
+          ],
+          "rate_mult": 0.06,
+          "rate_families": [
+            "coat",
+            "skin"
           ]
         },
         {
@@ -286,10 +323,17 @@
           "label": "the coat and teeth",
           "families": [
             "coat",
-            "skin"
+            "skin",
+            "genital"
           ],
           "tags": [
-            "teeth_tag"
+            "teeth_tag",
+            "mammary_tag"
+          ],
+          "rate_mult": 0.06,
+          "rate_families": [
+            "coat",
+            "skin"
           ]
         },
         {
@@ -334,7 +378,16 @@
             "skin",
             "coat",
             "muscle",
-            "size"
+            "size",
+            "genital"
+          ],
+          "tags": [
+            "mammary_tag"
+          ],
+          "rate_mult": 0.06,
+          "rate_families": [
+            "coat",
+            "skin"
           ]
         },
         {
@@ -368,7 +421,16 @@
             "skin",
             "coat",
             "muscle",
-            "size"
+            "size",
+            "genital"
+          ],
+          "tags": [
+            "mammary_tag"
+          ],
+          "rate_mult": 0.06,
+          "rate_families": [
+            "coat",
+            "skin"
           ]
         },
         {
@@ -388,9 +450,7 @@
           "id": "feathers_eyes",
           "label": "feathers, beak and eyes",
           "families": [
-            "coat",
-            "eyes",
-            "skin"
+            "eyes"
           ],
           "tags": [
             "beak_tag",
@@ -403,7 +463,18 @@
           "families": [
             "wings",
             "bone",
-            "size"
+            "size",
+            "coat",
+            "skin",
+            "genital"
+          ],
+          "tags": [
+            "mammary_tag"
+          ],
+          "rate_mult": 0.06,
+          "rate_families": [
+            "coat",
+            "skin"
           ]
         },
         {
@@ -424,8 +495,7 @@
           "id": "venom",
           "label": "venom, fangs and tongue",
           "families": [
-            "eyes",
-            "genital"
+            "eyes"
           ],
           "tags": [
             "venom_tag",
@@ -439,14 +509,25 @@
           "roles": [
             "nose",
             "eyes"
+          ],
+          "families": [
+            "coat",
+            "skin",
+            "genital"
+          ],
+          "tags": [
+            "mammary_tag"
+          ],
+          "rate_mult": 0.06,
+          "rate_families": [
+            "coat",
+            "skin"
           ]
         },
         {
           "id": "scales",
           "label": "the scales",
           "families": [
-            "coat",
-            "skin",
             "muscle"
           ]
         },
@@ -494,15 +575,24 @@
           "id": "wings",
           "label": "the wings",
           "families": [
-            "wings"
+            "wings",
+            "coat",
+            "skin",
+            "genital"
+          ],
+          "tags": [
+            "mammary_tag"
+          ],
+          "rate_mult": 0.06,
+          "rate_families": [
+            "coat",
+            "skin"
           ]
         },
         {
           "id": "coat",
           "label": "the coat",
           "families": [
-            "coat",
-            "skin",
             "muscle",
             "size"
           ]
@@ -552,11 +642,17 @@
           "tags": [
             "teeth_tag",
             "scent_tag",
-            "muzzle_tag"
+            "muzzle_tag",
+            "mammary_tag"
           ],
           "when": {
             "moon_min": 0.5
-          }
+          },
+          "rate_mult": 0.06,
+          "rate_families": [
+            "coat",
+            "skin"
+          ]
         },
         {
           "id": "wild_shape",

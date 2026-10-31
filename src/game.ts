@@ -173,6 +173,24 @@ export class HelperGame {
     return called;
   }
 
+  /** Force the full shift now, ignoring pressure/playstyle (a manual override). */
+  forceShift(characterId: string): boolean {
+    const char = this.cast.get(characterId);
+    if (!char) return false;
+    const shifted = this.triggers.forceShift(characterId, char.sim);
+    for (const genome of shifted) this.detector.push("change", characterId, `${genome.replace(/^genome\./, "")} shift forced manually`);
+    return shifted.length > 0;
+  }
+
+  /** Clear a shift now; it stays cleared until pressure genuinely falls. */
+  clearShift(characterId: string): boolean {
+    const char = this.cast.get(characterId);
+    if (!char) return false;
+    const cleared = this.triggers.clearShift(characterId, char.sim);
+    for (const genome of cleared) this.detector.push("change", characterId, `${genome.replace(/^genome\./, "")} shift cleared manually`);
+    return cleared.length > 0;
+  }
+
   /** Track a character by chat id. Returns the id, or null if the cast is full. */
   track(id: string, name: string, baseGender = "female"): string | null {
     if (!this.cast.add(id, name, baseGender)) return null;

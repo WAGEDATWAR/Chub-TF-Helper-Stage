@@ -1,5 +1,26 @@
 # Decisions
 
+- **D-040 — The gate is a runner that skips and narrows (H27).** `check` is now
+  `tools/check.ts`: content stages (validate/authoring/data-check/eyes/golden) are
+  content-hash-skipped when `vendor/` is unchanged and narrowed to the diff via
+  `tools/affected.ts`; `check:full` forces everything. Authoring/data-check sample
+  120 min over 50 days (structure, not timing). No assertion was weakened.
+
+- **D-039 — A shift log names the factors, and shifts are manually controllable
+  (H27).** A forced shift logs `moon 94% + hormonal 38% = 132% ≥ 62%`, not just
+  "pressure". The pane gains `force shift` / `clear shift`; a clear holds until
+  pressure genuinely falls below `revert_below`, so it does not re-fire under a full
+  moon. The `SHIFTED` tag means the shift has begun (the body grows in).
+
+- **D-038 — Mind and mood restore on reload (H27).** The helper's restore never
+  passed `mindData`/`moodData`, so realization/awareness and mood vanished every
+  reload and `when:{realized}` gates silently closed. Both now round-trip.
+
+- **D-037 — arousal/libido and mover traits stay visible (H27).** The interior read
+  pins the transformation-mover mind values (libidinous, dominant, …) ahead of the
+  deviation sort and exposes `arousal`/`libido` explicitly, so they no longer drop
+  out of the top-3 as they near neutral.
+
 - **D-036 — A second species supersedes, revertably; only a sure bind auto-supersedes
   (H26).** Two genomes used to stack one body; now a different species replaces the
   current one and the outgoing **body save** goes to history, so a revert restores

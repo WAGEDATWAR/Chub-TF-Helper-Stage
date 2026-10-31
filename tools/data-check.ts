@@ -15,6 +15,11 @@ const regs = buildRegistries(mergedContentSet());
 const data = mergedContentSet();
 const KNOWN = new Set(["genome.wolf","genome.dog","genome.cat","genome.fox","genome.rabbit","genome.bovine","genome.equine","genome.raven","genome.serpent","genome.bat"]);
 
+/** Coarse sample (structure only, D-254): 120-minute step, 50-day horizon. */
+const STEP = 120;
+const HORIZON_DAYS = 50;
+const only = (process.env.AFFECTED_GENOMES ?? "").split(",").map((s) => s.trim()).filter((s) => s && s !== "all");
+
 interface Row { id: string; attrs: number; morphs: number; settleDay: number; exposure: number; band: string; coupled: string; }
 const rows: Row[] = [];
 
@@ -24,6 +29,7 @@ function settled(subject: ReturnType<typeof startSubject>["subject"]): boolean {
 
 for (const genome of regs.genomes.all()) {
   if (genome.id === "genome.human_baseline") continue;
+  if (only.length > 0 && !only.includes(genome.id)) continue;
   const sim = startSubject({ name: "Check", seed: 11, regs });
   const morphs = new Set<string>();
   let settleDay = -1;
@@ -33,8 +39,8 @@ for (const genome of regs.genomes.all()) {
     rows.push({ id: genome.id, attrs: -1, morphs: 0, settleDay: -1, exposure: 0, band: "BESTOW-FAIL", coupled: "" });
     continue;
   }
-  for (let t = 0; t < days(90); t++) {
-    advance(sim, 1);
+  for (let t = 0; t < days(HORIZON_DAYS); t += STEP) {
+    advance(sim, STEP);
     sim.session.trace.all?.();
     if (settleDay < 0 && settled(sim.subject)) { settleDay = sim.session.clock.day; break; }
   }
