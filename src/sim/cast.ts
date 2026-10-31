@@ -24,6 +24,21 @@ export interface TrackedCharacter {
   name: string;
   baseGender: string;
   sim: Sim;
+  /**
+   * Species this character carried before the current one (H14). A second genome
+   * **supersedes** the first rather than stacking two bodies; this keeps the old
+   * form *and its body save* so it can be reverted at the exact progress it had —
+   * a stray auto-bind can then be undone without losing a cultivated change.
+   * Newest last.
+   */
+  genomeHistory: HistoryEntry[];
+}
+
+export interface HistoryEntry {
+  genome: string;
+  /** The superseded body, serialized, restored verbatim on revert. */
+  save: string;
+  atTick: number;
 }
 
 export interface CastFrame {
@@ -45,6 +60,8 @@ export interface CastFrame {
   realized: boolean;
   /** H11: the interior read — awareness tier, mood, and her strongest mind values. */
   interior: InteriorRead;
+  /** H14: species carried before the current one, newest last (revertable). */
+  genomeHistory: string[];
 }
 
 export interface InteriorRead {
@@ -115,7 +132,7 @@ export class Cast {
     if (this.chars.has(id) || this.full) return null;
     const seed = (this.baseSeed ^ hashString(id)) >>> 0;
     const sim = startSubject({ name, seed, baseGender, regs: this.regs, lunar: this.lunar });
-    const char: TrackedCharacter = { id, name, baseGender, sim };
+    const char: TrackedCharacter = { id, name, baseGender, sim, genomeHistory: [] };
     this.chars.set(id, char);
     if (this.worldTick > 0) sim.engine.advance(this.worldTick);
     return char;
@@ -148,6 +165,7 @@ export class Cast {
     const seed = (this.baseSeed ^ hashString(id)) >>> 0;
     const sim = startSubject({ name: char.name, seed, baseGender: char.baseGender, regs: this.regs, lunar: this.lunar });
     char.sim = sim;
+    char.genomeHistory = [];
     if (this.worldTick > 0) sim.engine.advance(this.worldTick);
     return char;
   }
@@ -158,16 +176,67 @@ export class Cast {
     if (char) { char.name = name; char.sim.subject.displayName = name; }
   }
 
-  /** Apply a genome to a tracked character (forced/narrative trigger). */
-  bind(id: string, genomeId: string, dose = DEFAULT_DOSE, policy: GenitalPolicy = "preserve"): boolean {
+  /**
+   * Apply a genome to a tracked character. A genome that differs from the current one
+   * **supersedes** it (H14): the outgoing body is saved to `genomeHistory` (so a
+   * stray bind can be reverted at its exact progress) and a fresh baseline is built
+   * for the new species. Re-applying the current genome just tops it up.
+   *
+   * `supersede: false` makes it additive — the current genome stays active and the
+   * new one is bestowed on top (used for weaker evidence that should not destroy an
+   * in-progress change).
+   */
+  bind(id: string, genomeId: string, dose = DEFAULT_DOSE, policy: GenitalPolicy = "preserve", supersede = true): boolean {
     const char = this.chars.get(id);
     const genome = this.regs.genomes.get(genomeId);
     if (!char || !genome) return false;
+    const current = char.sim.subject.genomes[char.sim.subject.genomes.length - 1] ?? null;
+    if (current !== genomeId && current && supersede) {
+      char.genomeHistory.push({ genome: current, save: saveSim(char.sim), atTick: char.sim.session.clock.tick });
+      const seed = (this.baseSeed ^ hashString(id)) >>> 0;
+      const sim = startSubject({ name: char.name, seed, baseGender: char.baseGender, regs: this.regs, lunar: this.lunar });
+      char.sim = sim;
+      if (this.worldTick > 0) sim.engine.advance(this.worldTick);
+    }
     // bind with no genital change, then apply the policy ourselves: the engine's own
     // `additive` is asymmetric (a no-op from a male), so we target the empty socket.
     bestow(char.sim, genomeId, dose, "preserve");
     if (policy !== "preserve") applyNow(char.sim.subject, genome, this.regs.library, policy);
     return true;
+  }
+
+  /**
+   * Return to the most recent superseded species (H14), restoring its exact body from
+   * the saved snapshot — progress intact. A revert is a manual act, so it is logged
+   * with the current genome. Returns the restored genome, or null when there is none.
+   */
+  revertSpecies(id: string): string | null {
+    const char = this.chars.get(id);
+    const entry = char?.genomeHistory.pop();
+    if (!char || !entry) return null;
+    const sim = restoreSim(entry.save, this.regs, this.lunar);
+    if (!sim) return null;
+    char.sim = sim;
+    // the restored clock is authoritative; keep the world at least at it
+    if (sim.session.clock.tick > this.worldTick) this.worldTick = sim.session.clock.tick;
+    return entry.genome;
+  }
+
+  /** The species this character carries now (last bound), or null. */
+  currentGenome(id: string): string | null {
+    const char = this.chars.get(id);
+    return char?.sim.subject.genomes[char.sim.subject.genomes.length - 1] ?? null;
+  }
+
+  /** The prior species list (for the pane), newest last. */
+  historyOf(id: string): HistoryEntry[] {
+    return [...(this.chars.get(id)?.genomeHistory ?? [])];
+  }
+
+  /** Restore a character's history (on load). */
+  setHistory(id: string, entries: HistoryEntry[]): void {
+    const char = this.chars.get(id);
+    if (char) char.genomeHistory = entries.slice();
   }
 
   /** Advance the whole cast by `ticks`, keeping every clock in lockstep. */
@@ -219,6 +288,7 @@ export class Cast {
         awareness: Math.round(s.mind?.awareness ?? 0),
         realized: s.mind?.realized ?? false,
         interior: interiorOf(s),
+        genomeHistory: char.genomeHistory.map((h) => h.genome),
       });
     }
     return out;

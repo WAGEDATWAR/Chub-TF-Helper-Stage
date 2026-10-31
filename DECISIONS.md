@@ -1,5 +1,17 @@
 # Decisions
 
+- **D-036 — A second species supersedes, revertably; only a sure bind auto-supersedes
+  (H26).** Two genomes used to stack one body; now a different species replaces the
+  current one and the outgoing **body save** goes to history, so a revert restores
+  the exact progress (not a reset). Because a stray accepted auto-bind would
+  otherwise undo a cultivated change, auto-apply only supersedes on a **sure**
+  (≥0.65) proposal; weaker ones wait for the player. An override starts clean
+  history. Hybrid/merge mechanics are deferred until this is proven.
+
+- **D-035 — The control mirror caps at 6 snapshots (H25).** Each snapshot payload is
+  a full cast save (~180 KB); an unbounded mirror would exhaust `localStorage`. Cap
+  6, with a quota-retry that halves on failure.
+
 - **D-034 — Durable controls mirror to localStorage; a failed generation cannot
   wipe them (H25).** Chub reverts/re-inits chat state when a generation fails (a
   common provider hiccup, e.g. Venice "received empty response from API"); snapshots

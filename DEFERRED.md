@@ -243,14 +243,33 @@ ledger is complete, not because anything is stubbed:
 
 ## `applyRelated` — post-apply hook
 
-- **Status:** STUB (scheduled: H14)
-- **Where:** `src/game.ts:237` (`applyRelated`).
-- **What:** called after a proposal applies; currently only logs. Intended to handle
-  a *second* species naming someone already changing (a "later proposal"), and any
-  cross-character consequence. The comment says "nothing to do here".
-- **Decide:** what applying one genome to one character should do to others (if
-  anything), and whether a second genome on one character is allowed, stacks, or
-  supersedes.
+- **Status:** resolved (H26); one part remains
+- **Where:** `src/game.ts` (`applyRelated`), `src/sim/cast.ts` (`bind`).
+- **What:** resolved — a second species **supersedes** (the outgoing body is saved to
+  history and revertable); `applyRelated` now logs the swap. A weak auto-bind no
+  longer auto-supersedes a cultivated change. Cross-character consequences remain
+  unimplemented (see the entry below).
+
+## CROSS-CHARACTER CONSEQUENCES — a change on one does nothing to others
+
+- **Status:** DEFERRED
+- **Where:** `src/game.ts` (`applyRelated`).
+- **What:** applying a genome to one character has no effect on anyone else (no
+  shared water, no pack infection, no "the bite spreads"). Every character is an
+  island.
+- **Decide:** whether any genome should spread or interact (a contagious bite, a
+  pack that shifts together), and how that reads against a manual override.
+- **Bearing:** `applyRelated`, the coupling engine.
+
+## HYBRID / MERGE — supersede only for now
+
+- **Status:** DEFERRED (foundation first, then merge)
+- **Where:** `src/sim/cast.ts` (`bind`, `genomeHistory`).
+- **What:** a second species **supersedes** (one body) so two never conflict. The
+  intended later step is true hybridisation (both species' parts merged into one
+  body) once the supersede/revert foundation is proven.
+- **Decide:** the merge rules (which parts win per slot, how exposure averages,
+  which morph tracks fire) — a real design pass.
 
 ## Detection ↔ content coverage asymmetries
 

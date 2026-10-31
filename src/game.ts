@@ -53,6 +53,8 @@ export interface SavePayload {
   pendingMinutes?: number;
   /** The lunar tick offset, so a reset moon survives a reload. */
   moonOffset?: number;
+  /** Per-character superseded-species history (H14), so a revert survives a reload. */
+  history?: Record<string, Array<{ genome: string; save: string; atTick: number }>>;
 }
 
 type TriggerEngine = ReturnType<typeof createTriggerEngine>;
@@ -239,8 +241,7 @@ export class HelperGame {
 
   /** A character's chosen genital policy (preserve | replace | additive | swap). */
   policyFor(id: string): GenitalPolicy {
-    return this.genitalPolicies.get(id) ?? this.defaultPolicy;
-  }
+    return this.genitalPolicies.get(id) ?? this.defaultPolicy;  }
 
   /** Set a character's genital policy; applies to the live body at once. */
   setGenitalPolicy(id: string, policy: GenitalPolicy): void {
@@ -275,13 +276,35 @@ export class HelperGame {
     return char ? profileOf(char.sim.subject) : "none";
   }
 
-  /** Apply the strongest pending proposal for a character (or a specific one). */
-  applyProposal(proposalId: string, dose = DEFAULT_DOSE): boolean {
+  /** The species carried before the current one (for the pane), newest last. */
+  speciesHistory(id: string): string[] {
+    return this.cast.historyOf(id).map((h) => h.genome);
+  }
+
+  /**
+   * Step back one species in the history (H14). A revert is manual, so it takes the
+   * override so detection cannot immediately re-apply the new species.
+   */
+  revertSpecies(id: string): boolean {
+    const prev = this.cast.revertSpecies(id);
+    if (!prev) return false;
+    this.detector.setOverride(id, prev);
+    this.triggers.prune(id, [prev]);
+    this.detector.push("apply", id, `reverted to ${prev.replace(/^genome\./, "")}`);
+    return true;
+  }
+
+  /**
+   * Apply the strongest pending proposal for a character (or a specific one). A
+   * manual apply always supersedes — the player chose it, and the previous body is
+   * kept in history so a revert is one click away.
+   */
+  applyProposal(proposalId: string, dose = DEFAULT_DOSE, supersede = true): boolean {
     const p = this.detector.proposals.find((q) => q.id === proposalId && q.status === "pending");
     if (!p) return false;
-    if (!this.cast.bind(p.characterId, p.genome, dose, this.policyFor(p.characterId))) return false;
+    if (!this.cast.bind(p.characterId, p.genome, dose, this.policyFor(p.characterId), supersede)) return false;
     this.detector.mark(p.id, "applied");
-    this.applyRelated(p.characterId, p.genome);
+    this.applyRelated(p.characterId, p.genome, supersede);
     return true;
   }
 
@@ -289,10 +312,15 @@ export class HelperGame {
     this.detector.mark(proposalId, "dismissed");
   }
 
+  /** How sure an auto-applied proposal must be to supersede an in-progress body. */
+  static readonly SUPERSEDE_CONFIDENCE = 0.65;
+
   /**
-   * Bind any pending **evidenced** proposal for a character that has no genome yet.
-   * A bare-mention proposal (a passing "wolf") waits for the player; an evidenced
-   * one (a card, a named species, or a species beside a change cue) auto-binds.
+   * Bind any pending **evidenced** proposal for a character with no genome yet. If
+   * the character is already changing, only a **sure** proposal supersedes it
+   * automatically (a stray weak bind must not reset a cultivated change); anything
+   * weaker waits for the player. The previous body is saved, so a supersede is
+   * revertable either way.
    */
   autoApplyPending(dose = DEFAULT_DOSE): string[] {
     const applied: string[] = [];
@@ -300,7 +328,9 @@ export class HelperGame {
       if (p.status !== "pending") continue;
       if (!p.evidence) continue;
       const char = this.cast.get(p.characterId);
-      if (!char || char.sim.subject.genomes.length > 0) continue;
+      if (!char) continue;
+      const changing = char.sim.subject.genomes.length > 0;
+      if (changing && p.confidence < HelperGame.SUPERSEDE_CONFIDENCE) continue;
       if (this.applyProposal(p.id, dose)) applied.push(p.characterId);
     }
     return applied;
@@ -472,17 +502,29 @@ export class HelperGame {
     if (this.cast.get(id)) this.active = id;
   }
 
-  /** Apply a genome to every tracked character that has none (a "bind the cast"). */
-  private applyRelated(characterId: string, genome: string): void {
-    // a second species naming a character already changing is a later proposal;
-    // nothing to do here beyond logging
-    this.detector.push("apply", characterId, `bound ${genome.replace(/^genome\./, "")}`);
+  /**
+   * Post-apply hook (H14). A genome applied to someone already carrying a different
+   * species **supersedes** it (the body was saved to history in `cast.bind`); log
+   * the swap so the journal shows the history, not a silent overwrite. A non-supersede
+   * bind (weak evidence) is logged as an add.
+   */
+  private applyRelated(characterId: string, genome: string, superseded = true): void {
+    const history = this.cast.historyOf(characterId);
+    const prev = history[history.length - 1]?.genome;
+    const label = genome.replace(/^genome\./, "");
+    if (superseded && prev) this.detector.push("apply", characterId, `${prev.replace(/^genome\./, "")} → ${label} (superseded)`);
+    else this.detector.push("apply", characterId, `bound ${label}`);
   }
 
   /** Serialize the whole cast + detection + coupling state to checksummed saves. */
   save(): SavePayload | null {
     if (this.cast.size === 0) return null;
-    return { worldTick: this.cast.worldTick, chars: this.cast.saveAll(), detect: this.detector.toJSON(), coupling: this.triggers.toJSON(), pendingMinutes: this.pendingMinutes, moonOffset: this.lunar.offsetTicks };
+    const history: SavePayload["history"] = {};
+    for (const c of this.cast.list()) {
+      const h = this.cast.historyOf(c.id);
+      if (h.length > 0) history[c.id] = h;
+    }
+    return { worldTick: this.cast.worldTick, chars: this.cast.saveAll(), detect: this.detector.toJSON(), coupling: this.triggers.toJSON(), pendingMinutes: this.pendingMinutes, moonOffset: this.lunar.offsetTicks, history };
   }
 
   /** The serialized byte size of the current save (for the budget gate). */
@@ -513,6 +555,8 @@ export class HelperGame {
       for (const c of this.cast.list()) this.detector.rename(c.id, [c.name]);
     }
     if (payload.coupling) this.triggers.loadJSON(payload.coupling, this.cast.entries());
+    // superseded-species history, so a revert survives a reload
+    for (const [id, entries] of Object.entries(payload.history ?? {})) this.cast.setHistory(id, entries);
     return any;
   }
 

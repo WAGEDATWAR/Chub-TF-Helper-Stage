@@ -90,8 +90,23 @@ milestone names the `DEFERRED.md` entry it closes (if any).
 | H23 | **Genital policy / intersex: preserve \| replace \| additive \| swap** | **done** | genital |
 | H24 | **Durable pane controls: persist override/snapshot/moon on action** | **done** | reload |
 | H25 | **Control mirror: snapshots survive a chat-state revert (failed generation)** | **done** | reload |
+| H26 | **Multi-genome: second species supersedes; revertable history; weak-bind guard** | **done** | applyRelated |
 
 Milestone order is a suggestion; H8–H12 are independent and can be resequenced.
+
+## H26 — Multi-genome: supersede (revertable) — done
+
+Two species on one character previously **stacked** into one impossible body while
+the tag merely read the last genome. Now a different species **supersedes**: the
+outgoing body is saved (with its progress) and a fresh baseline is built, so it is
+one body — and a revert restores the exact prior body, not a reset one. Because a
+stray auto-bind would otherwise destroy a cultivated change, only a **sure**
+(≥0.65) proposal auto-supersedes a character already changing; weaker ones wait for
+the player (still applyable by hand). Overrides start clean history; the pane shows
+a `was A → B` chip with a revert button. History persists with the save.
+`tools/multigenome.ts` locks it.
+
+Hybrid/merge mechanics stay deferred until this foundation is proven.
 
 ## H25 — Control mirror (survive a failed generation) — done
 
@@ -315,7 +330,7 @@ a wall clock. The per-message config is the *fallback*, not the rule.
 
 `npm run check` = `typecheck` + `validate` + `lint:authoring` + `data-check` +
 `smoke` + `detect` + `detect-eval` + `coupling` + `pace` + `name-restore` + `time` +
-`lycan` + `eyes` + `drive` + `visualize` + `golden` + `persist` + `control` + `genital` + `mirror`. All must be green
+`lycan` + `eyes` + `drive` + `visualize` + `golden` + `persist` + `control` + `genital` + `mirror` + `multigenome`. All must be green
 for any content or code change. `data-check` fails if a new genome lands < 5
 attributes, never settles, or (if fantasy) is missing its coupling block.
 

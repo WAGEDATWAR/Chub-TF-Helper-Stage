@@ -29,10 +29,11 @@
     "validate": "tsx tools/validate.ts",
     "lint:authoring": "tsx tools/authoring.ts",
     "data-check": "tsx tools/data-check.ts",
-    "check": "npm run typecheck && npm run validate && npm run lint:authoring && npm run data-check && npm run smoke && npm run detect && npm run detect-eval && npm run coupling && npm run pace && npm run name-restore && npm run time && npm run lycan && npm run eyes && npm run drive && npm run visualize && npm run golden && npm run persist && npm run control && npm run genital && npm run mirror",
+    "check": "npm run typecheck && npm run validate && npm run lint:authoring && npm run data-check && npm run smoke && npm run detect && npm run detect-eval && npm run coupling && npm run pace && npm run name-restore && npm run time && npm run lycan && npm run eyes && npm run drive && npm run visualize && npm run golden && npm run persist && npm run control && npm run genital && npm run mirror && npm run multigenome",
     "control": "tsx tools/control.ts",
     "genital": "tsx tools/genital.ts",
-    "mirror": "tsx tools/mirror.ts"
+    "mirror": "tsx tools/mirror.ts",
+    "multigenome": "tsx tools/multigenome.ts"
   },
   "dependencies": {
     "@chub-ai/stages-ts": "^0.3.7",

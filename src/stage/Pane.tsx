@@ -189,6 +189,12 @@ function CastTab({
               <span style={css.pip}><span style={{ ...css.pipFill, width: `${b.pct}%`, background: TONE[b.tone] }} /></span>
               <span style={{ ...css.dim, color: TONE[b.tone] }}>{f.exposure}% · {b.state} — {b.phrase}</span>
             </div>
+            {f.genomeHistory.length > 0 && (
+              <div style={css.row}>
+                <span style={css.attr}>was {f.genomeHistory.map((g) => speciesLabel(g)).join(" → ")}</span>
+                <button style={{ ...css.btn, padding: "1px 6px" }} onClick={() => run(() => game.revertSpecies(f.id))}>revert</button>
+              </div>
+            )}
             {f.awareness > 0 && (
               <div style={css.row}>
                 <span style={css.attr}>aware {f.awareness}%{f.realized ? " · realized" : ""}</span>
