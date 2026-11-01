@@ -62,6 +62,7 @@ export interface SavePayload {
    */
   control?: {
     pace: PaceId;
+    parseTime: boolean;
     defaultGenital: GenitalPolicy;
     genital: Array<[string, GenitalPolicy]>;
     overrides: Array<[string, string | null]>;
@@ -76,6 +77,8 @@ export interface ControlState {
   genital: Array<[string, GenitalPolicy]>;
   defaultGenital: GenitalPolicy;
   pace: PaceId;
+  /** Whether message text decides elapsed time (H17). */
+  parseTime: boolean;
   moonOffset: number;
   snapshots: Array<{ id: string; seq?: number; label: string; atTick: number; payload: SavePayload; roster: Array<{ id: string; name: string }> }>;
   seq: number;
@@ -451,6 +454,15 @@ export class HelperGame {
   get partialMinutes(): number {
     return this.pendingMinutes;
   }
+
+  /** Whether message text decides elapsed time (H17). A live knob, not only config. */
+  get parseTime(): boolean {
+    return this.parseTimeOn;
+  }
+  setParseTime(on: boolean): void {
+    this.parseTimeOn = on;
+  }
+  private parseTimeOn = true;
   private pendingMinutes = 0;
 
   // --- snapshots (manual save + rewind) ------------------------------------
@@ -581,6 +593,7 @@ export class HelperGame {
     if (withControl) {
       payload.control = {
         pace: this.pace,
+        parseTime: this.parseTimeOn,
         defaultGenital: this.defaultGenitalPolicy,
         genital: [...this.genitalPolicies.entries()],
         overrides: this.detector.allOverrides(),
@@ -637,6 +650,7 @@ export class HelperGame {
       genital: [...this.genitalPolicies.entries()],
       defaultGenital: this.defaultGenitalPolicy,
       pace: this.pace,
+      parseTime: this.parseTimeOn,
       moonOffset: this.lunar.offsetTicks,
       snapshots: this.snapshots.map((s) => ({ id: s.id, seq: s.seq, label: s.label, atTick: s.atTick, payload: s.payload, roster: s.roster })),
       seq: this.snapshotSeq,
@@ -647,6 +661,7 @@ export class HelperGame {
   applyControlState(state: ControlState | null | undefined): void {
     if (!state) return;
     if (state.pace) this.setPace(state.pace);
+    if (typeof state.parseTime === "boolean") this.parseTimeOn = state.parseTime;
     if (typeof state.moonOffset === "number") this.applyLunarOffset(state.moonOffset);
     if (state.defaultGenital) this.defaultGenitalPolicy = state.defaultGenital;
     for (const [id, p] of state.genital ?? []) if (isGenitalPolicy(p)) this.genitalPolicies.set(id, p);

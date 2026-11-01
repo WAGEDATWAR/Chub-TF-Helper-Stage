@@ -249,6 +249,18 @@ function check(name: string, cond: boolean, detail = ""): void {
   check("same-tick labels carry their sequence", list.every((s) => /#\d+/.test(s.label)), list.map((s) => s.label).join(" | "));
 }
 
+// the time-from-prose toggle is live and survives a reload
+{
+  const g = new HelperGame(28);
+  g.track("s", "S");
+  check("prose-time defaults on", g.parseTime === true);
+  g.setParseTime(false);
+  check("prose-time can be turned off", g.parseTime === false);
+  const h = new HelperGame(28);
+  h.applyControlState(g.controlState());
+  check("the toggle survives a reload", h.parseTime === false);
+}
+
 // a cleared change does not come back on reload
 {
   const g = new HelperGame(23);

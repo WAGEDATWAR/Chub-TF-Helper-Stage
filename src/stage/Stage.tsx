@@ -18,7 +18,6 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
   readonly game: HelperGame;
   private minutesPerMessage: number;
   private minutesFloor: number;
-  private parseTime: boolean;
   private statusMessage: boolean;
   private guardProse: boolean;
   private direction = "";
@@ -40,7 +39,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
         ? data.config.ticksPerMessage * 60
         : 60;
     this.minutesPerMessage = minutes;
-    this.parseTime = data.config?.parseTime !== false;
+    this.game.setParseTime(data.config?.parseTime !== false);
     this.minutesFloor = data.config?.minutesFloor && data.config.minutesFloor > 0 ? data.config.minutesFloor : 5;
     this.statusMessage = data.config?.statusMessage !== false;
     this.guardProse = data.config?.guardProse !== false;
@@ -143,7 +142,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
 
   /** Elapsed minutes for a message: parsed from its text when enabled, else the fixed value. */
   private readMinutes(text: string): number {
-    if (!this.parseTime) return this.minutesPerMessage;
+    if (!this.game.parseTime) return this.minutesPerMessage;
     return readTime(text, this.minutesFloor).minutes;
   }
 

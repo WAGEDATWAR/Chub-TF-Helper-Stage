@@ -399,7 +399,17 @@ function ToolsTab({ game, run, getGuard, getSaveKb }: { game: HelperGame; run: (
         <button style={css.btn} onClick={() => run(() => game.advance(1440))}>+1d</button>
         <button style={css.btn} onClick={() => run(() => game.advance(1440 * 7))}>+1w</button>
       </div>
-      {game.partialMinutes > 0 && <div style={css.attr}>{game.partialMinutes}m banked toward the next hour</div>}
+      <div style={css.row}>
+        <span style={css.dim}>time from prose</span>
+        <button
+          style={{ ...css.btn, ...(game.parseTime ? css.btnSel : {}), padding: "3px 8px" }}
+          title="Advance by the time a message implies; off = a fixed interval each message"
+          onClick={() => run(() => game.setParseTime(!game.parseTime))}
+        >
+          {game.parseTime ? "on" : "off"}
+        </button>
+      </div>
+      {game.partialMinutes > 0 && <div style={css.attr}>{game.partialMinutes}m elapsed this session</div>}
 
       <div style={css.label}>Moon — {moonRead(view.moon)}</div>
       <div style={css.row}>
