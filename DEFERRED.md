@@ -178,19 +178,15 @@ ledger is complete, not because anything is stubbed:
 
 ## TIME-MODEL — infer elapsed time from message content
 
-- **Status:** DEFERRED (scheduled: H17)
-- **Where:** `src/sim/cast.ts` (`advance`), `src/stage/Stage.tsx` (`beforePrompt`),
-  `chub_meta.yaml` (`ticksPerMessage`), the pane's time controls.
-- **What:** today the world advances a fixed `ticksPerMessage` hours per message.
-  Intended: time advances **only** via a message or a pane time control, and a message
-  advances however much its *content implies*. An undated/uncertain message advances a
-  **5-minute minimum**; a dated one ("the next morning", "three days later") advances
-  that much. The fixed config becomes the fallback, not the rule.
-- **Decide:** the cue grammar (absolute dates, relative phrases, sleeps, "later"),
-  how to disambiguate "years ago" (backstory) from elapsed time, and whether an
-  inferred jump is ever surfaced/editable in the pane.
-- **Building:** a pure `src/sim/timeparse.ts` with a labeled corpus + eval (mirrors
-  H9 detection). Must call the per-day mind step for each day it skips.
+- **Status:** shipped (H28/D-043); one open corner
+- **Where:** `src/sim/timeparse.ts`, `src/stage/Stage.tsx` (`readMinutes`),
+  `fixtures/time-corpus.json`, `tools/timeparse.ts`.
+- **Now:** a message advances what its text implies; an undated one takes the floor
+  (default 5). Backstory is excluded. Minutes apply directly (no hour hoarding).
+- **Open corner — an inferred jump is not surfaced or editable.** The pane shows a
+  running minutes counter but not "this message advanced 3 days"; a wrong read cannot
+  be corrected after the fact. Worth surfacing if it ever mis-reads in play.
+- **Decide:** whether to show/adjust a per-message inferred jump in the pane.
 
 ---
 

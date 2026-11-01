@@ -42,6 +42,7 @@ const CHECKS: Check[] = [
   { name: "pace", args: ["run", "pace"] },
   { name: "name-restore", args: ["run", "name-restore"] },
   { name: "time", args: ["run", "time"] },
+  { name: "timeparse", args: ["run", "timeparse"] },
   { name: "lycan", args: ["run", "lycan"] },
   { name: "eyes", args: ["run", "eyes"], contentSensitive: true },
   { name: "drive", args: ["run", "drive"] },

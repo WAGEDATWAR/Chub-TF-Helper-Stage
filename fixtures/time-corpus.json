@@ -1,0 +1,22 @@
+{
+  "time_version": 1,
+  "_comment": "H17 time-from-prose corpus. text = the message; floor = the configured per-message minimum; min/max bracket the acceptable elapsed minutes. Backstory ('years ago') reads as the floor.",
+  "cases": [
+    { "id": "undated-floor", "text": "She smiles and passes the mug.", "floor": 5, "min": 5, "max": 5 },
+    { "id": "soon-short", "text": "She will be back soon.", "floor": 5, "min": 5, "max": 20 },
+    { "id": "a-moment", "text": "A moment later she returns.", "floor": 5, "min": 5, "max": 5 },
+    { "id": "a-while", "text": "After a while she stirs.", "floor": 5, "min": 15, "max": 25 },
+    { "id": "that-evening", "text": "That evening the change deepens.", "floor": 5, "min": 400, "max": 500 },
+    { "id": "next-morning", "text": "The next morning she checks the mirror.", "floor": 5, "min": 700, "max": 740 },
+    { "id": "overnight", "text": "It happens overnight.", "floor": 5, "min": 480, "max": 480 },
+    { "id": "in-three-days", "text": "In three days it will be complete.", "floor": 5, "min": 4320, "max": 4320 },
+    { "id": "two-hours", "text": "Two hours pass in silence.", "floor": 5, "min": 120, "max": 120 },
+    { "id": "a-week", "text": "A week goes by.", "floor": 5, "min": 10080, "max": 10080 },
+    { "id": "a-month", "text": "Over a month she adapts.", "floor": 5, "min": 43200, "max": 43200 },
+    { "id": "five-minutes", "text": "Five minutes later the door opens.", "floor": 5, "min": 5, "max": 5 },
+    { "id": "backstory-years-ago", "text": "Twenty years ago she was a girl.", "floor": 5, "min": 5, "max": 5 },
+    { "id": "backstory-and-now", "text": "Years ago she left; now she returns.", "floor": 5, "min": 5, "max": 15 },
+    { "id": "ten-minutes", "text": "Ten minutes pass.", "floor": 5, "min": 10, "max": 10 },
+    { "id": "a-couple-days", "text": "A couple of days later she notices.", "floor": 5, "min": 2880, "max": 2880 }
+  ]
+}

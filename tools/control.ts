@@ -194,6 +194,45 @@ function check(name: string, cond: boolean, detail = ""): void {
   check("a snapshot survives a reload", h.snapshotCount() === 1 && h.listSnapshots()[0]!.label === "checkpoint", String(h.snapshotCount()));
 }
 
+// a snapshot captures the FULL run: the moon, pace, genital choice and override, so a
+// rewind restores all of them, not just the body (H28)
+{
+  const g = new HelperGame(25, { cycleDays: 28 });
+  g.track("s", "S");
+  g.bestow("s", "genome.wolf", 3);
+  g.advance(days(3));
+  g.setMoon("full");
+  g.setPace("fast");
+  g.setGenitalPolicy("s", "additive");
+  const id = g.snapshot("full");
+  // scramble everything, then rewind
+  g.setMoon("new");
+  g.setPace("slow");
+  g.setGenitalPolicy("s", "preserve");
+  g.advance(days(5));
+  check("a snapshot restores the moon", g.rewind(id) && g.lunar.intensity(g.cast.worldTick) > 0.99, String(g.lunar.intensity(g.cast.worldTick)));
+  check("a snapshot restores the pace", g.paceId() === "fast", g.paceId());
+  check("a snapshot restores the genital policy", g.policyFor("s") === "additive", g.policyFor("s"));
+}
+
+// two snapshots on the same day are distinguishable by clock and age
+{
+  const g = new HelperGame(26);
+  g.track("s", "S");
+  g.bestow("s", "genome.wolf", 3);
+  g.advance(600); // 10:00
+  const a = g.snapshot();
+  g.advance(90); // 11:30
+  g.snapshot();
+  g.advance(30); // 12:00
+  g.snapshot();
+  const list = g.listSnapshots();
+  check("snapshots carry a distinct clock", new Set(list.map((s) => s.clock)).size === 3, list.map((s) => s.clock).join(","));
+  check("the newest is flagged", list[0]!.newest === true);
+  check("older snapshots carry an increasing age", list[1]!.age === 30 && list[2]!.age === 120, list.map((s) => s.age).join(","));
+  check("the snapshot ids are all present", typeof a === "string" && a.length > 0);
+}
+
 // a cleared change does not come back on reload
 {
   const g = new HelperGame(23);

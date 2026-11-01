@@ -1,5 +1,20 @@
 # Decisions
 
+- **D-043 — Time advances from prose, floored per message (H17/H28).** A message
+  advances the elapsed minutes its text implies ("three days later"); an undated one
+  takes the `minutesFloor` (default 5). Backstory ("years ago") is not elapsed time.
+  Parsing is a config knob (`parseTime`), on by default; off makes every message the
+  fixed `minutesPerMessage`. Deterministic, with a corpus + eval.
+
+- **D-042 — Snapshots capture the whole run and are distinguishable (H28).** A
+  snapshot now embeds the moon offset, pace, genital choices and overrides, and a
+  rewind restores them — a snapshot is not just a body. Each also carries a `HH:MM`
+  clock and its age behind the newest, so several on one day are told apart.
+
+- **D-041 — Minutes apply immediately, no hour hoarding (H17).** With the minute tick
+  and a per-message value, minute progress is applied as the turn resolves; the
+  `pendingMinutes` field is now just an elapsed counter, not a rollover bank.
+
 - **D-040 — The gate is a runner that skips and narrows (H27).** `check` is now
   `tools/check.ts`: content stages (validate/authoring/data-check/eyes/golden) are
   content-hash-skipped when `vendor/` is unchanged and narrowed to the diff via

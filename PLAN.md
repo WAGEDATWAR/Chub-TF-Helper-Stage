@@ -81,7 +81,7 @@ milestone names the `DEFERRED.md` entry it closes (if any).
 | H14 | **Hardening: multi-genome on one char, second-genome semantics** | planned | applyRelated |
 | H15 | **Optional voice: TTS the status, foley for a shift** | planned | — |
 | H16 | **Dose ruling** (implement / expose / drop) | planned | DOSE |
-| H17 | **Time model: infer elapsed time from message content** | planned | — |
+| H17 | **Time model: infer elapsed time from message content** | **done (H28)** | — |
 | H18 | **Transformation duration: a pace knob + card-inferred rate** | **done** | PACE |
 | H19 | **Mobile usability: collapse/hide the pane; list changed parts** | **done** | mobile |
 | H20 | **Part/skeleton visualizer: a visual body map of changed parts** | planned | — |
@@ -92,8 +92,23 @@ milestone names the `DEFERRED.md` entry it closes (if any).
 | H25 | **Control mirror: snapshots survive a chat-state revert (failed generation)** | **done** | reload |
 | H26 | **Multi-genome: second species supersedes; revertable history; weak-bind guard** | **done** | applyRelated |
 | H27 | **Parent catch-up: fast harness; per-phase rate; shift/mind clarity** | **done** | D-254/D-255/D-256 |
+| H28 | **Time from prose (H17); complete + distinguishable snapshots** | **done** | TIME-MODEL |
 
 Milestone order is a suggestion; H8–H12 are independent and can be resequenced.
+
+## H28 — Time from prose (H17) + complete snapshots — done
+
+- **Time from prose.** `src/sim/timeparse.ts` reads elapsed minutes from a message
+  ("three days later", "that evening", "in two hours"), an undated one takes a
+  configurable floor (default 5). Backstory ("years ago") is not elapsed time. A
+  corpus (`fixtures/time-corpus.json`) + eval (`tools/timeparse.ts`) measure it. Since
+  the tick is a minute, minutes apply **directly** per message — no hoarding into
+  whole hours.
+- **Snapshots are complete.** A snapshot now captures the run-shaping controls too
+  (moon offset, pace, genital choices, overrides) and a rewind restores all of them,
+  not just the body.
+- **Snapshots are distinguishable.** Each carries a `HH:MM` clock and its age behind
+  the newest, so several on one day are told apart.
 
 ## H27 — Parent catch-up — done
 
@@ -347,7 +362,7 @@ a wall clock. The per-message config is the *fallback*, not the rule.
 
 `npm run check` = `typecheck` + `validate` + `lint:authoring` + `data-check` +
 `smoke` + `detect` + `detect-eval` + `coupling` + `pace` + `name-restore` + `time` +
-`lycan` + `eyes` + `drive` + `visualize` + `golden` + `persist` + `control` + `genital` + `mirror` + `multigenome`. All must be green; content stages skip on an unchanged `vendor/` and narrow to the diff (`tools/check.ts`).
+`lycan` + `eyes` + `drive` + `visualize` + `golden` + `persist` + `control` + `genital` + `mirror` + `multigenome` + `timeparse`. All must be green; content stages skip on an unchanged `vendor/` and narrow to the diff (`tools/check.ts`).
 for any content or code change. `data-check` fails if a new genome lands < 5
 attributes, never settles, or (if fantasy) is missing its coupling block.
 

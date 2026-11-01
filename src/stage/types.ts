@@ -41,4 +41,8 @@ export interface ConfigType {
   detectEvidenceOnly?: boolean;
   /** Ask the chat model for a species second-opinion on ambiguous prose. Default on. */
   useClassifier?: boolean;
+  /** Infer elapsed time from the message text; off = always `minutesPerMessage`. Default on. */
+  parseTime?: boolean;
+  /** The per-message floor in minutes when nothing is dated (H17). Default 5. */
+  minutesFloor?: number;
 }

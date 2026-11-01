@@ -55,6 +55,17 @@ export interface SavePayload {
   moonOffset?: number;
   /** Per-character superseded-species history (H14), so a revert survives a reload. */
   history?: Record<string, Array<{ genome: string; save: string; atTick: number }>>;
+  /**
+   * Control state captured with a snapshot (H28): a snapshot must restore *everything*
+   * that shapes the run, not just the body — the moon, pace, genital choices and
+   * overrides. Absent on an ordinary per-message save (that rides chat state).
+   */
+  control?: {
+    pace: PaceId;
+    defaultGenital: GenitalPolicy;
+    genital: Array<[string, GenitalPolicy]>;
+    overrides: Array<[string, string | null]>;
+  };
 }
 
 type TriggerEngine = ReturnType<typeof createTriggerEngine>;
@@ -424,10 +435,10 @@ export class HelperGame {
   }
 
   /**
-   * Advance by **minutes** (D-292): the sim tick is one minute, so this is now the
-   * native unit — `advance(1)` is a minute. Kept as a named seam so time-parse and
-   * the 5-minute control read clearly. `advanceMinutes` and `advance` are the same
-   * operation now; the minute bank only exists for display of sub-hour granularity.
+   * Advance by **minutes** (D-292/H17): the sim tick is one minute, so minutes are
+   * applied directly — no batching into whole hours. A message advances its
+   * configured `minutesPerMessage` ticks and resolves immediately; `partialMinutes`
+   * is just an elapsed-minutes counter for the pane.
    */
   advanceMinutes(minutes: number): void {
     if (minutes <= 0) return;
@@ -436,7 +447,7 @@ export class HelperGame {
     this.advance(m);
   }
 
-  /** Minutes elapsed since load, for the pane's running total (0..). */
+  /** Total minutes elapsed since load (a running counter, not a rollover bank). */
   get partialMinutes(): number {
     return this.pendingMinutes;
   }
@@ -449,19 +460,31 @@ export class HelperGame {
 
   /** Record the full cast + world state as a named snapshot (manual save). */
   snapshot(label?: string): string {
-    const payload = this.save();
+    const payload = this.save(true);
     if (!payload) return "";
     const at = this.cast.worldTick;
     const id = `snap${++this.snapshotSeq}`;
-    const name = label?.trim() || `day ${Math.floor(at / TICKS_PER_DAY) + 1}`;
+    const name = label?.trim() || `day ${Math.floor(at / TICKS_PER_DAY) + 1}, ${clockOf(at)}`;
     const roster = this.cast.list().map((c) => ({ id: c.id, name: c.name }));
     this.snapshots.push({ id, label: name, atTick: at, payload: JSON.parse(JSON.stringify(payload)), roster });
     return id;
   }
 
-  /** The recorded snapshots, newest first (for the pane). */
-  listSnapshots(): Array<{ id: string; label: string; atTick: number; day: number }> {
-    return [...this.snapshots].reverse().map((s) => ({ id: s.id, label: s.label, atTick: s.atTick, day: Math.floor(s.atTick / TICKS_PER_DAY) + 1 }));
+  /** The recorded snapshots, newest first, each with an "age" for comparison (H28). */
+  listSnapshots(): Array<{ id: string; label: string; atTick: number; day: number; clock: string; age: number; newest: boolean }> {
+    const list = [...this.snapshots].reverse();
+    const newestTick = list[0]?.atTick ?? 0;
+    return list.map((s) => ({
+      id: s.id,
+      label: s.label,
+      atTick: s.atTick,
+      day: Math.floor(s.atTick / TICKS_PER_DAY) + 1,
+      clock: clockOf(s.atTick),
+      // how far behind the newest snapshot this one is, in minutes — so two at the
+      // same day are still distinguishable
+      age: newestTick - s.atTick,
+      newest: s.atTick === newestTick,
+    }));
   }
 
   /** Rewind the live cast to a snapshot (keeps the snapshot list itself). */
@@ -472,6 +495,8 @@ export class HelperGame {
     for (const c of this.cast.list()) this.cast.remove(c.id);
     this.cast.worldTick = 0;
     this.restore(snap.payload, snap.roster);
+    // a snapshot restores the run-shaping controls it captured (H28)
+    if (snap.payload.control) this.applyControlState({ ...snap.payload.control, moonOffset: snap.payload.moonOffset ?? 0, snapshots: [], seq: 0 });
     return true;
   }
 
@@ -534,15 +559,28 @@ export class HelperGame {
     else this.detector.push("apply", characterId, `bound ${label}`);
   }
 
-  /** Serialize the whole cast + detection + coupling state to checksummed saves. */
-  save(): SavePayload | null {
+  /**
+   * Serialize the whole cast + detection + coupling state to checksummed saves.
+   * `withControl` also embeds the run-shaping controls — used by snapshots so a
+   * rewind restores the moon, pace, genital choices and overrides too (H28).
+   */
+  save(withControl = false): SavePayload | null {
     if (this.cast.size === 0) return null;
     const history: SavePayload["history"] = {};
     for (const c of this.cast.list()) {
       const h = this.cast.historyOf(c.id);
       if (h.length > 0) history[c.id] = h;
     }
-    return { worldTick: this.cast.worldTick, chars: this.cast.saveAll(), detect: this.detector.toJSON(), coupling: this.triggers.toJSON(), pendingMinutes: this.pendingMinutes, moonOffset: this.lunar.offsetTicks, history };
+    const payload: SavePayload = { worldTick: this.cast.worldTick, chars: this.cast.saveAll(), detect: this.detector.toJSON(), coupling: this.triggers.toJSON(), pendingMinutes: this.pendingMinutes, moonOffset: this.lunar.offsetTicks, history };
+    if (withControl) {
+      payload.control = {
+        pace: this.pace,
+        defaultGenital: this.defaultGenitalPolicy,
+        genital: [...this.genitalPolicies.entries()],
+        overrides: this.detector.allOverrides(),
+      };
+    }
+    return payload;
   }
 
   /** The serialized byte size of the current save (for the budget gate). */
@@ -633,4 +671,12 @@ export class HelperGame {
 export function seedFrom(id: number, override?: number): number {
   if (override && override > 0) return override;
   return (((id * 2654435761) ^ 0x9e3779b9) >>> 0) || 20261028;
+}
+
+/** A HH:MM time-of-day label for a tick, so two same-day snapshots differ (H28). */
+export function clockOf(tick: number): string {
+  const mins = ((tick % TICKS_PER_DAY) + TICKS_PER_DAY) % TICKS_PER_DAY;
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
 }

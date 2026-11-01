@@ -35,7 +35,8 @@
     "mirror": "tsx tools/mirror.ts",
     "multigenome": "tsx tools/multigenome.ts",
     "check:full": "tsx tools/check.ts --full",
-    "check:all": "tsx tools/check.ts --all"
+    "check:all": "tsx tools/check.ts --all",
+    "timeparse": "tsx tools/timeparse.ts"
   },
   "dependencies": {
     "@chub-ai/stages-ts": "^0.3.7",

@@ -6,6 +6,7 @@ import { Pane, type VisualState } from "./Pane";
 import { directions as buildDirections, guardMessage, instrumentRead, type DriveInput } from "../drive/drive";
 import { visualBundle } from "../view/visualize";
 import { inferPace, type PaceId } from "../sim/pace";
+import { readTime } from "../sim/timeparse";
 import { chatKey, readMirror, writeMirror, forgetSnapshot, capMirror } from "./mirror";
 
 /**
@@ -16,6 +17,8 @@ import { chatKey, readMirror, writeMirror, forgetSnapshot, capMirror } from "./m
 export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateType, ConfigType> {
   readonly game: HelperGame;
   private minutesPerMessage: number;
+  private minutesFloor: number;
+  private parseTime: boolean;
   private statusMessage: boolean;
   private guardProse: boolean;
   private direction = "";
@@ -37,6 +40,8 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
         ? data.config.ticksPerMessage * 60
         : 60;
     this.minutesPerMessage = minutes;
+    this.parseTime = data.config?.parseTime !== false;
+    this.minutesFloor = data.config?.minutesFloor && data.config.minutesFloor > 0 ? data.config.minutesFloor : 5;
     this.statusMessage = data.config?.statusMessage !== false;
     this.guardProse = data.config?.guardProse !== false;
 
@@ -125,12 +130,21 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
     this.game.observe(userMessage.anonymizedId ?? null, userMessage.content ?? "");
     // bind anyone whose card clearly named a species and who has no genome yet
     this.game.autoApplyPending(1.0);
-    this.game.advanceMinutes(this.minutesPerMessage);
+    // time from the prose (H17): a dated message advances what it says; an undated one
+    // advances the floor (never the old fixed hour while parsing is on)
+    const minutes = this.readMinutes(userMessage.content ?? "");
+    this.game.advanceMinutes(minutes);
     this.direction = buildDirections(this.driveInput());
     // mirror here too: if the generation then fails (a provider hiccup), a chat-state
     // revert must not lose a snapshot taken since the last action (H25)
     this.mirrorControl();
     return { stageDirections: this.direction, messageState: this.branchState(), chatState: this.chatState() };
+  }
+
+  /** Elapsed minutes for a message: parsed from its text when enabled, else the fixed value. */
+  private readMinutes(text: string): number {
+    if (!this.parseTime) return this.minutesPerMessage;
+    return readTime(text, this.minutesFloor).minutes;
   }
 
   async afterResponse(botMessage: Message): Promise<Partial<StageResponse<ChatStateType, MessageStateType>>> {
