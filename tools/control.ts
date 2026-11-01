@@ -233,6 +233,22 @@ function check(name: string, cond: boolean, detail = ""): void {
   check("the snapshot ids are all present", typeof a === "string" && a.length > 0);
 }
 
+// three snapshots at the SAME tick are still distinguishable and only one is newest
+{
+  const g = new HelperGame(27);
+  g.track("s", "S");
+  g.bestow("s", "genome.wolf", 3);
+  g.advance(9 * 1440 + 930); // day 9, 15:30 — all three at this exact tick
+  g.snapshot();
+  g.snapshot();
+  g.snapshot();
+  const list = g.listSnapshots();
+  check("same-tick snapshots have distinct ranks", new Set(list.map((s) => s.rank)).size === 3, list.map((s) => s.rank).join(","));
+  check("exactly one same-tick snapshot is newest", list.filter((s) => s.newest).length === 1, list.map((s) => s.newest).join(","));
+  check("the newest is the last created (rank 0)", list[0]!.newest && !list[1]!.newest && !list[2]!.newest);
+  check("same-tick labels carry their sequence", list.every((s) => /#\d+/.test(s.label)), list.map((s) => s.label).join(" | "));
+}
+
 // a cleared change does not come back on reload
 {
   const g = new HelperGame(23);

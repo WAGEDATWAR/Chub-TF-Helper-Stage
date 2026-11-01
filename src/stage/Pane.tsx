@@ -421,8 +421,8 @@ function ToolsTab({ game, run, getGuard, getSaveKb }: { game: HelperGame; run: (
         <div key={s.id} style={css.card}>
           <div style={css.row}>
             <span style={css.attr}>
-              day {s.day}, {s.clock}
-              {s.newest ? " · newest" : ` · ${s.age} minutes older`}
+              #{s.rank + 1} · day {s.day}, {s.clock}
+              {s.newest ? " · newest" : s.age > 0 ? ` · ${s.age} minutes older` : ` · ${s.rank} older`}
             </span>
             <span style={css.spacer} />
             <button style={css.btn} onClick={() => run(() => game.rewind(s.id))}>rewind</button>

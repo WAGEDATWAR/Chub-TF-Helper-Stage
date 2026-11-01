@@ -77,7 +77,7 @@ export interface ControlState {
   defaultGenital: GenitalPolicy;
   pace: PaceId;
   moonOffset: number;
-  snapshots: Array<{ id: string; label: string; atTick: number; payload: SavePayload; roster: Array<{ id: string; name: string }> }>;
+  snapshots: Array<{ id: string; seq?: number; label: string; atTick: number; payload: SavePayload; roster: Array<{ id: string; name: string }> }>;
   seq: number;
 }
 
@@ -455,7 +455,7 @@ export class HelperGame {
 
   // --- snapshots (manual save + rewind) ------------------------------------
 
-  private snapshots: Array<{ id: string; label: string; atTick: number; payload: SavePayload; roster: Array<{ id: string; name: string }> }> = [];
+  private snapshots: Array<{ id: string; seq: number; label: string; atTick: number; payload: SavePayload; roster: Array<{ id: string; name: string }> }> = [];
   private snapshotSeq = 0;
 
   /** Record the full cast + world state as a named snapshot (manual save). */
@@ -463,27 +463,33 @@ export class HelperGame {
     const payload = this.save(true);
     if (!payload) return "";
     const at = this.cast.worldTick;
-    const id = `snap${++this.snapshotSeq}`;
-    const name = label?.trim() || `day ${Math.floor(at / TICKS_PER_DAY) + 1}, ${clockOf(at)}`;
+    const seq = ++this.snapshotSeq;
+    const id = `snap${seq}`;
+    // a sequence number always distinguishes two snapshots, even at the same tick
+    const name = label?.trim() || `#${seq} · day ${Math.floor(at / TICKS_PER_DAY) + 1}, ${clockOf(at)}`;
     const roster = this.cast.list().map((c) => ({ id: c.id, name: c.name }));
-    this.snapshots.push({ id, label: name, atTick: at, payload: JSON.parse(JSON.stringify(payload)), roster });
+    this.snapshots.push({ id, seq, label: name, atTick: at, payload: JSON.parse(JSON.stringify(payload)), roster });
     return id;
   }
 
-  /** The recorded snapshots, newest first, each with an "age" for comparison (H28). */
-  listSnapshots(): Array<{ id: string; label: string; atTick: number; day: number; clock: string; age: number; newest: boolean }> {
-    const list = [...this.snapshots].reverse();
+  /**
+   * The recorded snapshots, newest first, each carrying what tells them apart (H28):
+   * the clock, an age in minutes, and — because creations can share a tick — the
+   * creation order. `newest` marks only the true most-recent by sequence, never a tie.
+   */
+  listSnapshots(): Array<{ id: string; label: string; atTick: number; day: number; clock: string; age: number; rank: number; newest: boolean }> {
+    // rank by creation sequence (authoritative), NOT by tick — same-tick saves tie on tick
+    const list = [...this.snapshots].sort((a, b) => b.seq - a.seq);
     const newestTick = list[0]?.atTick ?? 0;
-    return list.map((s) => ({
+    return list.map((s, rank) => ({
       id: s.id,
       label: s.label,
       atTick: s.atTick,
       day: Math.floor(s.atTick / TICKS_PER_DAY) + 1,
       clock: clockOf(s.atTick),
-      // how far behind the newest snapshot this one is, in minutes — so two at the
-      // same day are still distinguishable
       age: newestTick - s.atTick,
-      newest: s.atTick === newestTick,
+      rank,
+      newest: rank === 0,
     }));
   }
 
@@ -632,7 +638,7 @@ export class HelperGame {
       defaultGenital: this.defaultGenitalPolicy,
       pace: this.pace,
       moonOffset: this.lunar.offsetTicks,
-      snapshots: this.snapshots.map((s) => ({ id: s.id, label: s.label, atTick: s.atTick, payload: s.payload, roster: s.roster })),
+      snapshots: this.snapshots.map((s) => ({ id: s.id, seq: s.seq, label: s.label, atTick: s.atTick, payload: s.payload, roster: s.roster })),
       seq: this.snapshotSeq,
     };
   }
@@ -648,7 +654,11 @@ export class HelperGame {
     // cast). Union by id so a chat-state copy and a local mirror never duplicate.
     for (const s of state.snapshots ?? []) {
       if (this.snapshots.some((e) => e.id === s.id)) continue;
-      this.snapshots.push({ id: s.id, label: s.label, atTick: s.atTick, payload: s.payload, roster: s.roster });
+      // an older snapshot may predate the sequence field; derive one from the id or
+      // fall back to arrival order so ordering never collapses to a tie
+      const seq = s.seq ?? Number(s.id.replace(/\D/g, "")) ?? this.snapshots.length + 1;
+      this.snapshots.push({ id: s.id, seq, label: s.label, atTick: s.atTick, payload: s.payload, roster: s.roster });
+      this.snapshotSeq = Math.max(this.snapshotSeq, seq);
     }
     // overrides: record the flag, and re-bind only when the body does not already
     // match — so a reload that already restored the saved body keeps its progress,
