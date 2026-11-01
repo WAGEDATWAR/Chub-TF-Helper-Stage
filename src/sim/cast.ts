@@ -14,6 +14,7 @@ import { runDailyMind } from "./mind";
 import type { Registries } from "./registries";
 import { TimeEngine } from "@core/time_engine";
 import { TICKS_PER_DAY } from "@core/time";
+import { PROGRESS_MAX } from "@core/progress";
 import { loadSession } from "@core/savegame";
 import { createLunar } from "./lunar";
 import type { Subject } from "@core/subject";
@@ -54,7 +55,8 @@ export interface CastFrame {
   /** Changing part labels, most-progressed first (a compact read). */
   changing: string[];
   /** Every affected part, grouped by attribute, with its progression toward target (0..100). */
-  parts: Array<{ label: string; pct: number; count: number }>;
+  /** Affected attributes: current stage as the label, % toward target, covered part count. */
+  parts: Array<{ label: string; pct: number; count: number; wide: boolean; family: string }>;
   /** H10: awareness 0..100 toward realizing the change. */
   awareness: number;
   /** H10: true once the character has realized what is happening to them. */
@@ -275,20 +277,39 @@ export class Cast {
       const band = s.derived.band ?? "band.baseline";
       const changes = s.body
         .allInstances()
-        .flatMap((i) => i.attributes.filter((a) => a.progress > 0).map((a) => ({ slot: i.slot, id: a.id, p: a.progress, t: a.target_progress ?? 1000 })))
+        .flatMap((i) => i.attributes.filter((a) => a.progress > 0).map((a) => ({ slot: i.slot, part: i.id, id: a.id, p: a.progress, t: a.target_progress ?? 1000 })))
         .sort((a, b) => b.p - a.p);
       const changing = changes.slice(0, 6).map((a) => `${a.slot}: ${humanize(a.id)}`);
-      // affected parts only, grouped by attribute (so "fur" covers the whole body
-      // as one line), most-progressed first, each with its % toward target
-      const byPart = new Map<string, { label: string; pct: number; count: number }>();
+      // Group by ATTRIBUTE *and slot*, so a body-wide attribute (body heat, fur) is one
+      // line while two genuinely different organs stay two lines: the genitals are a
+      // penis in one socket and a vagina in the other, labelled by the part itself.
+      // Label by the current stage; a broad spread reads as "whole body" with no count.
+      const byAttr = new Map<string, { label: string; pct: number; slots: Set<string>; family: string }>();
       for (const a of changes) {
         const pct = Math.max(0, Math.min(100, Math.round((a.p / Math.max(1, a.t)) * 100)));
-        const label = humanize(a.id);
-        const cur = byPart.get(label);
-        if (cur) { cur.count += 1; if (pct > cur.pct) cur.pct = pct; }
-        else byPart.set(label, { label, pct, count: 1 });
+        const def = this.regs.attributes.get(a.id);
+        const stage = def?.stages?.reduce<string | null>((name, s) => (a.p / PROGRESS_MAX >= s.at ? s.name : name), null);
+        // a genital stage name is abstract ("Refashioned…"), so lead with the organ —
+        // which is the part in *this* socket. An "absent" placeholder is unhelpful, so
+        // fall back to the attribute's own name for that socket.
+        const organRaw = this.regs.library.get(a.part)?.display_name;
+        const organ = organRaw && !/^no .*genital/i.test(organRaw) ? organRaw : null;
+        // mammary is genital-family but names its own organ ("Human Nipples")
+        const isMammary = a.id === "attr.mammary_row";
+        const label = def?.family === "genital"
+          ? [isMammary ? def?.display_name : organ ?? def?.display_name, stage].filter(Boolean).join(" — ")
+          : stage ?? def?.display_name ?? humanize(a.id);
+        // only the true genital sockets split (a penis vs a vagina are two organs);
+        // nipples and other repeated genital-family parts group as one
+        const splits = def?.family === "genital" && (a.slot === "genital_primary" || a.slot === "genital_secondary");
+        const key = splits ? `${a.id}:${a.slot}` : a.id;
+        const cur = byAttr.get(key);
+        if (cur) { cur.pct = Math.max(cur.pct, pct); cur.slots.add(a.slot); }
+        else byAttr.set(key, { label, pct, slots: new Set([a.slot]), family: def?.family ?? "" });
       }
-      const parts = [...byPart.values()].sort((a, b) => b.pct - a.pct || b.count - a.count);
+      const parts = [...byAttr.values()]
+        .map((g) => ({ label: g.label, pct: g.pct, count: g.slots.size, wide: g.slots.size >= 5, family: g.family }))
+        .sort((a, b) => b.pct - a.pct || a.label.localeCompare(b.label));
       out.push({
         id: char.id,
         name: char.name,

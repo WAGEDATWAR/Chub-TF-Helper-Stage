@@ -100,10 +100,10 @@ function check(name: string, cond: boolean, detail = ""): void {
   g.track("d", "Dog");
   g.bestow("d", "genome.dog", 3);
   g.advance(3 * 60);
-  const claw = g.view().frames[0]!.parts.find((p) => /claw/.test(p.label));
+  const claw = g.view().frames[0]!.parts.find((p) => p.family === "claws");
   check("claws are not already at 50% after 3 hours", (claw?.pct ?? 0) < 40, String(claw?.pct));
-  g.advance(days(3));
-  const later = g.view().frames[0]!.parts.find((p) => /claw/.test(p.label));
+  g.advance(days(6));
+  const later = g.view().frames[0]!.parts.find((p) => p.family === "claws");
   check("but the claws do progress within days", (later?.pct ?? 0) > (claw?.pct ?? 0), `${claw?.pct} -> ${later?.pct}`);
 }
 

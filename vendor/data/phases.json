@@ -621,7 +621,8 @@
             "fangs_tag",
             "nail_tag",
             "tongue_tag",
-            "nose_tag"
+            "nose_tag",
+            "heat_tag"
           ],
           "roles": [
             "nose",
@@ -642,7 +643,6 @@
           "tags": [
             "teeth_tag",
             "scent_tag",
-            "muzzle_tag",
             "mammary_tag"
           ],
           "when": {

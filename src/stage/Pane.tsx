@@ -241,7 +241,11 @@ function CastTab({
               <div style={css.parts}>
                 {f.parts.map((p, i) => (
                   <span key={i} style={css.part}>
-                    {p.label}{p.count > 1 ? <span style={css.partCount}> ×{p.count}</span> : null} <span style={css.partPct}>({p.pct}%)</span>
+                    {p.label}
+                    {p.wide
+                      ? <span style={css.partCount}> · whole body</span>
+                      : p.count > 1 && p.family !== "genital" ? <span style={css.partCount}> ×{p.count}</span> : null}{" "}
+                    <span style={css.partPct}>({p.pct}%)</span>
                   </span>
                 ))}
               </div>

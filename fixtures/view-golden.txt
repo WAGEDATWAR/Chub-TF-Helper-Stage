@@ -1,9 +1,9 @@
 moon: full moon (95%)
 Mira — exposure 18% · cosmetic · a first shimmer
   changing: head: pack instinct, nose: keen smell, fangs.L: fangs, fangs.R: fangs, nails.hand.L: canine claws, nails.hand.R: canine claws
-  parts: canine claws ×3 (100%), fangs ×2 (100%), pack instinct (100%), keen smell (100%), canine tongue (75%), mammary row ×2 (10%), mobile ears ×2 (10%), species genital ×2 (10%), canine teeth (9%), body heat ×21 (2%), mammalian fur ×11 (2%)
+  parts: A Keen Animal Nose That Reads The Air (100%), Fully Pack-Minded, Uneasy Alone (100%), Horn-hard ×3 (100%), Long Curved Fangs ×2 (100%), A Longer, Looser Tongue (75%), Fixed Human Ears ×2 (10%), Mammary Row — Two Flat Nipples ×2 (10%), Species Genitalia — As They Were (10%), Even Human Teeth (9%), Vulva — As They Were (9%), Bare ×11 (2%), Normal Warmth ×21 (2%)
   interior: tier aware, neutral-still, calm 50/dominant 55/libidinous 52/nervous 38/aggressive 50/curious 56
-Wren — exposure 8% · cosmetic · a first shimmer · pressure 100% SHIFTED
-  changing: fangs.L: fangs, nails.hand.L: canine claws, nails.hand.R: canine claws, nails.foot.L: canine claws, nails.foot.R: canine claws, eyes.R: keen sight
-  parts: fangs ×2 (100%), canine claws ×4 (50%), keen sight ×2 (30%), canine tongue (19%), keen smell (19%), growl (19%)
-  interior: tier dim, unpleasant-charged, fear 29, calm 50/dominant 55/libidinous 52/nervous 43/aggressive 50/curious 56
+Wren — exposure 71% · heavy hybrid · more animal than not · pressure 100% SHIFTED
+  changing: head: body heat, ears.R: body heat, fangs.L: fangs, torso.upper: body heat, chest: body heat, nipples.L: body heat
+  parts: Horn-hard ×4 (100%), Long Curved Fangs ×2 (100%), Radiating Heat Like A Furnace ×30 (100%), Sight Sharpening ×2 (60%), A Human Nose (19%), A Human Tongue (19%), Clear Speech (19%), A Soft Baseline (6%), Fixed Human Ears ×2 (6%), Mammary Row — Two Flat Nipples ×2 (6%), Species Genitalia — As They Were (6%), Vulva — As They Were (6%), Even Human Teeth (5%), Bare ×12 (4%)
+  interior: tier dim, unpleasant-charged, fear 25, calm 50/dominant 55/libidinous 52/nervous 43/aggressive 50/curious 56
