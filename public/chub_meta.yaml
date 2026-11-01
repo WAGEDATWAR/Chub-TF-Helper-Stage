@@ -17,10 +17,22 @@ config_schema:
     minutesPerMessage:
       type: integer
       title: "Minutes per message"
-      description: "Simulated minutes advanced on each of your messages. 60 = an hour; 5 = a beat. Sub-hour amounts bank toward the next hour."
+      description: "Minutes advanced per message, used when 'Read time from prose' is off. When it is on, the prose decides and 'Minutes floor' is the undated fallback."
       minimum: 1
       maximum: 10080
       default: 60
+    parseTime:
+      type: boolean
+      title: "Read time from prose"
+      description: "Advance by the time a message implies ('three days later', 'the next morning'); otherwise its text is ignored. On by default."
+      default: true
+    minutesFloor:
+      type: integer
+      title: "Minutes floor"
+      description: "Minutes an undated message advances while 'Read time from prose' is on (a beat, not an hour). Default 5."
+      minimum: 1
+      maximum: 120
+      default: 5
     ticksPerMessage:
       type: integer
       title: "Hours per message (legacy)"
