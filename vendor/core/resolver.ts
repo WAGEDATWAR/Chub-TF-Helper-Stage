@@ -539,7 +539,7 @@ export class Resolver {
     subject: SubjectLike,
     injector: { id?: string; type: string; genome_reference?: string | null; base_dose?: number; onset_curve?: string; incubation_seconds?: number; subtype?: string; effects?: unknown[] },
     dose = 1.0,
-    options: { genome?: Genome; desireFor?: ((tags: readonly string[]) => number) | null } = {},
+    options: { genome?: Genome; desireFor?: ((tags: readonly string[]) => number) | null; rate?: number } = {},
   ): InjectorResult {
     if (!subject || !injector) {
       throw new ContentError("resolver: subject and injector are required");
@@ -566,7 +566,7 @@ export class Resolver {
     // Transformation sequencing (§14, M14.5): place winners in ordered phases and
     // spread them within a phase by a tempo read from her body and history.
     if (this.phases) {
-      winners = this.phases.schedule(winners, genome, tempoOf(subject, dose), this.rng);
+      winners = this.phases.schedule(winners, genome, tempoOf(subject, dose), this.rng, options.rate ?? 1);
     }
 
     for (const winner of winners) {

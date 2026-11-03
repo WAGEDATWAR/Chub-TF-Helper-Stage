@@ -23,13 +23,13 @@ export interface Pace {
   note: string;
 }
 
-/** The offered paces. `normal` is the authored 30-day baseline. */
+/** The offered paces. `normal` is the authored ~30-day baseline. */
 export const PACES: Pace[] = [
   { id: "slow", label: "Slow burn", rate: 0.5, approxDays: 60, note: "weeks pass between changes" },
   { id: "normal", label: "Normal", rate: 1, approxDays: 30, note: "the authored pacing" },
   { id: "fast", label: "Fast", rate: 2, approxDays: 15, note: "days, not weeks" },
-  { id: "quick", label: "Quick", rate: 4, approxDays: 8, note: "a change over a long scene or two" },
-  { id: "instant", label: "Instant", rate: 80, approxDays: 2, note: "the beat of a single scene" },
+  { id: "quick", label: "Quick", rate: 12, approxDays: 3, note: "a change over a long scene or two" },
+  { id: "instant", label: "Instant", rate: 80, approxDays: 0.5, note: "the beat of a single scene" },
 ];
 
 export function paceById(id: PaceId): Pace {

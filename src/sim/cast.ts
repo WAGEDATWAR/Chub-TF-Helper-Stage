@@ -293,15 +293,24 @@ export class Cast {
         // which is the part in *this* socket. An "absent" placeholder is unhelpful, so
         // fall back to the attribute's own name for that socket.
         const organRaw = this.regs.library.get(a.part)?.display_name;
-        const organ = organRaw && !/^no .*genital/i.test(organRaw) ? organRaw : null;
-        // mammary is genital-family but names its own organ ("Human Nipples")
+        const absentPart = !!organRaw && /^no .*genital/i.test(organRaw);
+        // the attribute still lands on an absent placeholder, but there is no organ
+        // there — hide it until a real part replaces it (additive/replace)
+        if (isGenitalSocket(a.slot) && absentPart) continue;
+        // name the organ by its socket when the part is an absent placeholder
+        const organ = !absentPart && organRaw ? organRaw
+          : a.slot === "genital_primary" ? "Penis" : a.slot === "genital_secondary" ? "Vulva" : organRaw;
+        // mammary is genital-family but names its own organ ("Human Nipples"). A
+        // genital socket whose organ is absent and unstarted is hidden entirely.
         const isMammary = a.id === "attr.mammary_row";
+        // a short label: the organ/part plus the short current stage (pane width)
+        const shortOrgan = isMammary ? def?.display_name : organ ?? def?.display_name;
         const label = def?.family === "genital"
-          ? [isMammary ? def?.display_name : organ ?? def?.display_name, stage].filter(Boolean).join(" — ")
-          : stage ?? def?.display_name ?? humanize(a.id);
+          ? [shortOrgan, shortStage(stage)].filter(Boolean).join(" · ")
+          : shortStage(stage) ? `${shortPart(def, a.id)} · ${shortStage(stage)}` : def?.display_name ?? humanize(a.id);
         // only the true genital sockets split (a penis vs a vagina are two organs);
         // nipples and other repeated genital-family parts group as one
-        const splits = def?.family === "genital" && (a.slot === "genital_primary" || a.slot === "genital_secondary");
+        const splits = isGenitalSocket(a.slot);
         const key = splits ? `${a.id}:${a.slot}` : a.id;
         const cur = byAttr.get(key);
         if (cur) { cur.pct = Math.max(cur.pct, pct); cur.slots.add(a.slot); }
@@ -340,6 +349,30 @@ export class Cast {
 
 function humanize(id: string): string {
   return id.replace(/^(attr|part|genome|react)\./, "").replace(/_/g, " ").trim();
+}
+
+/** A true genital socket (a penis vs a vagina — two organs, never merged). */
+function isGenitalSocket(slot: string): boolean {
+  return slot === "genital_primary" || slot === "genital_secondary";
+}
+
+/**
+ * A shortened stage label for the narrow pane: the first word of the stage name,
+ * title-cased back, so "Radiating Heat Like A Furnace" reads "Radiating".
+ */
+function shortStage(stage: string | null | undefined): string | null {
+  if (!stage) return null;
+  // up to two words ("Long Curved", "Radiating Heat"), skipping a leading article so
+  // it does not read "A …" / "An …" in the narrow pane
+  const words = stage.split(/[\s,]+/).filter(Boolean);
+  if (/^(a|an|the)$/i.test(words[0] ?? "")) words.shift();
+  return words.slice(0, 2).join(" ") || null;
+}
+
+/** A short part noun from the attribute, falling back to a trimmed display name. */
+function shortPart(def: { display_name?: string } | null | undefined, id: string): string {
+  const name = def?.display_name ?? humanize(id);
+  return name.split(/\s+/).slice(0, 2).join(" ");
 }
 
 /**

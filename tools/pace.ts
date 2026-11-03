@@ -21,7 +21,7 @@ function settleDays(seed: number, pace: "slow" | "normal" | "fast" | "quick" | "
   for (let t = 0; t < days(500); t++) {
     g.advance(1);
     const done = sim.subject.body.allInstances().every((i) => i.attributes.filter((a) => !a.phase_feral_only).every((a) => a.progress >= (a.target_progress ?? 1000)));
-    if (done) return Math.ceil(toDays(sim.session.clock.tick));
+    if (done) return Math.round((sim.session.clock.tick / 1440) * 100) / 100;
   }
   return 999;
 }
@@ -41,8 +41,12 @@ function settleDays(seed: number, pace: "slow" | "normal" | "fast" | "quick" | "
   // before the onset-scaling fix this floored at ~8 days no matter the rate. It is
   // now a handful of days because the wolf's `skull` phase is `stability_min`-gated
   // (D-248), so it waits for the body to steady (truer than an artificial floor).
-  check("instant settles in a beat (<= 5 days)", instant <= 5, `${instant}`);
-  check("quick is a scene or two (<= 10 days)", quick <= 10, `${quick}`);
+  // The phase runway scales with the pace, so the minute tick is not floored at days.
+  // (These are FULL-settle times, all parts at target — the visible change is much
+  // faster; exposure reaches most of the way in hours at instant.)
+  check("instant fully settles in a beat (<= 4 days)", instant <= 4, `${instant}`);
+  check("quick is a scene or two (<= 8 days)", quick <= 8, `${quick}`);
+  check("instant is far faster than quick, which is far faster than normal", instant < quick && quick < normal / 3, `${instant}/${quick}/${normal}`);
 }
 
 // a pace is applied to the whole cast, and re-setting replaces (no stacking)

@@ -80,6 +80,24 @@ export function applyNow(subject: Subject, genome: Genome, library: PartLibrary,
     partId = primary ?? secondary;
   }
   if (partId) applyGenitalPolicy(subject.body, library, partId, policy);
+  // the part is attached *after* the bestow ran, so it never receives the species
+  // genital attribute; grant it here for the socket the policy touched, copying the
+  // progress block/phase from the other socket's entry so it grows the same way
+  const targetSocket = library.get(partId ?? "")?.occupies_role;
+  if (targetSocket === PRIMARY_SOCKET || targetSocket === SECONDARY_SOCKET) {
+    const inst = subject.body.get(targetSocket);
+    if (inst && !inst.attributes.some((a) => a.id === "attr.species_genital")) {
+      const other = [PRIMARY_SOCKET, SECONDARY_SOCKET]
+        .map((s) => subject.body.get(s)?.attributes.find((a) => a.id === "attr.species_genital"))
+        .find((a) => a);
+      const entry = inst.addAttribute("attr.species_genital", 0);
+      entry.target_progress = 1000;
+      if (other?.progress_block) (entry as { progress_block?: unknown }).progress_block = other.progress_block;
+      const peers = other as { phase_index?: number; phase_rate_mult?: number } | undefined;
+      if (peers?.phase_index !== undefined) (entry as { phase_index?: number }).phase_index = peers.phase_index;
+      if (peers?.phase_rate_mult !== undefined) (entry as { phase_rate_mult?: number }).phase_rate_mult = peers.phase_rate_mult;
+    }
+  }
   subject.recomputeDerived();
   return profileOf(subject);
 }

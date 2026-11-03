@@ -5,7 +5,7 @@ import { sexualityBias } from "./sexuality";
 import { slotDesire } from "./transformation_coupling";
 import { tolerance, painPressure, stopCause, outcomeBand, responseComposureDelta, composureGateApplies } from "./consequence";
 import { resistanceCeiling, stabilityDrain, familiarityMultipliers, recordExposure } from "./psychology";
-import { compress, stretch, phaseShift } from "./temporal";
+import { compress, stretch, phaseShift, growthRate } from "./temporal";
 import { clampStat } from "./stats";
 import { attemptAwakening, reactionsMatching, type FormedReaction } from "./reactions";
 import { phaseWhenOpen } from "./mind_wiring";
@@ -345,7 +345,7 @@ function resolverFrom(registries: ResolverRegistries, session: Session): Resolve
   });
 }
 
-export function commitPower({ session, registries, injector, genome, dose, policy = "preserve", ticks = ONSET_TICKS, cause = 0 }: {
+export function commitPower({ session, registries, injector, genome, dose, policy = "preserve", ticks = ONSET_TICKS, cause = 0, rate }: {
   session: Session;
   registries: ResolverRegistries;
   injector: Injector;
@@ -354,6 +354,7 @@ export function commitPower({ session, registries, injector, genome, dose, polic
   policy?: string;
   ticks?: number;
   cause?: number;
+  rate?: number;
 }): CommitResult {
   if (!session || !injector || !genome) throw new ContentError("power: session, injector and genome are required");
   if (!(GENITAL_POLICIES as readonly string[]).includes(policy)) throw new ContentError(`power: unknown genital policy "${policy}"`);
@@ -371,7 +372,7 @@ export function commitPower({ session, registries, injector, genome, dose, polic
   if (!subject.genomes.includes(genome.id)) subject.genomes.push(genome.id);
 
   const resolver = resolverFrom(registries, session);
-  const result = resolver.applyInjector(subject, injector as never, dose, { genome, desireFor: (tags) => slotDesire(session, tags) });
+  const result = resolver.applyInjector(subject, injector as never, dose, { genome, desireFor: (tags) => slotDesire(session, tags), rate: rate ?? growthRate(session) });
 
   for (const w of result.winners) {
     const entry = subject.body.get(w.slot)?.attributes.find((a) => a.id === w.attribute);
@@ -545,6 +546,8 @@ export function resolvePower(args: {
   genome?: Genome | null;
   policy?: string;
   slot?: string | null;
+  /** Growth/tempo rate (a pace), so the phase schedule compresses with it. */
+  rate?: number;
 }): PowerResolution {
   const { session, registries, power, dose } = args;
   if (!session) throw new ContentError("power: a session is required");
@@ -585,6 +588,7 @@ export function resolvePower(args: {
         dose: appliedDose,
         policy: args.policy ?? "preserve",
         cause: root.id,
+        rate: args.rate,
       });
       for (const w of bestow.winners as Array<{ slot: string; attribute: string }>) changed.push(`${w.slot}:${w.attribute}`);
       note = `${power.label} at dose ${appliedDose.toFixed(1)}${Math.abs(steadied.offset) >= 0.02 ? ` (touch ${steadied.offset > 0 ? "+" : ""}${Math.round(steadied.offset * 100)}%)` : ""}`;

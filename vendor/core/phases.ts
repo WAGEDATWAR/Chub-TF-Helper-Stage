@@ -136,20 +136,26 @@ export class PhaseSequencer {
     genome: Genome,
     ctx: TempoContext,
     rng: { next(stream: string): number } | null,
+    rate = 1,
   ): T[] {
     const plan = this.planFor(genome.id);
+    // the phase runway scales with the caller rate (a pace): at an instant rate the
+    // spacing is a fraction of the authored 18h per phase, so a full form does not
+    // sit on a fixed multi-day floor regardless of how fast growth itself is
+    const spacing = Math.max(1, Math.round(this.spacing / Math.max(1, rate)));
+    const spread = Math.max(1, Math.round((plan.spread || this.spread) / Math.max(1, rate)));
     const phaseStart = new Map<number, number>();
     let cursor = 0;
     for (let i = 0; i < plan.phases.length; i++) {
       phaseStart.set(i, cursor);
-      cursor += this.spacing;
+      cursor += spacing;
     }
     const tempo = tempoFactor(ctx);
 
     return winners.map((w) => {
       const index = this.phaseFor(plan, w) ?? plan.phases.length - 1;
       const phase = plan.phases[index]!;
-      const within = spreadWithin(plan.spread || this.spread, tempo, rng);
+      const within = spreadWithin(spread, tempo, rng);
       const base = phaseStart.get(index) ?? 0;
       // stamp the phase's gate onto the winner (R6) so the resolver can honour a
       // feral-only / exposure_min / when-gated phase without re-reading the genome.

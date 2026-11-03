@@ -67,14 +67,26 @@ check("digest names both characters", d.includes("Mira") && d.includes("Wren"));
   const wide = parts.filter((p) => p.wide);
   check("body-wide attributes collapse to one wide line", wide.every((p) => p.count >= 5), JSON.stringify(wide));
   check("there is at least one wide line (heat/fur)", wide.length > 0);
-  // once genitals have started, both sockets are listed separately
+  // with additive, both sockets are present and listed separately (penis + vulva)
   const g2 = new HelperGame(97);
-  g2.track("s", "S");
+  g2.track("s", "S", "male");
+  g2.setGenitalPolicy("s", "additive");
   g2.bestow("s", "genome.wolf", 3);
   g2.advance(days(16));
   const gen = g2.view().frames[0]!.parts.filter((p) => p.family === "genital" && p.count === 1);
   check("genital sockets are listed separately", gen.length >= 2, JSON.stringify(gen.map((p) => p.label)));
   check("separate genital lines are not the same label", new Set(gen.map((p) => p.label)).size === gen.length, gen.map((p) => p.label).join(","));
+}
+
+// H29: an absent genital socket is hidden (a preserve female shows only the vulva)
+{
+  const g = new HelperGame(96);
+  g.track("s", "S");
+  g.bestow("s", "genome.wolf", 3);
+  g.advance(days(16));
+  const labels = g.view().frames[0]!.parts.filter((p) => p.family === "genital").map((p) => p.label);
+  check("the absent primary genital is hidden", !labels.some((l) => /^Penis/.test(l)), labels.join(","));
+  check("the present vulva is still shown", labels.some((l) => /Vulva/.test(l)), labels.join(","));
 }
 
 if (process.argv.includes("--update") || !existsSync(GOLDEN)) {

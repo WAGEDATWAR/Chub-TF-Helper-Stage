@@ -1,9 +1,9 @@
 moon: full moon (95%)
 Mira — exposure 18% · cosmetic · a first shimmer
   changing: head: pack instinct, nose: keen smell, fangs.L: fangs, fangs.R: fangs, nails.hand.L: canine claws, nails.hand.R: canine claws
-  parts: A Keen Animal Nose That Reads The Air (100%), Fully Pack-Minded, Uneasy Alone (100%), Horn-hard ×3 (100%), Long Curved Fangs ×2 (100%), A Longer, Looser Tongue (75%), Fixed Human Ears ×2 (10%), Mammary Row — Two Flat Nipples ×2 (10%), Species Genitalia — As They Were (10%), Even Human Teeth (9%), Vulva — As They Were (9%), Bare ×11 (2%), Normal Warmth ×21 (2%)
+  parts: Canine Claws · Horn-hard ×3 (100%), Fangs · Long Curved ×2 (100%), Keen Smell · Keen Animal (100%), Pack Instinct · Fully Pack-Minded (100%), Canine Tongue · Longer Looser (75%), Mammary Row · Two Flat ×2 (10%), Mobile Ears · Fixed Human ×2 (10%), Canine Teeth · Even Human (9%), Vulva · As They (9%), Body Heat · Normal Warmth ×21 (2%), Mammalian Fur · Bare ×11 (2%)
   interior: tier aware, neutral-still, calm 50/dominant 55/libidinous 52/nervous 38/aggressive 50/curious 56
 Wren — exposure 71% · heavy hybrid · more animal than not · pressure 100% SHIFTED
   changing: head: body heat, ears.R: body heat, fangs.L: fangs, torso.upper: body heat, chest: body heat, nipples.L: body heat
-  parts: Horn-hard ×4 (100%), Long Curved Fangs ×2 (100%), Radiating Heat Like A Furnace ×30 (100%), Sight Sharpening ×2 (60%), A Human Nose (19%), A Human Tongue (19%), Clear Speech (19%), A Soft Baseline (6%), Fixed Human Ears ×2 (6%), Mammary Row — Two Flat Nipples ×2 (6%), Species Genitalia — As They Were (6%), Vulva — As They Were (6%), Even Human Teeth (5%), Bare ×12 (4%)
+  parts: Body Heat · Radiating Heat ×30 (100%), Canine Claws · Horn-hard ×4 (100%), Fangs · Long Curved ×2 (100%), Keen Sight · Sight Sharpening ×2 (60%), Canine Tongue · Human Tongue (19%), Growl · Clear Speech (19%), Keen Smell · Human Nose (19%), Hardened Nerves · Soft Baseline (6%), Mammary Row · Two Flat ×2 (6%), Mobile Ears · Fixed Human ×2 (6%), Vulva · As They (6%), Canine Teeth · Even Human (5%), Mammalian Fur · Bare ×12 (4%)
   interior: tier dim, unpleasant-charged, fear 25, calm 50/dominant 55/libidinous 52/nervous 43/aggressive 50/curious 56
