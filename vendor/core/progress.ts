@@ -86,9 +86,19 @@ export function curveValue(curve: string, t: number): number {
   }
 }
 
+/**
+ * Stability effect on growth (D-260): a **soft brake**, never a dead stop. Below
+ * `stallBelow` the rate ramps toward a floor instead of snapping to 0, so a stage
+ * timeline never freezes for days waiting on regen — a frayed body is slower, not
+ * stalled. At/above the threshold it is full speed.
+ */
+export const STABILITY_FLOOR = 0.25;
+
 export function stabilityFactor(stability: number, stallBelow: number | undefined): number {
-  if (stallBelow === undefined || stallBelow === null) return 1;
-  return stability < stallBelow ? 0 : 1;
+  if (stallBelow === undefined || stallBelow === null || stallBelow <= 0) return 1;
+  if (stability >= stallBelow) return 1;
+  const t = Math.max(0, Math.min(1, stability / stallBelow));
+  return STABILITY_FLOOR + (1 - STABILITY_FLOOR) * t;
 }
 
 export function growthDelta(

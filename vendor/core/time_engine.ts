@@ -197,8 +197,11 @@ export class TimeEngine {
     const subject = session.subject;
     const rested = session.hasFlag("rested");
     const s = subject.stats;
-    s.stability = clampStat((s.stability ?? 0) + (rested ? REGEN.stabilityRested : REGEN.stability));
-    s.overload = clampStat((s.overload ?? 0) + (rested ? REGEN.overloadRested : REGEN.overload));
+    // recovery scales with the pace (D-259): a fast timeline must clear a stability
+    // hole in hours, not days, or a late change never starts
+    const rate = Math.max(1, growthRate(session));
+    s.stability = clampStat((s.stability ?? 0) + Math.round((rested ? REGEN.stabilityRested : REGEN.stability) * rate));
+    s.overload = clampStat((s.overload ?? 0) + Math.round((rested ? REGEN.overloadRested : REGEN.overload) * rate));
     s.drive = clampStat((s.drive ?? 0) + REGEN.drive);
     // drive mean-reverts toward an appetite set by her libido, so a settled run
     // neither pegs at 0 nor at 100 (D-197). This replaces the flat daily decay
