@@ -7,6 +7,12 @@ import { fromHours } from "./time";
 export const PHASE_GATE = 0.55;
 /** Max random minutes a part's first application is staggered by (D-219, D-292). */
 export const ONSET_JITTER_TICKS = fromHours(10);
+/**
+ * Absolute ceiling on a part's initial `start_delay` (D-259). The first application
+ * is a proportional fraction of the run, but never longer than this — on a fast
+ * timeline a fixed multi-day runway would eat the whole change before it began.
+ */
+export const ONSET_MAX_DELAY_TICKS = fromHours(72);
 
 /** A stable 0..N jitter from a slot id, for when no rng is present. */
 function stableJitter(slot: string): number {
@@ -594,9 +600,12 @@ export class Resolver {
       // the same phase do not all fire at once; preserve an existing delay on re-dose.
       if (entry.start_delay === undefined) {
         const base = (winner as { delay?: number }).delay ?? 0;
-        // rng when present; else a stable hash of the slot so onsets still stagger
-        const jitter = this.rng ? this.rng.int("transform", 0, ONSET_JITTER_TICKS) : stableJitter(winner.inst.slot);
-        entry.start_delay = base + jitter;
+        // the jitter is scaled with the rate too, so it never dominates a fast run;
+        // rng when present, else a stable hash of the slot so onsets still stagger
+        const jitterCap = Math.max(1, Math.round(ONSET_JITTER_TICKS / Math.max(1, options.rate ?? 1)));
+        const jitter = this.rng ? this.rng.int("transform", 0, jitterCap) : stableJitter(winner.inst.slot) % (jitterCap + 1);
+        // cap the total: on a quick timeline a long fixed delay would skip the onset
+        entry.start_delay = Math.min(base + jitter, ONSET_MAX_DELAY_TICKS);
       }
       // species genitals (D-202): give the entry its own [from..via..to] chain so
       // the socket morphs by progress, visibly, instead of snapping at the end.

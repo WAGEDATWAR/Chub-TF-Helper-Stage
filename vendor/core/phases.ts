@@ -1,6 +1,10 @@
 import { ContentError } from "./loader";
 import { matches } from "./criteria";
+import { fromHours } from "./time";
 import type { Genome } from "./genomes";
+
+/** Absolute ceiling on a scheduled phase delay (D-259): a fast run is not floored for days. */
+const MAX_PHASE_DELAY_TICKS = fromHours(72);
 
 /**
  * Transformation ordering (blueprint §13/§14; M14.5, S46).
@@ -162,7 +166,7 @@ export class PhaseSequencer {
       // rate_mult applies only to the families it names (else all); a narrowed cover
       // phase therefore crawls its coat/skin while ears/teeth keep the normal pace.
       const rateApplies = phase.rate_mult !== undefined && (!phase.rate_families || (w.attr.family !== undefined && phase.rate_families.includes(w.attr.family)));
-      return { ...w, phaseIndex: index, phaseId: phase.id, delay: base + within, phaseFeralOnly: phase.feral_only ?? false, phaseExposureMin: phase.exposure_min ?? 0, phaseWhen: phase.when ?? null, phaseRateMult: rateApplies ? phase.rate_mult : 1 };
+      return { ...w, phaseIndex: index, phaseId: phase.id, delay: Math.min(base + within, MAX_PHASE_DELAY_TICKS), phaseFeralOnly: phase.feral_only ?? false, phaseExposureMin: phase.exposure_min ?? 0, phaseWhen: phase.when ?? null, phaseRateMult: rateApplies ? phase.rate_mult : 1 };
     });
   }
 

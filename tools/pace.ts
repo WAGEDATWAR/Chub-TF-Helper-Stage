@@ -49,6 +49,24 @@ function settleDays(seed: number, pace: "slow" | "normal" | "fast" | "quick" | "
   check("instant is far faster than quick, which is far faster than normal", instant < quick && quick < normal / 3, `${instant}/${quick}/${normal}`);
 }
 
+// D-259: the onset delay is capped, so even fast starts actually change within hours
+// (before the cap a ~2-day runway ate a fast run before it began)
+{
+  const firstChangeHours = (pace: "fast" | "instant"): number => {
+    const g = new HelperGame(30);
+    g.track("m", "Mira");
+    g.setPace(pace);
+    g.bestow("m", "genome.wolf", 3);
+    for (let h = 0; h < 300; h++) {
+      g.advance(60);
+      if ((g.view().frames[0]!.exposure ?? 0) > 0) return h;
+    }
+    return 999;
+  };
+  check("fast starts changing within a few hours", firstChangeHours("fast") <= 8, String(firstChangeHours("fast")));
+  check("instant starts changing within an hour", firstChangeHours("instant") <= 1, String(firstChangeHours("instant")));
+}
+
 // a pace is applied to the whole cast, and re-setting replaces (no stacking)
 {
   const g = new HelperGame(2);

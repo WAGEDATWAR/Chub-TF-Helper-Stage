@@ -354,7 +354,7 @@ export function commitPower({ session, registries, injector, genome, dose, polic
   policy?: string;
   ticks?: number;
   cause?: number;
-  rate?: number;
+  rate?: number | undefined;
 }): CommitResult {
   if (!session || !injector || !genome) throw new ContentError("power: session, injector and genome are required");
   if (!(GENITAL_POLICIES as readonly string[]).includes(policy)) throw new ContentError(`power: unknown genital policy "${policy}"`);
@@ -547,7 +547,7 @@ export function resolvePower(args: {
   policy?: string;
   slot?: string | null;
   /** Growth/tempo rate (a pace), so the phase schedule compresses with it. */
-  rate?: number;
+  rate?: number | undefined;
 }): PowerResolution {
   const { session, registries, power, dose } = args;
   if (!session) throw new ContentError("power: a session is required");
