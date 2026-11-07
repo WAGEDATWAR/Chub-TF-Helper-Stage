@@ -1,18 +1,30 @@
 import { spawnSync } from "node:child_process";
 import { existsSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 /**
  * Core-drift gate (D-257/D-258). The engine is a pinned submodule; a consumer must not
- * edit it in place. Fails if:
- *  - the submodule is missing or not initialized;
- *  - the checked-out commit differs from the pin recorded in the index;
- *  - any file under the submodule is locally modified.
+ * edit it in place. Fails if the submodule is missing, is not at the pinned commit, or
+ * has local modifications.
  *
  * Usage: `npm run core:drift`. Exit 0 clean, 1 drifted.
  */
-const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const DIR = "chimera-core";
+
+/** Walk up from this file to the directory that holds the submodule. */
+function repoRoot(): string {
+  let dir = dirname(fileURLToPath(import.meta.url));
+  for (let i = 0; i < 6; i++) {
+    if (existsSync(join(dir, DIR, "core"))) return dir;
+    const parent = dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return dirname(fileURLToPath(import.meta.url));
+}
+
+const ROOT = repoRoot();
 
 function git(args: string[]): { out: string; code: number } {
   const r = spawnSync("git", args, { cwd: ROOT, encoding: "utf8", shell: process.platform === "win32" });
@@ -33,7 +45,6 @@ if (!pinned) {
 }
 if (pinned !== head) {
   console.error(`core:drift: ${DIR} is at ${head.slice(0, 7)} but pinned to ${pinned.slice(0, 7)}.`);
-  console.error("  Commit the pin change deliberately, or reset the submodule to the pin.");
   process.exit(1);
 }
 
