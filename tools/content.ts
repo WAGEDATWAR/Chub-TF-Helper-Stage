@@ -12,9 +12,9 @@ import { applyOverlays } from "../src/overlay";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 export const DATA = join(ROOT, "data");
-// the parent's `data/` is vendored under `vendor/` (see tools/sync-vendor.ps1), so
+// the parent's `data/` is vendored under `chimera-core/` (a pinned submodule), so
 // local dev and CI merge the same base before the local overlays are applied
-export const PARENT = join(ROOT, "vendor");
+export const PARENT = join(ROOT, "chimera-core");
 export const PARENT_DATA = join(PARENT, "data");
 
 function readDir(dir: string, suffix: string): Record<string, unknown> {

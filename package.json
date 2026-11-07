@@ -9,7 +9,7 @@
     "dev:staging": "vite --mode staging --host",
     "cert": "powershell -ExecutionPolicy Bypass -File tools/make-cert.ps1",
     "restart": "powershell -ExecutionPolicy Bypass -File tools/restart-stage.ps1",
-    "sync:vendor": "powershell -ExecutionPolicy Bypass -File tools/sync-vendor.ps1",
+    "engine:pull": "powershell -ExecutionPolicy Bypass -File tools/engine-pull.ps1", "core:drift": "tsx tools/core-drift.ts",
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.json",

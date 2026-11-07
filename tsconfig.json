@@ -18,8 +18,8 @@
     "types": ["node", "vite/client"],
     "baseUrl": ".",
     "paths": {
-      "@core/*": ["vendor/core/*"],
-      "@gamedata/*": ["vendor/data/*"]
+      "@core/*": ["chimera-core/core/*"],
+      "@gamedata/*": ["chimera-core/data/*"]
     }
   },
   "include": ["src", "data"],

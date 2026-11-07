@@ -1,0 +1,3 @@
+[submodule "chimera-core"]
+	path = chimera-core
+	url = https://github.com/WAGEDATWAR/chimera-core.git

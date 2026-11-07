@@ -2,11 +2,9 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 
-// The helper imports the parent game's `core/` + `data/` from the committed `vendor/`
-// copy, so local dev and CI resolve the exact same core (one source of truth). The
-// parent lives in a sibling folder while you co-develop; refresh the vendored copy
-// with `npm run sync:vendor`.
-const PARENT = resolve(__dirname, "vendor");
+// The engine (Chimera) is a pinned submodule, so local dev and CI resolve the exact
+// same core (one source of truth, no drift). It is never edited here.
+const PARENT = resolve(__dirname, "chimera-core");
 
 // Port 5173 is deliberate: Chub's stage renderer hardcodes the fallback
 //   http://localhost:5173/index.html

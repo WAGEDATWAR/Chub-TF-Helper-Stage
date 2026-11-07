@@ -8,7 +8,7 @@ const ROOT = fileURLToPath(new URL("..", import.meta.url));
  * comma-separated id list or `all`.
  *
  * Mirrors the parent (D-255). Attribution is deliberately conservative:
- *  - a change to shared machinery (a vendored core file, the merge, the offset
+ *  - a change to shared machinery (a engine core file, the merge, the offset
  *    overlays, the gates) widens to `all`;
  *  - otherwise a change to a genome's own block narrows to the ids in the diff;
  *  - a change with no genome id in it stays `all`, so narrowing only runs when safe.
@@ -22,9 +22,9 @@ const files = [...git(["diff", "--name-only", "HEAD"]).split("\n"), ...git(["ls-
 
 if (files.length === 0) { console.log(""); process.exit(0); }
 
-// shared machinery: any vendored core file, the merge/overlay plumbing, or a gate
+// shared machinery: any engine core file, the merge/overlay plumbing, or a gate
 const broad = files.some((f) =>
-  /^(vendor\/core\/|src\/sim\/(registries|bundle|subject|cast)\.ts|src\/overlay\.ts|tools\/|src\/detect\/)/.test(f) ||
+  /^(chimera-core\/core\/|src\/sim\/(registries|bundle|subject|cast)\.ts|src\/overlay\.ts|tools\/|src\/detect\/)/.test(f) ||
   /^(package\.json|tsconfig\.json|vite\.config\.ts)$/.test(f),
 );
 if (broad) { console.log("all"); process.exit(0); }

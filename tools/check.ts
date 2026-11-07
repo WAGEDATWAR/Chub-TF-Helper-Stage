@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
  * `check`: one command, one report — the verification set a change must pass before a
  * commit. Mirrors the parent's speed work (D-254/D-255) without losing coverage:
  *
- *  - **content-hash skipping**: if nothing under `vendor/` (core + data) changed since
+ *  - **content-hash skipping**: if nothing under `chimera-core/` (core + data) changed since
  *    the last green check, the content gates (authoring, data-check, golden) are
  *    skipped. `--all` forces them; `--full` additionally forces them and widens the
  *    genome scope.
@@ -26,7 +26,7 @@ const STAMP = join(ROOT, "node_modules", ".cache", "chrysalis-helper-check-hash"
 interface Check {
   name: string;
   args: string[];
-  /** Content gates depend on vendor/ (core+data); skipped when unchanged. */
+  /** Content gates depend on chimera-core/ (core+data); skipped when unchanged. */
   contentSensitive?: boolean;
 }
 
@@ -55,7 +55,7 @@ const CHECKS: Check[] = [
   { name: "multigenome", args: ["run", "multigenome"] },
 ];
 
-/** Hash of every vendored core/data file's path+mtime+size (the content set). */
+/** Hash of every engine core/data file's path+mtime+size (the content set). */
 function contentHash(): string {
   const h = createHash("sha1");
   const walk = (rel: string): void => {
@@ -64,7 +64,7 @@ function contentHash(): string {
     if (st.isDirectory()) for (const e of readdirSync(abs).sort()) walk(`${rel}/${e}`);
     else h.update(`${rel}:${st.mtimeMs}:${st.size}\n`);
   };
-  walk("vendor");
+  walk("chimera-core");
   return h.digest("hex");
 }
 
@@ -76,7 +76,7 @@ if (!force) {
   try { last = readFileSync(STAMP, "utf8").trim(); } catch { /* first run */ }
   contentChanged = hash !== last;
   if (!contentChanged) {
-    console.log("check: no vendor/ change since the last green check — skipping content gates (use --all to force).");
+    console.log("check: no chimera-core/ change since the last green check — skipping content gates (use --all to force).");
   } else {
     const r = spawnSync("npx", ["tsx", "tools/affected.ts"], { cwd: ROOT, encoding: "utf8", shell: process.platform === "win32" });
     if (r.status === 0 && r.stdout.trim()) affected = r.stdout.trim();
